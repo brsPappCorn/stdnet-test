@@ -1,16 +1,31 @@
-<h2>Resend unlock instructions</h2>
+<section class="admin-registrations-wrapper">
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3 text-center admin-form">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+      <h2>
+        Reenviar instrucciones para desbloquear la cuenta
+      </h2>
+
+      <!-- Form -->
+      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: 'form-control input-width' %>
+          </div>
+
+          <div class="actions text-right">
+            <%= f.submit 'Reenviar instrucciones', class: 'btn btn-primary btn-studnet-basic' %>
+          </div>
+      <% end %>
+
+      <div class="text-right">
+        <%= render 'administrators/shared/links' %>
+      </div>
+      <!-- Form -->
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
-  </div>
-<% end %>
-
-<%= render "administrators/shared/links" %>
+</section>

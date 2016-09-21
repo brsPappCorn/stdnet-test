@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
      admin_panel_path
   end
 
+  # TODO: Change devise redirections for depending on the role
+
 =begin
   def after_sign_in_path_for(resource)
       if resource.role == "dealer"
