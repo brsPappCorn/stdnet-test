@@ -10,15 +10,59 @@ $f-normal: normal;
 // ================
 // General
 // ================
-  body {
-    font-family: 'Roboto', sans-serif;
-    font-weight: $f-normal;
+body {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: $f-normal;
 }
 
 // ================
 // Navbar
 // ================
+header {
+  color: #777777;
 
+  .navbar-custom {
+    background-color: white;
+    border: 0;
+    border-radius: 0;
+    height: 70px;
+    margin-bottom: 0;
+    padding-top: 20px;
+
+    .navbar-header {
+
+      .navbar-logo {
+        margin-top: 10px;
+        width: 60%;
+      }
+
+    }
+
+    .navbar-collapse {
+      // TODO: CSS - fix hover when active border-bottom overlapping. Must have the same length as the text on top of the colored line.
+
+      .navbar-nav > .active > a {
+        background-color: transparent;
+        border-bottom: 3px solid #6AADE4;
+        padding-bottom: 1px;
+      }
+
+      .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+        border-bottom: 0;
+      }
+
+      .navbar-nav > li:hover, .navbar-nav > li:active, .navbar-nav > li:focus {
+        border-bottom: 3px solid #6AADE4;
+        a {
+          padding-bottom: 1px;
+        }
+      }
+
+    }
+
+  }
+
+}
 
 // ================
 // Footer

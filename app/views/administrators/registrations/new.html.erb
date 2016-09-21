@@ -1,0 +1,79 @@
+<section class="admin-registrations-wrapper">
+
+  <div class="container">
+    <!-- Information Text -->
+    <div class="col-md-8">
+      <h2>
+        ¿Quieres ganar dinero, experiencia y contactos trabajando mientras estudias?
+      </h2>
+
+      <h3>
+        Regístrate ahora y aplica a los proyectos, prácticas y trabajos que más te gusten. ¡Es gratis!
+      </h3>
+
+      <h4>
+        Trabajos Simples
+      </h4>
+      <p>
+        Trabaja en labores simples como traducciones, resúmenes y corrección de documentos
+      </p>
+
+      <h4>
+        Proyectos Virtuales
+      </h4>
+      <p>
+        Trabaja en proyectos como diseño de páginas web, diseño de logos y análisis financieros
+      </p>
+
+      <h4>
+        Proyectos Presenciales
+      </h4>
+      <p>
+        Trabaja con empresas y profesionales en el desarrollo de proyectos temporales
+      </p>
+
+      <h4>
+        Prácticas
+      </h4>
+      <p>
+        Trabaja de forma presencial haciendo prácticas en empresas de diversos sectores y tamaños
+      </p>
+    </div>
+    <!-- ./Information Text -->
+
+    <!-- Form -->
+    <div class="col-md-4">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Sign up" %>
+          </div>
+      <% end %>
+
+      <%= render "administrators/shared/links" %>
+    </div>
+    <!-- Form -->
+  </div>
+
+
+
+</section>
