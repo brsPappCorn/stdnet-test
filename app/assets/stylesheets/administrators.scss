@@ -1,0 +1,37 @@
+//========================
+// NEW
+//========================
+.admin-registrations-wrapper {
+  margin-top: 100px;
+
+  .admin-form {
+    border: 2px solid $cp-dark-gray;
+    padding: 20px 25px;
+
+    .form-group {
+      text-align: left;
+
+      .form-control {
+        border: 2px solid $cp-dark-gray;
+        border-radius: 0;
+      }
+
+    }
+
+  }
+
+  #error_explanation {
+    text-align: left;
+    ul {
+      padding-left: 20px;
+    }
+  }
+
+}
+
+//========================
+// INDEX
+//========================
+.admin-index-wrapper {
+
+}

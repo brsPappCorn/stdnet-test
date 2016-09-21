@@ -1,12 +1,59 @@
 Rails.application.routes.draw do
 
+
+
   # ============
   # Root
   # ============
   root to: 'static_pages#index'
 
 
+  # ============
+  # Devise
+  # ============
+=begin
+  devise_for :administrators, controllers: {
+      sessions: 'devise/sessions',
+      devise_registration: 'devise/'
+  }
+=end
 
+  # =========================
+  # Devise
+  # =========================
+  devise_for :administrators
+  devise_scope :administrator do
+    get '/admin_ingreso', to: 'administrators/sessions#new'
+    get '/admin_registro', to: 'administrators/registrations#new'
+  end
+
+
+=begin
+
+  # Devise
+  devise_for :admin, path_names: { sign_in: 'iniciar_sesion', sign_out: 'cerrar_sesion' }
+
+  resources :historias, controller: 'stories', as: 'stories', path_names: { new: 'crear', edit: 'editar' }
+  resources :usuarios, controller: 'users', as: 'users', path_names: { new: 'crear', edit: 'editar' } do
+    resources :perimetros, controller: 'perimeters', as: 'perimeters', path_names: { new: 'crear' }, except: [:index, :edit, :update]
+    resources :pliegues, controller: 'folds', as: 'folds', path_names: { new: 'crear' }, except: [:index, :edit, :update]
+    resources :resultados, controller: 'results', as: 'results', only: [:show, :destroy]
+  end
+
+=end
+
+  # ============
+  # Controllers
+  # ============
+  # get '/about', to: 'static_pages#about'
+  get 'index', to: 'administrators#index'
+
+
+  # ============
+  # Mailer
+  # ============
+  # match '/contacto', to: 'Contacts#new', via: :get
+  # match '/contacto', to: 'Contacts#create', via: :post
 
 
   # The priority is based upon order of creation: first created -> highest priority.
