@@ -1,0 +1,35 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+//================
+// Variables
+//================
+// TODO: Declare variables
+$f-normal: normal;
+
+// ================
+// General
+// ================
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: $f-normal;
+}
+
+// ================
+// Navbar
+// ================
+
+
+// ================
+// Footer
+// ================
+
+// ================
+// Import other stylesheets
+// ================
+
+// Static Pages
+@import "static_pages";
+
+// Responsive
+@import "responsive";
