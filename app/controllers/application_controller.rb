@@ -3,11 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+=begin
   protected
   # Devise redirection
   def after_sign_up_path_for(resource)
      admin_panel_path
   end
+=end
 
   # TODO: Change devise redirections for depending on the role
 
