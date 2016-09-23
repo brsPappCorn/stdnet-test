@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # =========================
   # Root
   # =========================
@@ -8,17 +9,19 @@ Rails.application.routes.draw do
   # =========================
   # Devise
   # =========================
-  devise_for :users
-  devise_scope :uer do
-    get '/ingreso', to: 'devise/sessions#new'
-    get '/registro', to: 'devise/registrations#new'
-  end
+  devise_for :user, path: '', path_names: {
+      sign_in: 'ingreso', sign_up: 'registro'
+  }, controllers: {
+      registrations: 'users/registrations'
+  }
 
   # =========================
   # Resources
   # =========================
   resources :students
-
+  resources :administrators
+  resources :people
+  resources :companies
 
   # =========================
   # Controllers

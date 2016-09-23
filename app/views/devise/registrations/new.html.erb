@@ -7,8 +7,24 @@
           <%= devise_error_messages! %>
 
           <div class="form-group">
+            <%= f.label :role_id, 'Selecciona el tipo de cuenta' %><br />
+            <select id="roleID" name="user[role_id]" class="form-control input-width">
+              <option value="2">
+                Estudiante
+              </option>
+              <option value="3">
+                Empresa
+              </option>
+              <option value="4">
+                Persona
+              </option>
+            </select>
+          </div>
+
+          <!-- User Information -->
+          <div class="form-group">
             <%= f.label :email, 'Correo Electrónico' %><br />
-            <%= f.text_field :email, class: 'form-control input-width' %>
+            <%= f.email_field :email, class: 'form-control input-width' %>
           </div>
 
           <div class="form-group">
@@ -23,10 +39,92 @@
             <%= f.label :password_confirmation, 'Confirmar contraseña' %><br />
             <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control input-width' %>
           </div>
+          <!-- ./User Information -->
+
+          <!-- Student Information -->
+
+          <div class="form-group devise-student-info" id="deviseCompanySignUp">
+            <%= f.fields_for :student, resource.build_student do |s| %>
+                <%= s.label :university_id, 'Universidad'  %>
+                <%= s.text_field :university_id, class: 'form-control input-width'  %>
+                <!--
+                <select id="university_id" name="user[university_id]" class="form-control input-width">
+                  <option disabled selected value>
+                    -- Seleccionar una opción --
+                  </option>
+                  <option value="1">
+                    Universidad de los Andes
+                  </option>
+                  <option value="2">
+                    Universidad Javeriana
+                  </option>
+                  <option value="3">
+                    Otra
+                  </option>
+                </select>
+                -->
+                <!-- # TODO: Registrations/New - include universities list -->
+
+                <%= s.label :major_id, 'Carrera'  %>
+                <%= s.text_field :major_id, class: 'form-control input-width'  %>
+                <!--
+                <select id="major_id" name="user[major_id]" class="form-control input-width">
+                  <option disabled selected value>
+                    -- Seleccionar una opción --
+                  </option>
+                  <option value="1">
+                    Administración
+                  </option>
+                  <option value="2">
+                    Ingeniería de Sistemas
+                  </option>
+                  <option value="3">
+                    Otra
+                  </option>
+                </select>
+                -->
+                <!-- # TODO: Registrations/New - include majors list -->
+            <% end %>
+          </div>
+
+          <!-- ./Student Information -->
+
+          <!-- Company Information -->
+          <div class="form-group devise-company-info" id="deviseCompanySignUp">
+            <%= f.fields_for :company, resource.build_company do |c| %>
+                <%= c.label :company_name, 'Nombre de la empresa'  %>
+                <%= c.text_field :company_name, class: 'form-control input-width' %>
+            <% end %>
+          </div>
+          <!-- ./Company Information -->
+
+          <!-- Person Information -->
+          <div class="form-group devise-person-info" id="devisePersonSignUp">
+            <%= f.fields_for :person, resource.build_person do |p| %>
+                <%= p.label :occupation, 'Ocupación'  %>
+                <%= p.text_field :occupation, class: 'form-control input-width' %>
+            <% end %>
+          </div>
+          <!-- ./Person Information -->
+
+          <!-- TODO: Registrations/New once we have defined how this will work, inputs will be displayed -->
+          <!-- Additional Information
+          <div class="form-group">
+            <%= f.label :promo_id, 'Código promocional' %><br />
+            <%= f.text_field :promo_id, class: 'form-control input-width' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
+            <%= f.select(:referenced_by, User::REFERENCED_BY, {}, { :class => 'form-control' }) %>
+          </div>
+           ./Additional Information -->
 
           <div class="actions text-right">
             <%= f.submit 'Registrarse', class: 'btn btn-primary btn-studnet-basic' %>
           </div>
+
+          <%= f.hidden_field(:role_id, value: '2') %>
       <% end %>
 
       <div class="text-right">
@@ -37,3 +135,45 @@
   </div>
 
 </section>
+
+<script>
+  // Functions to show/hide form in the content depending on the type of account (role) selected.
+  $(function() {
+
+    select_value = [];
+
+    $('.devise-student-info').show();
+    $('.devise-company-info').hide();
+    $('.devise-person-info').hide();
+
+    function displayFormContent() {
+      $('#roleID').change(function(){
+        if ( $('#roleID').val() == 2 ) {
+          $('.devise-student-info').show();
+          $('.devise-company-info').hide();
+          $('.devise-person-info').hide();
+        } else if ( $('#roleID').val() == 3 ) {
+          $('.devise-student-info').hide();
+          $('.devise-company-info').show();
+          $('.devise-person-info').hide();
+        } else if ( $('#roleID').val() == 4 ) {
+          $('.devise-student-info').hide();
+          $('.devise-company-info').hide();
+          $('.devise-person-info').show();
+        }
+
+        // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
+        select_value =  $('#roleID').val();
+        roleID_value =  $('#user_role_id').attr('value', select_value);
+
+      });
+
+      $('#roleID').val();
+
+    }
+
+    displayFormContent();
+
+  });
+
+</script>

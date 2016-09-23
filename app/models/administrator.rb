@@ -1,4 +1,5 @@
-class Student < ActiveRecord::Base
+class Administrator < ActiveRecord::Base
+
   #---------------------
   # Constants
   #---------------------
@@ -7,13 +8,13 @@ class Student < ActiveRecord::Base
   #---------------------
   # Associations
   #---------------------
-  belongs_to :user
+  # has_many :users, dependent: :destroy
+
 
 
   #---------------------
   # Validations
   #---------------------
-  # validates_presence_of :major_id
-  # validates_presence_of :major_id
+
 
 end

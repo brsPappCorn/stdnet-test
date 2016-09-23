@@ -1,4 +1,5 @@
-class Student < ActiveRecord::Base
+class Person < ActiveRecord::Base
+
   #---------------------
   # Constants
   #---------------------
@@ -13,7 +14,6 @@ class Student < ActiveRecord::Base
   #---------------------
   # Validations
   #---------------------
-  # validates_presence_of :major_id
-  # validates_presence_of :major_id
+
 
 end

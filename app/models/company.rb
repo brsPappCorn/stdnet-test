@@ -1,4 +1,5 @@
-class Student < ActiveRecord::Base
+class Company < ActiveRecord::Base
+
   #---------------------
   # Constants
   #---------------------
@@ -9,11 +10,9 @@ class Student < ActiveRecord::Base
   #---------------------
   belongs_to :user
 
-
   #---------------------
   # Validations
   #---------------------
-  # validates_presence_of :major_id
-  # validates_presence_of :major_id
+
 
 end
