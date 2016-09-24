@@ -21,17 +21,18 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li class="<%= is_active?(root_path) %>">
-            <%= link_to 'Home', class: '' %>
+            <%= link_to 'Home', root_path,class: '' %>
           </li>
-          <li class="<%= is_active?(new_user_registration_path) %>">
-            <%= link_to 'Registro', new_user_registration_path,class: '' %>
-          </li>
-          <li class="<%= is_active?('#') %>">
-            <%= link_to 'Estudiantes', '#',class: '' %>
-          </li>
-          <li class="<%= is_active?('#') %>">
-            <%= link_to 'Empresas/Personas', '#',class: '' %>
-          </li>
+
+          <% unless user_signed_in? %>
+              <li class="<%= is_active?(new_user_registration_path) %>">
+                <%= link_to 'Registrarse', new_user_registration_path,class: '' %>
+              </li>
+              <li class="<%= is_active?(new_user_session_path) %>">
+                <%= link_to 'Ingresar', new_user_session_path,class: '' %>
+              </li>
+          <% end %>
+
           <li class="<%= is_active?('http://www.studnet.com.co/acerca-de-studnet/') %>">
             <%= link_to 'Acerca de', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
           </li>
@@ -46,19 +47,39 @@
                   Perfil
                   <span class="caret"></span>
                 </a>
+
                 <ul class="dropdown-menu dropdown-menu-fixed">
-                  <li>
-                    <%= link_to 'Action', '#'  %>
-                  </li>
-                  <li>
-                    <%= link_to 'Action', '#'  %>
-                  </li>
+                  <!-- Actions for Students -->
+                  <% if user_role_id(2) %>
+                      <li>
+                        <%= link_to 'Mi Perfil', student_path(current_user.id) %>
+                      </li>
+                      <li>
+                        <%= link_to 'Ver Ofertas', '' %> <!-- TODO: navbar - Once offer is created add offers_path -->
+                      </li>
+                  <!-- Actions for Company -->
+                  <% elsif user_role_id(3) %>
+                      <li>
+                        <%= link_to 'Company Actions', '#'  %>
+                      </li>
+                  <!-- Actions for Person -->
+                  <% elsif user_role_id(4) %>
+                      <li>
+                        <%= link_to 'Person Actions', '#'  %>
+                      </li>
+                  <!-- Actions for Admin -->
+                  <% elsif user_role_id(1) %>
+                      <li>
+                        <%= link_to 'Lista de Usuarios', users_path  %>
+                      </li>
+                  <% end %>
                   <li role="separator" class="divider"></li>
                   <li>
                     <%= link_to destroy_user_session_path, method: :delete do %>
                         Sign out
                     <% end %>
                   </li>
+
                 </ul>
               </li>
           <% end %>

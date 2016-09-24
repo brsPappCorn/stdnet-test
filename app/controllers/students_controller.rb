@@ -1,28 +1,20 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
-  # GET /students
-  # GET /students.json
   def index
     @students = Student.all
   end
 
-  # GET /students/1
-  # GET /students/1.json
   def show
   end
 
-  # GET /students/new
   def new
     @student = Student.new
   end
 
-  # GET /students/1/edit
   def edit
   end
 
-  # POST /students
-  # POST /students.json
   def create
     @student = Student.new(student_params)
 
@@ -37,8 +29,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /students/1
-  # PATCH/PUT /students/1.json
   def update
     respond_to do |format|
       if @student.update(student_params)
@@ -51,14 +41,22 @@ class StudentsController < ApplicationController
     end
   end
 
-  # DELETE /students/1
-  # DELETE /students/1.json
+  # TODO: Students Controller - destroy action only allowed by Admin role
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to students_url, notice: 'El estudiante se elimino exitosamente.' }
       format.json { head :no_content }
     end
+  end
+
+  # ===================
+  # Custom Actions
+  # ===================
+
+  # Updates student basic info needed to show info in the student profile. Is the next step after devise(User) sign up.
+  def complete_info
+
   end
 
   private
@@ -69,6 +67,7 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:university_id, :major_id, :promo_id, :role_id)
+      params.require(:student).permit(:university_id, :major_id)
+      # TODO: Students Controller - add permitted params for basic info form to pass
     end
 end
