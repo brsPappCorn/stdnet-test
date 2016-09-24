@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# TODO: Seeds - revise this file once we receive the lists with info to build dropdowns and other elements
+University.create([
+                      { university_name: 'Universidad de los Andes' },
+                      { university_name: 'Pontificia Universidad Javeriana' },
+                      { university_name: 'Otra' }
+                  ])
+
+Major.create([
+                      { major_name: 'Administración' },
+                      { major_name: 'Ingeniería de Sistemas' },
+                      { major_name: 'Otra' }
+                  ])

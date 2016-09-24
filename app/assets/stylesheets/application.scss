@@ -90,7 +90,7 @@ header {
 // Devise
 // ================
 .devise-wrapper {
-  margin-top: 100px;
+  margin: 50px 0;
 
   .admin-form {
     border: 2px solid $cp-dark-gray;
@@ -113,6 +113,15 @@ header {
     ul {
       padding-left: 20px;
     }
+  }
+
+  // CSS clases for JS used to show/hide content in devise registration form
+  .show-form-content {
+    display: block;
+  }
+
+  .hide-form-content {
+    display: none;
   }
 
 }
