@@ -5,9 +5,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
       <th>User ID</th>
       <th>User Email</th>
+      <th>Company Name</th>
       <th>Role ID</th>
       <th colspan="3"></th>
     </tr>
@@ -16,12 +16,12 @@
   <tbody>
     <% @companies.each do |company| %>
       <tr>
-        <td><%= company.company_name %></td>
         <td><%= company.user.id %></td>
         <td>
           <%# TODO: Create If statement for verification of existence so there is no conflict rendering the view due to a nil? or blank? %>
           <%= company.user.email %>
         </td>
+        <td><%= company.company_name %></td>
         <td>
           <%= company.user.role_id %>
         </td>

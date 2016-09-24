@@ -19,8 +19,8 @@
       <tr>
         <td><%= student.user.id %>
         <td><%= student.user.email %></td>
-        <td><%= student.university_id %></td>
-        <td><%= student.major_id %></td>
+        <td><%= student.university.university_name %></td>
+        <td><%= student.major.major_name %></td>
         <td><%= student.user.role_id %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>

@@ -42,51 +42,16 @@
           <!-- ./User Information -->
 
           <!-- Student Information -->
-
           <div class="form-group devise-student-info" id="deviseCompanySignUp">
             <%= f.fields_for :student, resource.build_student do |s| %>
-                <%= s.label :university_id, 'Universidad'  %>
-                <%= s.text_field :university_id, class: 'form-control input-width'  %>
-                <!--
-                <select id="university_id" name="user[university_id]" class="form-control input-width">
-                  <option disabled selected value>
-                    -- Seleccionar una opción --
-                  </option>
-                  <option value="1">
-                    Universidad de los Andes
-                  </option>
-                  <option value="2">
-                    Universidad Javeriana
-                  </option>
-                  <option value="3">
-                    Otra
-                  </option>
-                </select>
-                -->
-                <!-- # TODO: Registrations/New - include universities list -->
+                <%= s.label :university_id, 'Universidad' %>
+                <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+
 
                 <%= s.label :major_id, 'Carrera'  %>
-                <%= s.text_field :major_id, class: 'form-control input-width'  %>
-                <!--
-                <select id="major_id" name="user[major_id]" class="form-control input-width">
-                  <option disabled selected value>
-                    -- Seleccionar una opción --
-                  </option>
-                  <option value="1">
-                    Administración
-                  </option>
-                  <option value="2">
-                    Ingeniería de Sistemas
-                  </option>
-                  <option value="3">
-                    Otra
-                  </option>
-                </select>
-                -->
-                <!-- # TODO: Registrations/New - include majors list -->
+                <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
             <% end %>
           </div>
-
           <!-- ./Student Information -->
 
           <!-- Company Information -->

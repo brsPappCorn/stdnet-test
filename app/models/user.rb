@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   #---------------------
 
   ROLE_ID = [1, 2, 3, 4]
-  # List of Roles. If you are going to include a new role, please add it also to the comment below, to keep track of roles.
+  ROLE_NAME = ['Admin', 'Estudiante', 'Empresa', 'Persona']
+  # List of Roles. If you are going to include a new role, please add it also to the comment below, to keep track of role_id
+  # with its equivalent name.
   # 1 = Administrator
   # 2 = Student
   # 3 = Company
@@ -40,6 +42,7 @@ class User < ActiveRecord::Base
   #---------------------
   # Validations
   #---------------------
+  # TODO: Declare validations
 
 
 end

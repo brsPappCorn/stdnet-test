@@ -1,15 +1,13 @@
-class Person < ActiveRecord::Base
+class Major < ActiveRecord::Base
 
   #---------------------
   # Associations
   #---------------------
-  belongs_to :user
-
+  has_many :students
 
   #---------------------
   # Validations
   #---------------------
   # TODO: Declare validations
-
 
 end

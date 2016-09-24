@@ -18,10 +18,11 @@ Rails.application.routes.draw do
   # =========================
   # Resources
   # =========================
-  resources :students
   resources :administrators
-  resources :people
   resources :companies
+  resources :people
+  resources :students
+  resources :users
 
   # =========================
   # Controllers

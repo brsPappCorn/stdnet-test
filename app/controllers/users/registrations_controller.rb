@@ -11,33 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     # Extending Devise controller to build nested form inside the User form_for
-
-
-=begin
- @resource = []
-    @resource = User.new(params[:sign_up_params])
-
-    hidden_role_id = params[:user][:role_id]
-    puts '-------------->'
-    puts 'hidden_role_id'
-    puts hidden_role_id
-
-    # Compares value for role_id passed on the hidden_field in order to build the nested form corresponding to the user role
-    if hidden_role_id == User::ROLE_ID[1]
-      puts '-------------->'
-      puts 'is a student'
-      @student = @resource.build_student if @resource.student.nil?
-    elsif hidden_role_id == User::ROLE_ID[2]
-      puts '-------------->'
-      puts 'is a company'
-      @company = @resource.build_company if @resource.company.nil?
-    elsif hidden_role_id == User::ROLE_ID[3]
-      puts '-------------->'
-      puts 'is a person'
-      @person = @resource.build_person if @resource.person.nil?
-    end
-=end
-
     super
   end
 

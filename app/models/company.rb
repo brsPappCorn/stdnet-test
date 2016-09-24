@@ -1,11 +1,6 @@
 class Company < ActiveRecord::Base
 
   #---------------------
-  # Constants
-  #---------------------
-
-
-  #---------------------
   # Associations
   #---------------------
   belongs_to :user
@@ -13,6 +8,7 @@ class Company < ActiveRecord::Base
   #---------------------
   # Validations
   #---------------------
+  # TODO: Declare validations
 
 
 end
