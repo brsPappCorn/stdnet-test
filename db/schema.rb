@@ -11,25 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922110635) do
+ActiveRecord::Schema.define(version: 20160924190052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "administrators", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "company_name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+  end
+
+  create_table "majors", force: :cascade do |t|
+    t.string   "major_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "occupation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.integer  "university_id"
     t.integer  "major_id"
-    t.integer  "promo_id"
-    t.integer  "role_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
+
+  create_table "universities", force: :cascade do |t|
+    t.string   "university_name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.integer  "role_id"
-    t.integer  "student_id"
-    t.integer  "company_id"
-    t.integer  "person_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
@@ -42,6 +70,8 @@ ActiveRecord::Schema.define(version: 20160922110635) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "promo_id"
+    t.string   "referenced_by"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

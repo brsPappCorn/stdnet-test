@@ -23,11 +23,14 @@
           <li class="<%= is_active?(root_path) %>">
             <%= link_to 'Home', class: '' %>
           </li>
-          <li class="<%= is_active?('#') %>">
-            <%= link_to 'Estudiantes', class: '' %>
+          <li class="<%= is_active?(new_user_registration_path) %>">
+            <%= link_to 'Registro', new_user_registration_path,class: '' %>
           </li>
           <li class="<%= is_active?('#') %>">
-            <%= link_to 'Empresas/Personas', class: '' %>
+            <%= link_to 'Estudiantes', '#',class: '' %>
+          </li>
+          <li class="<%= is_active?('#') %>">
+            <%= link_to 'Empresas/Personas', '#',class: '' %>
           </li>
           <li class="<%= is_active?('http://www.studnet.com.co/acerca-de-studnet/') %>">
             <%= link_to 'Acerca de', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
