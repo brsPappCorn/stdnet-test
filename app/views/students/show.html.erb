@@ -1,24 +1,183 @@
-<section class="studNet-wrapper">
+<section class="studNet-wrapper profile-wrapper">
   <div class="container">
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8 col-md-offset-2">
 
-        <p id="notice"><%= notice %></p>
+        <div class="tabbable student-tab-wrapper">
+          <!--  -->
+          <ul class="nav nav-tabs student-nav-tabs">
+            <li class="active">
+              <a href="#pane1" data-toggle="tab">
+                Información personal y educación
+              </a>
+            </li>
 
-        <p>
-          <strong>University:</strong>
-          <%= @student.university.university_name %>
-        </p>
+            <li>
+              <a href="#pane2" data-toggle="tab">
+                Experiencia laboral
+              </a>
+            </li>
 
-        <p>
-          <strong>Major:</strong>
-          <%= @student.major.major_name %>
-        </p>
+            <li>
+              <a href="#pane3" data-toggle="tab">
+                Habilidades
+              </a>
+            </li>
 
+            <li>
+              <a href="#pane4" data-toggle="tab">
+                Descripción
+              </a>
+            </li>
+            <li>
+              <a href="#pane5" data-toggle="tab">
+                Tab 5
+              </a>
+            </li>
+          </ul>
 
-        <%= link_to 'Edit', edit_student_path(@student) %> |
-        <%= link_to 'Back', students_path %>
+          <div class="tab-content student-tab-content">
+            <!-- Personal Information -->
+            <div id="pane1" class="tab-pane active">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>
+                    Información Personal
+                    <%= link_to edit_user_path(current_user.id) do |link| %>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
+                    <% end %>
+                  </h3>
+                  <p>
+                    Nombre(s):
+                    <%= @user.first_name %>
+                    <br>
+
+                    Apellidos:
+                    <%= @user.last_name %>
+                    <br>
+
+                    Fecha de Nacimiento:
+                    <!-- TODO: Students/show - Refactoring needed. Too many unless blocks. Create helper method in application_helper pending  -->
+                    <% unless @user.date_of_birth.nil? %>
+                        <%= @user.date_of_birth.strftime('%Y/%m/%d ') %>
+                    <% end %> <br>
+
+                    Edad:
+                    <%= "#{user_age} años." %>
+                    <br> <!-- TODO: Students/Show - only companies will see this info -->
+
+                    Número de documento:
+                    <%= @user.document_number %>
+                    <br>
+
+                    Teléfono de contacto:
+                    <%= @user.mobile_phone %>
+                    <br>
+
+                    Ciudad:
+                    <% unless @user.city_id.nil? %>
+                        <%= @user.city.city_name %>
+                    <% end %>
+                    <br>
+
+                    País:
+                    <% unless @user.country_id.nil? %>
+                        <%= @user.country.country_name %>
+                    <% end %>
+                  </p>
+                </div>
+
+                <div class="col-md-6">
+                  <h3>
+                    Educación
+                    <%= link_to edit_user_path(current_user.id) do |link| %>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
+                    <% end %>
+                  </h3>
+                  <p>
+                    Universidad:
+                    <% unless @student.university_id.nil? %>
+                        <%= @student.university.university_name %>
+                    <% end %>
+                    <br>
+
+                    Carrera:
+                    <% unless @student.major_id.nil? %>
+                        <%= @student.major.major_name %>
+                    <% end %>
+                    <br>
+
+                    Nivel:
+                    <%= @student.ed_level_id %>
+                    <br>
+
+                    Otra carrera(s):
+                    'PENDIENTE
+                    <br>
+
+                    Ultimo semestre cursado:
+                    <%= @student.last_semester %>
+                    <br>
+
+                    Calificación máxima en tu universidad:
+                    <%= @student.gpa_max %>
+
+                    Promedio académico acumulado:
+                    <%= @student.gpa %>
+                    <br>
+
+                    Intercambio:
+                    <% if @student.exchange_student == true  %>
+                        <%= 'Sí' %>
+                    <% else %>
+                        <%= 'No' %>
+                    <% end %>
+                    <br>
+
+                    Pais de intercambio:
+                    <%= @student.country.country_name %>
+                    <br>
+
+                    Universidad de intercambio:
+                    <%= @student.exchange_university %>
+                    <br>
+
+                    Colegio del que te graduaste:
+                    <%= @student.highschool %>
+
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Experience -->
+            <div id="pane2" class="tab-pane">
+              <!-- TODO: Update Student model to include empty attribute listed below -->
+
+            </div>
+
+            <!-- Skills -->
+            <div id="pane3" class="tab-pane">
+
+            </div>
+
+            <!-- Description -->
+            <div id="pane4" class="tab-pane">
+
+            </div>
+
+            <!-- Tab 5 -->
+            <div id="pane5" class="tab-pane">
+
+            </div>
+          </div>
+          <!-- /.tab-content -->
+        </div>
+        <!-- /.tabbable -->
+
 
       </div>
     </div>
@@ -27,3 +186,5 @@
 </section>
 
 
+<%#= link_to 'Edit', info_basica_path %> |
+<%#= link_to 'Back', users_path %>

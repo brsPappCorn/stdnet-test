@@ -1,6 +1,235 @@
-<h1>Editing User</h1>
+<section class="studNet-wrapper profile-wrapper">
+  <div class="container">
 
-<%= render 'form' %>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+        <div class="tabbable student-tab-wrapper">
+          <!--  -->
+          <ul class="nav nav-tabs student-nav-tabs">
+            <li class="active">
+              <a href="#pane1" data-toggle="tab">
+                Información personal y educación
+              </a>
+            </li>
+
+            <li>
+              <a href="#pane2" data-toggle="tab">
+                Experiencia laboral
+              </a>
+            </li>
+
+            <li>
+              <a href="#pane3" data-toggle="tab">
+                Habilidades
+              </a>
+            </li>
+
+            <li>
+              <a href="#pane4" data-toggle="tab">
+                Descripción
+              </a>
+            </li>
+            <li>
+              <a href="#pane5" data-toggle="tab">
+                Tab 5
+              </a>
+            </li>
+          </ul>
+
+
+
+          <%= form_for(@user) do |f| %>
+              <% if @user.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
+
+                    <ul>
+                      <% @user.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+
+              <div class="tab-content student-tab-content">
+                <!-- Personal Information -->
+                <div id="pane1" class="tab-pane active">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h3>
+                        Información Personal
+                      </h3>
+
+                      <p>
+                      <div class="form-group">
+                        <%= f.label :first_name, 'Nombre(s)' %><br>
+                        <%= f.text_field :first_name, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :last_name, 'Apellidos' %><br>
+                        <%= f.text_field :last_name, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :date_of_birth, 'Fecha de nacimiento' %><br>
+                        <%= f.date_select :date_of_birth, { start_year: Time.now.year - 18, end_year: Time.now.year - 90 }, { class: 'form-control input-width' } %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :document_number, 'Documento de identidad' %><br>
+                        <%= f.text_field :document_number, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :mobile_phone, 'Número de contacto' %><br>
+                        <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :city_id, 'Ciudad' %><br>
+                        <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :country_id, 'Pais' %><br>
+                        <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                      </div>
+
+                      </p>
+                    </div>
+
+                    <div class="col-md-6">
+                      <h3>
+                        Educación
+                      </h3>
+                      <p>
+                        <!-- Nested form (student) -->
+                        <%= f.fields_for :student, @user.student do |s| %>
+                          <div class="form-group">
+                            <%= s.label :university_id, 'Universidad' %>
+                            <%= s.select :university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :major_id, 'Carrera'  %>
+                            <%= s.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= f.label :ed_level_id, 'Nivel' %>
+                            <select id="edLevelID" name="user[student_attributes][ed_level_id]" class="form-control input-width">
+                              <option value="1">
+                                Pregrado
+                              </option>
+                              <option value="2">
+                                Posgrado
+                              </option>
+                            </select>
+                          </div>
+
+                          <!-- TODO: Update Student model to include empty attribute listed below -->
+
+                          <div class="form-group">
+                            Otra carrera(s):
+                            <!-- TODO: Users/Edit - Multiple select must be done. -->
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :last_semester, 'Ultimo semestre cursado:' %>
+                            <%= s.select :last_semester, Student::LAST_SEMESTER, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <!-- TODO: Users/edit - For GPA_EXTRA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store. Use this value to validate user input -->
+                          <!-- TODO: Users/edit - Use JS to get value in the gpa_extra input as the base for max value of GPA possible in the GPA input below-->
+                          <div class="form-group">
+                            <%= s.label :gpa_max, 'Calificación máxima en tu universidad' %>
+                            <%= s.number_field :gpa_max, max: 100, min: 0, class: 'form-control input-width' %>
+                          </div>
+
+                          <!-- TODO: Users/edit - For GPA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store -->
+                          <div class="form-group">
+                            <%= s.label :gpa, 'Promedio académico acumulado' %>
+                            <%= s.number_field :gpa, in: 1.0..5.0, step: 0.5, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= f.label :exchange_student, '¿Has realizado algún intercambio académico?' %><br />
+                            <select id="exchangeStudentID" name="user[student_attributes][exchange_student]" class="form-control input-width">
+                              <option value="0">
+                                No
+                              </option>
+                              <option value="1">
+                                Sí
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :country_id, 'Indica el país en el cual realizaste el intercambio' %>
+                            <%= s.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :exchange_university, 'Indica el nombre de la universidad en la cual realizaste el intercambio' %>
+                            <%= s.text_field :exchange_university, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :highschool, 'Indica el nombre del colegio del que te graduaste' %>
+                            <%= s.text_field :highschool, class: 'form-control input-width' %>
+                          </div>
+                      <% end %>
+                      <!-- ./Nested form (student) -->
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- ./Personal Information -->
+
+                <!-- Experience -->
+                <div id="pane2" class="tab-pane">
+                  ñ
+                </div>
+                <!-- ./Experience -->
+
+                <!-- Skills -->
+                <div id="pane3" class="tab-pane">
+                  l
+                </div>
+                <!-- ./Skills -->
+
+                <!-- Description -->
+                <div id="pane4" class="tab-pane">
+                  mjuf hbh
+                </div>
+                <!-- ./Description -->
+
+                <!-- Tab 5 -->
+                <div id="pane5" class="tab-pane">
+                  lij
+                </div>
+                <!-- ./Tab 5 -->
+
+                <div class="actions text-right">
+                  <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
+                </div>
+              </div>
+          <% end %>
+          <!-- /.tab-content -->
+        </div>
+        <!-- /.tabbable -->
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<%= link_to 'Edit', info_basica_path %> |
+<%#= link_to 'Back', users_path %>

@@ -15,6 +15,17 @@ module ApplicationHelper
     current_user.role_id == User::ROLE_ID[array_element]
   end
 
+  # Method to calculate user's (student role only) age, so that companies/people will be able to know this information.
+  def user_age
+    user_id = current_user.id
+    user = User.find_by_id(user_id)
+    unless user.date_of_birth.nil?
+      Date.today.year - user.date_of_birth.year
+    end
+  end
 
-
+  # Method to verify if an attribute is nil?
+  def is_attribute_nil?(attribute)
+    # TODO: application_helper - write is_attribute_nil? method. Needed to refactor students/show view (too many unless blocks)
+  end
 end

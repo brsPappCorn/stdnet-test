@@ -1,11 +1,23 @@
 class StudentsController < ApplicationController
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def index
-    @students = Student.all
+    if user_signed_in?
+      # @users = User.all
+      @students = Student.all
+    else
+      redirect_to '/ingreso'
+    end
   end
 
   def show
+    if user_signed_in?
+      @user = User.find_by_id(current_user.id)
+    else
+      puts '---------------->>>>>'
+      puts 'no existe usuario'
+    end
   end
 
   def new
@@ -30,11 +42,16 @@ class StudentsController < ApplicationController
   end
 
   def update
+    # TODO: Students controller. This action is deleting the student record that was created upon user sign up. Must fix this bug
     respond_to do |format|
       if @student.update(student_params)
+        puts '------------->>>>'
+        puts 'ejecuta update (students_controller) '
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else
+        puts '------------->>>>'
+        puts 'no ejecuta update y hace render de edit (students_controller)'
         format.html { render :edit }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
@@ -51,13 +68,19 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    if user_signed_in?
+      user_id = current_user.id
+      @student = Student.find_by_user_id(user_id)
+    else
+      redirect_to '/ingreso'
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def student_params
-      params.require(:student).permit(:university_id, :major_id)
-    end
+  end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def student_params
+    params.require(:student).permit(:id, :university_id, :major_id,
+                                    :ed_level_id, :last_semester, :gpa, :gpa_max, :exchange_student, :country_id, :exchange_university, :highschool
+    )
+  end
 end

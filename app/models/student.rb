@@ -1,4 +1,8 @@
 class Student < ActiveRecord::Base
+  #---------------------
+  # Constants
+  #---------------------
+  LAST_SEMESTER = %w[1 2 3 4 5 6 7 8 9 10 11 12 13 14]
 
   #---------------------
   # Associations
@@ -6,6 +10,7 @@ class Student < ActiveRecord::Base
   belongs_to :user
   belongs_to :university
   belongs_to :major
+  belongs_to :country
 
   #---------------------
   # Validations
