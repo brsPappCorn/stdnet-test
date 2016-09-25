@@ -1,24 +1,29 @@
-<p id="notice"><%= notice %></p>
+<section class="studNet-wrapper">
+  <div class="container">
 
-<p>
-  <strong>University:</strong>
-  <%= @student.university_id %>
-</p>
+    <div class="row">
+      <div class="col-md-12">
 
-<p>
-  <strong>Major:</strong>
-  <%= @student.major_id %>
-</p>
+        <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Promo:</strong>
-  <%= @student.promo_id %>
-</p>
+        <p>
+          <strong>University:</strong>
+          <%= @student.university.university_name %>
+        </p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @student.role_id %>
-</p>
+        <p>
+          <strong>Major:</strong>
+          <%= @student.major.major_name %>
+        </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+
+        <%= link_to 'Edit', edit_student_path(@student) %> |
+        <%= link_to 'Back', students_path %>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
