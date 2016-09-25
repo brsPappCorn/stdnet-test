@@ -1,6 +1,191 @@
-<h1>Editing User</h1>
+<section class="studNet-wrapper profile-wrapper">
+  <div class="container">
 
-<%= render 'form' %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+        <div class="tabbable student-tab-wrapper">
+          <!--  -->
+          <ul class="nav nav-tabs student-nav-tabs">
+            <li class="active">
+              <a href="#pane1" data-toggle="tab">
+                Información personal y educación
+              </a>
+            </li>
+
+            <li>
+              <a href="#pane2" data-toggle="tab">
+                Experiencia laboral
+              </a>
+            </li>
+
+            <li>
+              <a href="#pane3" data-toggle="tab">
+                Habilidades
+              </a>
+            </li>
+
+            <li>
+              <a href="#pane4" data-toggle="tab">
+                Descripción
+              </a>
+            </li>
+            <li>
+              <a href="#pane5" data-toggle="tab">
+                Tab 5
+              </a>
+            </li>
+          </ul>
+
+
+          <div class="tab-content student-tab-content">
+            <%= form_for(@user) do |f| %>
+                <% if @user.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
+
+                      <ul>
+                        <% @user.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                <% end %>
+
+                <!-- Personal Information -->
+                <div id="pane1" class="tab-pane active">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h3>
+                        Información Personal
+                      </h3>
+
+                      <p>
+                      <div class="form-group">
+                        <%= f.label :first_name, 'Nombre(s)' %><br>
+                        <%= f.text_field :first_name, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :last_name, 'Apellidos' %><br>
+                        <%= f.text_field :last_name, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :date_of_birth, 'Fecha de nacimiento' %><br>
+                        <%= f.date_select :date_of_birth, { start_year: Time.now.year - 18, end_year: Time.now.year - 90 }, { class: 'form-control input-width' } %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :document_number, 'Documento de identidad' %><br>
+                        <%= f.text_field :document_number, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :mobile_phone, 'Número de contacto' %><br>
+                        <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :city_id, 'Ciudad' %><br>
+                        <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :country_id, 'Pais' %><br>
+                        <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                      </div>
+
+                      </p>
+                    </div>
+
+                    <div class="col-md-6">
+                      <h3>
+                        Educación
+                      </h3>
+                      <p>
+                        <!-- Nested form (student) -->
+                        <%= f.fields_for :student, @user.build_student do |s| %>
+                          <div class="form-group">
+                            <%= s.label :university_id, 'Universidad' %>
+                            <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :major_id, 'Carrera'  %>
+                            <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+                      <% end %>
+                      <!-- ./Nested form (student) -->
+
+                      <div class="form-group">
+                        <%= f.label :ed_level_id, 'Nivel' %><br />
+                        <select id="edLevelID" name="user[student_attributes][ed_level_id]" class="form-control input-width">
+                          <option value="1">
+                            Pregrado
+                          </option>
+                          <option value="2">
+                            Posgrado
+                          </option>
+                        </select>
+                      </div>
+
+                      <!-- TODO: Update Student model to include empty attribute listed below --> <br>
+                      Otra carrera(s):                      <br>
+                      Ultimo semestre cursado:              <br>
+                      Promedio académico acumulado:         <br>
+                      Intercambio: SI/NO tipo de respuesta  <br>
+                      Pais de intercambio:                  <br>
+                      Universidad de intercambio:           <br>
+                      Colegio del que te graduaste:
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- ./Personal Information -->
+
+                <!-- Experience -->
+                <div id="pane2" class="tab-pane">
+
+                </div>
+                <!-- ./Experience -->
+
+                <!-- Skills -->
+                <div id="pane3" class="tab-pane">
+
+                </div>
+                <!-- ./Skills -->
+
+                <!-- Description -->
+                <div id="pane4" class="tab-pane">
+
+                </div>
+                <!-- ./Description -->
+
+                <!-- Tab 5 -->
+                <div id="pane5" class="tab-pane">
+
+                </div>
+                <!-- ./Tab 5 -->
+
+                <div class="actions text-right">
+                  <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
+                </div>
+            <% end %>
+          </div>
+          <!-- /.tab-content -->
+        </div>
+        <!-- /.tabbable -->
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<%= link_to 'Edit', info_basica_path %> |
+<%#= link_to 'Back', users_path %>

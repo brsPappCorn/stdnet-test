@@ -3,7 +3,7 @@ class University < ActiveRecord::Base
   #---------------------
   # Associations
   #---------------------
-  has_many :students
+  has_many :students, dependent: :destroy
 
   #---------------------
   # Validations
