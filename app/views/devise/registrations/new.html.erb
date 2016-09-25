@@ -47,7 +47,6 @@
                 <%= s.label :university_id, 'Universidad' %>
                 <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
 
-
                 <%= s.label :major_id, 'Carrera'  %>
                 <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
             <% end %>

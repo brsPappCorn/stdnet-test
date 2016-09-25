@@ -50,15 +50,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  # ===================
-  # Custom Actions
-  # ===================
-
-  # Updates student basic info needed to show info in the student profile. Is the next step after devise(User) sign up.
-  def complete_info
-
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
@@ -68,6 +59,5 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:university_id, :major_id)
-      # TODO: Students Controller - add permitted params for basic info form to pass
     end
 end

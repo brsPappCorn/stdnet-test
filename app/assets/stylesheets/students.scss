@@ -1,3 +1,26 @@
-// Place all the styles related to the Students controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+//========================
+// INDEX
+//========================
+
+
+//========================
+// SHOW
+//========================
+.student-tab-wrapper {
+
+  .nav-tabs > li > a {
+    border: 2px solid #3B3B3C;
+    border-bottom: 0;
+    margin-right: 0;
+  }
+
+  .student-tab-content {
+    border: 2px solid #3B3B3C;
+    padding: 20px 25px;
+  }
+
+}
+
+//========================
+// BASIC INFO
+//========================

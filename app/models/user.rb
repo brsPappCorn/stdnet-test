@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
   has_one :company, dependent: :destroy
   has_one :student, dependent: :destroy
   has_one :person, dependent: :destroy
+
+  belongs_to :city
+  belongs_to :country
+
+  # Admin
   #belongs_to :administrator
 
   accepts_nested_attributes_for :company

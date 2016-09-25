@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # =========================
   # get '/about', to: 'static_pages#about'
   get '/admin_panel', to: 'administrators#index'
-  get '/info_basica', to: 'students#complete_info'
+  get '/info_basica', to: 'users#basic_info'
 
 
   # ============
