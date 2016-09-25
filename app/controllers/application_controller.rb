@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
 
+  # TODO: Change devise redirections for depending on the role
 
 =begin
   protected
@@ -36,7 +37,6 @@ class ApplicationController < ActionController::Base
   end
 =end
 
-  # TODO: Change devise redirections for depending on the role
 
 =begin
   def after_sign_in_path_for(resource)
