@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
   # Admin
   #belongs_to :administrator
 
-  accepts_nested_attributes_for :company
-  accepts_nested_attributes_for :student
-  accepts_nested_attributes_for :person
+  accepts_nested_attributes_for :company, update_only: true
+  accepts_nested_attributes_for :student, update_only: true
+  accepts_nested_attributes_for :person, update_only: true
 
   #---------------------
   # Validations

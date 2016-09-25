@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10 col-md-offset-1">
 
         <div class="tabbable student-tab-wrapper">
           <!--  -->
@@ -38,20 +38,21 @@
           </ul>
 
 
-          <div class="tab-content student-tab-content">
-            <%= form_for(@user) do |f| %>
-                <% if @user.errors.any? %>
-                    <div id="error_explanation">
-                      <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
 
-                      <ul>
-                        <% @user.errors.full_messages.each do |message| %>
-                            <li><%= message %></li>
-                        <% end %>
-                      </ul>
-                    </div>
-                <% end %>
+          <%= form_for(@user) do |f| %>
+              <% if @user.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
 
+                    <ul>
+                      <% @user.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+
+              <div class="tab-content student-tab-content">
                 <!-- Personal Information -->
                 <div id="pane1" class="tab-pane active">
 
@@ -106,39 +107,82 @@
                       </h3>
                       <p>
                         <!-- Nested form (student) -->
-                        <%= f.fields_for :student, @user.build_student do |s| %>
+                        <%= f.fields_for :student, @user.student do |s| %>
                           <div class="form-group">
                             <%= s.label :university_id, 'Universidad' %>
-                            <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                            <%= s.select :university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                           </div>
 
                           <div class="form-group">
                             <%= s.label :major_id, 'Carrera'  %>
-                            <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                            <%= s.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= f.label :ed_level_id, 'Nivel' %>
+                            <select id="edLevelID" name="user[student_attributes][ed_level_id]" class="form-control input-width">
+                              <option value="1">
+                                Pregrado
+                              </option>
+                              <option value="2">
+                                Posgrado
+                              </option>
+                            </select>
+                          </div>
+
+                          <!-- TODO: Update Student model to include empty attribute listed below -->
+
+                          <div class="form-group">
+                            Otra carrera(s):
+                            <!-- TODO: Users/Edit - Multiple select must be done. -->
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :last_semester, 'Ultimo semestre cursado:' %>
+                            <%= s.select :last_semester, Student::LAST_SEMESTER, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <!-- TODO: Users/edit - For GPA_EXTRA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store. Use this value to validate user input -->
+                          <!-- TODO: Users/edit - Use JS to get value in the gpa_extra input as the base for max value of GPA possible in the GPA input below-->
+                          <div class="form-group">
+                            <%= s.label :gpa_max, 'Calificación máxima en tu universidad' %>
+                            <%= s.number_field :gpa_max, max: 100, min: 0, class: 'form-control input-width' %>
+                          </div>
+
+                          <!-- TODO: Users/edit - For GPA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store -->
+                          <div class="form-group">
+                            <%= s.label :gpa, 'Promedio académico acumulado' %>
+                            <%= s.number_field :gpa, in: 1.0..5.0, step: 0.5, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= f.label :exchange_student, '¿Has realizado algún intercambio académico?' %><br />
+                            <select id="exchangeStudentID" name="user[student_attributes][exchange_student]" class="form-control input-width">
+                              <option value="0">
+                                No
+                              </option>
+                              <option value="1">
+                                Sí
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :country_id, 'Indica el país en el cual realizaste el intercambio' %>
+                            <%= s.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :exchange_university, 'Indica el nombre de la universidad en la cual realizaste el intercambio' %>
+                            <%= s.text_field :exchange_university, class: 'form-control input-width' %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= s.label :highschool, 'Indica el nombre del colegio del que te graduaste' %>
+                            <%= s.text_field :highschool, class: 'form-control input-width' %>
                           </div>
                       <% end %>
                       <!-- ./Nested form (student) -->
-
-                      <div class="form-group">
-                        <%= f.label :ed_level_id, 'Nivel' %><br />
-                        <select id="edLevelID" name="user[student_attributes][ed_level_id]" class="form-control input-width">
-                          <option value="1">
-                            Pregrado
-                          </option>
-                          <option value="2">
-                            Posgrado
-                          </option>
-                        </select>
-                      </div>
-
-                      <!-- TODO: Update Student model to include empty attribute listed below --> <br>
-                      Otra carrera(s):                      <br>
-                      Ultimo semestre cursado:              <br>
-                      Promedio académico acumulado:         <br>
-                      Intercambio: SI/NO tipo de respuesta  <br>
-                      Pais de intercambio:                  <br>
-                      Universidad de intercambio:           <br>
-                      Colegio del que te graduaste:
                       </p>
                     </div>
                   </div>
@@ -148,33 +192,33 @@
 
                 <!-- Experience -->
                 <div id="pane2" class="tab-pane">
-
+                  ñ
                 </div>
                 <!-- ./Experience -->
 
                 <!-- Skills -->
                 <div id="pane3" class="tab-pane">
-
+                  l
                 </div>
                 <!-- ./Skills -->
 
                 <!-- Description -->
                 <div id="pane4" class="tab-pane">
-
+                  mjuf hbh
                 </div>
                 <!-- ./Description -->
 
                 <!-- Tab 5 -->
                 <div id="pane5" class="tab-pane">
-
+                  lij
                 </div>
                 <!-- ./Tab 5 -->
 
                 <div class="actions text-right">
                   <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
                 </div>
-            <% end %>
-          </div>
+              </div>
+          <% end %>
           <!-- /.tab-content -->
         </div>
         <!-- /.tabbable -->

@@ -37,104 +37,144 @@
             </li>
           </ul>
 
-              <div class="tab-content student-tab-content">
-                <!-- Personal Information -->
-                <div id="pane1" class="tab-pane active">
+          <div class="tab-content student-tab-content">
+            <!-- Personal Information -->
+            <div id="pane1" class="tab-pane active">
 
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h3>
-                        Información Personal
-                        <%= link_to edit_user_path(current_user.id) do |link| %>
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                        <% end %>
-                      </h3>
-                      <p>
-                        Nombre(s):
-                        <%= @user.first_name %>
-                        <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>
+                    Información Personal
+                    <%= link_to edit_user_path(current_user.id) do |link| %>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
+                    <% end %>
+                  </h3>
+                  <p>
+                    Nombre(s):
+                    <%= @user.first_name %>
+                    <br>
 
-                        Apellidos:
-                        <%= @user.last_name %>
-                        <br>
+                    Apellidos:
+                    <%= @user.last_name %>
+                    <br>
 
-                        Fecha de Nacimiento:
-                        <!-- TODO: Students/show - Refactoring needed. Too many unless blocks. Create helper method in application_helper pending  -->
-                        <% unless @user.date_of_birth.nil? %>
-                            <%= @user.date_of_birth.strftime('%Y/%m/%d ') %>
-                        <% end %> <br>
+                    Fecha de Nacimiento:
+                    <!-- TODO: Students/show - Refactoring needed. Too many unless blocks. Create helper method in application_helper pending  -->
+                    <% unless @user.date_of_birth.nil? %>
+                        <%= @user.date_of_birth.strftime('%Y/%m/%d ') %>
+                    <% end %> <br>
 
-                        Edad:
-                        <%= "#{user_age} años." %>
-                        <br> <!-- TODO: Students/Show - only companies will see this info -->
+                    Edad:
+                    <%= "#{user_age} años." %>
+                    <br> <!-- TODO: Students/Show - only companies will see this info -->
 
-                        Número de documento:
-                        <%= @user.document_number %>
-                        <br>
+                    Número de documento:
+                    <%= @user.document_number %>
+                    <br>
 
-                        Teléfono de contacto:
-                        <%= @user.mobile_phone %>
-                        <br>
+                    Teléfono de contacto:
+                    <%= @user.mobile_phone %>
+                    <br>
 
-                        Ciudad:
-                        <% unless @user.city_id.nil? %>
-                            <%= @user.city.city_name %>
-                        <% end %>
-                        <br>
+                    Ciudad:
+                    <% unless @user.city_id.nil? %>
+                        <%= @user.city.city_name %>
+                    <% end %>
+                    <br>
 
-                        País:
-                        <% unless @user.country_id.nil? %>
-                            <%= @user.country.country_name %>
-                        <% end %>
-                      </p>
-                    </div>
-
-                    <div class="col-md-6">
-                      <h3>
-                        Educación
-                        <%= link_to edit_user_path(current_user.id) do |link| %>
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                        <% end %>
-                      </h3>
-                      <p>
-                        Universidad: <%= @student.university.university_name %> <br>
-                        Carrera: <%= @student.major.major_name %> <br>
-                        Nivel: <%= @student.ed_level_id %>
-                        <!-- TODO: Update Student model to include empty attribute listed below --> <br>
-                        Otra carrera(s):                      <br>
-                        Ultimo semestre cursado: <%= @student.last_semester %> <br>
-                        Promedio académico acumulado: <%= @student.gpa %> <br>
-                        Intercambio: SI/NO tipo de respuesta <%= @student.exchange_student %> <br>
-                        Pais de intercambio: <%= @student.exchange_country_id %><br>
-                        Universidad de intercambio: <%= @student.exchange_university %> <br>
-                        Colegio del que te graduaste: <%= @student.highschool %>
-                      </p>
-                    </div>
-                  </div>
-
+                    País:
+                    <% unless @user.country_id.nil? %>
+                        <%= @user.country.country_name %>
+                    <% end %>
+                  </p>
                 </div>
 
-                <!-- Experience -->
-                <div id="pane2" class="tab-pane">
+                <div class="col-md-6">
+                  <h3>
+                    Educación
+                    <%= link_to edit_user_path(current_user.id) do |link| %>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
+                    <% end %>
+                  </h3>
+                  <p>
+                    Universidad:
+                    <% unless @student.university_id.nil? %>
+                        <%= @student.university.university_name %>
+                    <% end %>
+                    <br>
 
-                </div>
+                    Carrera:
+                    <% unless @student.major_id.nil? %>
+                        <%= @student.major.major_name %>
+                    <% end %>
+                    <br>
 
-                <!-- Skills -->
-                <div id="pane3" class="tab-pane">
+                    Nivel:
+                    <%= @student.ed_level_id %>
+                    <br>
 
-                </div>
+                    Otra carrera(s):
+                    'PENDIENTE
+                    <br>
 
-                <!-- Description -->
-                <div id="pane4" class="tab-pane">
+                    Ultimo semestre cursado:
+                    <%= @student.last_semester %>
+                    <br>
 
-                </div>
+                    Calificación máxima en tu universidad:
+                    <%= @student.gpa_max %>
 
-                <!-- Tab 5 -->
-                <div id="pane5" class="tab-pane">
+                    Promedio académico acumulado:
+                    <%= @student.gpa %>
+                    <br>
 
+                    Intercambio:
+                    <% if @student.exchange_student == true  %>
+                        <%= 'Sí' %>
+                    <% else %>
+                        <%= 'No' %>
+                    <% end %>
+                    <br>
+
+                    Pais de intercambio:
+                    <%= @student.country.country_name %>
+                    <br>
+
+                    Universidad de intercambio:
+                    <%= @student.exchange_university %>
+                    <br>
+
+                    Colegio del que te graduaste:
+                    <%= @student.highschool %>
+
+                  </p>
                 </div>
               </div>
-              <!-- /.tab-content -->
+
+            </div>
+
+            <!-- Experience -->
+            <div id="pane2" class="tab-pane">
+              <!-- TODO: Update Student model to include empty attribute listed below -->
+
+            </div>
+
+            <!-- Skills -->
+            <div id="pane3" class="tab-pane">
+
+            </div>
+
+            <!-- Description -->
+            <div id="pane4" class="tab-pane">
+
+            </div>
+
+            <!-- Tab 5 -->
+            <div id="pane5" class="tab-pane">
+
+            </div>
+          </div>
+          <!-- /.tab-content -->
         </div>
         <!-- /.tabbable -->
 

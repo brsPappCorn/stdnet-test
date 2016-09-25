@@ -28,8 +28,10 @@
                 <td><%= student.user_id %></td>
                 <td><%= student.user.email %></td>
                 <td><%= student.id %></td>
-                <td><%= student.university.university_name %></td>
-                <td><%= student.major.major_name %></td>
+                <% unless user_signed_in? %>
+                    <td><%= student.university.university_name %></td>
+                    <td><%= student.major.major_name %></td>
+                <% end %>
                 <td><%= student.user.role_id %></td>
                 <td><%= link_to 'Show', student %></td>
                 <td><%= link_to 'Edit', edit_student_path(student) %></td>
