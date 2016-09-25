@@ -1,35 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Students</h1>
+<section class="studNet-wrapper">
+  <div class="container">
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>User ID</th>
-      <th>User Email</th>
-      <th>University</th>
-      <th>Major</th>
-      <th>Role ID</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="row">
+      <div class="col-md-12">
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.user.id %>
-        <td><%= student.user.email %></td>
-        <td><%= student.university.university_name %></td>
-        <td><%= student.major.major_name %></td>
-        <td><%= student.user.role_id %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <h1>Listing Students</h1>
 
-<br>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Correo Usuario</th>
+            <th>Student ID</th>
+            <th>Universidad</th>
+            <th>Carrera</th>
+            <th>Role ID</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
 
-<%= link_to 'New Student', new_student_path %>
+          <tbody>
+          <% @students.each do |student| %>
+              <tr>
+                <!-- TODO: Students/index - Make nil? validation or use is_attribute_nil? method (The method needs to be created) -->
+                <td><%= student.user_id %></td>
+                <td><%= student.user.email %></td>
+                <td><%= student.id %></td>
+                <% unless user_signed_in? %>
+                    <td><%= student.university.university_name %></td>
+                    <td><%= student.major.major_name %></td>
+                <% end %>
+                <td><%= student.user.role_id %></td>
+                <td><%= link_to 'Show', student %></td>
+                <td><%= link_to 'Edit', edit_student_path(student) %></td>
+                <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: '¿Estás seguro que deseas eliminar al estudiante?' } %>
+
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <br>
+
+        <%= link_to 'New Student', new_student_path %>
+
+      </div>
+    </div>
+
+  </div>
+</section>

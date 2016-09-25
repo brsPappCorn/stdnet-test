@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    if user_signed_in?
+      @users = User.all
+    else
+      redirect_to '/ingreso'
+    end
   end
 
   def show
@@ -33,10 +37,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         puts '------------->>>>'
-        puts 'ejecuta update y NO complete signup'
+        puts 'ejecuta update (users_controller) '
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
+        puts '------------->>>>'
+        puts 'no ejecuta update y hace render de edit (users_controller)'
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -70,6 +76,8 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     #params.fetch(:user, {})
-    params.require(:user).permit(:first_name, :last_name, :date_of_birth, :document_number, :mobile_phone, :city_id, :country_id)
+    params.require(:user).permit(:first_name, :last_name, :date_of_birth, :document_number, :mobile_phone, :city_id, :country_id, :university_id, :major_id,
+                                 student_attributes: [:ed_level_id, :last_semester, :gpa, :gpa_max, :exchange_student, :country_id, :exchange_university, :highschool]
+    )
   end
 end
