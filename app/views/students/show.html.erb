@@ -49,6 +49,7 @@
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
                     <% end %>
                   </h3>
+
                   <p>
                     Nombre(s):
                     <%= @user.first_name %>
@@ -89,6 +90,7 @@
                   </p>
                 </div>
 
+                <!-- TODO: Conditional needed to show info corresponding to the role of the user signed_in -->
                 <div class="col-md-6">
                   <h3>
                     Educación
@@ -96,6 +98,7 @@
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
                     <% end %>
                   </h3>
+
                   <p>
                     Universidad:
                     <% unless @student.university_id.nil? %>
@@ -110,7 +113,11 @@
                     <br>
 
                     Nivel:
-                    <%= @student.ed_level_id %>
+                    <% if @student.ed_level_id == 1  %>
+                        <%= 'Pregrado' %>
+                    <% else %>
+                        <%= 'Posgrado' %>
+                    <% end %>
                     <br>
 
                     Otra carrera(s):
@@ -137,7 +144,9 @@
                     <br>
 
                     Pais de intercambio:
-                    <%= @student.country.country_name %>
+                    <% unless @student.country_id.nil? %>
+                        <%= @student.country.country_name %>
+                    <% end %>
                     <br>
 
                     Universidad de intercambio:
@@ -148,6 +157,7 @@
                     <%= @student.highschool %>
 
                   </p>
+
                 </div>
               </div>
 
@@ -155,7 +165,63 @@
 
             <!-- Experience -->
             <div id="pane2" class="tab-pane">
-              <!-- TODO: Update Student model to include empty attribute listed below -->
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <h3>
+                    Experiencia profesional
+                    <%= link_to edit_user_path(current_user.id) do |link| %>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
+                    <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
+                  </h3>
+
+                  <p>
+                    Tiene experiencia laboral:
+                    <% if @student.work_xp == true  %>
+                        <%= 'Sí' %>
+                    <% else %>
+                        <%= 'No' %>
+                    <% end %>
+                    <br>
+
+                    Nombre de la empresa:
+                    <%= @student.xp_company %>
+                    <br>
+
+                    Cargo:
+                    <%= @student.xp_position %>
+                    <br>
+
+                    Logros:
+                    <%= @student.xp_achievements %>
+                    <br>
+                  </p>
+
+                  <h3>
+                    Actividades sociales y de voluntariado
+                  </h3>
+
+                  <p>
+                    Otras experiencias:
+                    <% if @student.volunteer_xp == true  %>
+                        <%= 'Sí' %>
+                    <% else %>
+                        <%= 'No' %>
+                    <% end %>
+                    <br>
+
+                    Nombre de la empresa:
+                    <%= @student.volunteer_org %>
+                    <br>
+
+                    Cargo:
+                    <%= @student.volunteer_functions %>
+                    <br>
+                  </p>
+
+                </div>
+              </div>
 
             </div>
 
