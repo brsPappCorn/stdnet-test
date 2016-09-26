@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   def user_params
     #params.fetch(:user, {})
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :document_number, :mobile_phone, :city_id, :country_id, :university_id, :major_id,
-                                 student_attributes: [:ed_level_id, :last_semester, :gpa, :gpa_max, :exchange_student, :country_id, :exchange_university, :highschool]
+                                 student_attributes: [:ed_level_id, :last_semester, :gpa, :gpa_max, :exchange_student, :country_id, :exchange_university, :highschool, :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org, :volunteer_functions]
     )
   end
 end
