@@ -37,56 +37,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-=begin
-  hidden_role_id = params[:user][:hidden_role_id]
-
-  puts '-------------->'
-  puts 'hidden_role_id'
-  puts hidden_role_id
-
-  if hidden_role_id == 2
-    puts '-------------->'
-    puts 'is a student'
-    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-      user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
-                         student_attributes: [:university_id, :major_id])
-    end
-  elsif hidden_role_id == 3
-    puts '-------------->'
-    puts 'is a company'
-    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-      user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
-                         company_attributes: [:company_name])
-    end
-  elsif hidden_role_id == 4
-    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-      user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
-                         person_attributes: [:occupation])
-    end
-  end
-=end
-
-=begin
-# Student Model
-  devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-    user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
-                       student_attributes: [:university_id, :major_id])
-  end
-
-# Company
-  devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-    user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
-                       company_attributes: [:company_name])
-  end
-
-# Person Model
-  devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-    user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
-                       person_attributes: [:occupation])
-  end
-=end
-
-
   # If you have extra params to permit, append them to the sanitizer.
   #  def configure_sign_up_params
   # devise_parameter_sanitizer.permit(:sign_up, keys: [company: [:company_name] ])
@@ -98,9 +48,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
 
+  # TODO: Change Devise after sign up redirection. Must redirect to '/info_basica' info_basica_path
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
-  #   super(resource)
+  #  puts '----------------->>>>'
+  #  puts 'devise after sign up'
+  #  puts '----------------->>>>'
+  #  info_basica_path
+  #  puts info_basica_path
+  #  super(resource)
   # end
 
   # The path used after sign up for inactive accounts.

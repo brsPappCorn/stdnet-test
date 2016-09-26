@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925223714) do
+ActiveRecord::Schema.define(version: 20160926134741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,13 @@ ActiveRecord::Schema.define(version: 20160925223714) do
     t.string   "highschool"
     t.string   "gpa_max"
     t.integer  "country_id"
+    t.boolean  "work_xp"
+    t.string   "xp_company"
+    t.text     "xp_position"
+    t.text     "xp_achievements"
+    t.boolean  "volunteer_xp"
+    t.string   "volunteer_org"
+    t.text     "volunteer_functions"
   end
 
   create_table "universities", force: :cascade do |t|
