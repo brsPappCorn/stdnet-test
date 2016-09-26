@@ -49,15 +49,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # TODO: Change Devise after sign up redirection. Must redirect to '/info_basica' info_basica_path
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #  puts '----------------->>>>'
-  #  puts 'devise after sign up'
-  #  puts '----------------->>>>'
-  #  info_basica_path
-  #  puts info_basica_path
-  #  super(resource)
-  # end
+   #The path used after sign up.
+   def after_sign_up_path_for(resource)
+     basic_info_user_path(resource.id)
+   end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :basic_info]
 
   def index
     if user_signed_in?
@@ -63,7 +63,6 @@ class UsersController < ApplicationController
 
   # Updates student basic info needed to show info in the student profile. Is the next step after devise(User) sign up.
   def basic_info
-    @user = User.find_by_id(current_user.id)
   end
 
 
