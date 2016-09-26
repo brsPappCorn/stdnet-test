@@ -22,14 +22,17 @@ Rails.application.routes.draw do
   resources :companies
   resources :people
   resources :students
-  resources :users
+  resources :users do
+    member do
+      get 'basic_info'
+    end
+  end
 
   # =========================
   # Controllers
   # =========================
   # get '/about', to: 'static_pages#about'
   get '/admin_panel', to: 'administrators#index'
-  get '/info_basica', to: 'users#basic_info'
 
 
   # ============
