@@ -1,16 +1,19 @@
+<p id="notice"><%= notice %></p>
+
 <section class="studNet-wrapper profile-wrapper">
   <div class="container">
 
-    <!-- Student Show -->
     <div class="row">
       <div class="col-md-10 col-md-offset-1 text-center">
 
+        <!-- Student's Photo, Name and Rating -->
         <div class="row">
           <div class="col-md-3">
             Foto
           </div>
           <div class="col-md-6">
             <h2>
+              <!-- # TODO: Students/show fix validation for nil? -->
               <%= "#{@student.user.first_name} #{@student.user.last_name}" %>
             </h2>
           </div>
@@ -18,6 +21,7 @@
             Calificación (maximo 4 estrellas)
           </div>
         </div>
+        <!-- ./Student's Photo, Name and Rating -->
 
       </div>
     </div>
@@ -26,7 +30,7 @@
       <div class="col-md-10 col-md-offset-1">
 
         <div class="tabbable student-tab-wrapper">
-          <!--  -->
+
           <ul class="nav nav-tabs student-nav-tabs">
             <li class="active">
               <a href="#pane1" data-toggle="tab">
@@ -151,6 +155,7 @@
 
                     Calificación máxima en tu universidad:
                     <%= @student.gpa_max %>
+                    <br>
 
                     Promedio académico acumulado:
                     <%= @student.gpa %>
@@ -183,6 +188,7 @@
               </div>
 
             </div>
+            <!-- ./Personal Information -->
 
             <!-- Experience -->
             <div id="pane2" class="tab-pane">
@@ -245,6 +251,7 @@
               </div>
 
             </div>
+            <!-- ./Experience -->
 
             <!-- Skills -->
             <div id="pane3" class="tab-pane">
@@ -326,6 +333,7 @@
               </div>
 
             </div>
+            <!-- ./Skills -->
 
             <!-- Description -->
             <div id="pane4" class="tab-pane">
@@ -368,8 +376,9 @@
               </div>
 
             </div>
+            <!-- ./Description -->
 
-            <!-- Tab 5 -->
+            <!-- Other -->
             <div id="pane5" class="tab-pane">
 
               <div class="row">
@@ -394,6 +403,7 @@
               </div>
 
             </div>
+            <!-- ./Other -->
           </div>
           <!-- /.tab-content -->
         </div>
@@ -401,11 +411,6 @@
 
       </div>
     </div>
-    <!-- ./Student Show -->
 
   </div>
 </section>
-
-
-<%#= link_to 'Edit', info_basica_path %> |
-<%#= link_to 'Back', users_path %>

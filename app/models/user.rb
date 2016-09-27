@@ -18,14 +18,16 @@ class User < ActiveRecord::Base
   # 4 = Person
 
   REFERENCED_BY = [
-      'Un amigo', 'Universidad', 'Facebook' # TODO: User Model - Update information once the client delivers the list.
+      'Un amigo',
+      'Universidad',
+      'Facebook'
   ]
   # List of References. If you are going to include a new reference, please add it also to the comment below, to keep track of references.
 
   PROMO_CODE = [
       # TODO: User Model - Promotional codes will be defined later on.
   ]
-  # List of References. If you are going to include a new promotional code, please add it also to the comment below, to keep track of promotional codes.
+
 
   #---------------------
   # Associations
