@@ -52,13 +52,22 @@
                   <!-- Actions for Students -->
                   <% if user_role_id(2) %>
                       <li>
-                        <%= link_to 'Mi Perfil', student_path(current_user.id) %>
+                        <%= link_to 'Ver Perfil', student_path(current_user.id) %>
+                      </li>
+                      <li>
+                        <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
                       </li>
                       <li>
                         <%= link_to 'Ver Ofertas', '' %> <!-- TODO: navbar - Once offer is created add offers_path -->
                       </li>
                   <!-- Actions for Company -->
                   <% elsif user_role_id(3) %>
+                      <li>
+                        <%= link_to 'Ver Perfil', company_path(current_user.id) %>
+                      </li>
+                      <li>
+                        <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
+                      </li>
                       <li>
                         <%= link_to 'Company Actions', '#'  %>
                       </li>

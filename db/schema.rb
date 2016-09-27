@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927120648) do
+ActiveRecord::Schema.define(version: 20160927180705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,9 +30,16 @@ ActiveRecord::Schema.define(version: 20160927120648) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "company_name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "user_id"
+    t.string   "position"
+    t.string   "company_address"
+    t.string   "company_nit"
+    t.text     "company_description"
+    t.string   "company_size"
+    t.string   "company_website_url"
+    t.integer  "company_sector_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -60,6 +67,12 @@ ActiveRecord::Schema.define(version: 20160927120648) do
     t.integer  "user_id"
   end
 
+  create_table "sectors", force: :cascade do |t|
+    t.string   "sector_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.integer  "university_id"
     t.integer  "major_id"
@@ -81,7 +94,7 @@ ActiveRecord::Schema.define(version: 20160927120648) do
     t.boolean  "volunteer_xp"
     t.string   "volunteer_org"
     t.text     "volunteer_functions"
-    t.string   "language_id"
+    t.integer  "language_id"
     t.string   "language_level"
     t.boolean  "programming_skills"
     t.text     "programing_languages"

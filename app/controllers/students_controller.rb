@@ -42,7 +42,6 @@ class StudentsController < ApplicationController
   end
 
   def update
-    # TODO: Students controller. This action is deleting the student record that was created upon user sign up. Must fix this bug
     respond_to do |format|
       if @student.update(student_params)
         puts '------------->>>>'
@@ -77,6 +76,7 @@ class StudentsController < ApplicationController
       redirect_to '/ingreso'
     end
   end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def student_params
     params.require(:student).permit(:id, :university_id, :major_id,
