@@ -271,7 +271,9 @@
                         <tr>
                           <td>
                             <strong>
-                              <%= @student.language.language_name %>
+                              <% unless @student.language_id.nil? %>
+                                  <%= @student.language.language_name %>
+                              <% end %>
                             </strong>
                           </td>
                           <td>
