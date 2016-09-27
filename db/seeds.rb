@@ -21,6 +21,68 @@ Major.create([
                  { major_name: 'Otra' }
              ])
 
+Language.create([
+                 { language_name: 'Español' },
+                 { language_name: 'Ingles' },
+                 { language_name: 'Frances' },
+                 { language_name: 'Italiano' },
+                 { language_name: 'Alemán' }
+             ])
+
+Tool.create([
+                { tool_name: '3ds Max' },
+                { tool_name: 'Adobe After Effects' },
+                { tool_name: 'Adobe Dreamweaver' },
+                { tool_name: 'Adobe Illustrator' },
+                { tool_name: 'Adobe InDesign' },
+                { tool_name: 'Adobe Photoshop' },
+                { tool_name: 'Adobe Premiere Pro' },
+                { tool_name: 'Altium' },
+                { tool_name: 'ANSYS' },
+                { tool_name: 'ArcGIS' },
+                { tool_name: 'Arduino' },
+                { tool_name: 'Arena' },
+                { tool_name: 'Aspen Plus' },
+                { tool_name: 'AutoCAD' },
+                { tool_name: 'Bizagi BPM' },
+                { tool_name: 'Bloomberg' },
+                { tool_name: 'ChemDraw' },
+                { tool_name: 'CorelDRAW' },
+                { tool_name: 'Distribuciones Lynux' },
+                { tool_name: 'Eclipse' },
+                { tool_name: 'Excel - Macros' },
+                { tool_name: 'Excel - Tablas dinámicas' },
+                { tool_name: 'Final Cut' },
+                { tool_name: 'GAMS' },
+                { tool_name: 'Google Forms' },
+                { tool_name: 'HELISA' },
+                { tool_name: 'HFSS' },
+                { tool_name: 'Inventor' },
+                { tool_name: 'LaTex' },
+                { tool_name: 'Lectra' },
+                { tool_name: 'Lego Mindstorm NXT' },
+                { tool_name: 'MATLAB' },
+                { tool_name: 'Microsoft Access' },
+                { tool_name: 'Microsoft Project' },
+                { tool_name: 'Microsoft Visio' },
+                { tool_name: 'Oracle Crystall Ball' },
+                { tool_name: 'Regedit' },
+                { tool_name: 'Rhino 3D' },
+                { tool_name: 'Richpeace' },
+                { tool_name: 'SAP' },
+                { tool_name: 'SigmaPlot' },
+                { tool_name: 'Siigo' },
+                { tool_name: 'SketchUp' },
+                { tool_name: 'Solid Edge' },
+                { tool_name: 'SOLIDWORKS' },
+                { tool_name: 'SPSS' },
+                { tool_name: 'STATA' },
+                { tool_name: 'Statgraphics' },
+                { tool_name: 'Survey Monkey' },
+                { tool_name: 'Windows Movie Maker' },
+                { tool_name: 'WordPress' }
+            ])
+
 # Linked with User
 City.create([
                 { city_name: 'Bogota' },
@@ -34,4 +96,10 @@ Country.create([
                    { country_name: 'Mexico' },
                    { country_name: 'Noruega' }
                ])
+
+
+
+
+
+
 

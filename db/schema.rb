@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926134741) do
+ActiveRecord::Schema.define(version: 20160927120648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 20160926134741) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "languages", force: :cascade do |t|
+    t.string   "language_name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "majors", force: :cascade do |t|
     t.string   "major_name"
     t.datetime "created_at", null: false
@@ -57,8 +63,8 @@ ActiveRecord::Schema.define(version: 20160926134741) do
   create_table "students", force: :cascade do |t|
     t.integer  "university_id"
     t.integer  "major_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "user_id"
     t.integer  "ed_level_id"
     t.string   "last_semester"
@@ -75,6 +81,24 @@ ActiveRecord::Schema.define(version: 20160926134741) do
     t.boolean  "volunteer_xp"
     t.string   "volunteer_org"
     t.text     "volunteer_functions"
+    t.string   "language_id"
+    t.string   "language_level"
+    t.boolean  "programming_skills"
+    t.text     "programing_languages"
+    t.text     "strengths"
+    t.text     "areas_to_develop"
+    t.text     "hobbies"
+  end
+
+  create_table "students_tools", id: false, force: :cascade do |t|
+    t.integer "tool_id",    null: false
+    t.integer "student_id", null: false
+  end
+
+  create_table "tools", force: :cascade do |t|
+    t.string   "tool_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "universities", force: :cascade do |t|
