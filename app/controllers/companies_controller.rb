@@ -1,28 +1,31 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
-  # GET /companies
-  # GET /companies.json
   def index
-    @companies = Company.all
+    if user_signed_in?
+      # @users = User.all
+      @companies = Company.all
+    else
+      redirect_to '/ingreso'
+    end
   end
 
-  # GET /companies/1
-  # GET /companies/1.json
   def show
+    if user_signed_in?
+      @user = User.find_by_id(current_user.id)
+    else
+      puts '---------------->>>>>'
+      puts 'no existe usuario'
+    end
   end
 
-  # GET /companies/new
   def new
     @company = Company.new
   end
 
-  # GET /companies/1/edit
   def edit
   end
 
-  # POST /companies
-  # POST /companies.json
   def create
     @company = Company.new(company_params)
 
@@ -37,8 +40,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/1
-  # PATCH/PUT /companies/1.json
   def update
     respond_to do |format|
       if @company.update(company_params)
@@ -51,8 +52,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /companies/1
-  # DELETE /companies/1.json
+  # TODO: Companies Controller - destroy action only allowed by Admin role
   def destroy
     @company.destroy
     respond_to do |format|
@@ -64,11 +64,16 @@ class CompaniesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
-      @company = Company.find(params[:id])
+      if user_signed_in?
+        user_id = current_user.id
+        @company = Company.find_by_user_id(user_id)
+      else
+        redirect_to '/ingreso'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:company_name)
+      params.require(:company).permit(:id, :company_name, :position, :company_address, :company_nit, :company_description, :company_size, :company_website_url, :company_sector_id)
     end
 end
