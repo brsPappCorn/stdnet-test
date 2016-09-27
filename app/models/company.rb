@@ -16,7 +16,7 @@ class Company < ActiveRecord::Base
   # Associations
   #---------------------
   belongs_to :user
-  belongs_to :sector
+  belongs_to :sector, foreign_key: 'company_sector_id'
 
   #---------------------
   # Validations

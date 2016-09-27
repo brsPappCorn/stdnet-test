@@ -81,7 +81,7 @@
               Sector:
               <% unless @company.company_sector_id.nil? %>
                   <%#= TODO: Company/show - Fix nil:NilClass error %>
-                  <%#= @company.sector.sector_name %>
+                  <%= @company.sector.sector_name %>
               <% end %>
               <br>
 
