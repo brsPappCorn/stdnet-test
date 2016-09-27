@@ -4,6 +4,12 @@ class Student < ActiveRecord::Base
   #---------------------
   LAST_SEMESTER = %w[1 2 3 4 5 6 7 8 9 10 11 12 13 14]
 
+  LANGUAGE_LEVEL = [
+      'Nativo', 'Avanzado', 'Intermedio', 'Básico' # Language levels
+  ]
+
+  EDUCATION_LEVEL = %w[Pregrado Posgrado]
+
   #---------------------
   # Associations
   #---------------------
@@ -11,6 +17,9 @@ class Student < ActiveRecord::Base
   belongs_to :university
   belongs_to :major
   belongs_to :country
+  belongs_to :language
+
+  has_and_belongs_to_many :tools
 
   #---------------------
   # Validations

@@ -81,7 +81,11 @@ class StudentsController < ApplicationController
   def student_params
     params.require(:student).permit(:id, :university_id, :major_id,
                                     :ed_level_id, :last_semester, :gpa, :gpa_max, :exchange_student, :country_id, :exchange_university, :highschool,
-                                    :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org, :volunteer_functions
+                                    :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org, :volunteer_functions,
+                                    :language_id, :language_level, :programming_skills, :programing_languages, :strengths, :areas_to_develop, :hobbies, :referenced_by, tool_ids:[]
     )
   end
 end
+
+
+
