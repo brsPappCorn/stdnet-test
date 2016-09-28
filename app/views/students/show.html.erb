@@ -138,7 +138,9 @@
                     <br>
 
                     Nivel:
-                    <%= @student.education_level.level_name %>
+                    <% unless @student.ed_level_id.nil? %>
+                        <%= @student.education_level.level_name %>
+                    <% end %>
                     <br>
 
                     Otra carrera(s):
