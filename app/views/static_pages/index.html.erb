@@ -1,14 +1,113 @@
 <section class="root-index-wrapper">
 
-  <div class="container">
+  <div class="root-index-hero-bg-wrapper text-center">
+    <div class="container index-container-hero">
+
+      <div class="row">
+        <!-- Index Hero Left -->
+        <div class="col-md-6 root-index-hero-cont">
+          <h2>
+            Estudiantes
+          </h2>
+          <h4>
+            ¿Eres un estudiante universitario y quieres aplicar a ofertas de proyectos, prácticas y trabajos?
+          </h4>
+          <h6>
+            <%= link_to 'Aplica a ofertas', new_user_session_path, class: 'btn btn-primary btn-studnet-basic btn-studnet-hero-index' %>
+          </h6>
+        </div>
+        <!-- ./Index Hero Left -->
+
+        <!-- Index Hero Right -->
+        <div class="col-md-6 root-index-hero-cont">
+          <h2>
+            Empresas / Personas
+          </h2>
+          <h4>
+            ¿Necesitas un estudiante universitario o recién egresado para tu empresa o tus proyectos personales?
+          </h4>
+          <h6>
+            <%= link_to 'Aplica a ofertas', new_user_session_path, class: 'btn btn-primary btn-studnet-basic btn-studnet-hero-index' %>
+          </h6>
+        </div>
+        <!-- ./Index Hero Right -->
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container root-index-content text-center">
 
     <div class="row">
       <div class="col-md-12">
 
-        <h1>StaticPages#index</h1>
-        <p>Find me in app/views/static_pages/index.html.erb</p>
+        <h3>
+          Encuentra a tu estudiante ideal con studNet
+        </h3>
+
+        <p>
+          studNet es la red que conecta a empresas y personas con estudiantes universitarios para el desarrollo de proyectos, prácticas y trabajos. A través de nuestra plataforma, las empresas y personas pueden encontrar de forma rápida y fácil estudiantes y recién egresados de diversas universidades, carreras, conocimientos y experiencias.
+        </p>
+
+        <p>
+          ¿Aún no estás registrado? Regístrate gratis haciendo click a continuación:
+        </p>
 
       </div>
+    </div>
+
+    <div class="row margin-top-20">
+      <!-- Index Student SignUp -->
+      <div class="col-md-4">
+        <%= image_tag 'estudiantes.jpg', alt: 'studNet | Estudiantes', class: '' %>
+        <h4>
+          Estudiantes
+        </h4>
+
+        <p class="index-signup-p">
+          Crea tu perfil con tu universidad, carrera, habilidades y experiencias. Aplica a tus ofertas favoritas de proyectos, prácticas y trabajos
+        </p>
+
+        <p>
+          <%= link_to 'Registrarse', new_user_registration_path(studnet: 2), class: 'btn btn-primary btn-studnet-basic' %>
+        </p>
+      </div>
+      <!-- ./Index Student SignUp -->
+
+      <!-- Index Company SignUp -->
+      <div class="col-md-4">
+        <%= image_tag 'empresas.jpg', alt: 'studNet | Estudiantes', class: '' %>
+        <h4>
+          Empresas
+        </h4>
+
+        <p class="index-signup-p">
+          Publica tus ofertas de proyectos, prácticas y trabajos para estudiantes universitarios y recién egresados. Recibe aplicaciones y selecciona al candidato ideal
+        </p>
+
+        <p>
+          <%= link_to 'Registrarse', new_user_registration_path(studnet: 3), class: 'btn btn-primary btn-studnet-basic' %>
+        </p>
+      </div>
+      <!-- ./Index Company SignUp -->
+
+      <!-- Index Person SignUp -->
+      <div class="col-md-4">
+        <%= image_tag 'personas.jpg', alt: 'studNet | Estudiantes', class: '' %>
+        <h4>
+          Personas
+        </h4>
+
+        <p class="index-signup-p">
+          ¿Necesitas una traducción, diseñar un logo, una página web, hacer encuestas, investigaciones o resúmenes? Publica tu oferta y selecciona al candidato ideal
+        </p>
+
+        <p>
+          <%= link_to 'Registrarse', new_user_registration_path(studnet: 4), class: 'btn btn-primary btn-studnet-basic' %>
+        </p>
+      </div>
+      <!-- ./Index Person SignUp -->
     </div>
 
   </div>
