@@ -21,6 +21,7 @@ $cs-light-blue: #C3DEF4;
 // General
 // ================
 body {
+  color: $cp-dark-gray;
   font-family: 'Ubuntu', sans-serif;
   font-weight: $f-normal;
 }
@@ -76,8 +77,13 @@ body {
 // ================
 // Buttons
 // ================
+
 .btn-studnet-basic {
 
+}
+
+.btn-studnet-hero-index {
+  padding: 20px 28px;
 }
 
 // ================
@@ -139,9 +145,53 @@ header {
 // ================
 .devise-wrapper {
   margin: 30px 0;
+  margin-top: 0;
 
-  .admin-form {
-    border: 2px solid $cp-dark-gray;
+  .students-signup-wrapper {
+    background-image: url(image_path('register_students.jpg'));
+    background-size: cover;
+    color: white;
+
+    h1 {
+      font-weight: bold;
+      margin-bottom: 50px;
+      margin-top: 40px;
+    }
+
+    h2 {
+      font-size: 1.91em;
+      font-weight: 500;
+      margin-bottom: 100px;
+    }
+
+    .students-signup-content {
+      h4 {
+        font-size: 1.4em;
+        font-weight: 400;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: #dddddd;
+        margin-bottom: 20px;
+
+      }
+
+    }
+
+  }
+
+  .companies-signup-wrapper {
+
+  }
+
+  .people-signup-wrapper {
+
+  }
+
+  .register-form {
+    background: rgba(106,173,228,0.4);
     padding: 20px 25px;
 
     .form-group {
