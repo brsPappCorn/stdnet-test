@@ -128,15 +128,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                  <%= f.label :ed_level_id, 'Nivel' %>
-                                  <select id="edLevelID" name="user[student_attributes][ed_level_id]" class="form-control input-width">
-                                    <option value="1">
-                                      Pregrado
-                                    </option>
-                                    <option value="2">
-                                      Posgrado
-                                    </option>
-                                  </select>
+                                  <%= s.label :ed_level_id, 'Nivel' %>
+                                  <%= s.select :ed_level_id, EducationLevel.all.map { |ed_level| [ed_level.level_name, ed_level.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                                 </div>
 
                                 <div class="form-group">
@@ -426,7 +419,7 @@
 
                                 <div class="form-group">
                                   <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
-                                  <%= f.select(:referenced_by, User::REFERENCED_BY, {}, { :class => 'form-control' }) %>
+                                  <%= f.select(:referenced_by, User::REFERENCES_STUDENT, {}, { :class => 'form-control' }) %>
                                 </div>
 
                               </div>
@@ -578,6 +571,12 @@
 
                           </div>
                       <% end %>
+
+                      <div class="form-group">
+                        <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
+                        <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
+                      </div>
+
                       <!-- ./Nested form (company) -->
 
                     </div>
