@@ -1,140 +1,144 @@
 <section class="devise-wrapper">
 
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3 text-center admin-form">
-      <!-- Form -->
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= devise_error_messages! %>
 
-          <div class="form-group">
-            <%= f.label :role_id, 'Selecciona el tipo de cuenta' %><br />
-            <select id="roleID" name="user[role_id]" class="form-control input-width">
-              <option value="2">
-                Estudiante
-              </option>
-              <option value="3">
-                Empresa
-              </option>
-              <option value="4">
-                Persona
-              </option>
-            </select>
+  <% if params[:studnet].to_i == 2 %>
+
+      <div class="students-signup-wrapper">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col-md-8">
+              <h1>
+                ¿Quieres ganar dinero, experiencia y contactos trabajando mientras estudias?
+              </h1>
+              <h2>
+                Regístrate ahora y aplica a los proyectos, prácticas y trabajos que más te gusten. ¡Es gratis!
+              </h2>
+
+              <div class="students-signup-content">
+                <h4>
+                  Trabajos Simples
+                </h4>
+                <p>
+                  Trabaja en labores simples como traducciones, resúmenes y <br>
+                  corrección de documentos
+                </p>
+
+                <h4>
+                  Proyectos Virtuales
+                </h4>
+                <p>
+                  Trabaja en proyectos como diseño de páginas web, diseño de <br>
+                  logos y análisis financieros
+                </p>
+
+                <h4>
+                  Proyectos Presenciales
+                </h4>
+                <p>
+                  Trabaja con empresas y profesionales en el desarrollo de <br>
+                  proyectos temporales
+                </p>
+
+                <h4>
+                  Prácticas
+                </h4>
+                <p>
+                  Trabaja de forma presencial haciendo prácticas en empresas de <br>
+                  diversos sectores y tamaños
+                </p>
+              </div>
+
+            </div>
+
+            <div class="col-md-4 text-center register-form">
+              <%= render 'devise/registrations/form' %>
+            </div>
           </div>
 
-          <!-- User Information -->
-          <div class="form-group">
-            <%= f.label :email, 'Correo Electrónico' %><br />
-            <%= f.email_field :email, class: 'form-control input-width' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password, 'Contraseña' %>
-            <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: 'off', class: 'form-control input-width' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password_confirmation, 'Confirmar contraseña' %><br />
-            <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control input-width' %>
-          </div>
-          <!-- ./User Information -->
-
-          <!-- Student Information -->
-          <div class="form-group devise-student-info" id="deviseCompanySignUp">
-            <%= f.fields_for :student, resource.build_student do |s| %>
-                <%= s.label :university_id, 'Universidad' %>
-                <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width devie-control-margin-bot' %>
-
-                <%= s.label :major_id, 'Carrera'  %>
-                <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
-            <% end %>
-          </div>
-          <!-- ./Student Information -->
-
-          <!-- Company Information -->
-          <div class="form-group devise-company-info" id="deviseCompanySignUp">
-            <%= f.fields_for :company, resource.build_company do |c| %>
-                <%= c.label :company_name, 'Nombre de la empresa'  %>
-                <%= c.text_field :company_name, class: 'form-control input-width' %>
-            <% end %>
-          </div>
-          <!-- ./Company Information -->
-
-          <!-- Person Information -->
-          <div class="form-group devise-person-info" id="devisePersonSignUp">
-            <%= f.fields_for :person, resource.build_person do |p| %>
-                <%= p.label :occupation, 'Ocupación'  %>
-                <%= p.text_field :occupation, class: 'form-control input-width' %>
-            <% end %>
-          </div>
-          <!-- ./Person Information -->
-
-          <!-- TODO: Registrations/New once we have defined how this will work, inputs will be displayed -->
-          <!-- Additional Information
-
-          <div class="form-group">
-            <%= f.label :promo_id, 'Código promocional' %><br />
-            <%= f.text_field :promo_id, class: 'form-control input-width' %>
-          </div>
-
-           ./Additional Information -->
-
-          <div class="actions text-right">
-            <%= f.submit 'Registrarse', class: 'btn btn-primary btn-studnet-basic' %>
-          </div>
-
-          <%= f.hidden_field(:role_id, value: '2') %>
-      <% end %>
-
-      <div class="text-right">
-        <%= render 'devise/shared/links' %>
+        </div>
       </div>
-      <!-- Form -->
-    </div>
-  </div>
+
+  <% elsif params[:studnet].to_i == 3 %>
+
+      <div class="companies-signup-wrapper">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col-md-6">
+              reerre
+            </div>
+
+            <div class="col-md-6 text-center register-form">
+              <%= render 'devise/registrations/form' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+  <% elsif params[:studnet].to_i == 4 %>
+      <div class="people-signup-wrapper">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col-md-6">
+              reerre
+            </div>
+
+            <div class="col-md-6 text-center register-form">
+              <%= render 'devise/registrations/form' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  <% end %>
 
 </section>
 
 <script>
   // Functions to show/hide form in the content depending on the type of account (role) selected.
-  $(function() {
+  /*
+   $(function() {
 
-    select_value = [];
+   select_value = [];
 
-    $('.devise-student-info').show();
-    $('.devise-company-info').hide();
-    $('.devise-person-info').hide();
+   $('.devise-student-info').show();
+   $('.devise-company-info').hide();
+   $('.devise-person-info').hide();
 
-    function displayFormContent() {
-      $('#roleID').change(function(){
-        if ( $('#roleID').val() == 2 ) {
-          $('.devise-student-info').show();
-          $('.devise-company-info').hide();
-          $('.devise-person-info').hide();
-        } else if ( $('#roleID').val() == 3 ) {
-          $('.devise-student-info').hide();
-          $('.devise-company-info').show();
-          $('.devise-person-info').hide();
-        } else if ( $('#roleID').val() == 4 ) {
-          $('.devise-student-info').hide();
-          $('.devise-company-info').hide();
-          $('.devise-person-info').show();
-        }
+   function displayFormContent() {
+   $('#roleID').change(function(){
+   if ( $('#roleID').val() == 2 ) {
+   $('.devise-student-info').show();
+   $('.devise-company-info').hide();
+   $('.devise-person-info').hide();
+   } else if ( $('#roleID').val() == 3 ) {
+   $('.devise-student-info').hide();
+   $('.devise-company-info').show();
+   $('.devise-person-info').hide();
+   } else if ( $('#roleID').val() == 4 ) {
+   $('.devise-student-info').hide();
+   $('.devise-company-info').hide();
+   $('.devise-person-info').show();
+   }
 
-        // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
-        select_value =  $('#roleID').val();
-        roleID_value =  $('#user_role_id').attr('value', select_value);
+   // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
+   select_value =  $('#roleID').val();
+   roleID_value =  $('#user_role_id').attr('value', select_value);
 
-      });
+   });
 
-      $('#roleID').val();
+   $('#roleID').val();
 
-    }
+   }
 
-    displayFormContent();
+   displayFormContent();
 
-  });
-
+   });
+   */
 </script>
