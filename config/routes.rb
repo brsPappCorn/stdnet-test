@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-  resources :opportunities
   # =========================
   # Root
   # =========================
@@ -26,6 +24,11 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get 'basic_info'
+    end
+  end
+  resources :opportunities do
+    member do
+      post 'apply'
     end
   end
 

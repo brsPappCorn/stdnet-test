@@ -77,7 +77,9 @@ class UsersController < ApplicationController
     #params.fetch(:user, {})
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :document_number, :mobile_phone, :city_id, :country_id, :university_id, :major_id, :referenced_by,
                                  student_attributes: [ :id, :university_id, :major_id, :ed_level_id, :last_semester, :gpa, :gpa_max, :exchange_student, :country_id, :exchange_university, :highschool, :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org, :volunteer_functions, :language_id, :language_level, :programming_skills, :programing_languages, :strengths, :areas_to_develop, :hobbies, tool_ids:[] ],
-                                 company_attributes: [ :id, :position, :company_address, :company_nit, :company_description, :company_size, :company_website_url, :company_name, :company_sector_id  ]
+                                 company_attributes: [ :id, :position, :company_address, :company_nit, :company_description, :company_size, :company_website_url, :company_name, :company_sector_id  ],
+                                 opportunity_ids:[]
+
     )
   end
 end
