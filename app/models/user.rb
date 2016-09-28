@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
   has_one :person, dependent: :destroy
 
   has_many :opportunities
+  has_and_belongs_to_many :opportunities
 
   belongs_to :city
   belongs_to :country

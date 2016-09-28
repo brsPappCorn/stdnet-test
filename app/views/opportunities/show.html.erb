@@ -73,6 +73,10 @@
           <%= @opportunity.number_of_students %>
         </p>
 
+        <p>
+          <%= link_to 'Aplicar', apply_opportunity_path(@opportunity), method: :post, class: 'btn btn-primary btn-studNet' %>
+        </p>
+
       </div>
     </div>
 

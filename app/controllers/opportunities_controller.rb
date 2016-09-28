@@ -1,5 +1,5 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
+  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply]
 
   # GET /opportunities
   # GET /opportunities.json
@@ -59,6 +59,18 @@ class OpportunitiesController < ApplicationController
       format.html { redirect_to opportunities_url, notice: 'Opportunity was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  #
+  def apply
+    if @opportunity.users.push(current_user)
+      flash[:error] = 'Aplicaste satisfactoriamente a la oferta'
+      redirect_to opportunities_path
+    else
+      flash[:error] = 'Intentalo de nuevo'
+      redirect_to @opportunity
+    end
+
   end
 
   private
