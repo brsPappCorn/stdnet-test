@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Opportunities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Opportunity type</th>
+      <th>Ooportunity title</th>
+      <th>Activity description</th>
+      <th>Skills description</th>
+      <th>Major</th>
+      <th>Other majors</th>
+      <th>Question for student</th>
+      <th>Date ini</th>
+      <th>Opportunity duration</th>
+      <th>Availability</th>
+      <th>Cost or offer option</th>
+      <th>Opportunity cost</th>
+      <th>Receive portfolio</th>
+      <th>Number of students</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @opportunities.each do |opportunity| %>
+      <tr>
+        <td><%= opportunity.opportunity_type %></td>
+        <td><%= opportunity.ooportunity_title %></td>
+        <td><%= opportunity.activity_description %></td>
+        <td><%= opportunity.skills_description %></td>
+        <td><%= opportunity.major_id %></td>
+        <td><%= opportunity.other_majors %></td>
+        <td><%= opportunity.question_for_student %></td>
+        <td><%= opportunity.date_ini %></td>
+        <td><%= opportunity.opportunity_duration %></td>
+        <td><%= opportunity.availability %></td>
+        <td><%= opportunity.cost_or_offer_option %></td>
+        <td><%= opportunity.opportunity_cost %></td>
+        <td><%= opportunity.receive_portfolio %></td>
+        <td><%= opportunity.number_of_students %></td>
+        <td><%= link_to 'Show', opportunity %></td>
+        <td><%= link_to 'Edit', edit_opportunity_path(opportunity) %></td>
+        <td><%= link_to 'Destroy', opportunity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Opportunity', new_opportunity_path %>

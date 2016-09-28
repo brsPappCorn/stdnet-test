@@ -17,12 +17,28 @@ class User < ActiveRecord::Base
   # 3 = Company
   # 4 = Person
 
-  REFERENCED_BY = [
-      'Un amigo',
-      'Universidad',
-      'Facebook'
+  REFERENCES_USER = [
+      'Anuncios / publicidad en Facebook',
+      'Publicaciones en grupos de Facebook',
+      'Linked In',
+      'Instagram',
+      'Un/a amigo/a',
+      'Evento o conferencia',
+      'Google u otro motor de búsqueda',
+      'Correo electróncio'
   ]
-  # List of References. If you are going to include a new reference, please add it also to the comment below, to keep track of references.
+
+  REFERENCES_STUDENT = [
+      'Anuncios / publicidad en Facebook',
+      'Publicaciones en grupos de Facebook',
+      'Linked In',
+      'Instagram',
+      'Un/a amigo/a',
+      'Evento o conferencia',
+      'Google u otro motor de búsqueda',
+      'Correo electróncio',
+      'Universidad'
+  ]
 
   PROMO_CODE = [
       # TODO: User Model - Promotional codes will be defined later on.
@@ -35,6 +51,8 @@ class User < ActiveRecord::Base
   has_one :company, dependent: :destroy
   has_one :student, dependent: :destroy
   has_one :person, dependent: :destroy
+
+  has_many :opportunities
 
   belongs_to :city
   belongs_to :country
@@ -51,5 +69,12 @@ class User < ActiveRecord::Base
   #---------------------
   # TODO: Declare validations
 
+
+  #---------------------
+  # Methods
+  #---------------------
+  def can_create_opportunity?
+    self.role_id != 2
+  end
 
 end

@@ -8,8 +8,6 @@ class Student < ActiveRecord::Base
       'Nativo', 'Avanzado', 'Intermedio', 'Básico' # Language levels
   ]
 
-  EDUCATION_LEVEL = %w[Pregrado Posgrado]
-
   #---------------------
   # Associations
   #---------------------
@@ -18,6 +16,7 @@ class Student < ActiveRecord::Base
   belongs_to :major
   belongs_to :country
   belongs_to :language
+  belongs_to :education_level, foreign_key: 'ed_level_id'
 
   has_and_belongs_to_many :tools
 

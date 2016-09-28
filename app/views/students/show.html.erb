@@ -138,11 +138,7 @@
                     <br>
 
                     Nivel:
-                    <% if @student.ed_level_id == 1  %>
-                        <%= 'Pregrado' %>
-                    <% else %>
-                        <%= 'Posgrado' %>
-                    <% end %>
+                    <%= @student.education_level.level_name %>
                     <br>
 
                     Otra carrera(s):
