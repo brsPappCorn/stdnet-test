@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927180705) do
+ActiveRecord::Schema.define(version: 20160928032828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20160927180705) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "education_levels", force: :cascade do |t|
+    t.string   "level_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string   "language_name"
     t.datetime "created_at",    null: false
@@ -58,6 +64,25 @@ ActiveRecord::Schema.define(version: 20160927180705) do
     t.string   "major_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "opportunities", force: :cascade do |t|
+    t.integer  "opportunity_type"
+    t.string   "opportunity_title"
+    t.text     "activity_description"
+    t.text     "skills_description"
+    t.integer  "major_id"
+    t.boolean  "other_majors"
+    t.string   "question_for_student"
+    t.date     "date_ini"
+    t.string   "opportunity_duration"
+    t.integer  "availability"
+    t.integer  "cost_or_offer_option"
+    t.integer  "opportunity_cost"
+    t.boolean  "receive_portfolio"
+    t.integer  "number_of_students"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "people", force: :cascade do |t|

@@ -1,0 +1,2 @@
+json.extract! opportunity, :id, :opportunity_type, :ooportunity_title, :activity_description, :skills_description, :major_id, :other_majors, :question_for_student, :date_ini, :opportunity_duration, :availability, :cost_or_offer_option, :opportunity_cost, :receive_portfolio, :number_of_students, :created_at, :updated_at
+json.url opportunity_url(opportunity, format: :json)

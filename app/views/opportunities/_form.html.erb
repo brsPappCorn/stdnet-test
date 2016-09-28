@@ -1,0 +1,96 @@
+<%= form_for(@opportunity) do |f| %>
+    <% if @opportunity.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
+
+          <ul>
+            <% @opportunity.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :opportunity_type, 'Tipo de oferta' %>
+          <%= f.select :opportunity_type, options_for_select(opportunity_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :opportunity_title, 'Título de la oferta' %><br>
+          <%= f.text_field :opportunity_title, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :activity_description, 'Descripción de las actividades a realizar' %><br>
+          <%= f.text_area :activity_description, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :skills_description, 'Descripción de las habilidades y conocimientos requeridos' %><br>
+          <%= f.text_area :skills_description, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :major_id, 'Carrera'  %>
+          <%= f.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group">
+          <h5>
+            ¿Permitir aplicaciones de estudiantes de otras carreras?
+          </h5>
+          <%= f.check_box :other_majors, class: 'checkbox-inline input-width' %>
+          <%= f.label :other_majors, 'Sí' %><br>
+          <!-- TODO: Opportunities/form. Generate Yes/No question. if Yes: all students can apply. if No: only specified majors can apply -->
+        </div>
+
+        <div class="form-group">
+          <%= f.label :question_for_student, 'Pregunta al estudiante' %><br>
+          <%= f.text_field :question_for_student, class: 'form-control input-width' %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :date_ini, 'Fecha de inicio del trabajo' %><br>
+          <%= f.date_select :date_ini, { start_year: Time.now.year }, { class: 'form-control input-width' } %>
+        </div>
+        <div class="form-group">
+          <%= f.label :opportunity_duration, 'Duración del trabajo (en días, semanas o meses)' %><br>
+          <%= f.text_field :opportunity_duration, class: 'form-control input-width' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :availability, 'Tiempo requerido del estudiante' %><br>
+          <%= f.select :availability, options_for_select(opportunity_select_availability), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :cost_or_offer_option, '¿Quieres poner un valor para el proyecto o escuchar ofertas de los estudiantes?' %><br>
+          <%= f.select :cost_or_offer_option, options_for_select(opportunity_select_cost_or_offer), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :opportunity_cost, 'Salario / Valor del proyecto' %><br>
+          <%= f.number_field :opportunity_cost, class: 'form-control input-width' %>
+        </div>
+        <div class="form-group">
+          <h5>
+            ¿Quieres recibir el portafolio de los estudiantes que apliquen a tu oferta?
+          </h5>
+          <%= f.check_box :receive_portfolio, class: 'checkbox-inline input-width' %>
+          <%= f.label :receive_portfolio, 'Sí' %><br>
+        </div>
+        <div class="form-group">
+          <%= f.label :number_of_students, '¿Cuántos estudiantes necesitas contratar para esta oferta?' %><br>
+          <%= f.number_field :number_of_students, class: 'form-control input-width' %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Crear oferta', class: 'btn btn-primary btn-studNet' %>
+      <!-- TODO: Opportunity/_form make button text conditional depending on the path -->
+    </div>
+<% end %>

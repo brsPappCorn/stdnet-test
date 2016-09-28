@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+<section class="studNet-wrapper opportunity-wrapper">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 studNet-form no-border">
+
+
+        <h1>
+          Título de la oferta:
+          <%= @opportunity.opportunity_title %>
+          <%= link_to edit_opportunity_path(@opportunity.id) do |link| %>
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
+          <% end %>
+          <br>
+        </h1>
+
+        <p>
+          Tipo de oferta:
+          <%= opportunity_type_friendly(@opportunity) %>
+          <br>
+
+          Descripción de las actividades a realizar:
+          <%= @opportunity.activity_description %>
+          <br>
+
+          Descripción de las habilidades y conocimientos requeridos:
+          <%= @opportunity.skills_description %>
+          <br>
+
+          Carreras:
+          <%= @opportunity.major.major_name %>
+          <br>
+
+          ¿Permitir aplicaciones de estudiantes de otras carreras?:
+          <%= @opportunity.other_majors %>
+          <!-- TODO: Opportunities/show - Generate Yes/No question. if Yes: all students can apply. if No: only specified majors can apply -->
+          <br>
+
+          Pregunta al estudiante:
+          <%= @opportunity.question_for_student %>
+          <!-- TODO: Opportunities/show - Add tooltip to help understand this question. if answered: show the question on the opportunity view displayed to students -->
+          <br>
+
+          Fecha de inicio del trabajo:
+          <%= @opportunity.date_ini.strftime('%Y/%m/%d ') %>
+          <!-- TODO: Opportunities/show - Add two checkboxes: 'Indefinido' / 'Lo antes posible'  -->
+          <br>
+
+          Duración del trabajo (en días, semanas o meses):
+          <%= @opportunity.opportunity_duration %>
+          <!-- TODO: Opportunities/show - Add two checkboxes: 'Indefinido'  -->
+          <br>
+
+          Tiempo requerido del estudiante:
+          <%= opportunity_availability_friendly(@opportunity) %>
+          <!-- TODO: Opportunities/show - Must create a new attribute in Student (student_availability) to validate if a student meets the requirements of the opportunity (availability) -->
+          <br>
+
+          ¿Quieres poner un valor para el proyecto o escuchar ofertas de los estudiantes?:
+          <%= opportunity_cost_or_offer_friendly(@opportunity) %>
+          <br>
+
+          Salario / Valor del proyecto:
+          <%= @opportunity.opportunity_cost %>
+          <br>
+
+          ¿Quieres recibir el portafolio de los estudiantes que apliquen a tu oferta?:
+          <%= @opportunity.receive_portfolio %>
+          <br>
+
+          ¿Cuántos estudiantes necesitas contratar para esta oferta?
+          <%= @opportunity.number_of_students %>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</section>
