@@ -1,38 +1,318 @@
 <section class="devise-wrapper">
+  <!-- Sign In Account Type Selection -->
+  <% if current_page?(new_user_session_path(studnet: 2)) || current_page?(new_user_session_path(studnet: 3)) || current_page?(new_user_session_path(studnet: 4)) %>
 
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3 text-center admin-form">
-      <!-- Form -->
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <%= devise_error_messages! %>
+      <!-- Sign In Form -->
+      <div class="devise-signup-wrapper students-signup-wrapper">
 
-          <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.text_field :email, autofocus: true, class: 'form-control input-width' %>
+        <div class="sign-in-title">
+          <div class="container">
+            <div class="col-md-12">
+              <h3>
+                Iniciar sesión
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="container sign-in-form">
+
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3>
+                Por favor ingresa tu correo y contraseña para iniciar sesión en la plataforma
+              </h3>
+            </div>
           </div>
 
-          <div class="form-group">
-            <%= f.label :password, 'Contraseña' %><br />
-            <%= f.password_field :password, autocomplete: 'off', class: 'form-control input-width' %>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+              <!-- Form -->
+              <%= render 'devise/sessions/form' %>
+              <!-- Form -->
+
+            </div>
           </div>
 
-          <% if devise_mapping.rememberable? -%>
-              <div class="form-group">
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
+        </div>
+      </div>
+      <!-- ./Sign In Form -->
+
+      <!-- Sign Up Info -->
+      <% if current_page?(new_user_session_path(studnet: 2)) %>
+          <div class="container sign-in-info-container">
+
+            <div class="row">
+              <div class="col-md-8">
+                <h3>
+                  ¿Aún no estás registrado? Regístrate ahora y aplica a los proyectos, prácticas y trabajos que más te gusten. ¡Es gratis!
+                </h3>
+                <p>
+                  <%= link_to 'Registrarme', new_user_registration_path(studnet: 2), class: 'btn btn-primary btn-studnet-basic margin-bot-40' %>
+                </p>
+
+                <div class="row text-center">
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_money.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Dinero
+                    </h4>
+                    <p>
+                      ¡Gana dinero trabajando en tareas, proyectos y prácticas con diversas empresas y profesionales!
+                    </p>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_xp.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Experiencia
+                    </h4>
+                    <p>
+                      ¡Obtén experiencia con diferentes proyectos y fortalece tu hoja de vida y tus conocimientos!
+                    </p>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_networking.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Networking
+                    </h4>
+                    <p>
+                      ¡Fortalece tu networking y genera contactos empresariales y profesionales!
+                    </p>
+                  </div>
+                </div>
+
               </div>
-          <% end -%>
 
-          <div class="actions text-right">
-            <%= f.submit 'Ingresar', class: 'btn btn-primary btn-studnet-basic' %>
+              <div class="col-md-4">
+                <h5>
+                  Trabajos Simples
+                </h5>
+                <p>
+                  Trabaja en labores simples como traducciones, resúmenes y corrección de documentos
+                </p>
+
+                <h5>
+                  Proyectos Virtuales
+                </h5>
+                <p>
+                  Trabaja en proyectos como diseño de páginas web, diseño de logos y análisis financieros
+                </p>
+
+                <h5>
+                  Proyectos Presenciales
+                </h5>
+                <p>
+                  Trabaja con empresas y profesionales en el desarrollo de proyectos temporales
+                </p>
+
+                <h5>
+                  Prácticas
+                </h5>
+                <p>
+                  Trabaja de forma presencial haciendo prácticas en empresas de diversos sectores y tamaños
+                </p>
+
+              </div>
+            </div>
+
+          </div>
+      <% elsif current_page?(new_user_session_path(studnet: 3)) %>
+          <div class="container sign-in-info-container">
+
+            <div class="row">
+              <div class="col-md-8">
+                <h3>
+                  ¿Aún no estás registrado? Regístrate ahora y aplica a los proyectos, prácticas y trabajos que más te gusten. ¡Es gratis!
+                </h3>
+                <p>
+                  <%= link_to 'Registrarme', new_user_registration_path(studnet: 3), class: 'btn btn-primary btn-studnet-basic margin-bot-40' %>
+                </p>
+
+                <div class="row text-center">
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_time.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Ahorra tiempo
+                    </h4>
+                    <p>
+                      Publica tu oferta y recibe rapidamente aplicaciones de estudiantes de diferentes universidades y carreras
+                    </p>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_db.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Amplia base de datos
+                    </h4>
+                    <p>
+                      Encuentra en un solo lugar estudiantes de diversas universidades, carreras, conocimientos y experiencias
+                    </p>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_selection.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Selección precisa
+                    </h4>
+                    <p>
+                      ¡Elige a tu estudiante ideal por universidad, carrera, promedio, proyectos realizados y más!
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+                <h5>
+                  Trabajos Simples
+                </h5>
+                <p>
+                  ¿Tienes una labor simple por hacer como traducciones, resúmenes y correción de documentos? ¡Apóyate en un estudiante y completa esta labor!
+                </p>
+
+                <h5>
+                  Proyectos Virtuales
+                </h5>
+                <p>
+                  ¿Necesitas apoyo en tus próximos proyectos como diseño de páginas web, diseño de logos y análisis financieros? ¡Haz más eficiente tu trabajo incluyendo a un estudiante!
+                </p>
+
+                <h5>
+                  Proyectos Presenciales
+                </h5>
+                <p>
+                  ¿Más proyectos de los previstos? ¡Contrata un estudiante de forma presencial y flexible para el desarrollo de proyectos temporales y fortalece tu equipo!
+                </p>
+
+                <h5>
+                  Prácticas
+                </h5>
+                <p>
+                  ¿Tienes labores permanentes que podrían agregarle experiencia laboral a un estudiante? ¡Contrátalo para su práctica empresarial!
+                </p>
+
+              </div>
+            </div>
+
+          </div>
+      <% elsif current_page?(new_user_session_path(studnet: 4)) %>
+          <div class="container sign-in-info-container">
+
+            <div class="row">
+              <div class="col-md-8">
+                <h3>
+                  ¿Aún no estás registrado? Regístrate ahora y aplica a los proyectos, prácticas y trabajos que más te gusten. ¡Es gratis!
+                </h3>
+                <p>
+                  <%= link_to 'Registrarme', new_user_registration_path(studnet: 4), class: 'btn btn-primary btn-studnet-basic margin-bot-40' %>
+                </p>
+
+                <div class="row text-center">
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_time.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Ahorra tiempo
+                    </h4>
+                    <p>
+                      Publica tu oferta y recibe rapidamente aplicaciones de estudiantes de diferentes universidades y carreras
+                    </p>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_db.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Amplia base de datos
+                    </h4>
+                    <p>
+                      Encuentra en un solo lugar estudiantes de diversas universidades, carreras, conocimientos y experiencias
+                    </p>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= image_tag 'sign_in_selection.png', alt: 'studNet | Ingresos', class: '' %>
+                    <h4>
+                      Selección precisa
+                    </h4>
+                    <p>
+                      ¡Elige a tu estudiante ideal por universidad, carrera, promedio, proyectos realizados y más!
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+                <h5>
+                  Trabajos Simples
+                </h5>
+                <p>
+                  ¿Tienes una labor simple por hacer como traducciones, resúmenes y correción de documentos? ¡Apóyate en un estudiante y completa esta labor!
+                </p>
+
+                <h5>
+                  Proyectos Virtuales
+                </h5>
+                <p>
+                  ¿Necesitas apoyo en tus próximos proyectos como diseño de páginas web, diseño de logos y análisis financieros? ¡Haz más eficiente tu trabajo incluyendo a un estudiante!
+                </p>
+
+                <h5>
+                  Proyectos Presenciales
+                </h5>
+                <p>
+                  ¿Más proyectos de los previstos? ¡Contrata un estudiante de forma presencial y flexible para el desarrollo de proyectos temporales y fortalece tu equipo!
+                </p>
+
+              </div>
+            </div>
+
           </div>
       <% end %>
+      <!-- ./Sign Up Info -->
 
-      <div class="text-right">
-        <%= render 'devise/shared/links' %>
+  <% else %>
+      <!-- Companies/People preselection view -->
+      <div class="root-index-wrapper">
+        <div class="root-index-hero-bg-wrapper sign-in-wrapper-bg text-center">
+          <div class="container index-container-hero">
+
+            <div class="row">
+              <!-- Index Hero Left -->
+              <div class="col-md-6 root-index-hero-cont">
+                <h2>
+                  Empresas
+                </h2>
+                <h4>
+                  Publica tus ofertas de proyectos, prácticas y trabajos para estudiantes universitarios y recién egresados. Recibe aplicaciones y selecciona al candidato ideal
+                </h4>
+                <h6>
+                  <%= link_to 'Ingresar', new_user_session_path(studnet: 3), class: 'btn btn-primary btn-studnet-hero-index' %>
+                </h6>
+              </div>
+              <!-- ./Index Hero Left -->
+
+              <!-- Index Hero Right -->
+              <div class="col-md-6 root-index-hero-cont">
+                <h2>
+                  Personas
+                </h2>
+                <h4>
+                  ¿Necesitas una traducción, diseñar un logo, una página web, hacer encuestas, investigaciones, resúmenes u otros proyectos? Publica tu oferta y selecciona al candidato ideal
+                </h4>
+                <h6>
+                  <%= link_to 'Ingresar', new_user_session_path(studnet: 4), class: 'btn btn-primary btn-studnet-hero-index' %>
+                </h6>
+              </div>
+              <!-- ./Index Hero Right -->
+            </div>
+
+          </div>
+        </div>
       </div>
-      <!-- Form -->
-    </div>
-  </div>
+      <!-- ./Companies/People preselection view -->
+  <% end %>
+  <!-- ./Sign In Account Type Selection -->
 
 </section>
