@@ -75,4 +75,12 @@
 
   }
 
+  // Custom classes for Devise actions
+  .sign-in-wrapper-bg {
+    background-image: url(image_path('sign_in_bg.jpg'));
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 50px;
+  }
+
 }
