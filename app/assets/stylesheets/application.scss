@@ -74,12 +74,32 @@ body {
 
 }
 
+// CSS clases for JS used to show/hide content in devise registration form
+.show-form-content {
+  display: block;
+}
+
+.hide-form-content {
+  display: none;
+}
+
 // ================
 // Buttons
 // ================
 
 .btn-studnet-basic {
-
+  background-color: #1db5f7;
+  background: -webkit-linear-gradient(#1db5f7,#0578d7);
+  background: -moz-linear-gradient(#1db5f7,#0578d7);
+  background: -ms-linear-gradient(#1db5f7,#0578d7);
+  background: -o-linear-gradient(#1db5f7,#0578d7);
+  background: linear-gradient(#1db5f7,#0578d7);
+  border: none;
+  box-shadow: none;
+  font-size: 1.25em;
+  font-weight: bold;
+  padding: 8px 12px;
+  text-shadow: none;
 }
 
 .btn-studnet-hero-index {
@@ -146,11 +166,31 @@ header {
 .devise-wrapper {
   margin: 30px 0;
   margin-top: 0;
+  padding-bottom: 20px;
 
-  .students-signup-wrapper {
-    background-image: url(image_path('register_students.jpg'));
-    background-size: cover;
-    color: white;
+  .sign-up-select-account {
+
+    .sign-up-select-account-students {
+      background-image: url(image_path('estudiantes.jpg'));
+      background-size: cover;
+      min-height: 450px;
+    }
+
+    .sign-up-select-account-companies {
+      background-image: url(image_path('empresas.jpg'));
+      background-size: cover;
+      min-height: 450px;
+    }
+
+    .sign-up-select-account-people {
+      background-image: url(image_path('personas.jpg'));
+      background-size: cover;
+      min-height: 450px;
+    }
+
+  }
+
+  .devise-signup-wrapper {
 
     h1 {
       font-weight: bold;
@@ -164,7 +204,7 @@ header {
       margin-bottom: 100px;
     }
 
-    .students-signup-content {
+    .devise-signup-content {
       h4 {
         font-size: 1.4em;
         font-weight: 400;
@@ -174,20 +214,31 @@ header {
 
       p {
         color: #dddddd;
+        font-size: 16px;
         margin-bottom: 20px;
-
       }
 
     }
 
   }
 
-  .companies-signup-wrapper {
+  .students-signup-wrapper {
+    background-image: url(image_path('register_students.jpg'));
+    background-size: cover;
+    color: white;
 
   }
 
-  .people-signup-wrapper {
+  .companies-signup-wrapper {
+    background-image: url(image_path('register_companies.jpg'));
+    background-size: cover;
+    color: white;
+  }
 
+  .people-signup-wrapper {
+    background-image: url(image_path('register_people.jpg'));
+    background-size: cover;
+    color: white;
   }
 
   .register-form {
@@ -198,10 +249,36 @@ header {
       text-align: left;
 
       .form-control {
-        border: 2px solid $cp-dark-gray;
-        border-radius: 0;
+        border: 1px solid #bbbbbb;
+        color: $cp-dark-gray;
+        -webkit-box-shadow: inset 0px 2px 3px #dddddd;
+        border-radius: 5px;
       }
 
+    }
+
+  }
+
+  // Custom classes for logo text in registration
+  .registration-whats-studnet {
+
+    h4 {
+      margin-top: 20px;
+    }
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.15em;
+    }
+
+    #studnet-gray-logo {
+      color: $cp-dark-gray;
+      font-weight: bold;
+    }
+
+    #studnet-blue-logo {
+      color: $cp-blue;
+      font-weight: bold;
     }
 
   }
@@ -217,13 +294,14 @@ header {
     margin-bottom: 15px;
   }
 
-  // CSS clases for JS used to show/hide content in devise registration form
-  .show-form-content {
-    display: block;
-  }
+  .devise-shared-links {
+    margin-top: 5px;
 
-  .hide-form-content {
-    display: none;
+    a, a:hover, a:focus, a:active {
+      color: white;
+      text-decoration: none;
+    }
+
   }
 
 }
