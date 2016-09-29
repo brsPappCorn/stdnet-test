@@ -27,10 +27,12 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :password, 'Contraseña' %>
+      <%= f.label :password, 'Contraseña (mínimo 6 caracteres)' %>
+      <!--
       <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
+      -->
       <%= f.password_field :password, autocomplete: 'off', class: 'form-control input-width' %>
     </div>
 
@@ -87,7 +89,8 @@
            ./Additional Information -->
 
     <div class="actions text-right">
-      <%= f.submit 'Registrarse', class: 'btn btn-primary btn-studnet-basic' %>
+      <%= f.submit 'Registrarme', class: 'btn btn-primary btn-studnet-basic' %>
+      <!-- TODO: Devise/Registrations/form when signup fails redirection doesnt go back to registro?studnet=params(studnet role), fix redirection in devise controller  -->
     </div>
 
     <%#= f.hidden_field(:role_id, value: '2') %>
