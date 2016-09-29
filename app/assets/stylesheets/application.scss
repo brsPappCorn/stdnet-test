@@ -98,12 +98,18 @@ body {
   box-shadow: none;
   font-size: 1.25em;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 5px 25px;
   text-shadow: none;
 }
 
 .btn-studnet-hero-index {
-  padding: 20px 28px;
+  background-color: $cp-blue;
+  border: none;
+  box-shadow: none;
+  font-size: 1.25em;
+  font-weight: bold;
+  padding: 15px 30px;
+  text-shadow: none;
 }
 
 // ================
@@ -166,8 +172,8 @@ header {
 .devise-wrapper {
   margin: 30px 0;
   margin-top: 0;
-  padding-bottom: 20px;
 
+  // Sign Up
   .sign-up-select-account {
 
     .sign-up-select-account-students {
@@ -226,19 +232,21 @@ header {
     background-image: url(image_path('register_students.jpg'));
     background-size: cover;
     color: white;
-
+    padding-bottom: 40px;
   }
 
   .companies-signup-wrapper {
     background-image: url(image_path('register_companies.jpg'));
     background-size: cover;
     color: white;
+    padding-bottom: 40px;
   }
 
   .people-signup-wrapper {
     background-image: url(image_path('register_people.jpg'));
     background-size: cover;
     color: white;
+    padding-bottom: 40px;
   }
 
   .register-form {
@@ -300,6 +308,58 @@ header {
     a, a:hover, a:focus, a:active {
       color: white;
       text-decoration: none;
+    }
+
+  }
+
+  // Sign In
+  .sign-in-info-container {
+    padding-top: 15px;
+
+    h3 {
+      font-size: 1.29em;
+      font-weight: normal;
+      line-height: 24px;
+      margin-top: 0;
+    }
+
+    h5 {
+      font-size: 1.29em;
+      font-weight: 500;
+      margin-top: 0;
+    }
+
+    h5:first-child {
+      margin-top: 5px;
+    }
+
+    p {
+
+    }
+
+    .margin-bot-40 {
+      margin-bottom: 40px;
+    }
+
+  }
+
+  .sign-in-title {
+    background-color: $cp-dark-gray;
+    border-bottom: 2px solid black;
+
+    h3 {
+      font-size: 1.15em;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+  }
+
+  .sign-in-form {
+
+    h3 {
+      margin-bottom: 30px;
+      padding-top: 30px;
     }
 
   }

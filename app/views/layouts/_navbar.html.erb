@@ -26,11 +26,13 @@
 
           <% unless user_signed_in? %>
               <li class="<%= is_active?(new_user_registration_path) %>">
-                <%= link_to 'Registrarse', new_user_registration_path,class: '' %>
+                <%= link_to 'Registro', new_user_registration_path,class: '' %>
               </li>
+              <!--
               <li class="<%= is_active?(new_user_session_path) %>">
                 <%= link_to 'Ingresar', new_user_session_path,class: '' %>
               </li>
+              -->
           <% end %>
 
           <li class="<%= is_active?('http://www.studnet.com.co/acerca-de-studnet/') %>">
