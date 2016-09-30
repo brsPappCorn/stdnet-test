@@ -28,22 +28,25 @@ body {
 
 // General wrapper with basic CSS structure for the site
 .studNet-wrapper {
-  margin: 30px 0;
+  margin: 0;
 
   h3 {
     margin-top: 0;
   }
 
+  // Generic For
   .studNet-form {
-    border: 2px solid $cp-dark-gray;
+    background: rgba(106,173,228,0.4);
     padding: 20px 25px;
 
     .form-group {
       text-align: left;
 
       .form-control {
-        border: 2px solid $cp-dark-gray;
-        border-radius: 0;
+        border: 1px solid #bbbbbb;
+        color: $cp-dark-gray;
+        -webkit-box-shadow: inset 0px 2px 3px #dddddd;
+        border-radius: 5px;
       }
 
     }
@@ -63,7 +66,17 @@ body {
       display: inline;
       width: 20.7%;
     }
+
   }
+
+  // Basic Info
+  &.basic-info-wrapper {
+    background-image: url(image_path('register_students.jpg'));
+    background-size: cover;
+    color: white;
+    padding: 40px 0;
+  }
+
 }
 
 // Profile wrapper applies to Student, Company & Person show view
@@ -82,6 +95,31 @@ body {
 .hide-form-content {
   display: none;
 }
+
+// Generic studnet table classes
+.table {
+  &.studNet-table {
+
+    tbody {
+      tr {
+
+        td {
+          border:none;
+        }
+
+        td:nth-child(odd) {
+          text-align: right;
+          width: 50%;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
 
 // ================
 // Buttons

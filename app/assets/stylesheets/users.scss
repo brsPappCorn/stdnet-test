@@ -20,8 +20,21 @@
 
 }
 
-.users-students-skills-wrapper {
+.users-students-skills-languages-wrapper {
 
+}
+
+.users-students-skills-tools-wrapper {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-weight: bold;
+
+    li {
+      margin-bottom: 5px;
+    }
+
+  }
 }
 
 .users-students-others-wrapper {

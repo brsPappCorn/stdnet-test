@@ -13,19 +13,85 @@
 .student-tab-wrapper {
 
   .nav-tabs > li > a {
-    border: 2px solid #3B3B3C;
+    background-color: $cs-light-gray;
+    border: 3px solid $cp-blue;
     border-bottom: 0;
-    margin-right: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    color: $cp-blue;
+  }
+
+  .nav-tabs > li > a:hover, .nav-tabs > li > a:focus, .nav-tabs > li > a:active  {
+    background-color: white;
+    border: 3px solid $cp-blue;
+    border-bottom: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    color: $cp-blue;
   }
 
   .student-tab-content {
-    border: 2px solid #3B3B3C;
+    border: 3px solid $cp-blue;
     padding: 20px 25px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+
+    h3 {
+      color: $cp-blue;
+    }
+
+    h4 {
+      margin-bottom: 5px;
+    }
+
+    h5 {
+      color: $cp-blue;
+      font-weight: bold;
+    }
+
+  }
+
+  .student-tools {
+    font-weight: bold;
+    list-style: none;
+    padding-left: 0;
+    li {
+      margin-bottom: 5px;
+    }
+  }
+
+  .student-skills {
+    h4 {
+      font-size: 1.25em;
+    }
+
+    p {
+
+    }
+  }
+
+  .student-xp-title {
+    h3 {
+      border-bottom: 3px solid #6AADE4;
+    }
   }
 
   #glyphiconPencilSize {
     color: $cp-blue;
     font-size: 18px;
+  }
+
+  #studentMajorName {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  #studentMajorBlue {
+    color: $cp-blue;
+    font-weight: bold;
   }
 
 }
