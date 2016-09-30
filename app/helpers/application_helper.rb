@@ -17,8 +17,7 @@ module ApplicationHelper
 
   # Method to calculate user's (student role only) age, so that companies/people will be able to know this information.
   def user_age
-    user_id = current_user.id
-    user = User.find_by_id(user_id)
+    user = User.find_by_id(current_user.id)
     unless user.date_of_birth.nil?
       Date.today.year - user.date_of_birth.year
     end

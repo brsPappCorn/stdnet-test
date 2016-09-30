@@ -68,120 +68,209 @@
 
               <div class="row">
                 <div class="col-md-6">
-                  <h3>
-                    Información Personal
-                    <%= link_to edit_user_path(current_user.id) do |link| %>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                    <% end %>
-                  </h3>
 
-                  <p>
-                    Nombre(s):
-                    <%= @user.first_name %>
-                    <br>
+                  <!-- Personal Info Table -->
+                  <table class="table studNet-table">
+                    <tbody>
 
-                    Apellidos:
-                    <%= @user.last_name %>
-                    <br>
+                    <tr>
+                      <td>
+                        Nombre:
+                      </td>
+                      <td id="studentMajorName">
+                        <%= "#{@user.first_name} #{@user.last_name}" %>
+                      </td>
+                    </tr>
 
-                    Fecha de Nacimiento:
-                    <!-- TODO: Students/show - Refactoring needed. Too many unless blocks. Create helper method in application_helper pending  -->
-                    <% unless @user.date_of_birth.nil? %>
-                        <%= @user.date_of_birth.strftime('%Y/%m/%d ') %>
-                    <% end %> <br>
+                    <tr>
+                      <td>
+                        Carrera:
+                      </td>
+                      <td id="studentMajorBlue">
+                        <% unless @student.major_id.nil? %>
+                            <%= @student.major.major_name %>
+                        <% end %>
+                      </td>
+                    </tr>
 
-                    Edad:
-                    <%= "#{user_age} años." %>
-                    <br> <!-- TODO: Students/Show - only companies will see this info -->
+                    <tr>
+                      <td>
+                        Universidad:
+                      </td>
+                      <td>
+                        <% unless @student.university_id.nil? %>
+                            <%= @student.university.university_name %>
+                        <% end %>
+                      </td>
+                    </tr>
 
-                    Número de documento:
-                    <%= @user.document_number %>
-                    <br>
+                    <tr>
+                      <td>
+                        Nivel:
+                      </td>
+                      <td>
+                        <% unless @student.ed_level_id.nil? %>
+                            <%= @student.education_level.level_name %>
+                        <% end %>
+                      </td>
+                    </tr>
 
-                    Teléfono de contacto:
-                    <%= @user.mobile_phone %>
-                    <br>
+                    <tr>
+                      <td>
+                        Ultimo semestre cursado:
+                      </td>
+                      <td>
+                        <%= @student.last_semester %>
+                      </td>
+                    </tr>
 
-                    Ciudad:
-                    <% unless @user.city_id.nil? %>
-                        <%= @user.city.city_name %>
-                    <% end %>
-                    <br>
+                    <tr>
+                      <td>
+                        Edad:
+                      </td>
+                      <td>
+                        <!-- TODO: Students/Show - only companies will see this info -->
+                        <% unless @student.user.date_of_birth.nil?  %>
+                            <%= "#{user_age} años." %>
+                        <% end %>
+                        <!-- TODO: Students/Show - only companies will see this info -->
+                      </td>
+                    </tr>
 
-                    País:
-                    <% unless @user.country_id.nil? %>
-                        <%= @user.country.country_name %>
-                    <% end %>
-                  </p>
+                    <tr>
+                      <td>
+                        Promedio académico:
+                      </td>
+                      <td>
+                        <% unless @student.gpa.blank? && @student.gpa_max.blank?  %>
+                            <%= " #{@student.gpa} / #{@student.gpa_max}" %>
+                        <% end %>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Colegio del que te graduaste:
+                      </td>
+                      <td>
+                        <%= @student.highschool %>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Ciudad en la que vive:
+                      </td>
+                      <td>
+                        <% unless @user.city_id.nil? %>
+                            <%= @user.city.city_name %>
+                        <% end %>
+                      </td>
+                    </tr>
+
+                    <!-- TODO: Students/Show - only companies will see this info -->
+                    <tr>
+                      <td>
+                        Número de documento:
+                      </td>
+                      <td>
+                        <%= @user.document_number %>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Teléfono de contacto:
+                      </td>
+                      <td>
+                        <%= @user.mobile_phone %>
+                      </td>
+                    </tr>
+                    <!-- TODO: Students/Show - only companies will see this info -->
+                    </tbody>
+                  </table>
+                  <!-- ./Personal Info Table -->
+
                 </div>
 
                 <!-- TODO: Conditional needed to show info corresponding to the role of the user signed_in -->
                 <div class="col-md-6">
                   <h3>
-                    Educación
-                    <%= link_to edit_user_path(current_user.id) do |link| %>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                    <% end %>
+                    Otra carrera:
                   </h3>
 
-                  <p>
-                    Universidad:
-                    <% unless @student.university_id.nil? %>
-                        <%= @student.university.university_name %>
-                    <% end %>
-                    <br>
+                  <!-- Education Info Table -->
+                  <table class="table studNet-table">
+                    <tbody>
 
-                    Carrera:
-                    <% unless @student.major_id.nil? %>
-                        <%= @student.major.major_name %>
-                    <% end %>
-                    <br>
+                    <!--  TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major
+                    <tr>
+                      <td>
+                        Carrera:
+                      </td>
+                      <td>
+                        'PENDIENTE
+                      </td>
+                    </tr>
 
-                    Nivel:
-                    <% unless @student.ed_level_id.nil? %>
-                        <%= @student.education_level.level_name %>
-                    <% end %>
-                    <br>
+                    <tr>
+                      <td>
+                        Universidad:
+                      </td>
+                      <td>
+                        <% unless @student.university_id.nil? %>
+                            <%= @student.university.university_name %>
+                        <% end %>
+                      </td>
+                    </tr>
 
-                    Otra carrera(s):
-                    'PENDIENTE
-                    <br>
+                    <tr>
+                      <td>
+                        Nivel:
+                      </td>
+                      <td>
+                        <% unless @student.ed_level_id.nil? %>
+                            <%= @student.education_level.level_name %>
+                        <% end %>
+                      </td>
+                    </tr>
+                    TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major -->
 
-                    Ultimo semestre cursado:
-                    <%= @student.last_semester %>
-                    <br>
+                    </tbody>
+                  </table>
+                  <!-- ./Education Info Table -->
 
-                    Calificación máxima en tu universidad:
-                    <%= @student.gpa_max %>
-                    <br>
+                  <!--  Exchange Info Table-->
+                  <h3>
+                    Intercambio académico:
+                  </h3>
 
-                    Promedio académico acumulado:
-                    <%= @student.gpa %>
-                    <br>
+                  <table class="table studNet-table">
+                    <tbody>
 
-                    Intercambio:
-                    <% if @student.exchange_student == true  %>
-                        <%= 'Sí' %>
-                    <% else %>
-                        <%= 'No' %>
-                    <% end %>
-                    <br>
+                    <tr>
+                      <td>
+                        Pais de intercambio:
+                      </td>
+                      <td>
+                        <% unless @student.country_id.nil? %>
+                            <%= @student.country.country_name %>
+                        <% end %>
+                      </td>
+                    </tr>
 
-                    Pais de intercambio:
-                    <% unless @student.country_id.nil? %>
-                        <%= @student.country.country_name %>
-                    <% end %>
-                    <br>
+                    <tr>
+                      <td>
+                        Universidad de intercambio:
+                      </td>
+                      <td>
+                        <%= @student.exchange_university %>
+                      </td>
+                    </tr>
 
-                    Universidad de intercambio:
-                    <%= @student.exchange_university %>
-                    <br>
-
-                    Colegio del que te graduaste:
-                    <%= @student.highschool %>
-
-                  </p>
-
+                    </tbody>
+                  </table>
+                  <!--  Exchange Info Table-->
                 </div>
               </div>
 
@@ -194,56 +283,107 @@
               <div class="row">
                 <div class="col-md-12">
 
-                  <h3>
-                    Experiencia profesional
-                    <%= link_to edit_user_path(current_user.id) do |link| %>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                    <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
-                  </h3>
+                  <!-- Work Experience outside studNet  -->
 
-                  <p>
-                    Tiene experiencia laboral:
-                    <% if @student.work_xp == true  %>
-                        <%= 'Sí' %>
-                    <% else %>
-                        <%= 'No' %>
+
+                  <div class="student-work-outside-studnet">
+
+                    <% unless @student.work_xp == false %>
+                        <%# TODO: Make conditional to show work xp if student answered yes to the question %>
                     <% end %>
-                    <br>
 
-                    Nombre de la empresa:
-                    <%= @student.xp_company %>
-                    <br>
-
-                    Cargo:
-                    <%= @student.xp_position %>
-                    <br>
-
-                    Logros:
-                    <%= @student.xp_achievements %>
-                    <br>
-                  </p>
-
-                  <h3>
-                    Actividades sociales y de voluntariado
-                  </h3>
-
-                  <p>
-                    Otras experiencias:
-                    <% if @student.volunteer_xp == true  %>
-                        <%= 'Sí' %>
-                    <% else %>
-                        <%= 'No' %>
+                    <% unless @student.volunteer_xp == false %>
+                        <%# TODO: Make conditional to show volunteer xp if student answered yes to the question %>
                     <% end %>
-                    <br>
 
-                    Nombre de la empresa:
-                    <%= @student.volunteer_org %>
-                    <br>
+                    <!-- Professional XP -->
 
-                    Cargo:
-                    <%= @student.volunteer_functions %>
-                    <br>
-                  </p>
+                    <div class="row">
+                      <div class="col-md-6 student-xp-title">
+                        <h3>
+                          Experiencia profesional
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 student-xp-title">
+                        <h4>
+                          <%= @student.xp_position %>
+                        </h4>
+
+                        <h5>
+                          <%= @student.xp_company %>
+                        </h5>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p>
+                          Funciones y logros
+                          <br>
+                          <!-- TODO: Students/new - create new column in Student for student.xp_functions -->
+                          <%= @student.xp_achievements %>
+                          <br>
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Professional XP -->
+
+                    <!-- Other Activities XP -->
+
+                    <div class="row">
+                      <div class="col-md-6 student-xp-title">
+                        <h3>
+                          Actividades sociales y de voluntariado
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p>
+                          Nombre de la empresa:
+                          <%= @student.volunteer_org %>
+                          <br>
+
+                          Cargo:
+                          <%= @student.volunteer_functions %>
+                          <br>
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- ./Work Experience outside studNet  -->
+
+                  <!-- Work Experience inside studNet  -->
+                  <div class="row">
+                    <div class="col-md-6 student-xp-title">
+                      <h3>
+                        Proyectos desarrollados en studNet
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p>
+                        Título del proyecto (oferta):
+                        <%#= @student.volunteer_org TODO: Students/show - show opportunity title applied by the student %>
+                        <br>
+
+                        Descripción del proyecto:
+                        <%#= @student.volunteer_functions TODO: Students/show - show opportunity description applied by the student %>
+                        <br>
+                      </p>
+                    </div>
+                  </div>
+                  <!-- ./Work Experience inside studNet  -->
 
                 </div>
               </div>
@@ -257,64 +397,79 @@
               <div class="row">
                 <div class="col-md-12">
 
-                  <h3>
-                    Habilidades
-                    <%= link_to edit_user_path(current_user.id) do |link| %>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                    <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
-                  </h3>
-
                   <div class="row">
-                    <div class="col-md-6">
-                      <h4>
-                        Idiomas
-                      </h4>
+                    <!-- Student Languages -->
+                    <%# TODO: Students/Show - Make conditional validation to display languages section %>
+                    <div class="users-students-skills-languages-wrapper student-xp-title">
+                      <div class="col-md-6">
+                        <h3>
+                          Idiomas
+                        </h3>
 
-                      <!-- TODO: Students/show - fix languages to create more than one language and show them here -->
-                      <table class="table">
-                        <tbody>
-                        <tr>
-                          <td>
-                            <strong>
-                              <% unless @student.language_id.nil? %>
-                                  <%= @student.language.language_name %>
-                              <% end %>
-                            </strong>
-                          </td>
-                          <td>
-                            <%= @student.language_level %>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
+                        <!-- TODO: Students/show - fix languages to create more than one language and show them here -->
+                        <table class="table studNet-table">
+                          <tbody>
+                          <tr>
+                            <td>
+                              <strong>
+                                <% unless @student.language_id.nil? %>
+                                    <strong>
+                                      <%= @student.language.language_name %>
+                                    </strong>
+                                <% end %>
+                              </strong>
+                            </td>
+                            <td>
+                              <%= @student.language_level %>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
+                    <!-- ./Student Languages -->
 
-                    <div class="col-md-6">
-                      <h4>
-                        Herramientas
-                      </h4>
+                    <!-- Student Tools -->
+                    <div class="student-xp-title">
+                      <div class="col-md-6 users-students-skills-tools-wrapper">
+                        <h3>
+                          Herramientas
+                        </h3>
 
-                      <p>
-                      <ul>
-                        <% @student.tools.each do |tool| %>
-                            <li>
-                              <%= tool.tool_name  %>
-                            </li>
-                        <% end %>
-                      </ul>
-                      </p>
+                        <p>
+                        <ul class="student-tools">
+                          <% @student.tools.each do |tool| %>
+                              <li>
+                                <%= tool.tool_name  %>
+                              </li>
+                          <% end %>
+                        </ul>
+                        </p>
+                      </div>
                     </div>
+                    <!-- Student Tools -->
                   </div>
 
+                  <!-- Student Programming Skills/Languages -->
+                  <%# TODO: Students/Show - Make conditional validation to display programming section %>
                   <div class="row">
                     <div class="col-md-12">
-                      <h4>
-                        Lenguajes de programación
-                      </h4>
+
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title">
+                          <h3>
+                            Lenguajes de programación
+                          </h3>
+                        </div>
+                      </div>
 
                       <p>
+                        <% unless @student.programming_skills == false %>
+                            <%# TODO: Make conditional to display programming skills if student answered yes to the question %>
+                        <% end %>
+
                         ¿Sabes programar?:
-                        <% if @student.volunteer_xp == true  %>
+                        <% if @student.programming_skills == true  %>
                             <%= 'Sí' %>
                         <% else %>
                             <%= 'No' %>
@@ -322,11 +477,12 @@
                         <br>
 
                         <%= @student.programing_languages %>
+
                       </p>
 
                     </div>
                   </div>
-
+                  <!-- ./Student Programming Skills/Languages -->
                 </div>
               </div>
 
@@ -339,36 +495,49 @@
               <div class="row">
                 <div class="col-md-12">
 
-                  <h3>
-                    Habilidades
-                    <%= link_to edit_user_path(current_user.id) do |link| %>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                    <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
-                  </h3>
+                  <div class="row">
+                    <div class="col-md-6 student-xp-title">
+                      <h3>
+                        Proyectos desarrollados en studNet
+                      </h3>
+                    </div>
+                  </div>
 
-                  <h4>
-                    Principales fortalezas
-                  </h4>
+                  <div class="row">
+                    <div class="col-md-12 student-skills">
 
-                  <p>
-                    <%= @student.strengths %>
-                  </p>
+                      <h4>
+                        Principales fortalezas
+                      </h4>
 
-                  <h4>
-                    Áreas en la que les gustaría desarrollar su carrera profesional
-                  </h4>
+                      <ul>
+                        <li>
+                          <%= @student.strengths %>
+                        </li>
+                      </ul>
 
-                  <p>
-                    <%= @student.areas_to_develop %>
-                  </p>
+                      <h4>
+                        Áreas en la que les gustaría desarrollar su carrera profesional
+                      </h4>
 
-                  <h4>
-                    Intereses, hobbies y otros
-                  </h4>
+                      <ul>
+                        <li>
+                          <%= @student.areas_to_develop %>
+                        </li>
+                      </ul>
 
-                  <p>
-                    <%= @student.hobbies %>
-                  </p>
+                      <h4>
+                        Intereses, hobbies y otros
+                      </h4>
+
+                      <ul>
+                        <li>
+                          <%= @student.hobbies %>
+                        </li>
+                      </ul>
+
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -383,7 +552,7 @@
                 <div class="col-md-12">
 
                   <h3>
-                    Habilidades
+                    Otros
                     <%= link_to edit_user_path(current_user.id) do |link| %>
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
                     <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
@@ -412,3 +581,59 @@
 
   </div>
 </section>
+
+<!--
+
+<tr>
+  <td>
+  Fecha de Nacimiento:
+  </td>
+  <td>
+  <% unless @user.date_of_birth.nil? %>
+    <%= @user.date_of_birth.strftime('%Y/%m/%d ') %>
+<% end %>
+  </td>
+</tr>
+
+<tr>
+  <td>
+  País:
+  </td>
+  <td>
+  <% unless @user.country_id.nil? %>
+    <%= @user.country.country_name %>
+<% end %>
+  </td>
+</tr>
+
+<tr>
+  <td>
+    Intercambio:
+  </td>
+  <td>
+    <% if @student.exchange_student == true  %>
+    <%= 'Sí' %>
+<% else %>
+    <%= 'No' %>
+<% end %>
+  </td>
+</tr>
+
+
+Tiene experiencia laboral:
+<% if @student.work_xp == true  %>
+    <%= 'Sí' %>
+<% else %>
+    <%= 'No' %>
+<% end %>
+
+
+// Get yes/no for the selected attribute
+<%= student_work_xp_select_friendly(@student) %>
+
+
+// Get yes/no for the selected attribute
+<%= student_volunteer_xp_select_friendly(@student) %>
+
+
+-->

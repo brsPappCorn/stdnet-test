@@ -8,6 +8,9 @@ class Student < ActiveRecord::Base
       'Nativo', 'Avanzado', 'Intermedio', 'Básico' # Language levels
   ]
 
+  OPTION_FOR_NO = 0
+  OPTION_FOR_YES = 1
+
   #---------------------
   # Associations
   #---------------------

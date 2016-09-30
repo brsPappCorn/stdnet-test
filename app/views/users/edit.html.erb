@@ -207,14 +207,8 @@
                               <div class="users-students-professional-xp-wrapper">
                                 <div class="form-group">
                                   <%= s.label :work_xp, '¿Tienes experiencia laboral?' %><br />
-                                  <select id="workXpID" name="user[student_attributes][work_xp]" class="form-control input-width">
-                                    <option value="0">
-                                      No
-                                    </option>
-                                    <option value="1">
-                                      Sí
-                                    </option>
-                                  </select>
+                                  <!-- TODO: Users/edit - fix problem with how DB stores the values for work_xp -->
+                                  <%= s.select :work_xp, options_for_select(student_work_xp_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                                 </div>
 
                                 <div class="form-group">
@@ -223,12 +217,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                  <%= s.label :xp_position, 'Indica tu cargo y tus funciones en la empresa' %>
-                                  <%= s.text_area :xp_position, rows: 4, class: 'form-control input-width' %>
+                                  <%= s.label :xp_position, 'Indica el nombre del cargo' %>
+                                  <%= s.text_field :xp_position, class: 'form-control input-width' %>
                                 </div>
 
                                 <div class="form-group">
-                                  <%= s.label :xp_achievements, 'Indica tus logros en este cargo' %>
+                                  <%= s.label :xp_achievements, 'Indica las funciones y logros en este cargo' %>
                                   <%= s.text_area :xp_achievements, rows: 4, class: 'form-control input-width' %>
                                 </div>
 
@@ -249,14 +243,8 @@
                               <div class="users-students-other-xp-wrapper">
                                 <div class="form-group">
                                   <%= s.label :volunteer_xp, '¿Realizas o has realizado una actividad social / de voluntariado?' %><br />
-                                  <select id="volunteerXpID" name="user[student_attributes][volunteer_xp]" class="form-control input-width">
-                                    <option value="0">
-                                      No
-                                    </option>
-                                    <option value="1">
-                                      Sí
-                                    </option>
-                                  </select>
+                                  <%= s.select :volunteer_xp, options_for_select(student_volunteer_xp_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+
                                 </div>
 
                                 <div class="form-group">
@@ -341,7 +329,7 @@
 
                                 <!-- TODO: Users/edit Bug nested boolean (Si/No) dropdown is not working properly -->
                                 <div class="form-group">
-                                  <%= s.label :programming_skills, 'Nivel' %>
+                                  <%= s.label :programming_skills, '¿Sabes programar?' %>
                                   <select id="programmingSkillsID" name="user[student_attributes][programming_skills]" class="form-control input-width">
                                     <option value="0">
                                       No
@@ -376,7 +364,7 @@
                             <div class="row">
                               <div class="col-md-12">
                                 <h3>
-                                  Habilidades
+                                  Descripción
                                 </h3>
 
                                 <div class="form-group">
