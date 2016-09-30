@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def edit
   end
 
+  # TODO: BASIC INFO fix redirection. It's pointing to users/id instead of student || company || person
   def create
     @user = User.new(user_params)
 
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # TODO: BASIC INFO fix redirection. It's pointing to users/id instead of student || company || person
   def update
     respond_to do |format|
       if @user.update(user_params)
