@@ -11,7 +11,12 @@
         <div class="col-md-6">
           <h2>
             <!-- # TODO: Students/show fix validation for nil? & fix error when displaying student/id when signed_in as other role -->
-            <%= "#{@student_user.first_name} #{@student_user.last_name}" %>
+            <% if @user_role.role_id == 2 %>
+                <%= @student_user.first_name %>
+                <%= @student_user.last_name %>
+            <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
+                <%= @student_user.first_name %>
+            <% end %>
           </h2>
         </div>
         <div class="col-md-3">
@@ -59,6 +64,16 @@
               Otros
             </a>
           </li>
+
+          <% unless @application.nil? %>
+              <% if @application.applied_opportunity.user_id == current_user.id %>
+                  <li>
+                    <a href="#pane6" data-toggle="tab">
+                      Sobre la oferta
+                    </a>
+                  </li>
+              <% end %>
+          <% end %>
         </ul>
 
         <div class="tab-content student-tab-content">
@@ -77,7 +92,12 @@
                       Nombre:
                     </td>
                     <td id="studentMajorName">
-                      <%= "#{@student_user.first_name} #{@student_user.last_name}" %>
+                      <% if @user_role.role_id == 2 %>
+                          <%= @student_user.first_name %>
+                          <%= @student_user.last_name %>
+                      <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
+                          <%= @student_user.first_name %>
+                      <% end %>
                     </td>
                   </tr>
 
@@ -156,36 +176,45 @@
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      Ciudad en la que vive:
-                    </td>
-                    <td>
-                      <% unless @student_user.city_id.nil? %>
-                          <%= @student_user.city.city_name %>
-                      <% end %>
-                    </td>
-                  </tr>
+                  <% if @user_role.role_id == 2 %>
+                      <tr>
+                        <td>
+                          Ciudad en la que vive:
+                        </td>
+                        <td>
+                          <% unless @student_user.city_id.nil? %>
+                              <%= @student_user.city.city_name %>
+                          <% end %>
+                        </td>
+                      </tr>
 
-                  <!-- TODO: Students/Show - only companies will see this info -->
-                  <tr>
-                    <td>
-                      Número de documento:
-                    </td>
-                    <td>
-                      <%= @student_user.document_number %>
-                    </td>
-                  </tr>
+                      <tr>
+                        <td>
+                          Número de documento:
+                        </td>
+                        <td>
+                          <%= @student_user.document_number %>
+                        </td>
+                      </tr>
 
-                  <tr>
-                    <td>
-                      Teléfono de contacto:
-                    </td>
-                    <td>
-                      <%= @student_user.mobile_phone %>
-                    </td>
-                  </tr>
-                  <!-- TODO: Students/Show - only companies will see this info -->
+                      <tr>
+                        <td>
+                          Email:
+                        </td>
+                        <td>
+                          <%= @student_user.email %>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Teléfono de contacto:
+                        </td>
+                        <td>
+                          <%= @student_user.mobile_phone %>
+                        </td>
+                      </tr>
+                  <% end %>
                   </tbody>
                 </table>
                 <!-- ./Personal Info Table -->
@@ -570,6 +599,70 @@
 
           </div>
           <!-- ./Other -->
+
+          <!-- TODO: Students/student_display - make conditional to display 'sobre la oferta' tab, so that only a company/person can view this info -->
+          <!-- About this offer -->
+
+          <% unless @application.nil? %>
+              <% if @application.applied_opportunity.user_id == current_user.id %>
+                  <div id="pane6" class="tab-pane">
+
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <h3>
+                          <%= @application.applied_opportunity.opportunity_title %>
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+
+                        <p>
+                          <strong>
+                            ¿Cuáles características tienes que te hacen ideal para esta oferta?
+                          </strong> <br>
+                          <%= @application.student_characteristics %>
+                        </p>
+
+                        <p>
+                          <strong>
+                            ¿Qué te interesa de la oferta?
+                          </strong> <br>
+                          <%= @application.student_interests %>
+                        </p>
+
+                        <% unless @application.student_answer.nil? || @application.student_answer.blank? %>
+                            <p>
+                              <strong>
+                                <%= @application.applied_opportunity.question_for_student %>
+                              </strong> <br>
+                              <%= @application.student_answer %>
+                            </p>
+                        <% end %>
+                      </div>
+
+                      <div class="col-md-6">
+                        <% unless @application.opportunity_value.nil? || @application.opportunity_value.blank? %>
+                            <p>
+                              <strong>
+                                Valor del proyecto
+                              </strong> <br>
+                              <%= @application.opportunity_value %>
+                            </p>
+                        <% end %>
+
+                        <!-- TODO: Students/student_display - Pending carrierwave integration, in the view show portfolio link for download, if student has uploaded portfolio  -->
+                      </div>
+
+                    </div>
+
+                  </div>
+              <% end %>
+          <% end %>
+
+          <!-- ./<!-- About this offer -->
+
         </div>
         <!-- /.tab-content -->
 
@@ -578,7 +671,7 @@
           <div class="col-md-12 text-center student-actions-wrapper">
             <% if @user_role.role_id == 2 %>
                 <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet' %>
-            <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
+            <% elsif (@user_role.role_id == 3 || @user_role.role_id == 4) && params[:opportunity] %>
                 <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet' %>
 
                 <%# TODO: student/show/student_display - Make 'adquirir informacion' work %>
