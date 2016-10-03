@@ -13,33 +13,22 @@ class StudentsController < ApplicationController
 
   def show
     id = params[:id].to_i
-
     # Used to check what type of role is signed in
     @user_role = User.find_by_id(current_user.id)
 
     if user_signed_in?
+
+      if params[:opportunity]
+        user_id = params[:id]
+        opportunity_id = params[:opportunity]
+        @application = Application.where(user_id: user_id, opportunity_id: opportunity_id).first
+      end
+
       @student_user = User.find_by_id(id)
+
     else
       redirect_to '/ingreso'
     end
-
-=begin
-    user = User.find_by_id(id)
-
-    if user.role_id == 2
-
-    elsif user.role_id == 3 || user.role_id == 4
-
-    end
-=end
-
-=begin
-    if user_signed_in?
-      @user = User.find_by_id(current_user.id)
-    else
-      redirect_to '/ingreso'
-    end
-=end
 
   end
 

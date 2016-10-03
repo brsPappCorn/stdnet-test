@@ -32,4 +32,11 @@ class Opportunity < ActiveRecord::Base
   #---------------------
   # TODO: Declare validations
 
+  #---------------------
+  # Validations
+  #---------------------
+  def self.opportunities_for_student(student)
+    where major_id: student.major_id
+  end
+
 end

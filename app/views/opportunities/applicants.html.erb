@@ -13,23 +13,27 @@
         <table class="table table-striped">
           <thead>
           <tr>
+            <th colspan="1"></th>
             <th>
               Nombre(s)
-            </th>
-            <th>
-              Edad
-            </th>
-            <th>
-              Universidad
             </th>
             <th>
               Carrera
             </th>
             <th>
+              Universidad
+            </th>
+            <th>
               Nivel
             </th>
             <th>
-              Promedio
+              Semestre
+            </th>
+            <th>
+              Edad
+            </th>
+            <th>
+              Calificación
             </th>
             <th colspan="2">Acciones</th>
           </tr>
@@ -39,10 +43,17 @@
           <% @applicants.each do |applicant| %>
               <tr>
                 <td>
+                  <%#= applicant.first_name TODO: Opportunities/applicants - carrierwave integration, display student image here %>
+                </td>
+                <td>
                   <%= applicant.first_name %>
                 </td>
                 <td>
-                  <%= "#{Time.now.year - applicant.date_of_birth.year} años" %>
+                  <% if applicant.student.major_id.nil? %>
+                      No disponible
+                  <% else %>
+                      <%= applicant.student.major.major_name %>
+                  <% end %>
                 </td>
                 <td>
                   <% if applicant.student.university_id.nil? %>
@@ -52,14 +63,6 @@
                   <% end %>
                 </td>
                 <td>
-                  <% if applicant.student.major_id.nil? %>
-                      No disponible
-                  <% else %>
-                      <%= applicant.student.major.major_name %>
-                  <% end %>
-
-                </td>
-                <td>
                   <% if applicant.student.ed_level_id.nil? %>
                       No disponible
                   <% else %>
@@ -67,12 +70,29 @@
                   <% end %>
                 </td>
                 <td>
+                  <% if applicant.student.last_semester.nil? %>
+                      No disponible
+                  <% else %>
+                      <%= applicant.student.last_semester %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= "#{Time.now.year - applicant.date_of_birth.year} años" %>
+                </td>
+                <td>
+                  No disponible
+                  <!-- TODO: Opportunities/applicants - Make rating system,pending for dev -->
+                </td>
+
+                <!--
+                <td>
                   <% if applicant.student.gpa.nil? %>
                       No disponible
                   <% else %>
                       <%= "#{applicant.student.gpa}/#{applicant.student.gpa_max}" %>
                   <% end %>
                 </td>
+                -->
 
                 <!-- TODO: Opportunities/applicants - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
                 <!-- TODO: Opportunities/applicants - cancan | Company/Person can only view an offer they have created -->
@@ -91,7 +111,7 @@
 
     <div class="row">
       <div class="col-md-12 text-center">
-        <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
+        <%#TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
         <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
       </div>
     </div>
