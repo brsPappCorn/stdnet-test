@@ -7,7 +7,7 @@
       <div class="col-md-12">
 
         <h1>
-          Lista de Ofertas
+          Mis Ofertas
         </h1>
 
         <table class="table table-striped">
@@ -33,7 +33,7 @@
           </thead>
 
           <tbody>
-          <% @opportunities.each do |opportunity| %>
+          <% @my_opportunities.each do |opportunity| %>
               <tr>
                 <td>
                   <%= opportunity.id %>
@@ -43,34 +43,34 @@
                 </td>
                 <td>
                   <%= opportunity.user.company.company_name  %>
-                  <!-- TODO: fix controller action when creating opportunity add user_id -->
                 </td>
                 <td>
                   <%= 'Número de oferentes' %>
+                  <!-- TODO: Opportunity/my_opportunities - show number of applicants-->
                 </td>
                 <td>
                   <%= opportunity.created_at.strftime('%d/%m/%Y') %>
                 </td>
 
-                <!-- TODO: Opportunities/index - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
-                <!-- TODO: Opportunities/index - cancan | Company/Person can only view an offer they have created -->
-                <td><%= link_to 'Ver', opportunity %></td>
+                <!-- TODO: Opportunities/my_opportunities - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
+                <!-- TODO: Opportunities/my_opportunities - cancan | Company/Person can only view an offer they have created -->
+                <td><%= link_to 'Ver', applicants_opportunity_path(opportunity) %></td>
 
-                <!-- TODO: Opportunities/index - create 'APROBAR' action for ADMIN to approve opportunities -->
-                <!-- TODO: Opportunities/index - cancan | only admin can approve offer -->
+                <!-- TODO: Opportunities/my_opportunities - create 'APROBAR' action for ADMIN to approve opportunities -->
+                <!-- TODO: Opportunities/my_opportunities - cancan | only admin can approve offer -->
                 <td><%= link_to 'Aprobar', '#' %></td>
 
-                <!-- TODO: Opportunities/index - cancan | only Company/Person can edit an offer they created -->
-                <td><%= link_to 'Edit', edit_user_path(opportunity) %></td>
+                <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can edit an offer they created -->
+                <td><%= link_to 'Edit', edit_opportunity_path(opportunity) %></td>
 
-                <!-- TODO: Opportunities/index - cancan | only Company/Person can archive / close an opportunity. It will not be destroyed, but no one else can apply after it has been closed. -->
+                <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can archive / close an opportunity. It will not be destroyed, but no one else can apply after it has been closed. -->
                 <td><%= link_to 'Cerrar', '#' %></td>
 
-                <!-- TODO: Opportunities/index - cancan | only admin can destroy -->
+                <!-- TODO: Opportunities/my_opportunities - cancan | only admin can destroy -->
                 <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
 
               </tr>
-          <% end %>
+              <% end %>
           </tbody>
         </table>
 

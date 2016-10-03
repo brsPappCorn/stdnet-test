@@ -39,6 +39,12 @@
     -moz-border-radius: 0;
     border-radius: 0;
 
+    h1 {
+      color: $cp-blue;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
     h3 {
       color: $cp-blue;
     }
@@ -50,6 +56,10 @@
     h5 {
       color: $cp-blue;
       font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
     }
 
   }

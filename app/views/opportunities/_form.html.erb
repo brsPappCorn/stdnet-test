@@ -89,8 +89,21 @@
 
     </div>
 
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.hidden_field(:user_id, value: current_user.id) %>
+
+        </div>
+      </div>
+    </div>
+
     <div class="actions">
-      <%= f.submit 'Crear oferta', class: 'btn btn-primary btn-studNet' %>
       <!-- TODO: Opportunity/_form make button text conditional depending on the path -->
+      <% if current_page?(new_opportunity_path) %>
+          <%= f.submit 'Crear oferta', class: 'btn btn-primary btn-studnet-basic' %>
+      <% else %>
+          <%= f.submit 'Editar oferta', class: 'btn btn-primary btn-studnet-basic' %>
+      <% end %>
     </div>
 <% end %>

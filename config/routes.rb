@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Root
   # =========================
   root to: 'static_pages#index'
+  # TODO: Make root point to Student, Company or User /show, depending on user role
 
   # =========================
   # Devise
@@ -29,6 +30,10 @@ Rails.application.routes.draw do
   resources :opportunities do
     member do
       post 'apply'
+      get 'applicants'
+    end
+    collection do
+      get 'my_opportunities'
     end
   end
 
