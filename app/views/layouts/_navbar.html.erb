@@ -60,7 +60,10 @@
                         <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
                       </li>
                       <li>
-                        <%= link_to 'Ver Ofertas', '' %> <!-- TODO: navbar - Once offer is created add offers_path -->
+                        <%= link_to 'Ver Ofertas', opportunities_path %>
+                      </li>
+                      <li>
+                        <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
                       </li>
                   <!-- Actions for Company -->
                   <% elsif user_role_id(3) %>

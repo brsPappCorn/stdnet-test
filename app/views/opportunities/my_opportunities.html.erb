@@ -3,86 +3,159 @@
 <section class="studNet-wrapper">
   <div class="container">
 
-    <div class="row">
-      <div class="col-md-12">
+    <% if @user_role.role_id == 3 || @user_role.role_id == 4 %>
+        <!-- My Opportunities for Companies/People -->
+        <div class="row">
+          <div class="col-md-12">
 
-        <h1>
-          Mis Ofertas
-        </h1>
+            <h1>
+              Mis Ofertas
+            </h1>
 
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>
-              ID
-            </th>
-            <th>
-              Nombre de la oferta
-            </th>
-            <th>
-              Empresa oferente
-            </th>
-            <th>
-              Número de aplicaciones
-            </th>
-            <th>
-              Fecha de publicación
-            </th>
-            <th colspan="5">Acciones</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <% @my_opportunities.each do |opportunity| %>
+            <table class="table table-striped">
+              <thead>
               <tr>
-                <td>
-                  <%= opportunity.id %>
-                </td>
-                <td>
-                  <%= opportunity.opportunity_title %>
-                </td>
-                <td>
-                  <%= opportunity.user.company.company_name  %>
-                </td>
-                <td>
-                  <%= 'Número de oferentes' %>
-                  <!-- TODO: Opportunity/my_opportunities - show number of applicants-->
-                </td>
-                <td>
-                  <%= opportunity.created_at.strftime('%d/%m/%Y') %>
-                </td>
-
-                <!-- TODO: Opportunities/my_opportunities - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
-                <!-- TODO: Opportunities/my_opportunities - cancan | Company/Person can only view an offer they have created -->
-                <td><%= link_to 'Ver', applicants_opportunity_path(opportunity) %></td>
-
-                <!-- TODO: Opportunities/my_opportunities - create 'APROBAR' action for ADMIN to approve opportunities -->
-                <!-- TODO: Opportunities/my_opportunities - cancan | only admin can approve offer -->
-                <td><%= link_to 'Aprobar', '#' %></td>
-
-                <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can edit an offer they created -->
-                <td><%= link_to 'Edit', edit_opportunity_path(opportunity) %></td>
-
-                <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can archive / close an opportunity. It will not be destroyed, but no one else can apply after it has been closed. -->
-                <td><%= link_to 'Cerrar', '#' %></td>
-
-                <!-- TODO: Opportunities/my_opportunities - cancan | only admin can destroy -->
-                <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
-
+                <th>
+                  ID
+                </th>
+                <th>
+                  Nombre de la oferta
+                </th>
+                <th>
+                  # Aplicaciones
+                </th>
+                <th>
+                  Fecha de publicación
+                </th>
+                <th colspan="5">Acciones</th>
               </tr>
+              </thead>
+
+              <tbody>
+              <% @my_opportunities.each do |opportunity| %>
+                  <tr>
+                    <td>
+                      <%= opportunity.id %>
+                    </td>
+                    <td>
+                      <%= opportunity.opportunity_title %>
+                    </td>
+                    <td>
+                      <%= "#{opportunity.users.count} estudiantes" %>
+                    </td>
+                    <td>
+                      <%= opportunity.created_at.strftime('%d/%m/%Y') %>
+                    </td>
+
+                    <!-- TODO: Opportunities/my_opportunities - cancan | Company/Person can only view an offer they have created -->
+                    <td><%= link_to 'Ver', applicants_opportunity_path(opportunity) %></td>
+
+                    <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can edit an offer they created -->
+                    <td><%= link_to 'Editar', edit_opportunity_path(opportunity) %></td>
+
+                    <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can archive / close an opportunity. It will not be destroyed, but no one else can apply after it has been closed. -->
+                    <td><%= link_to 'Cerrar', '#' %></td>
+
+                  </tr>
               <% end %>
-          </tbody>
-        </table>
+              </tbody>
+            </table>
 
-      </div>
-    </div>
+          </div>
+        </div>
+        <!-- ./My Opportunities for Companies/People -->
+    <% elsif @user_role.role_id == 2 %>
+        <!-- My Opportunities for Students -->
+        <div class="row">
+          <div class="col-md-12">
 
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
-        <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
-      </div>
-    </div>
+            <h1>
+              Mis Ofertas
+            </h1>
 
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>
+                  Empresa oferente
+                </th>
+                <th>
+                  Nombre de la oferta
+                </th>
+                <th>
+                  Fecha de publicación
+                </th>
+                <th>
+                  Duración
+                </th>
+                <th>
+                  Tiempo requerido
+                </th>
+                <th>
+                  Salario / Valor
+                </th>
+                <th colspan="5">Acciones</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @student_opportunities.each do |opportunity| %>
+                  <tr>
+                    <td>
+                      <%= opportunity.user.company.company_name  %>
+                    </td>
+                    <td>
+                      <%= opportunity.opportunity_title %>
+                    </td>
+                    <td>
+                      <%= opportunity.created_at.strftime('%d/%m/%Y') %>
+                    </td>
+                    <td>
+                      <%= opportunity.opportunity_duration %>
+                    </td>
+                    <td>
+                      <%= opportunity_availability_friendly(opportunity) %>
+                    </td>
+                    <td>
+                      <%# TODO: Make conditional to show opportunity_cost if there is one, if company selected 'student can make an offer' then show 'Permite ofertar'  %>
+                      <% if opportunity.opportunity_cost.nil? %>
+                          <%= 'Se permite ofertar' %>
+                      <% else %>
+                          <%= opportunity.opportunity_cost %>
+                      <% end %>
+                    </td>
+
+                    <!-- TODO: Opportunities/my_opportunities - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
+                    <td><%= link_to 'Detalles', applicants_opportunity_path(opportunity) %></td>
+                    <!-- TODO: Opportunities/my_opportunities - make 'Aplicar' work -->
+                    <td><%#= link_to 'Aplicar', '#' %></td>
+
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+        <!-- ./My Opportunities for Students -->
+    <% end %>
+
+    <!-- My Opportunities Actions -->
+    <% if @user_role.role_id == 3 || @user_role.role_id == 4 %>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
+            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
+          </div>
+        </div>
+    <% elsif @user_role.role_id == 2 %>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
+            <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studnet' %>
+          </div>
+        </div>
+    <% end %>
+    <!-- ./My Opportunities Actions -->
   </div>
 </section>
