@@ -1,0 +1,147 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<section class="studNet-wrapper student-tab-wrapper opportunity-wrapper">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 student-tab-content ">
+
+        <%= form_for(@application, url: apply_opportunity_path(@opportunity)) do |f| %>
+            <% if @opportunity.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
+
+                  <ul>
+                    <% @opportunity.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <%= f.label :student_characteristics, '¿Cuáles características tienes que te hacen ideal para esta oferta?' %>
+                  <%= f.text_area :student_characteristics, rows: 5, class: 'form-control input-width' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :student_interests, '¿Qué te interesa de la oferta?' %>
+                  <%= f.text_area :student_interests, rows: 5, class: 'form-control input-width'  %>
+                </div>
+
+                <div class="form-group">
+                  <% unless @opportunity.question_for_student.nil? %>
+                      <%= f.label :student_answer, @opportunity.question_for_student %>
+                      <%= f.text_area :student_answer, rows: 5, class: 'form-control input-width'  %>
+                  <% end %>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <%# TODO: opportunities/application_form - check to see how this works when company selects the option when creating the opportunity %>
+                  <% unless @opportunity.opportunity_cost.nil? %>
+                      <%= f.label :opportunity_value, 'Valor del proyecto' %>
+                      <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <% unless @opportunity.receive_portfolio.nil? %>
+                      <!-- TODO: Opportunities/application_form - carrierwave uploader for portfolio, pending for development -->
+                      <%#= 'Por favor adjuntar los archivos de tu portafolio' %>
+                      <%#= f.text_area :characteristics  %>
+                  <% end %>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Application Form Modal -->
+            <div class="row">
+              <div class="col-md-12 text-center">
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-studnet" data-toggle="modal" data-target="#myModal">
+                  Aplicar
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                          Tiempo disponible
+                        </h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>
+                          Seleccione la disponibilidad de tiempo que tiene para esta oferta, <br>
+                          recuerda que la oferta
+                          <strong>
+                            <%= @opportunity.opportunity_title %>
+                          </strong>
+                          requiere
+                          <strong>
+                            <%= opportunity_availability_friendly(@opportunity).downcase %>
+                          </strong>
+                          .
+                        </p>
+
+                        <p>
+                          <%= f.fields_for :student, @opportunity.user.student do |s| %>
+                              <%= s.select :student_availability, options_for_select(opportunity_select_availability), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                          <% end %>
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="actions">
+                          <%= f.submit 'Aceptar', class: 'btn btn-primary btn-studnet', id: 'applyButton', disabled: true %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./Application Form Modal -->
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+  // Functions to disable/enable apply button depending if student's availability matches with the opportunity's availability.
+  $(function() {
+
+    function enableButton() {
+
+      $('#application_student_student_availability').change(function(){
+
+        if ( $(this).val() === '<%= @opportunity.availability %>' ) {
+          $( "#applyButton" ).prop( "disabled", false );
+        } else {
+          $( "#applyButton" ).prop( "disabled", true );
+        }
+
+      });
+
+
+    };
+
+    enableButton();
+
+  })
+
+</script>

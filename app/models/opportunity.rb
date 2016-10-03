@@ -21,7 +21,10 @@ class Opportunity < ActiveRecord::Base
   belongs_to :user
   belongs_to :major
 
-  has_and_belongs_to_many :users
+  has_many :students
+
+  has_many :applications
+  has_many :applied_users, through: :applications, class_name: 'User' # Students that applied to a company offer
 
 
   #---------------------

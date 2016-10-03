@@ -1,11 +1,11 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply]
+  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants]
 
   def index
     # Used to check what type of role is signed in
     @user_role = User.find_by_id(current_user.id)
     if @user_role.role_id == 2
-    @opportunities = Opportunity.all
+      @opportunities = Opportunity.all
     elsif @user_role.role_id == 3 || @user_role.role_id == 3
       redirect_to my_opportunities_opportunities_path
     end
@@ -57,8 +57,31 @@ class OpportunitiesController < ApplicationController
   #================
   # Custom Actions
   #================
+  def my_opportunities
+    # Used to check what type of role is signed in
+    @user_role = User.find_by_id(current_user.id)
+
+    # Used for companies/people that create opportunities
+    @my_opportunities = Opportunity.where(user_id: [current_user.id])
+
+    # Used for students that applied to opportunities
+    @student_opportunities = @user_role.applied_opportunities
+
+  end
+
+  def applicants
+    @applicants = @opportunity.applied_users
+  end
+
+  def application_form
+    @application = @opportunity.applications.build
+  end
+
   def apply
-    if @opportunity.users.push(current_user)
+    application = @opportunity.applications.build user_id: current_user.id
+    application.assign_attributes application_params
+
+    if application.save
       flash[:error] = 'Aplicaste satisfactoriamente a la oferta'
       redirect_to opportunities_path
     else
@@ -68,31 +91,29 @@ class OpportunitiesController < ApplicationController
 
   end
 
-  def my_opportunities
-    # Used to check what type of role is signed in
-    @user_role = User.find_by_id(current_user.id)
 
-    # Used for companies/people that create opportunities
-    @my_opportunities = Opportunity.where(user_id: [current_user.id])
-
-    # Used for students that applied to opportunities
-    @student_opportunities = @user_role.opportunities
-
-  end
-
-  def applicants
-    current_opportunity = Opportunity.find_by_id(params[:id])
-    @applicants = current_opportunity.users
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_opportunity
-      @opportunity = Opportunity.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_opportunity
+    @opportunity = Opportunity.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def opportunity_params
-      params.require(:opportunity).permit(:opportunity_type, :opportunity_title, :activity_description, :skills_description, :major_id, :other_majors, :question_for_student, :date_ini, :opportunity_duration, :availability, :cost_or_offer_option, :opportunity_cost, :receive_portfolio, :number_of_students, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def opportunity_params
+    params.require(:opportunity).permit(:opportunity_type, :opportunity_title, :activity_description, :skills_description,
+                                        :major_id, :other_majors, :question_for_student, :date_ini, :opportunity_duration,
+                                        :availability, :cost_or_offer_option, :opportunity_cost, :receive_portfolio,
+                                        :number_of_students, :user_id, :student_availability
+    )
+  end
+
+  def application_params
+    params.require(:application).permit(
+        :student_characteristics,
+        :student_interests,
+        :student_answer,
+        :opportunity_value
+    )
+  end
 end
