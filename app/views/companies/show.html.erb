@@ -1,108 +1,179 @@
 <p id="notice"><%= notice %></p>
 
-<section class="studNet-wrapper profile-wrapper">
+<section class="studNet-wrapper student-tab-wrapper">
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 studNet-form">
+      <div class="col-md-10 col-md-offset-1 student-tab-content">
 
+        <!-- Company Info -->
         <div class="row">
           <!-- Contact Info -->
-          <div class="col-md-6">
+          <div class="col-md-6 text-center">
             <h3>
               Datos de contacto
-              <%= link_to edit_user_path(current_user.id) do |link| %>
-                  <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-              <% end %>
             </h3>
 
-            <p>
-              Nombre(s):
-              <%= @user.first_name %>
-              <br>
+            <table class="table studNet-table">
+              <tbody>
 
-              Apellidos:
-              <%= @user.last_name %>
-              <br>
+              <tr>
+                <td>
+                  Nombre:
+                </td>
+                <td>
+                  <%= "#{@user.first_name} #{@user.last_name}" %>
+                </td>
+              </tr>
 
-              Cargo:
-              <%= @company.position %>
-              <br>
+              <tr>
+                <td>
+                  Cargo:
+                </td>
+                <td>
+                  <%= @company.position %>
+                </td>
+              </tr>
 
-              Email de tu cuenta:
-              <%= @user.email %>
-              <br>
+              <tr>
+                <td>
+                  Email de tu cuenta:
+                </td>
+                <td>
+                  <%= @user.email %>
+                </td>
+              </tr>
 
-              Teléfono de tu cuenta:
-              <%= @user.mobile_phone %>
-              <br>
+              <tr>
+                <td>
+                  Teléfono de tu cuenta:
+                </td>
+                <td>
+                  <%= @user.mobile_phone %>
+                </td>
+              </tr>
 
-              Dirección:
-              <%= @company.company_address %>
-              <br>
+              <tr>
+                <td>
+                  Dirección:
+                </td>
+                <td>
+                  <%= @company.company_address %>
+                </td>
+              </tr>
 
-              Ciudad:
-              <% unless @user.city_id.nil? %>
-                  <%= @user.city.city_name %>
-              <% end %>
-              <br>
+              <tr>
+                <td>
+                  Ciudad:
+                </td>
+                <td>
+                  <% unless @user.city_id.nil? %>
+                      <%= @user.city.city_name %>
+                  <% end %>
+                </td>
+              </tr>
 
-              País:
-              <% unless @user.country_id.nil? %>
-                  <%= @user.country.country_name %>
-              <% end %>
-            </p>
+              <tr>
+                <td>
+                  País:
+                </td>
+                <td>
+                  <% unless @user.country_id.nil? %>
+                      <%= @user.country.country_name %>
+                  <% end %>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
 
           </div>
           <!-- Contact Info -->
 
           <!-- Company Info -->
-          <div class="col-md-6">
+          <div class="col-md-6 text-center">
             <h3>
               Información de la empresa:
-              <%= link_to edit_user_path(current_user.id) do |link| %>
-                  <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-              <% end %>
             </h3>
 
-            <p>
-              Nombre de la empresa:
-              <%= @company.company_name %>
-              <br>
+            <table class="table studNet-table">
+              <tbody>
 
-              NIT:
-              <%= @company.company_nit %>
-              <br>
+              <tr>
+                <td>
+                  Nombre de la empresa:
+                </td>
+                <td>
+                  <%= @company.company_name %>
+                </td>
+              </tr>
 
-              Breve descripción de tu empresa:
-              <%= @company.company_description %>
-              <br>
+              <tr>
+                <td>
+                  NIT:
+                </td>
+                <td>
+                  <%= @company.company_nit %>
+                </td>
+              </tr>
 
-              Sector:
-              <% unless @company.company_sector_id.nil? %>
-                  <%#= TODO: Company/show - Fix nil:NilClass error %>
-                  <%= @company.sector.sector_name %>
-              <% end %>
-              <br>
+              <tr>
+                <td>
+                  Descripción de la empresa:
+                </td>
+                <td>
+                  <%= @company.company_description %>
+                </td>
+              </tr>
 
-              Tamaño:
-              <%= @company.company_size %>
-              <br>
+              <tr>
+                <td>
+                  Sector:
+                </td>
+                <td>
+                  <% unless @company.company_sector_id.nil? %>
+                      <%#= TODO: Company/show - Fix nil:NilClass error %>
+                      <%= @company.sector.sector_name %>
+                  <% end %>
+                </td>
+              </tr>
 
-              Página Web:
-              <%= @company.company_website_url %>
-              <br>
+              <tr>
+                <td>
+                  Tamaño:
+                </td>
+                <td>
+                  <%= @company.company_size %>
+                </td>
+              </tr>
 
+              <tr>
+                <td>
+                  Página Web:
+                </td>
+                <td>
+                  <%= link_to "#{@company.company_website_url}", "http://#{@company.company_website_url}", target: '_blank' %>
+                </td>
+              </tr>
 
-            </p>
+              </tbody>
+            </table>
 
           </div>
           <!-- Company Info -->
         </div>
+        <!-- ./Company Info -->
 
+        <!-- Actions -->
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <%= link_to 'Crear Oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
+            <%= link_to 'Editar Perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
+          </div>
+        </div>
+        <!-- ./Actions-->
       </div>
     </div>
 
   </div>
 </section>
-

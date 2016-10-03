@@ -1,0 +1,100 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<section class="studNet-wrapper">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <h1>
+          Mis Ofertas
+        </h1>
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              Nombre(s)
+            </th>
+            <th>
+              Edad
+            </th>
+            <th>
+              Universidad
+            </th>
+            <th>
+              Carrera
+            </th>
+            <th>
+              Nivel
+            </th>
+            <th>
+              Promedio
+            </th>
+            <th colspan="2">Acciones</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @applicants.each do |applicant| %>
+              <tr>
+                <td>
+                  <%= applicant.first_name %>
+                </td>
+                <td>
+                  <%= "#{Time.now.year - applicant.date_of_birth.year} años" %>
+                </td>
+                <td>
+                  <% if applicant.student.university_id.nil? %>
+                      No disponible
+                  <% else %>
+                      <%= applicant.student.university.university_name  %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if applicant.student.major_id.nil? %>
+                      No disponible
+                  <% else %>
+                      <%= applicant.student.major.major_name %>
+                  <% end %>
+
+                </td>
+                <td>
+                  <% if applicant.student.ed_level_id.nil? %>
+                      No disponible
+                  <% else %>
+                      <%= applicant.student.education_level.level_name %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if applicant.student.gpa.nil? %>
+                      No disponible
+                  <% else %>
+                      <%= "#{applicant.student.gpa}/#{applicant.student.gpa_max}" %>
+                  <% end %>
+                </td>
+
+                <!-- TODO: Opportunities/applicants - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
+                <!-- TODO: Opportunities/applicants - cancan | Company/Person can only view an offer they have created -->
+                <td><%= link_to 'Ver', student_path(applicant) %></td>
+
+                <!-- TODO: Opportunities/applicants - cancan | only Company/Person can view complete info from student, once they have payed -->
+                <td><%= link_to 'Adquirir información', '#' %></td>
+
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
+        <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
+      </div>
+    </div>
+
+  </div>
+</section>
