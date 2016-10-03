@@ -76,7 +76,7 @@
 
                 <!-- TODO: Opportunities/applicants - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
                 <!-- TODO: Opportunities/applicants - cancan | Company/Person can only view an offer they have created -->
-                <td><%= link_to 'Ver', student_path(applicant) %></td>
+                <td><%= link_to 'Ver', student_path(applicant, opportunity: params[:id]) %></td>
 
                 <!-- TODO: Opportunities/applicants - cancan | only Company/Person can view complete info from student, once they have payed -->
                 <td><%= link_to 'Adquirir información', '#' %></td>

@@ -128,16 +128,17 @@
           <div class="col-md-12 text-center">
             <!-- TODO: Opportunities/show - cancan | Only Student can apply to opportunities -->
             <!-- TODO: Opportunities/show - make it work like twitter follow/unfollow like the one on rails tutorial. Student can only apply once. Or have the button apply once, the next time he clicks apply, he cancels the application to the offer -->
-            <%= link_to 'Aplicar', apply_opportunity_path(@opportunity), method: :post, class: 'btn btn-primary btn-studNet' %>
 
-            <!-- TODO: Opportunities/show - cancan | Only Company/Person can edit or archive the opportunities -->
-            <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studNet' %>
-            <%= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
+            <% if @user_role.role_id == 2 %>
+                <%= link_to 'Aplicar', apply_opportunity_path(@opportunity), method: :post, class: 'btn btn-primary btn-studNet' %>
+                <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studNet' %>
+            <% elsif @user_role.role_id == 3 || @user.role_id == 4 %>
+                <!-- TODO: Opportunities/show - cancan | Only Company/Person can edit or archive the opportunities -->
+                <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studNet' %>
+                <%= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
+            <% end %>
           </div>
         </div>
-
-
-
 
       </div>
     </div>

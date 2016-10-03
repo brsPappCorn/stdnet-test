@@ -8,11 +8,12 @@ module StudentsHelper
     ]
   end
 
+  # TODO: Students_helper - Refactor student_work_xp_select_friendly
   # Helper method to display friendly name instead of select value
   def student_work_xp_select_friendly(student)
     if student.work_xp == false
       'No'
-    elsif student.work_xp == true
+    else student.work_xp == true
       'Sí'
     end
   end

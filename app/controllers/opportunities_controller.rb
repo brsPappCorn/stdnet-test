@@ -2,10 +2,19 @@ class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply]
 
   def index
+    # Used to check what type of role is signed in
+    @user_role = User.find_by_id(current_user.id)
+    if @user_role.role_id == 2
     @opportunities = Opportunity.all
+    elsif @user_role.role_id == 3 || @user_role.role_id == 3
+      redirect_to my_opportunities_opportunities_path
+    end
+
   end
 
   def show
+    # Used to check what type of role is signed in
+    @user_role = User.find_by_id(current_user.id)
   end
 
   def new
@@ -60,7 +69,15 @@ class OpportunitiesController < ApplicationController
   end
 
   def my_opportunities
+    # Used to check what type of role is signed in
+    @user_role = User.find_by_id(current_user.id)
+
+    # Used for companies/people that create opportunities
     @my_opportunities = Opportunity.where(user_id: [current_user.id])
+
+    # Used for students that applied to opportunities
+    @student_opportunities = @user_role.opportunities
+
   end
 
   def applicants
