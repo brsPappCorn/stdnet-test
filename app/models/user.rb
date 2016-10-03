@@ -52,8 +52,9 @@ class User < ActiveRecord::Base
   has_one :student, dependent: :destroy
   has_one :person, dependent: :destroy
 
-  has_many :opportunities
-  has_and_belongs_to_many :opportunities
+  has_many :opportunities # Company/People association for creation of an opportunity
+  has_many :applications
+  has_many :applied_opportunities, through: :applications, class_name: 'Opportunity'
 
   belongs_to :city
   belongs_to :country

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002170730) do
+ActiveRecord::Schema.define(version: 20161003171153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(version: 20161002170730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "applications", force: :cascade do |t|
+    t.string   "student_characteristics"
+    t.string   "student_interests"
+    t.string   "student_answer"
+    t.string   "opportunity_value"
+    t.integer  "user_id"
+    t.integer  "opportunity_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "applications", ["opportunity_id", "user_id"], name: "index_applications_on_opportunity_id_and_user_id", using: :btree
 
   create_table "cities", force: :cascade do |t|
     t.string   "city_name"
@@ -84,11 +97,6 @@ ActiveRecord::Schema.define(version: 20161002170730) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "user_id"
-  end
-
-  create_table "opportunities_users", id: false, force: :cascade do |t|
-    t.integer "opportunity_id", null: false
-    t.integer "user_id",        null: false
   end
 
   create_table "people", force: :cascade do |t|

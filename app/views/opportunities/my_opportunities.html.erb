@@ -41,7 +41,7 @@
                       <%= opportunity.opportunity_title %>
                     </td>
                     <td>
-                      <%= "#{opportunity.users.count} estudiantes" %>
+                      <%= "#{opportunity.applied_users.count} estudiantes" %>
                     </td>
                     <td>
                       <%= opportunity.created_at.strftime('%d/%m/%Y') %>
@@ -126,7 +126,7 @@
                     </td>
 
                     <!-- TODO: Opportunities/my_opportunities - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
-                    <td><%= link_to 'Detalles', applicants_opportunity_path(opportunity) %></td>
+                    <td><%= link_to 'Detalles', opportunity %></td>
                     <!-- TODO: Opportunities/my_opportunities - make 'Aplicar' work -->
                     <td><%#= link_to 'Aplicar', '#' %></td>
 

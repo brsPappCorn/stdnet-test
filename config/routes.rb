@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :opportunities do
     member do
+      get 'application_form'
       post 'apply'
       get 'applicants'
     end
