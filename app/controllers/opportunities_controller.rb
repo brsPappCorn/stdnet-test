@@ -5,6 +5,7 @@ class OpportunitiesController < ApplicationController
     # Used to check what type of role is signed in
     @user_role = User.find_by_id(current_user.id)
     if @user_role.role_id == 2
+      @all_opportunities = Opportunity.all
       @opportunities = Opportunity.opportunities_for_student(@user_role.student)
 
     elsif @user_role.role_id == 3 || @user_role.role_id == 3

@@ -34,6 +34,9 @@
 
                 <div class="form-group">
                   <% unless @opportunity.question_for_student.nil? %>
+                      <h3>
+                        Pregunta de la empresa
+                      </h3>
                       <%= f.label :student_answer, @opportunity.question_for_student %>
                       <%= f.text_area :student_answer, rows: 5, class: 'form-control input-width'  %>
                   <% end %>
