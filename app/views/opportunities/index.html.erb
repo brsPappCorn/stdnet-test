@@ -3,11 +3,12 @@
 <section class="studNet-wrapper">
   <div class="container">
 
+    <!-- List of opportunities that apply to me -->
     <div class="row">
       <div class="col-md-12">
 
         <h1>
-          Posibles Ofertas
+          Posibles ofertas para mi
         </h1>
 
         <table class="table table-striped">
@@ -82,6 +83,7 @@
 
       </div>
     </div>
+    <!-- ./List of opportunities that apply to me -->
 
     <!-- Companiy/Person Actions -->
     <% if @user_role.role_id == 3 || @user_role.role_id == 4 %>
@@ -100,6 +102,88 @@
         </div>
     <% end %>
     <!-- ./Companiy/Person Actions -->
+
+    <!-- List of opportunities that apply to me -->
+    <div class="row">
+      <div class="col-md-12">
+
+        <h1>
+          Otras ofertas en studNet
+        </h1>
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              Empresa oferente
+            </th>
+            <th>
+              Nombre de la oferta
+            </th>
+            <th>
+              Fecha de publicación
+            </th>
+            <th>
+              Duración
+            </th>
+            <th>
+              Tiempo requerido
+            </th>
+            <th>
+              Salario / Valor
+            </th>
+            <th colspan="5">Acciones</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @all_opportunities.each do |opportunity| %>
+              <tr>
+                <td>
+                  <%= opportunity.user.company.company_name  %>
+                </td>
+                <td>
+                  <%= opportunity.opportunity_title %>
+                </td>
+                <td>
+                  <%= opportunity.created_at.strftime('%d/%m/%Y') %>
+                </td>
+                <td>
+                  <%= opportunity.opportunity_duration %>
+                </td>
+                <td>
+                  <%= opportunity_availability_friendly(opportunity) %>
+                </td>
+                <td>
+                  <%# TODO: Make conditional to show opportunity_cost if there is one, if company selected 'student can make an offer' then show 'Permite ofertar'  %>
+                  <% if opportunity.opportunity_cost.nil? %>
+                      <%= 'Se permite ofertar' %>
+                  <% else %>
+                      <%= opportunity.opportunity_cost %>
+                  <% end %>
+                </td>
+
+                <!-- TODO: Opportunities/index - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
+                <td><%#= link_to 'Detalles', opportunity_path(opportunity) %></td>
+                <!-- TODO: Opportunities/indexs - make 'Aplicar' work -->
+                <td><%#= link_to 'Aplicar', apply_opportunity_path(opportunity) %></td>
+
+                <% if @user_role.role_id == 0 %>
+                    <!-- TODO: Opportunities/index - create 'APROBAR' action for ADMIN to approve opportunities -->
+                    <!-- TODO: Opportunities/index - cancan | only admin can approve offer -->
+                    <td><%= link_to 'Aprobar', '#' %></td>
+                    <!-- TODO: Opportunities/index - cancan | only admin can destroy -->
+                    <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+                <% end %>
+
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <!-- ./List of opportunities that apply to me -->
 
   </div>
 </section>
