@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :basic_info]
 
+  before_action :authenticate_administrator! || :authenticate_user!
+
   def index
-    if user_signed_in?
+    if user_signed_in? || administrator_signed_in?
       @users = User.all
     else
       redirect_to '/ingreso'
@@ -71,7 +73,7 @@ class UsersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find(params[:id])
+   # @user = User.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

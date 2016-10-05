@@ -3,11 +3,10 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def index
-    if user_signed_in?
-      # @users = User.all
+    if administrator_signed_in?
       @students = Student.all
     else
-      redirect_to '/ingreso'
+      redirect_to root_path
     end
   end
 
@@ -16,7 +15,7 @@ class StudentsController < ApplicationController
     # Used to check what type of role is signed in
     @user_role = User.find_by_id(current_user.id)
 
-    if user_signed_in?
+    if user_signed_in? || administrator_signed_in?
 
       if params[:opportunity]
         user_id = params[:id]
@@ -99,6 +98,8 @@ class StudentsController < ApplicationController
                                     tool_ids:[]
     )
   end
+
+
 end
 
 

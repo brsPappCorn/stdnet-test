@@ -1,8 +1,6 @@
 class AdministratorsController < ApplicationController
   before_action :set_administrator, only: [:show, :edit, :update, :destroy]
 
-  # GET /administrators
-  # GET /administrators.json
   def index
     @administrators = Administrator.all
   end
@@ -59,6 +57,14 @@ class AdministratorsController < ApplicationController
       format.html { redirect_to administrators_url, notice: 'Administrator was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  #===================
+  # Custom actions
+  #===================
+
+  def opportunities
+    @opportunities = Opportunity.all
   end
 
   private

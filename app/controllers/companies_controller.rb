@@ -2,11 +2,10 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   def index
-    if user_signed_in?
-      # @users = User.all
+    if administrator_signed_in?
       @companies = Company.all
     else
-      redirect_to '/ingreso'
+      redirect_to root_path
     end
   end
 
