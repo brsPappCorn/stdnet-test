@@ -41,7 +41,11 @@
               <% if opportunity.approved_state == true %>
                   <tr>
                     <td>
-                      <%= opportunity.user.company.company_name  %>
+                      <% if opportunity.user.company.nil? %>
+                          <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
+                      <% else %>
+                          <%= opportunity.user.company.company_name  %>
+                      <% end %>
                     </td>
                     <td>
                       <%= opportunity.opportunity_title %>
@@ -63,19 +67,7 @@
                           <%= opportunity.opportunity_cost %>
                       <% end %>
                     </td>
-
-                    <!-- TODO: Opportunities/index - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
                     <td><%= link_to 'Detalles', opportunity_path(opportunity) %></td>
-                    <!-- TODO: Opportunities/indexs - make 'Aplicar' work -->
-                    <td><%#= link_to 'Aplicar', apply_opportunity_path(opportunity) %></td>
-
-                    <% if @user_role.role_id == 0 %>
-                        <!-- TODO: Opportunities/index - create 'APROBAR' action for ADMIN to approve opportunities -->
-                        <!-- TODO: Opportunities/index - cancan | only admin can approve offer -->
-                        <td><%= link_to 'Aprobar', '#' %></td>
-                        <!-- TODO: Opportunities/index - cancan | only admin can destroy -->
-                        <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
-                    <% end %>
 
                   </tr>
               <% end %>
@@ -143,7 +135,11 @@
               <% if opportunity.approved_state == true %>
                   <tr>
                     <td>
-                      <%= opportunity.user.company.company_name  %>
+                      <% if opportunity.user.company.nil? %>
+                          <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
+                      <% else %>
+                          <%= opportunity.user.company.company_name  %>
+                      <% end %>
                     </td>
                     <td>
                       <%= opportunity.opportunity_title %>

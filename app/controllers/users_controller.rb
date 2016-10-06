@@ -91,6 +91,9 @@ class UsersController < ApplicationController
                                      :id, :position, :company_address, :company_nit, :company_description, :company_size,
                                      :company_website_url, :company_name, :company_sector_id
                                  ],
+                                 person_attributes: [
+                                     :id, :occupation, :profession
+                                 ],
                                  opportunity_ids:[]
 
     )

@@ -43,11 +43,9 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
-        format.json { render :show, status: :created, location: @student }
+        format.html { redirect_to root_path, notice: 'Student was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,15 +53,9 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        puts '------------->>>>'
-        puts 'ejecuta update (students_controller) '
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-        format.json { render :show, status: :ok, location: @student }
+        format.html { redirect_to root_path, notice: 'Student was successfully updated.' }
       else
-        puts '------------->>>>'
-        puts 'no ejecuta update y hace render de edit (students_controller)'
         format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
   end
