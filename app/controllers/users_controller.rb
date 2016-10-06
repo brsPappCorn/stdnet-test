@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :basic_info]
 
-  before_action :authenticate_administrator! || :authenticate_user!
-
   def index
-    if user_signed_in? || administrator_signed_in?
+    if administrator_signed_in?
       @users = User.all
     else
-      redirect_to '/ingreso'
+      redirect_to root_path
     end
   end
 
@@ -19,9 +17,9 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by_id(current_user.id)
   end
 
-  # TODO: BASIC INFO fix redirection. It's pointing to users/id instead of student || company || person
   def create
     @user = User.new(user_params)
 
@@ -38,17 +36,13 @@ class UsersController < ApplicationController
 
   # TODO: BASIC INFO fix redirection. It's pointing to users/id instead of student || company || person
   def update
+    @user = User.find_by_id(current_user.id)
+
     respond_to do |format|
       if @user.update(user_params)
-        puts '------------->>>>'
-        puts 'ejecuta update (users_controller) '
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.html { redirect_to root_path, notice: 'User was successfully updated.' }
       else
-        puts '------------->>>>'
-        puts 'no ejecuta update y hace render de edit (users_controller)'
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -27,13 +27,13 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :password, 'Contraseña (mínimo 6 caracteres)' %>
+      <%= f.label :password, 'Contraseña' %>
       <!--
       <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
       -->
-      <%= f.password_field :password, autocomplete: 'off', class: 'form-control input-width' %>
+      <%= f.password_field :password, autocomplete: 'off', placeholder: 'mínimo 6 caracteres', class: 'form-control input-width' %>
     </div>
 
     <div class="form-group">
@@ -101,3 +101,10 @@
   <%= render 'devise/shared/links' %>
 </div>
 <!-- Form -->
+
+<script type="text/javascript">
+  // Student
+  $('#user_student_attributes_university_id').select2();
+  $('#user_student_attributes_major_id').select2();
+
+</script>
