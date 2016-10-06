@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # =========================
   # Root
   # =========================
@@ -9,16 +10,23 @@ Rails.application.routes.draw do
   # =========================
   # Devise
   # =========================
-  devise_for :user, path: '', path_names: {
+  devise_for :users, path: '', path_names: {
       sign_in: 'ingreso', sign_up: 'registro'
-  }, controllers: {
-      registrations: 'users/registrations'
+  }
+
+  devise_for :administrators, path: '', path_names: {
+      sign_in: 'ingreso_admin'
   }
 
   # =========================
   # Resources
   # =========================
-  resources :administrators
+  resources :administrators do
+    collection do
+      get 'opportunities'
+      get 'pending_opportunities'
+    end
+  end
   resources :companies
   resources :people
   resources :students
@@ -32,6 +40,7 @@ Rails.application.routes.draw do
       get 'application_form'
       post 'apply'
       get 'applicants'
+      post 'approve'
     end
     collection do
       get 'my_opportunities'

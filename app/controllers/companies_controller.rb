@@ -2,11 +2,10 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   def index
-    if user_signed_in?
-      # @users = User.all
+    if administrator_signed_in?
       @companies = Company.all
     else
-      redirect_to '/ingreso'
+      redirect_to root_path
     end
   end
 
@@ -52,12 +51,15 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # TODO: Companies Controller - destroy action only allowed by Admin role
   def destroy
-    @company.destroy
-    respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }
+    if administrator_signed_in?
+      @company.destroy
+      respond_to do |format|
+        format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_path
     end
   end
 

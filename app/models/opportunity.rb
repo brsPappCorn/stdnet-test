@@ -33,10 +33,19 @@ class Opportunity < ActiveRecord::Base
   # TODO: Declare validations
 
   #---------------------
-  # Validations
+  # Methods
   #---------------------
   def self.opportunities_for_student(student)
     where major_id: student.major_id
+  end
+
+  def self.pending_approval
+    where approved_state: false
+  end
+
+  def approve
+    self.approved_state = true
+    self.save
   end
 
 end

@@ -65,7 +65,7 @@
                       <li>
                         <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
                       </li>
-                  <!-- Actions for Company -->
+                      <!-- Actions for Company -->
                   <% elsif user_role_id(3) %>
                       <li>
                         <%= link_to 'Ver Perfil', company_path(current_user.id) %>
@@ -79,13 +79,13 @@
                       <li>
                         <%= link_to 'Company Actions', '#'  %>
                       </li>
-                  <!-- Actions for Person -->
+                      <!-- Actions for Person -->
                   <% elsif user_role_id(4) %>
                       <li>
                         <%= link_to 'Person Actions', '#'  %>
                       </li>
-                  <!-- Actions for Admin -->
-                  <% elsif user_role_id(1) %>
+                      <!-- Actions for Admin -->
+                  <% elsif administrator_signed_in? %>
                       <li>
                         <%= link_to 'Lista de Usuarios', users_path  %>
                       </li>
@@ -100,7 +100,45 @@
                 </ul>
               </li>
           <% end %>
-          <!-- Account Menu Dropdown. -->
+          <!-- ./Account Menu Dropdown. Depends on the type of user signed in. -->
+
+
+          <!-- Admin drop-down -->
+          <% if administrator_signed_in? %> <!-- TODO: Update dropdown actions depending on the role -->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Perfil
+                  <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-fixed">
+                  <li>
+                    <%= link_to 'Ofertas', opportunities_administrators_path  %>
+                  </li>
+                  <li>
+                    <%= link_to 'Usuarios', users_path  %>
+                  </li>
+                  <li>
+                    <%= link_to 'Estudiantes', students_path  %>
+                  </li>
+                  <li>
+                    <%= link_to 'Empresas', companies_path  %>
+                  </li>
+                  <li>
+                    <%= link_to 'Personas', people_path  %>
+                  </li>
+
+                  <li role="separator" class="divider"></li>
+                  <li>
+                    <%= link_to destroy_user_session_path, method: :delete do %>
+                        Sign out
+                    <% end %>
+                  </li>
+
+                </ul>
+              </li>
+          <% end %>
+          <!-- ./Admin Dropdown -->
 
         </ul>
       </div><!-- /.navbar-collapse -->
