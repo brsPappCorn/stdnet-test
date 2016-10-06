@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th>
-      Empresa oferente
+      Oferente
     </th>
     <th>
       Nombre de la oferta
@@ -27,7 +27,11 @@
   <% @opportunities.each do |opportunity| %>
       <tr>
         <td>
-          <%= opportunity.user.company.company_name  %>
+          <% if opportunity.user.company.nil? %>
+              <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
+          <% else %>
+              <%= opportunity.user.company.company_name  %>
+          <% end %>
         </td>
         <td>
           <%= opportunity.opportunity_title %>
