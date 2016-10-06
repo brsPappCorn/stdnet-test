@@ -6,7 +6,7 @@ gem 'rails', '4.2.7.1'
 
 # Core
 gem 'cancan'
-gem 'carrierwave'
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
 gem 'devise'
 gem 'fog'
 gem 'pg'
@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 # Translation
-gem 'rails-i18n' # TODO: Make site multilanguage
+gem 'rails-i18n'
 
 # Other
 
