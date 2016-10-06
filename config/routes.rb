@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :administrators do
     collection do
       get 'opportunities'
+      get 'pending_opportunities'
     end
   end
   resources :companies
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
       get 'application_form'
       post 'apply'
       get 'applicants'
+      post 'approve'
     end
     collection do
       get 'my_opportunities'

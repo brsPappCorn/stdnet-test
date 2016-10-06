@@ -1,0 +1,61 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>
+      Empresa oferente
+    </th>
+    <th>
+      Nombre de la oferta
+    </th>
+    <th>
+      Fecha de publicación
+    </th>
+    <th>
+      Duración
+    </th>
+    <th>
+      Tiempo requerido
+    </th>
+    <th>
+      Salario / Valor
+    </th>
+    <th colspan="5">Acciones</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @opportunities.each do |opportunity| %>
+      <tr>
+        <td>
+          <%= opportunity.user.company.company_name  %>
+        </td>
+        <td>
+          <%= opportunity.opportunity_title %>
+        </td>
+        <td>
+          <%= opportunity.created_at.strftime('%d/%m/%Y') %>
+        </td>
+        <td>
+          <%= opportunity.opportunity_duration %>
+        </td>
+        <td>
+          <%= opportunity_availability_friendly(opportunity) %>
+        </td>
+        <td>
+          <%# TODO: Make conditional to show opportunity_cost if there is one, if company selected 'student can make an offer' then show 'Permite ofertar'  %>
+          <% if opportunity.opportunity_cost.nil? %>
+              <%= 'Se permite ofertar' %>
+          <% else %>
+              <%= opportunity.opportunity_cost %>
+          <% end %>
+        </td>
+
+        <% unless opportunity.approved_state %>
+            <td><%= link_to 'Aprobar', approve_opportunity_path(opportunity), method: :post %></td>
+        <% end %>
+        <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>

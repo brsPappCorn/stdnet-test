@@ -1,26 +1,22 @@
 class AdministratorsController < ApplicationController
   before_action :set_administrator, only: [:show, :edit, :update, :destroy]
 
+
+
   def index
     @administrators = Administrator.all
   end
 
-  # GET /administrators/1
-  # GET /administrators/1.json
   def show
   end
 
-  # GET /administrators/new
   def new
     @administrator = Administrator.new
   end
 
-  # GET /administrators/1/edit
   def edit
   end
 
-  # POST /administrators
-  # POST /administrators.json
   def create
     @administrator = Administrator.new(administrator_params)
 
@@ -35,8 +31,6 @@ class AdministratorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /administrators/1
-  # PATCH/PUT /administrators/1.json
   def update
     respond_to do |format|
       if @administrator.update(administrator_params)
@@ -49,8 +43,6 @@ class AdministratorsController < ApplicationController
     end
   end
 
-  # DELETE /administrators/1
-  # DELETE /administrators/1.json
   def destroy
     @administrator.destroy
     respond_to do |format|
@@ -65,6 +57,10 @@ class AdministratorsController < ApplicationController
 
   def opportunities
     @opportunities = Opportunity.all
+  end
+
+  def pending_opportunities
+    @opportunities = Opportunity.pending_approval
   end
 
   private

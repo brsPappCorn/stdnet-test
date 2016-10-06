@@ -1,5 +1,5 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants]
+  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve]
 
   def index
     # Used to check what type of role is signed in
@@ -49,10 +49,14 @@ class OpportunitiesController < ApplicationController
   end
 
   def destroy
-    @opportunity.destroy
-    respond_to do |format|
-      format.html { redirect_to opportunities_url, notice: 'Opportunity was successfully destroyed.' }
-      format.json { head :no_content }
+    if administrator_signed_in?
+      @opportunity.destroy
+      respond_to do |format|
+        format.html { redirect_to opportunities_url, notice: 'Opportunity was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_path
     end
   end
 
@@ -68,7 +72,6 @@ class OpportunitiesController < ApplicationController
 
     # Used for students that applied to opportunities
     @student_opportunities = @user_role.applied_opportunities
-
   end
 
   def applicants
@@ -93,6 +96,15 @@ class OpportunitiesController < ApplicationController
 
   end
 
+  def approve
+    if administrator_signed_in?
+      @opportunity.approve
+      # TODO: Flash exito
+      redirect_to opportunities_administrators_path
+    else
+      redirect_to root_path
+    end
+  end
 
 
   private

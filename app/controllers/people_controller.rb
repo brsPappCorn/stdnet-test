@@ -45,13 +45,15 @@ class PeopleController < ApplicationController
     end
   end
 
-  # DELETE /people/1
-  # DELETE /people/1.json
   def destroy
-    @person.destroy
-    respond_to do |format|
-      format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
-      format.json { head :no_content }
+    if administrator_signed_in?
+      @person.destroy
+      respond_to do |format|
+        format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_path
     end
   end
 

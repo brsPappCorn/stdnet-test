@@ -51,12 +51,15 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # TODO: Companies Controller - destroy action only allowed by Admin role
   def destroy
-    @company.destroy
-    respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }
+    if administrator_signed_in?
+      @company.destroy
+      respond_to do |format|
+        format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_path
     end
   end
 

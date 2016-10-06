@@ -4,7 +4,6 @@
 //================
 // Variables
 //================
-// TODO: Declare variables
 $f-normal: normal;
 
 // Primary Colors
@@ -193,10 +192,27 @@ header {
         }
       }
 
+
     }
 
   }
 
+  .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    padding-bottom: 0;
+  }
+
+}
+
+header .navbar-custom .navbar-collapse .navbar-nav > li:hover a, header .navbar-custom .navbar-collapse .navbar-nav > li:active a, header .navbar-custom .navbar-collapse .navbar-nav > li:focus a {
+  padding-bottom: 0;
+}
+
+header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-custom .navbar-collapse .navbar-nav > li:active, header .navbar-custom .navbar-collapse .navbar-nav > li:focus {
+  border-bottom: 0;
+}
+
+.dropdown-menu > li > a {
+  padding-bottom: 0;
 }
 
 // ================

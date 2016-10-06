@@ -26,7 +26,7 @@ class StudentsController < ApplicationController
       @student_user = User.find_by_id(id)
 
     else
-      redirect_to '/ingreso'
+      redirect_to root_path
     end
 
   end
@@ -70,10 +70,14 @@ class StudentsController < ApplicationController
 
   # TODO: Students Controller - destroy action only allowed by Admin role
   def destroy
-    @student.destroy
-    respond_to do |format|
-      format.html { redirect_to students_url, notice: 'El estudiante se elimino exitosamente.' }
-      format.json { head :no_content }
+    if administrator_signed_in?
+      @student.destroy
+      respond_to do |format|
+        format.html { redirect_to students_url, notice: 'El estudiante se elimino exitosamente.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_path
     end
   end
 
