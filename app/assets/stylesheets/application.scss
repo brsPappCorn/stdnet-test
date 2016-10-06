@@ -119,6 +119,19 @@ body {
 
 }
 
+// Select2
+.select2-container--default .select2-selection--single {
+  height: 34px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding-top: 3px !important;
+}
+
+.select2-container {
+  width: 100% !important;
+}
+
 
 // ================
 // Buttons

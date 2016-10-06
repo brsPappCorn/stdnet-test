@@ -291,41 +291,38 @@
 
                                 <div class="row">
                                   <div class="col-md-6">
-
                                     <div class="form-group">
                                       <%= s.label :language_id, 'Idioma' %>
                                       <%= s.select :language_id, Language.all.map { |language| [language.language_name, language.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                                     </div>
-                                  </div>
 
-                                  <div class="col-md-6">
                                     <div class="form-group">
                                       <%= s.label :language_level, 'Nivel' %>
                                       <%= s.select(:language_level, Student::LANGUAGE_LEVEL, {}, { :class => 'form-control' }) %>
                                     </div>
+
+                                    <div class="form-group">
+                                      <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
+                                        <%= link_to 'Agregar otro idioma', '', class: 'btn btn-primary btn-studnet-basic' %>
+                                    </div>
+
+                                  </div>
+                                  <!-- ./ Student Languages -->
+
+
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <%= s.label '¿Cuáles de estas herramientas sabes usar?' %>
+                                      <%= s.collection_check_boxes :tool_ids, Tool.all, :id, :tool_name do |b| %>
+                                          <div class="collection-check-box">
+                                            <%= b.check_box %>
+                                            <%= b.label %>
+                                          </div>
+                                      <% end %>
+                                    </div>
                                   </div>
                                 </div>
 
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
-                                    <button class="btn btn-primary btn-studnet-basic pull-right">
-                                      Agregar otro idioma
-                                    </button>
-                                  </div>
-
-                                </div>
-                                <!-- ./ Student Languages -->
-
-                                <div class="form-group">
-                                  <%= s.label '¿Cuáles de estas herramientas sabes usar?' %>
-                                  <%= s.collection_check_boxes :tool_ids, Tool.all, :id, :tool_name do |b| %>
-                                      <div class="collection-check-box">
-                                        <%= b.check_box %>
-                                        <%= b.label %>
-                                      </div>
-                                  <% end %>
-                                </div>
 
                                 <!-- TODO: Users/edit Bug nested boolean (Si/No) dropdown is not working properly -->
                                 <div class="form-group">
@@ -591,3 +588,30 @@
     <% end %>
   </div>
 </section>
+
+
+<script type="text/javascript">
+  // Student
+  $('#user_student_attributes_university_id').select2();
+  $('#user_student_attributes_major_id').select2();
+  $('#user_student_attributes_ed_level_id').select2();
+  $('#user_student_attributes_last_semester').select2();
+
+  $('#user_date_of_birth_1i').select2();
+  $('#user_date_of_birth_2i').select2();
+  $('#user_date_of_birth_3i').select2();
+
+  $('#user_city_id').select2();
+  $('#user_country_id').select2();
+  $('#user_student_attributes_country_id').select2();
+
+  $('#user_student_attributes_language_id').select2();
+  $('#user_student_attributes_language_level').select2();
+
+  $('#user_referenced_by').select2();
+
+  // Company
+  $('#user_company_attributes_company_sector_id').select2();
+  $('#user_company_attributes_company_size').select2();
+
+</script>
