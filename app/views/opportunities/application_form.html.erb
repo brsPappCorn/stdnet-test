@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1 student-tab-content ">
 
-        <%= form_for(@application, url: apply_opportunity_path(@opportunity)) do |f| %>
+        <%= form_for(@application, url: apply_opportunity_path(@opportunity), multipart: true) do |f| %>
             <% if @opportunity.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(@opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
@@ -56,9 +56,10 @@
 
                 <div class="form-group">
                   <% unless @opportunity.receive_portfolio.nil? %>
-                      <!-- TODO: Opportunities/application_form - carrierwave uploader for portfolio, pending for development -->
-                      <%#= 'Por favor adjuntar los archivos de tu portafolio' %>
-                      <%#= f.text_area :characteristics  %>
+                      <div class="form-group">
+                        <%= f.label :portfolio, 'Por favor adjuntar los archivos de tu portafolio' %><br>
+                        <%= f.file_field :portfolio, class: 'form-control input-width' %>
+                      </div>
                   <% end %>
                 </div>
 

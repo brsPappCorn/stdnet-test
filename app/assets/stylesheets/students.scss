@@ -10,6 +10,19 @@
 //========================
 // SHOW
 //========================
+.student-avatar {
+  img {
+    max-height: 80px;
+  }
+}
+
+.student-avatar-index {
+  img {
+    max-width: 40px;
+  }
+}
+
+
 .student-tab-wrapper {
 
   .nav-tabs > li > a {

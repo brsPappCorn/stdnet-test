@@ -24,6 +24,11 @@ class Student < ActiveRecord::Base
   has_and_belongs_to_many :tools
 
   #---------------------
+  # Uploaders
+  #---------------------
+  mount_uploader :avatar, AvatarUploader
+
+  #---------------------
   # Validations
   #---------------------
   # TODO: Student.rb - Declare validations

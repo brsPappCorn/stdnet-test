@@ -1,0 +1,133 @@
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="student-tab-wrapper ">
+      <div class="student-tab-content">
+        <div class="row">
+
+          <!-- Contact Info Wrapper -->
+          <div class="col-md-6">
+
+            <h3>
+              Datos de contacto
+            </h3>
+
+            <div class="form-group">
+              <%= f.label :first_name, 'Nombre(s)' %><br>
+              <%= f.text_field :first_name, class: 'form-control input-width' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :last_name, 'Apellidos' %><br>
+              <%= f.text_field :last_name, class: 'form-control input-width' %>
+            </div>
+
+            <!-- Nested form (company) -->
+            <%= f.fields_for :company, @user.company do |c| %>
+                <div class="users-companies-company-info-wrapper">
+
+                  <div class="form-group">
+                    <%= c.label :position, 'Cargo' %><br>
+                    <%= c.text_field :position, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= c.label :company_address, 'Dirección' %><br>
+                    <%= c.text_field :company_address, class: 'form-control input-width' %>
+                  </div>
+
+                </div>
+            <% end %>
+            <!-- ./Nested form (company) -->
+
+            <div class="form-group">
+              <%= f.label :mobile_phone, 'Teléfono de contacto' %><br>
+              <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :city_id, 'Ciudad' %><br>
+              <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :country_id, 'Pais' %><br>
+              <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+            </div>
+
+          </div>
+          <!-- ./Contact Info Wrapper -->
+
+          <!-- Company Info Wrapper -->
+          <div class="col-md-6">
+            <h3>
+              Información de la empresa
+            </h3>
+
+            <!-- Nested form (company) -->
+            <%= f.fields_for :company, @user.company do |c| %>
+                <div class="users-companies-company-info-wrapper">
+
+                  <div class="form-group">
+                    <%= c.label :company_name, 'Nombre de la empresa' %><br>
+                    <%= c.text_field :company_name, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= c.label :company_nit, 'NIT' %><br>
+                    <%= c.text_field :company_nit, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= c.label :company_description, 'Breve descripción de tu empresa' %><br>
+                    <%= c.text_area :company_description, rows: 5, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= c.label :company_sector_id, 'Sector' %>
+                    <%= c.select :company_sector_id, Sector.all.map { |sector| [sector.sector_name, sector.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= c.label :company_size, 'Tamaño' %><br />
+                    <%= c.select(:company_size, Company::COMPANY_SIZE, {}, { :class => 'form-control' }) %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= c.label :company_website_url, 'Página web' %><br>
+                    <%= c.text_field :company_website_url, class: 'form-control input-width' %>
+                  </div>
+
+                </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
+              <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
+            </div>
+
+            <!-- ./Nested form (company) -->
+
+          </div>
+          <!-- ./Company Info Wrapper -->
+
+        </div>
+
+        <div class="actions text-right">
+          <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
+        </div>
+
+      </div>
+
+    </div>
+<% end %>
