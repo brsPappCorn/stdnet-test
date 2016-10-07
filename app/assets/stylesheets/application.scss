@@ -119,6 +119,18 @@ body {
 
 }
 
+.table {
+  &.table-aligned-middle {
+    tr {
+      td {
+        vertical-align: middle;
+      }
+    }
+  }
+
+}
+
+
 // Select2
 .select2-container--default .select2-selection--single {
   height: 34px !important;

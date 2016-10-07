@@ -5,22 +5,30 @@
 
       <!-- Student's Photo, Name and Rating -->
       <div class="row">
-        <div class="col-md-3">
-          Foto
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-12 text-center">
           <h2>
-            <!-- # TODO: Students/show fix validation for nil? & fix error when displaying student/id when signed_in as other role -->
-            <% if @user_role.role_id == 2 %>
-                <%= @student_user.first_name %>
-                <%= @student_user.last_name %>
-            <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
-                <%= @student_user.first_name %>
-            <% end %>
+            <span class="student-avatar">
+              <% unless @student_user.student.avatar.file.nil? %>
+                  <%= image_tag aws_url(@student_user.student.avatar), class: 'img-circle' %>
+              <% end %>
+            </span>
+
+            <spa>
+              <!-- # TODO: Students/show fix validation for nil? & fix error when displaying student/id when signed_in as other role -->
+              <% if @user_role.role_id == 2 %>
+                  <%= @student_user.first_name %>
+                  <%= @student_user.last_name %>
+              <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
+                  <%= @student_user.first_name %>
+              <% end %>
+            </spa>
+
+            <span>
+              <!--
+              Calificación (maximo 4 estrellas) TODO: Students/student_display - pending for dev: Rating 'stars'
+              -->
+            </span>
           </h2>
-        </div>
-        <div class="col-md-3">
-          Calificación (maximo 4 estrellas)
         </div>
       </div>
       <!-- ./Student's Photo, Name and Rating -->
@@ -221,11 +229,14 @@
 
               </div>
 
-              <!-- TODO: Conditional needed to show info corresponding to the role of the user signed_in -->
               <div class="col-md-6">
+
+                <!-- TODO: Show a second major + university + city + country -->
+                <!--
                 <h3>
                   Otra carrera:
                 </h3>
+                -->
 
                 <!-- Education Info Table -->
                 <table class="table studNet-table">
@@ -652,7 +663,14 @@
                             </p>
                         <% end %>
 
-                        <!-- TODO: Students/student_display - Pending carrierwave integration, in the view show portfolio link for download, if student has uploaded portfolio  -->
+                        <% unless @application.portfolio.file.nil? %>
+                            <p>
+                              <strong>
+                                Portafolio
+                              </strong> <br>
+                              <%= link_to 'Descargar', aws_url(@application.portfolio), target: '_blank' %>
+                            </p>
+                        <% end %>
                       </div>
 
                     </div>
