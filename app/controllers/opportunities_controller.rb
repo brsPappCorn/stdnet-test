@@ -127,7 +127,8 @@ class OpportunitiesController < ApplicationController
         :student_characteristics,
         :student_interests,
         :student_answer,
-        :opportunity_value
+        :opportunity_value,
+        :portfolio
     )
   end
 end

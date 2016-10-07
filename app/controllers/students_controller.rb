@@ -91,6 +91,7 @@ class StudentsController < ApplicationController
                                     :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org, :volunteer_functions,
                                     :language_id, :language_level, :programming_skills, :programing_languages, :strengths, :areas_to_develop, :hobbies,
                                     :student_availability,
+                                    :avatar,
                                     tool_ids:[]
     )
   end

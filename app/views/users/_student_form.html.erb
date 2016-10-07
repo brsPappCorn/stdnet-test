@@ -1,0 +1,384 @@
+<%= form_for(@user, multipart: true) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="tab-content student-tab-content">
+      <!-- Personal Information -->
+      <div id="pane1" class="tab-pane active">
+
+        <div class="row">
+          <div class="col-md-6">
+            <h3>
+              Información Personal
+            </h3>
+
+            <!-- Personal Info Wrapper -->
+            <div class="users-personal-info-wrapper">
+              <div class="form-group">
+                <%= f.label :first_name, 'Nombre(s)' %><br>
+                <%= f.text_field :first_name, class: 'form-control input-width' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :last_name, 'Apellidos' %><br>
+                <%= f.text_field :last_name, class: 'form-control input-width' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :date_of_birth, 'Fecha de nacimiento' %><br>
+                <%= f.date_select :date_of_birth, { start_year: Time.now.year - 18, end_year: Time.now.year - 90 }, { class: 'form-control input-width' } %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :document_number, 'Documento de identidad' %><br>
+                <%= f.text_field :document_number, class: 'form-control input-width' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :mobile_phone, 'Número de contacto' %><br>
+                <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :city_id, 'Ciudad' %><br>
+                <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :country_id, 'Pais' %><br>
+                <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+              </div>
+
+              <%= f.fields_for :student, @user.student do |s| %>
+                  <div class="form-group">
+                    <%= s.label :avatar, 'Foto de perfil' %><br>
+                    <%= s.file_field :avatar, class: 'form-control input-width' %>
+                  </div>
+              <% end %>
+
+
+            </div>
+            <!-- ./Personal Info Wrapper -->
+          </div>
+
+          <div class="col-md-6">
+            <h3>
+              Educación
+            </h3>
+
+            <!-- Students: Education Info Wrapper -->
+            <div class="users-students-education-info-wrapper">
+              <!-- Nested form (student) -->
+              <%= f.fields_for :student, @user.student do |s| %>
+                  <div class="form-group">
+                    <%= s.label :university_id, 'Universidad' %>
+                    <%= s.select :university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :major_id, 'Carrera'  %>
+                    <%= s.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :ed_level_id, 'Nivel' %>
+                    <%= s.select :ed_level_id, EducationLevel.all.map { |ed_level| [ed_level.level_name, ed_level.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    Otra carrera(s):
+                    <!-- TODO: Users/Edit - Multiple select must be done. -->
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :last_semester, 'Ultimo semestre cursado:' %>
+                    <%= s.select :last_semester, Student::LAST_SEMESTER, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <!-- TODO: Users/edit - For GPA_EXTRA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store. Use this value to validate user input -->
+                  <!-- TODO: Users/edit - Use JS to get value in the gpa_extra input as the base for max value of GPA possible in the GPA input below-->
+                  <div class="form-group">
+                    <%= s.label :gpa_max, 'Calificación máxima en tu universidad' %>
+                    <%= s.number_field :gpa_max, max: 100, min: 0, class: 'form-control input-width' %>
+                  </div>
+
+                  <!-- TODO: Users/edit - For GPA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store -->
+                  <div class="form-group">
+                    <%= s.label :gpa, 'Promedio académico acumulado' %>
+                    <%= s.number_field :gpa, in: 1.0..5.0, step: 0.5, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :exchange_student, '¿Has realizado algún intercambio académico?' %><br />
+                    <select id="exchangeStudentID" name="user[student_attributes][exchange_student]" class="form-control input-width">
+                      <option value="0">
+                        No
+                      </option>
+                      <option value="1">
+                        Sí
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :country_id, 'Indica el país en el cual realizaste el intercambio' %>
+                    <%= s.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :exchange_university, 'Indica el nombre de la universidad en la cual realizaste el intercambio' %>
+                    <%= s.text_field :exchange_university, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :highschool, 'Indica el nombre del colegio del que te graduaste' %>
+                    <%= s.text_field :highschool, class: 'form-control input-width' %>
+                  </div>
+              <% end %>
+              <!-- ./Nested form (student) -->
+            </div>
+            <!-- ./Students: Education Info Wrapper -->
+
+          </div>
+        </div>
+
+      </div>
+      <!-- ./Personal Information -->
+
+      <!-- Work Experience -->
+      <div id="pane2" class="tab-pane">
+        <!-- Nested form (student) -->
+        <%= f.fields_for :student, @user.student do |s| %>
+
+            <div class="row">
+              <div class="col-md-6">
+                <h3>
+                  Experiencia Profesional
+                </h3>
+
+                <!-- Professional Experience Wrapper -->
+                <div class="users-students-professional-xp-wrapper">
+                  <div class="form-group">
+                    <%= s.label :work_xp, '¿Tienes experiencia laboral?' %><br />
+                    <!-- TODO: Users/edit - fix problem with how DB stores the values for work_xp -->
+                    <%= s.select :work_xp, options_for_select(student_work_xp_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :xp_company, 'Indica el nombre de la empresa en la que trabajaste' %>
+                    <%= s.text_field :xp_company, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :xp_position, 'Indica el nombre del cargo' %>
+                    <%= s.text_field :xp_position, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :xp_achievements, 'Indica las funciones y logros en este cargo' %>
+                    <%= s.text_area :xp_achievements, rows: 4, class: 'form-control input-width' %>
+                  </div>
+
+                  <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
+                  <button class="btn btn-primary btn-studnet-basic pull-right">
+                    Agregar otra experiencia
+                  </button>
+                </div>
+                <!-- ./Professional Experience Wrapper -->
+              </div>
+
+              <div class="col-md-6">
+                <h3>
+                  Otras experiencias
+                </h3>
+
+                <!-- Other Experience Wrapper -->
+                <div class="users-students-other-xp-wrapper">
+                  <div class="form-group">
+                    <%= s.label :volunteer_xp, '¿Realizas o has realizado una actividad social / de voluntariado?' %><br />
+                    <%= s.select :volunteer_xp, options_for_select(student_volunteer_xp_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :volunteer_org, 'Indica el nombre de la empresa en la que trabajaste' %>
+                    <%= s.text_field :volunteer_org, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :volunteer_functions, 'Indica tu cargo y tus funciones en la empresa' %>
+                    <%= s.text_area :volunteer_functions, rows: 4, class: 'form-control input-width' %>
+                  </div>
+
+                  <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
+                  <button class="btn btn-primary btn-studnet-basic pull-right">
+                    Agregar otra experiencia
+                  </button>
+                </div>
+                <!-- ./Other Experience Wrapper -->
+              </div>
+            </div>
+
+        <% end %>
+        <!-- ./Nested form (student) -->
+      </div>
+      <!-- ./Work Experience -->
+
+      <!-- Skills -->
+      <div id="pane3" class="tab-pane">
+        <!-- Nested form (student) -->
+        <%= f.fields_for :student, @user.student do |s| %>
+
+            <div class="row">
+              <div class="col-md-12">
+                <h3>
+                  Habilidades
+                </h3>
+
+                <!-- Skills Wrapper -->
+                <div class="users-students-skills-wrapper">
+                  <!-- Student Languages -->
+                  <h5>
+                    ¿Cuáles idiomas hablas?
+                  </h5>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <%= s.label :language_id, 'Idioma' %>
+                        <%= s.select :language_id, Language.all.map { |language| [language.language_name, language.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= s.label :language_level, 'Nivel' %>
+                        <%= s.select(:language_level, Student::LANGUAGE_LEVEL, {}, { :class => 'form-control' }) %>
+                      </div>
+
+                      <div class="form-group">
+                        <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
+                        <%= link_to 'Agregar otro idioma', '', class: 'btn btn-primary btn-studnet-basic' %>
+                      </div>
+
+                    </div>
+                    <!-- ./ Student Languages -->
+
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <%= s.label '¿Cuáles de estas herramientas sabes usar?' %>
+                        <%= s.collection_check_boxes :tool_ids, Tool.all, :id, :tool_name do |b| %>
+                            <div class="collection-check-box">
+                              <%= b.check_box %>
+                              <%= b.label %>
+                            </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- TODO: Users/edit Bug nested boolean (Si/No) dropdown is not working properly -->
+                  <div class="form-group">
+                    <%= s.label :programming_skills, '¿Sabes programar?' %>
+                    <select id="programmingSkillsID" name="user[student_attributes][programming_skills]" class="form-control input-width">
+                      <option value="0">
+                        No
+                      </option>
+                      <option value="1">
+                        Sí
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :programing_languages, 'Indica en qué lenguajes sabes programar' %>
+                    <%= s.text_area :programing_languages, rows: 3, class: 'form-control input-width' %>
+                  </div>
+
+                </div>
+                <!-- ./Skills Experience Wrapper -->
+              </div>
+            </div>
+
+        <% end %>
+        <!-- Nested form (student) -->
+      </div>
+      <!-- ./Skills -->
+
+      <!-- Description -->
+      <div id="pane4" class="tab-pane">
+        <!-- Nested form (student) -->
+        <%= f.fields_for :student, @user.student do |s| %>
+            <!-- Description Wrapper -->
+            <div class="users-students-skills-wrapper">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>
+                    Descripción
+                  </h3>
+
+                  <div class="form-group">
+                    <%= s.label :strengths, '¿Cuáles son tus principales fortalezas?' %>
+                    <%= s.text_area :strengths, rows: 5, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :areas_to_develop, '¿En qué áreas te gustaría desarrollar tu carrera profesional?' %>
+                    <%= s.text_area :areas_to_develop, rows: 5, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :hobbies, 'Describe brevemente tus intereses, tus hobbies y demás información que describa quien eres:' %>
+                    <%= s.text_area :hobbies, rows: 5, class: 'form-control input-width' %>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- ./Description Wrapper -->
+        <% end %>
+      </div>
+      <!-- ./Description -->
+
+      <!-- Other -->
+      <div id="pane5" class="tab-pane">
+
+        <!-- Nested form (student) -->
+        <%= f.fields_for :student, @user.student do |s| %>
+            <!-- Description Wrapper -->
+            <div class="users-students-others-wrapper">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="form-group">
+                    <%= s.label 'Cargar foto de perfil' %>
+                    <!-- TODO: Users/edit - create uploader for Student Images -->
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
+                    <%= f.select(:referenced_by, User::REFERENCES_STUDENT, {}, { :class => 'form-control' }) %>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- Description Wrapper -->
+        <% end %>
+      </div>
+      <!-- ./Other -->
+
+      <div class="actions text-right">
+        <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
+      </div>
+    </div>
+<% end %>

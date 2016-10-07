@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006143620) do
+ActiveRecord::Schema.define(version: 20161007113334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20161006143620) do
     t.integer  "opportunity_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "portfolio"
   end
 
   add_index "applications", ["opportunity_id", "user_id"], name: "index_applications_on_opportunity_id_and_user_id", using: :btree
@@ -155,6 +156,7 @@ ActiveRecord::Schema.define(version: 20161006143620) do
     t.text     "strengths"
     t.text     "areas_to_develop"
     t.text     "hobbies"
+    t.string   "avatar"
   end
 
   create_table "students_tools", id: false, force: :cascade do |t|
