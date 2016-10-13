@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007113334) do
+ActiveRecord::Schema.define(version: 20161012204524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,21 +137,21 @@ ActiveRecord::Schema.define(version: 20161007113334) do
     t.integer  "ed_level_id"
     t.string   "last_semester"
     t.float    "gpa"
-    t.boolean  "exchange_student"
+    t.integer  "exchange_student"
     t.string   "exchange_university"
     t.string   "highschool"
     t.string   "gpa_max"
     t.integer  "country_id"
-    t.boolean  "work_xp"
+    t.integer  "work_xp"
     t.string   "xp_company"
     t.text     "xp_position"
     t.text     "xp_achievements"
-    t.boolean  "volunteer_xp"
+    t.integer  "volunteer_xp"
     t.string   "volunteer_org"
     t.text     "volunteer_functions"
     t.integer  "language_id"
     t.string   "language_level"
-    t.boolean  "programming_skills"
+    t.integer  "programming_skills"
     t.text     "programing_languages"
     t.text     "strengths"
     t.text     "areas_to_develop"
