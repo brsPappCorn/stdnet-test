@@ -85,7 +85,121 @@
 
 
 <script type="text/javascript">
-  // Student
+
+  //=======================
+  // Display/Hide options
+  //=======================
+
+  $(function() {
+
+    select_value = [];
+
+    // Variables
+    current_exchange_student_val = <%= @user.student.exchange_student.to_i %>
+    current_work_xp_val = <%= @user.student.work_xp.to_i %>
+    current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>
+    current_programming_skills_val = <%= @user.student.programming_skills.to_i %>
+
+
+    // Function for exchange_student Select
+    if ( current_exchange_student_val == 1 ) {
+      $('.exchangeStudent').show();
+    } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
+      $('.exchangeStudent').hide();
+    }
+
+    function displayExchangeStudent() {
+      $('#user_student_attributes_exchange_student').change(function(){
+        if ( $('#user_student_attributes_exchange_student').val() == 1 ) {
+          $('.exchangeStudent').show();
+        } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
+          $('.exchangeStudent').hide();
+        }
+
+      });
+
+      $('#user_student_attributes_exchange_student').val();
+
+    }
+
+    // Function for work_xp Select
+    if ( current_work_xp_val == 1 ) {
+      $('.workXp').show();
+    } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
+      $('.workXp').hide();
+    }
+
+    function displayWorkXp() {
+      $('#user_student_attributes_work_xp').change(function(){
+        if ( $('#user_student_attributes_work_xp').val() == 1 ) {
+          $('.workXp').show();
+        } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
+          $('.workXp').hide();
+        }
+
+      });
+
+      $('#user_student_attributes_work_xp').val();
+
+    }
+
+
+    // Function for volunteer_xp Select
+    if ( current_volunteer_xp_val == 1 ) {
+      $('.volunteerXp').show();
+    } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
+      $('.volunteerXp').hide();
+    }
+
+    function displayVolunteerXp() {
+      $('#user_student_attributes_volunteer_xp').change(function(){
+        if ( $('#user_student_attributes_volunteer_xp').val() == 1 ) {
+          $('.volunteerXp').show();
+        } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
+          $('.volunteerXp').hide();
+        }
+
+      });
+
+      $('#user_student_attributes_volunteer_xp').val();
+
+    }
+
+    // Function for programming_languages Select
+    if ( current_programming_skills_val == 1 ) {
+      $('#programmingLanguages').show();
+    } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
+      $('#programmingLanguages').hide();
+    }
+
+    function displayProgrammingLanguages() {
+      $('#user_student_attributes_programming_skills').change(function(){
+        if ( $('#user_student_attributes_programming_skills').val() == 1 ) {
+          $('#programmingLanguages').show();
+        } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
+          $('#programmingLanguages').hide();
+        }
+
+      });
+
+      $('#user_student_attributes_programming_skills').val();
+
+    }
+
+    // Call functions
+    displayExchangeStudent();
+    displayWorkXp();
+    displayVolunteerXp();
+    displayProgrammingLanguages();
+
+  });
+
+
+  //=======================
+  // Select2
+  //=======================
+
+  /* Student */
   $('#user_student_attributes_university_id').select2();
   $('#user_student_attributes_major_id').select2();
   $('#user_student_attributes_ed_level_id').select2();
@@ -104,7 +218,7 @@
 
   $('#user_referenced_by').select2();
 
-  // Company
+  /* Company */
   $('#user_company_attributes_company_sector_id').select2();
   $('#user_company_attributes_company_size').select2();
 

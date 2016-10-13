@@ -114,27 +114,20 @@
                   <!-- TODO: Users/edit - For GPA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store -->
                   <div class="form-group">
                     <%= s.label :gpa, 'Promedio académico acumulado' %>
-                    <%= s.number_field :gpa, in: 1.0..5.0, step: 0.5, class: 'form-control input-width' %>
+                    <%= s.number_field :gpa, in: 1.0..5.0, step: 0.1, class: 'form-control input-width' %>
                   </div>
 
                   <div class="form-group">
                     <%= s.label :exchange_student, '¿Has realizado algún intercambio académico?' %><br />
-                    <select id="exchangeStudentID" name="user[student_attributes][exchange_student]" class="form-control input-width">
-                      <option value="0">
-                        No
-                      </option>
-                      <option value="1">
-                        Sí
-                      </option>
-                    </select>
+                    <%= s.select :exchange_student, options_for_select(student_yes_no_select_type, @user.student.exchange_student), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group exchangeStudent">
                     <%= s.label :country_id, 'Indica el país en el cual realizaste el intercambio' %>
                     <%= s.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group exchangeStudent">
                     <%= s.label :exchange_university, 'Indica el nombre de la universidad en la cual realizaste el intercambio' %>
                     <%= s.text_field :exchange_university, class: 'form-control input-width' %>
                   </div>
@@ -170,20 +163,20 @@
                   <div class="form-group">
                     <%= s.label :work_xp, '¿Tienes experiencia laboral?' %><br />
                     <!-- TODO: Users/edit - fix problem with how DB stores the values for work_xp -->
-                    <%= s.select :work_xp, options_for_select(student_work_xp_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                    <%= s.select :work_xp, options_for_select(student_yes_no_select_type, @user.student.work_xp), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group workXp">
                     <%= s.label :xp_company, 'Indica el nombre de la empresa en la que trabajaste' %>
                     <%= s.text_field :xp_company, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group workXp">
                     <%= s.label :xp_position, 'Indica el nombre del cargo' %>
                     <%= s.text_field :xp_position, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group workXp">
                     <%= s.label :xp_achievements, 'Indica las funciones y logros en este cargo' %>
                     <%= s.text_area :xp_achievements, rows: 4, class: 'form-control input-width' %>
                   </div>
@@ -205,16 +198,16 @@
                 <div class="users-students-other-xp-wrapper">
                   <div class="form-group">
                     <%= s.label :volunteer_xp, '¿Realizas o has realizado una actividad social / de voluntariado?' %><br />
-                    <%= s.select :volunteer_xp, options_for_select(student_volunteer_xp_select_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                    <%= s.select :volunteer_xp, options_for_select(student_yes_no_select_type, @user.student.volunteer_xp), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
 
                   </div>
 
-                  <div class="form-group">
-                    <%= s.label :volunteer_org, 'Indica el nombre de la empresa en la que trabajaste' %>
+                  <div class="form-group volunteerXp">
+                    <%= s.label :volunteer_org, 'Indica el nombre de la organización en la que trabajaste' %>
                     <%= s.text_field :volunteer_org, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group volunteerXp">
                     <%= s.label :volunteer_functions, 'Indica tu cargo y tus funciones en la empresa' %>
                     <%= s.text_area :volunteer_functions, rows: 4, class: 'form-control input-width' %>
                   </div>
@@ -285,21 +278,12 @@
                     </div>
                   </div>
 
-
-                  <!-- TODO: Users/edit Bug nested boolean (Si/No) dropdown is not working properly -->
                   <div class="form-group">
                     <%= s.label :programming_skills, '¿Sabes programar?' %>
-                    <select id="programmingSkillsID" name="user[student_attributes][programming_skills]" class="form-control input-width">
-                      <option value="0">
-                        No
-                      </option>
-                      <option value="1">
-                        Sí
-                      </option>
-                    </select>
+                    <%= s.select :programming_skills, options_for_select(student_yes_no_select_type, @user.student.programming_skills), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group" id="programmingLanguages">
                     <%= s.label :programing_languages, 'Indica en qué lenguajes sabes programar' %>
                     <%= s.text_area :programing_languages, rows: 3, class: 'form-control input-width' %>
                   </div>
@@ -377,7 +361,7 @@
       </div>
       <!-- ./Other -->
 
-      <div class="actions text-right">
+      <div class="actions actions-margin-top text-right">
         <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
       </div>
     </div>

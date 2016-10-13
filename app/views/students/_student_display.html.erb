@@ -280,35 +280,37 @@
                 <!-- ./Education Info Table -->
 
                 <!--  Exchange Info Table-->
-                <h3>
-                  Intercambio académico:
-                </h3>
+                <% unless @student_user.student.exchange_student == 0 %>
+                    <h3>
+                      Intercambio académico:
+                    </h3>
 
-                <table class="table studNet-table">
-                  <tbody>
+                    <table class="table studNet-table">
+                      <tbody>
 
-                  <tr>
-                    <td>
-                      Pais de intercambio:
-                    </td>
-                    <td>
-                      <% unless @student_user.student.country_id.nil? %>
-                          <%= @student_user.student.country.country_name %>
-                      <% end %>
-                    </td>
-                  </tr>
+                      <tr>
+                        <td>
+                          Pais de intercambio:
+                        </td>
+                        <td>
+                          <% unless @student_user.student.country_id.nil? %>
+                              <%= @student_user.student.country.country_name %>
+                          <% end %>
+                        </td>
+                      </tr>
 
-                  <tr>
-                    <td>
-                      Universidad de intercambio:
-                    </td>
-                    <td>
-                      <%= @student_user.student.exchange_university %>
-                    </td>
-                  </tr>
+                      <tr>
+                        <td>
+                          Universidad de intercambio:
+                        </td>
+                        <td>
+                          <%= @student_user.student.exchange_university %>
+                        </td>
+                      </tr>
 
-                  </tbody>
-                </table>
+                      </tbody>
+                    </table>
+                <% end %>
                 <!--  Exchange Info Table-->
               </div>
             </div>
@@ -326,50 +328,42 @@
 
 
                 <div class="student-work-outside-studnet">
-
-                  <% unless @student_user.student.work_xp == false %>
-                      <%# TODO: Make conditional to show work xp if student answered yes to the question %>
-                  <% end %>
-
-                  <% unless @student_user.student.volunteer_xp == false %>
-                      <%# TODO: Make conditional to show volunteer xp if student answered yes to the question %>
-                  <% end %>
-
                   <!-- Professional XP -->
 
-                  <div class="row">
-                    <div class="col-md-6 student-xp-title">
-                      <h3>
-                        Experiencia profesional
-                      </h3>
-                    </div>
-                  </div>
+                  <% unless @student_user.student.work_xp == 0 %>
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title">
+                          <h3>
+                            Experiencia profesional
+                          </h3>
+                        </div>
+                      </div>
 
-                  <div class="row">
-                    <div class="col-md-6 student-xp-title">
-                      <h4>
-                        <%= @student_user.student.xp_position %>
-                      </h4>
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title">
+                          <h4>
+                            <%= @student_user.student.xp_position %>
+                          </h4>
 
-                      <h5>
-                        <%= @student_user.student.xp_company %>
-                      </h5>
-                    </div>
-                  </div>
+                          <h5>
+                            <%= @student_user.student.xp_company %>
+                          </h5>
+                        </div>
+                      </div>
 
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <p>
-                        Funciones y logros
-                        <br>
-                        <!-- TODO: Students/new - create new column in Student for student.xp_functions -->
-                        <%= @student_user.student.xp_achievements %>
-                        <br>
-                      </p>
-                    </div>
-                  </div>
-
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p>
+                            Funciones y logros
+                            <br>
+                            <!-- TODO: Students/new - create new column in Student for student.xp_functions -->
+                            <%= @student_user.student.xp_achievements %>
+                            <br>
+                          </p>
+                        </div>
+                      </div>
+                  <% end %>
                   <!-- Professional XP -->
 
                   <!-- Other Activities XP -->
@@ -384,15 +378,21 @@
 
                   <div class="row">
                     <div class="col-md-12">
-                      <p>
-                        Nombre de la empresa:
-                        <%= @student_user.student.volunteer_org %>
-                        <br>
+                      <% if @student_user.student.volunteer_xp == 0 %>
+                          <p>
+                            No cuenta con experiencia disponible.
+                          </p>
+                      <% else %>
+                          <p>
+                            Nombre de la empresa:
+                            <%= @student_user.student.volunteer_org %>
+                            <br>
 
-                        Cargo:
-                        <%= @student_user.student.volunteer_functions %>
-                        <br>
-                      </p>
+                            Cargo:
+                            <%= @student_user.student.volunteer_functions %>
+                            <br>
+                          </p>
+                      <% end %>
                     </div>
                   </div>
 
@@ -490,37 +490,25 @@
                 </div>
 
                 <!-- Student Programming Skills/Languages -->
-                <%# TODO: Students/Show - Make conditional validation to display programming section %>
-                <div class="row">
-                  <div class="col-md-12">
-
+                <% unless @student_user.student.programming_skills == 0 %>
                     <div class="row">
-                      <div class="col-md-6 student-xp-title">
-                        <h3>
-                          Lenguajes de programación
-                        </h3>
+                      <div class="col-md-12">
+
+                        <div class="row">
+                          <div class="col-md-6 student-xp-title">
+                            <h3>
+                              Lenguajes de programación
+                            </h3>
+                          </div>
+                        </div>
+
+                        <p>
+                          <%= @student_user.student.programing_languages %>
+                        </p>
+
                       </div>
                     </div>
-
-                    <p>
-                      <% unless @student_user.student.programming_skills == false %>
-                          <%# TODO: Make conditional to display programming skills if student answered yes to the question %>
-                      <% end %>
-
-                      ¿Sabes programar?:
-                      <% if @student_user.student.programming_skills == true  %>
-                          <%= 'Sí' %>
-                      <% else %>
-                          <%= 'No' %>
-                      <% end %>
-                      <br>
-
-                      <%= @student_user.student.programing_languages %>
-
-                    </p>
-
-                  </div>
-                </div>
+                <% end %>
                 <!-- ./Student Programming Skills/Languages -->
               </div>
             </div>
@@ -592,15 +580,9 @@
 
                 <h3>
                   Otros
-                  <%= link_to edit_user_path(current_user.id) do |link| %>
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                  <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
                 </h3>
 
                 <p>
-                  <!-- TODO: Students/show - Upload User image must be done later -->
-                  1) Foto <br><br>
-
                   Como te enteraste de studNet?:
                   <%= @student_user.referenced_by %>
                 </p>

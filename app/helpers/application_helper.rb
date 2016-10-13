@@ -21,6 +21,7 @@ module ApplicationHelper
     user = User.find_by_id(current_user.id)
     unless user.date_of_birth.nil?
       Date.today.year - user.date_of_birth.year
+      # TODO: usar time_ago para la edad del estudiante
     end
   end
 
