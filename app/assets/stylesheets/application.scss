@@ -144,6 +144,10 @@ body {
   width: 100% !important;
 }
 
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #9a9a9a !important;
+}
+
 // Flash Messages
 .alert {
   //margin-top: 22px;
@@ -460,6 +464,13 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
 
   }
 
+}
+
+// Other devise classes
+.devise-links-color {
+  a {
+    color: white;
+  }
 }
 
 // ================

@@ -29,6 +29,4 @@ module ApplicationHelper
     "https://s3.amazonaws.com/#{ENV['AWS_BUCKET_NAME']}/#{image.file.path}"
   end
 
-
-
 end

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # =========================
   devise_for :users, path: '', path_names: {
       sign_in: 'ingreso', sign_up: 'registro'
+  }, controllers: {
+      registrations: 'users/registrations'
   }
 
   devise_for :administrators, path: '', path_names: {

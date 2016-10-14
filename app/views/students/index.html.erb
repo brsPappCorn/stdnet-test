@@ -22,7 +22,6 @@
           <tbody>
           <% @students.each do |student| %>
               <tr>
-                <!-- TODO: Students/index - Make nil? validation or use is_attribute_nil? method (The method needs to be created) -->
                 <td><%= student.user_id %></td>
                 <td><%= student.user.email %></td>
                 <td><%= student.id %></td>

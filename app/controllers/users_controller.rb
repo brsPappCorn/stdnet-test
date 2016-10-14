@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :basic_info]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
     if administrator_signed_in?
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_to root_path
   end
 
   def new
@@ -60,15 +61,6 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
-
-  # ===================
-  # Custom Actions
-  # ===================
-
-  # Updates student basic info needed to show info in the student profile. Is the next step after devise(User) sign up.
-  def basic_info
-  end
-
 
   private
   # Use callbacks to share common setup or constraints between actions.

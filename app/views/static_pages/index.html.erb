@@ -43,31 +43,19 @@
       <div class="col-md-12">
 
         <h3>
-          Encuentra a tu estudiante ideal con studNet
+          Registro:
         </h3>
-
-        <p>
-          studNet es la red que conecta a empresas y personas con estudiantes universitarios para el desarrollo de proyectos, prácticas y trabajos. A través de nuestra plataforma, las empresas y personas pueden encontrar de forma rápida y fácil estudiantes y recién egresados de diversas universidades, carreras, conocimientos y experiencias.
-        </p>
-
-        <p>
-          ¿Aún no estás registrado? Regístrate gratis haciendo click a continuación:
-        </p>
 
       </div>
     </div>
 
     <div class="row margin-top-20">
       <!-- Index Student SignUp -->
-      <div class="col-md-4">
+      <div class="col-md-6">
         <%= image_tag 'estudiantes.jpg', alt: 'studNet | Estudiantes', class: '' %>
         <h4>
           Estudiantes
         </h4>
-
-        <p class="index-signup-p">
-          Crea tu perfil con tu universidad, carrera, habilidades y experiencias. Aplica a tus ofertas favoritas de proyectos, prácticas y trabajos
-        </p>
 
         <p>
           <%= link_to 'Registrarse', new_user_registration_path(studnet: 2), class: 'btn btn-primary btn-studnet-basic' %>
@@ -76,15 +64,11 @@
       <!-- ./Index Student SignUp -->
 
       <!-- Index Company SignUp -->
-      <div class="col-md-4">
+      <div class="col-md-6">
         <%= image_tag 'empresas.jpg', alt: 'studNet | Empresas', class: '' %>
         <h4>
-          Empresas
+          Empresas / Personas
         </h4>
-
-        <p class="index-signup-p">
-          Publica tus ofertas de proyectos, prácticas y trabajos para estudiantes universitarios y recién egresados. Recibe aplicaciones y selecciona al candidato ideal
-        </p>
 
         <p>
           <%= link_to 'Registrarse', new_user_registration_path(studnet: 3), class: 'btn btn-primary btn-studnet-basic' %>
@@ -92,22 +76,6 @@
       </div>
       <!-- ./Index Company SignUp -->
 
-      <!-- Index Person SignUp -->
-      <div class="col-md-4">
-        <%= image_tag 'personas.jpg', alt: 'studNet | Personas', class: '' %>
-        <h4>
-          Personas
-        </h4>
-
-        <p class="index-signup-p">
-          ¿Necesitas una traducción, diseñar un logo, una página web, hacer encuestas, investigaciones o resúmenes? Publica tu oferta y selecciona al candidato ideal
-        </p>
-
-        <p>
-          <%= link_to 'Registrarse', new_user_registration_path(studnet: 4), class: 'btn btn-primary btn-studnet-basic' %>
-        </p>
-      </div>
-      <!-- ./Index Person SignUp -->
     </div>
 
   </div>

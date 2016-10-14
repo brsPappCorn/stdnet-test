@@ -15,7 +15,7 @@ module OpportunitiesHelper
     if opportunity.opportunity_type == 0
       'Proyecto virtual'
     elsif opportunity.opportunity_type == 1
-      'Proyecto personal'
+      'Proyecto presencial'
     elsif opportunity.opportunity_type == 2
       'Práctica'
     else
