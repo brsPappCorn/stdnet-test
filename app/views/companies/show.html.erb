@@ -1,5 +1,3 @@
-<!--<p id="notice"><%= notice %></p>-->
-
 <section class="studNet-wrapper student-tab-wrapper">
   <div class="container">
 
@@ -132,7 +130,6 @@
                 </td>
                 <td>
                   <% unless @company.company_sector_id.nil? %>
-                      <%#= TODO: Company/show - Fix nil:NilClass error %>
                       <%= @company.sector.sector_name %>
                   <% end %>
                 </td>

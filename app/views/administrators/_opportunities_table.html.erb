@@ -46,7 +46,6 @@
           <%= opportunity_availability_friendly(opportunity) %>
         </td>
         <td>
-          <%# TODO: Make conditional to show opportunity_cost if there is one, if company selected 'student can make an offer' then show 'Permite ofertar'  %>
           <% if opportunity.opportunity_cost.nil? %>
               <%= 'Se permite ofertar' %>
           <% else %>

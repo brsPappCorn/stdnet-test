@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   # Root
   # =========================
   root to: 'static_pages#index'
-  # TODO: Make root point to Student, Company or User /show, depending on user role
 
   # =========================
   # Devise

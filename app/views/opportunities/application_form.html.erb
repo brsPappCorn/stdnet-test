@@ -1,5 +1,3 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <section class="studNet-wrapper student-tab-wrapper opportunity-wrapper">
   <div class="container">
 
@@ -48,7 +46,6 @@
 
                 <% if @opportunity.cost_or_offer_option.to_i == 1 %>
                     <div class="form-group">
-                      <%# TODO: opportunities/application_form - check to see how this works when company selects the option when creating the opportunity %>
                       <% unless @opportunity.opportunity_cost.nil? %>
                           <%= f.label :opportunity_value, 'Valor del proyecto' %>
                           <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>

@@ -24,11 +24,6 @@ module ApplicationHelper
     end
   end
 
-  # Method to verify if an attribute is nil?
-  def is_attribute_nil?(attribute)
-    # TODO: application_helper - write is_attribute_nil? method. Needed to refactor students/show view (too many unless blocks)
-  end
-
   # Method for AWS file path
   def aws_url(image)
     "https://s3.amazonaws.com/#{ENV['AWS_BUCKET_NAME']}/#{image.file.path}"
