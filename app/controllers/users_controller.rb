@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :basic_info]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
     if administrator_signed_in?
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_to root_path
   end
 
   def new
@@ -25,11 +26,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'La cuenta fue creada exitosamente.' }
-        format.json { render :show, status: :created, location: @user }
+        flash[:success] = 'La cuenta fue creada exitosamente.'
+        format.html { redirect_to @user }
       else
+        flash[:error] = 'La cuenta no pudo ser creada, por favor intentarlo nuevamente.'
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -39,8 +40,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to root_path, notice: 'El perfil fue actualizado exitosamente.' }
+        flash[:success] = 'La cuenta fue actualizada exitosamente.'
+        format.html { redirect_to root_path }
       else
+        flash[:error] = 'La cuenta no pudo ser actualizada, por favor intentarlo nuevamente.'
         format.html { render :edit }
       end
     end
@@ -50,22 +53,14 @@ class UsersController < ApplicationController
     if administrator_signed_in?
       @user.destroy
       respond_to do |format|
-        format.html { redirect_to users_url, notice: 'El usuario fue eliminado exitosamente.' }
-        format.json { head :no_content }
+        flash[:success] = 'La cuenta fue eliminada exitosamente.'
+        format.html { redirect_to users_url }
       end
     else
+      flash[:error] = 'La cuenta no pudo ser eliminada, por favor intentarlo nuevamente.'
       redirect_to root_path
     end
   end
-
-  # ===================
-  # Custom Actions
-  # ===================
-
-  # Updates student basic info needed to show info in the student profile. Is the next step after devise(User) sign up.
-  def basic_info
-  end
-
 
   private
   # Use callbacks to share common setup or constraints between actions.

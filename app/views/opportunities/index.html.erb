@@ -1,5 +1,3 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <section class="studNet-wrapper">
   <div class="container">
 
@@ -60,7 +58,6 @@
                       <%= opportunity_availability_friendly(opportunity) %>
                     </td>
                     <td>
-                      <%# TODO: Make conditional to show opportunity_cost if there is one, if company selected 'student can make an offer' then show 'Permite ofertar'  %>
                       <% if opportunity.opportunity_cost.nil? %>
                           <%= 'Se permite ofertar' %>
                       <% else %>
@@ -79,23 +76,23 @@
     </div>
     <!-- ./List of opportunities that apply to me -->
 
+
     <!-- Companiy/Person Actions -->
-    <% if @user_role.role_id == 3 || @user_role.role_id == 4 %>
+    <% if user_signed_in? && (@user_role.role_id == 3 || @user_role.role_id == 4) %>
         <div class="row">
           <div class="col-md-12 text-center">
-            <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
             <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
           </div>
         </div>
-    <% elsif @user_role.role_id == 2 %>
+    <% elsif user_signed_in? && @user_role.role_id == 2 %>
         <div class="row">
           <div class="col-md-12 text-center">
-            <% #TODO: Opportunities/show - cancan | only Company/Person can create a new opportunity %>
             <%= link_to 'Ver mis ofertas', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studnet' %>
           </div>
         </div>
     <% end %>
     <!-- ./Companiy/Person Actions -->
+
 
     <!-- List of all opportunities -->
     <div class="row">
@@ -154,17 +151,12 @@
                       <%= opportunity_availability_friendly(opportunity) %>
                     </td>
                     <td>
-                      <%# TODO: Make conditional to show opportunity_cost if there is one, if company selected 'student can make an offer' then show 'Permite ofertar'  %>
                       <% if opportunity.opportunity_cost.nil? %>
                           <%= 'Se permite ofertar' %>
                       <% else %>
                           <%= opportunity.opportunity_cost %>
                       <% end %>
                     </td>
-                    <!-- TODO: Opportunities/index - cancan | Student can only view offers that match their Major(s) or that are open for all Majors -->
-                    <td><%#= link_to 'Detalles', opportunity_path(opportunity) %></td>
-                    <!-- TODO: Opportunities/indexs - make 'Aplicar' work -->
-                    <td><%#= link_to 'Aplicar', apply_opportunity_path(opportunity) %></td>
 
                   </tr>
               <% end %>

@@ -103,7 +103,7 @@
                     <%= s.select :last_semester, Student::LAST_SEMESTER, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
-                  <!-- TODO: Users/edit - For GPA_EXTRA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store. Use this value to validate user input -->
+                  <!-- TODO: Users/edit - For GPA_EXTRA input, validate max value posible. Use JS on the front-end as well to restrict what the type of info the user can store. Use this to validate user input -->
                   <!-- TODO: Users/edit - Use JS to get value in the gpa_extra input as the base for max value of GPA possible in the GPA input below-->
                   <div class="form-group">
                     <%= s.label :gpa_max, 'Calificación máxima en tu universidad' %>
@@ -342,11 +342,6 @@
             <div class="users-students-others-wrapper">
               <div class="row">
                 <div class="col-md-12">
-
-                  <div class="form-group">
-                    <%= s.label 'Cargar foto de perfil' %>
-                    <!-- TODO: Users/edit - create uploader for Student Images -->
-                  </div>
 
                   <div class="form-group">
                     <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />

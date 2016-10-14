@@ -39,12 +39,11 @@
           </h5>
           <%= f.check_box :other_majors, class: 'checkbox-inline input-width' %>
           <%= f.label :other_majors, 'Sí' %><br>
-          <!-- TODO: Opportunities/form. Generate Yes/No question. if Yes: all students can apply. if No: only specified majors can apply -->
         </div>
 
         <div class="form-group" id="opportunitySpecificMajor">
           <%= f.label :major_id, 'Carrera'  %>
-          <%= f.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %> <!-- TODO: Add multiple:true -->
+          <%= f.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
         </div>
 
         <div class="form-group">
@@ -82,7 +81,7 @@
         </div>
         <div class="form-group" id="opportunityCost">
           <%= f.label :opportunity_cost, 'Salario / Valor del proyecto' %><br>
-          <%= f.number_field :opportunity_cost, class: 'form-control input-width' %>
+          <%= f.text_field :opportunity_cost, class: 'form-control input-width' %>
         </div>
         <div class="form-group">
           <h5>
@@ -109,7 +108,6 @@
     </div>
 
     <div class="actions">
-      <!-- TODO: Opportunity/_form make button text conditional depending on the path -->
       <% if current_page?(new_opportunity_path) %>
           <%= f.submit 'Crear oferta', class: 'btn btn-primary btn-studnet-basic' %>
       <% else %>

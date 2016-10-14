@@ -2,23 +2,19 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
-    <!-- TODO: Registration/new - select roleID will be reused for student / opportunity application availability select -->
-    <!--
-          <div class="form-group">
-            <%= f.label :role_id, 'Selecciona el tipo de cuenta' %><br />
-            <select id="roleID" name="user[role_id]" class="form-control input-width">
-              <option value=2>
-                Estudiante
-              </option>
-              <option value=3>
-                Empresa
-              </option>
-              <option value=4>
-                Persona
-              </option>
-            </select>
-          </div>
-          -->
+    <% if current_page?(new_user_registration_path(studnet: 3)) || current_page?(new_user_registration_path(studnet: 4)) %>
+        <div class="form-group">
+          <%= f.label :role_id, 'Selecciona el tipo de cuenta' %><br />
+          <select id="roleID" name="user[role_id]" class="form-control input-width">
+            <option value=3>
+              Empresa
+            </option>
+            <option value=4>
+              Persona
+            </option>
+          </select>
+        </div>
+    <% end %>
 
     <!-- User Information -->
     <div class="form-group">
@@ -58,24 +54,26 @@
 
     <!-- Company Information -->
     <% if params[:studnet].to_i == 3 %>
-        <div class="form-group devise-company-info" id="deviseCompanySignUp">
-          <%= f.fields_for :company, resource.build_company do |c| %>
-              <%= c.label :company_name, 'Nombre de la empresa'  %>
-              <%= c.text_field :company_name, class: 'form-control input-width' %>
-          <% end %>
-        </div>
     <% end %>
+
+    <div class="form-group devise-company-info" id="deviseCompanySignUp">
+      <%= f.fields_for :company, resource.build_company do |c| %>
+          <%= c.label :company_name, 'Nombre de la empresa'  %>
+          <%= c.text_field :company_name, class: 'form-control input-width' %>
+      <% end %>
+    </div>
     <!-- ./Company Information -->
 
     <!-- Person Information -->
     <% if params[:studnet].to_i == 4 %>
-        <div class="form-group devise-person-info" id="devisePersonSignUp">
-          <%= f.fields_for :person, resource.build_person do |p| %>
-              <%= p.label :occupation, 'Ocupación'  %>
-              <%= p.text_field :occupation, class: 'form-control input-width' %>
-          <% end %>
-        </div>
     <% end %>
+
+    <div class="form-group devise-person-info" id="devisePersonSignUp">
+      <%= f.fields_for :person, resource.build_person do |p| %>
+          <%= p.label :occupation, 'Ocupación'  %>
+          <%= p.text_field :occupation, class: 'form-control input-width' %>
+      <% end %>
+    </div>
     <!-- ./Person Information -->
 
     <!-- TODO: Registrations/New - once we have defined how this will work, inputs will be displayed -->
@@ -103,6 +101,86 @@
 <!-- Form -->
 
 <script type="text/javascript">
+
+  //=======================
+  // Display/Hide options
+  //=======================
+
+  $(function() {
+    // Variables
+    select_value = [];
+
+    current_params_role_id_val = <%= params[:studnet].to_i %>;
+
+    // Function to display company additional information
+    if ( current_params_role_id_val == 2 ) {
+      $('.devise-student-info').show();
+      $('.devise-company-info').hide();
+      $('.devise-person-info').hide();
+    } else if ( current_params_role_id_val == 3 ) {
+      $('.devise-student-info').hide();
+      $('.devise-company-info').show();
+      $('.devise-person-info').hide();
+    } else if ( current_params_role_id_val == 4 ) {
+      $('.devise-student-info').hide();
+      $('.devise-company-info').hide();
+      $('.devise-person-info').show();
+    }
+
+    function displayCompanyAdditionalInfo() {
+      $('#roleID').change(function(){
+        if ( $('#roleID').val() == 3 ) {
+          $('#deviseCompanySignUp').show();
+        } else {
+          $('#deviseCompanySignUp').hide();
+        }
+
+        // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
+        select_value =  $('#roleID').val();
+        roleID_value =  $('#user_role_id').attr('value', select_value);
+
+      });
+
+      $('#roleID').val();
+
+    }
+
+    // Function to display person additional information
+    if ( current_params_role_id_val == 4 ) {
+      $('#devisePersonSignUp').show();
+      $("#roleID option[value='4']").prop('selected', true);
+    } else {
+      $('#devisePersonSignUp').hide();
+    }
+
+
+    function displayPersonAdditionalInfo() {
+      $('#roleID').change(function(){
+        if ( $('#roleID').val() == 4 ) {
+          $('#devisePersonSignUp').show();
+        } else {
+          $('#devisePersonSignUp').hide();
+        }
+
+        // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
+        select_value =  $('#roleID').val();
+        roleID_value =  $('#user_role_id').attr('value', select_value);
+
+      });
+
+      $('#roleID').val();
+
+    }
+
+
+    // Calling Functions
+    displayCompanyAdditionalInfo();
+    displayPersonAdditionalInfo();
+
+  });
+
+
+
   // Student
   $('#user_student_attributes_university_id').select2();
   $('#user_student_attributes_major_id').select2();

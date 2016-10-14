@@ -36,9 +36,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice">
-  <%= notice %> <!-- TODO: Application.html.erb - change notice for flash messages -->
-</p>
+<%= render partial: 'shared/flash', locals: { flash: flash } %>
 
 <header>
   <%= render 'layouts/navbar' %>
@@ -50,13 +48,10 @@
   <%= render 'layouts/footer' %>
 </footer>
 
-<% console %> <!-- TODO: Remove web console for production -->
+<%# console %> <!-- TODO: Remove web console for production -->
 
 <!-- Google Analytics -->
 <!-- TODO: Insert google analytics code -->
-
-<!-- Social Media -->
-<!-- TODO: Insert social media share buttons -->
 
 </body>
 </html>

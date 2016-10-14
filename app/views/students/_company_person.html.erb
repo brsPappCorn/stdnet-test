@@ -10,7 +10,6 @@
         </div>
         <div class="col-md-6">
           <h2>
-            <!-- # TODO: Students/show fix validation for nil? & fix error when displaying student/id when signed_in as other role -->
             <%= "#{@student.user.first_name} #{@student.user.last_name}" %>
           </h2>
         </div>
@@ -128,11 +127,9 @@
                       Edad:
                     </td>
                     <td>
-                      <!-- TODO: Students/Show - only companies will see this info -->
                       <% unless @student.user.date_of_birth.nil?  %>
                           <%= "#{user_age} años." %>
                       <% end %>
-                      <!-- TODO: Students/Show - only companies will see this info -->
                     </td>
                   </tr>
 
@@ -167,7 +164,6 @@
                     </td>
                   </tr>
 
-                  <!-- TODO: Students/Show - only companies will see this info -->
                   <tr>
                     <td>
                       Número de documento:
@@ -185,14 +181,12 @@
                       <%= @user.mobile_phone %>
                     </td>
                   </tr>
-                  <!-- TODO: Students/Show - only companies will see this info -->
                   </tbody>
                 </table>
                 <!-- ./Personal Info Table -->
 
               </div>
 
-              <!-- TODO: Conditional needed to show info corresponding to the role of the user signed_in -->
               <div class="col-md-6">
                 <h3>
                   Otra carrera:
@@ -202,7 +196,7 @@
                 <table class="table studNet-table">
                   <tbody>
 
-                  <!--  TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major
+                  <!--
                     <tr>
                       <td>
                         Carrera:
@@ -233,7 +227,7 @@
                         <% end %>
                       </td>
                     </tr>
-                    TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major -->
+                     -->
 
                   </tbody>
                 </table>
@@ -288,11 +282,11 @@
                 <div class="student-work-outside-studnet">
 
                   <% unless @student.work_xp == false %>
-                      <%# TODO: Make conditional to show work xp if student answered yes to the question %>
+                      <%#  %>
                   <% end %>
 
                   <% unless @student.volunteer_xp == false %>
-                      <%# TODO: Make conditional to show volunteer xp if student answered yes to the question %>
+                      <%#  %>
                   <% end %>
 
                   <!-- Professional XP -->
@@ -323,7 +317,7 @@
                       <p>
                         Funciones y logros
                         <br>
-                        <!-- TODO: Students/new - create new column in Student for student.xp_functions -->
+                        <!--  -->
                         <%= @student.xp_achievements %>
                         <br>
                       </p>
@@ -373,11 +367,11 @@
                   <div class="col-md-12">
                     <p>
                       Título del proyecto (oferta):
-                      <%#= @student.volunteer_org TODO: Students/show - show opportunity title applied by the student %>
+                      <%#= @student.volunteer_org  %>
                       <br>
 
                       Descripción del proyecto:
-                      <%#= @student.volunteer_functions TODO: Students/show - show opportunity description applied by the student %>
+                      <%#= @student.volunteer_functions  %>
                       <br>
                     </p>
                   </div>
@@ -398,14 +392,13 @@
 
                 <div class="row">
                   <!-- Student Languages -->
-                  <%# TODO: Students/Show - Make conditional validation to display languages section %>
+                  <%#  %>
                   <div class="users-students-skills-languages-wrapper student-xp-title">
                     <div class="col-md-6">
                       <h3>
                         Idiomas
                       </h3>
 
-                      <!-- TODO: Students/show - fix languages to create more than one language and show them here -->
                       <table class="table studNet-table">
                         <tbody>
                         <tr>
@@ -450,7 +443,6 @@
                 </div>
 
                 <!-- Student Programming Skills/Languages -->
-                <%# TODO: Students/Show - Make conditional validation to display programming section %>
                 <div class="row">
                   <div class="col-md-12">
 
@@ -464,7 +456,7 @@
 
                     <p>
                       <% unless @student.programming_skills == false %>
-                          <%# TODO: Make conditional to display programming skills if student answered yes to the question %>
+                          <%#  %>
                       <% end %>
 
                       ¿Sabes programar?:
@@ -554,13 +546,10 @@
                   Otros
                   <%= link_to edit_user_path(current_user.id) do |link| %>
                       <span class="glyphicon glyphicon-pencil" aria-hidden="true" id="glyphiconPencilSize"></span>
-                  <% end %> <!-- TODO: Users/edit - Make this edit link redirect to edit path specifically to the correct tab -->
+                  <% end %>
                 </h3>
 
                 <p>
-                  <!-- TODO: Students/show - Upload User image must be done later -->
-                  1) Foto <br><br>
-
                   Como te enteraste de studNet?:
                   <%= @student.user.referenced_by %>
                 </p>

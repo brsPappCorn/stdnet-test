@@ -153,7 +153,7 @@
                   </tr>
 
                   <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4 ) %>
-                      <!-- TODO: Pending: will show info once company has payed to view students full info -->
+                      <!-- TODO: Pending: will show info once company has payed to view students full info. Pending for dev, once this is clarified with client  -->
                   <% elsif user_signed_in? && (current_user.role_id == 2 ) %>
                       <% unless @student_user.date_of_birth.nil?  %>
                           <tr>
@@ -362,7 +362,6 @@
                           <p>
                             Funciones y logros
                             <br>
-                            <!-- TODO: Students/new - create new column in Student for student.xp_functions -->
                             <%= @student_user.student.xp_achievements %>
                             <br>
                           </p>
@@ -680,7 +679,7 @@
             <% elsif (@user_role.role_id == 3 || @user_role.role_id == 4) && params[:opportunity] %>
                 <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet' %>
 
-                <%# TODO: student/show/student_display - Make 'adquirir informacion' work %>
+                <%# TODO: student/show/student_display - Make 'acquire informacion' work %>
                 <%= link_to 'Adquirir información', '#', class: 'btn btn-primary btn-studnet' %>
             <% end %>
           </div>

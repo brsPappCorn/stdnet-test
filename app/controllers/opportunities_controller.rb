@@ -16,7 +16,7 @@ class OpportunitiesController < ApplicationController
 
   def show
     if user_signed_in?
-    # Used to check what type of role is signed in
+      # Used to check what type of role is signed in
       @user_role = User.find_by_id(current_user.id)
     elsif administrator_signed_in?
       @user_role = Administrator.find_by_id(current_administrator.id)
@@ -36,8 +36,10 @@ class OpportunitiesController < ApplicationController
 
     respond_to do |format|
       if @opportunity.save
-        format.html { redirect_to my_opportunities_opportunities_path, notice: 'Opportunity was successfully created.' }
+        flash[:success] = 'La oportunidad fue creada exitosamente'
+        format.html { redirect_to my_opportunities_opportunities_path }
       else
+        flash[:error] = 'No se pudo crear la oportunidad, por favor intentarlo nuevamente.'
         format.html { render :new }
       end
     end
@@ -46,8 +48,10 @@ class OpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @opportunity.update(opportunity_params)
-        format.html { redirect_to @opportunity, notice: 'Opportunity was successfully updated.' }
+        flash[:success] = 'La oportunidad fue actualizada exitosamente'
+        format.html { redirect_to @opportunity }
       else
+        flash[:error] = 'No se pudo actualizar la oportunidad, por favor intentarlo nuevamente.'
         format.html { render :edit }
       end
     end
@@ -57,10 +61,12 @@ class OpportunitiesController < ApplicationController
     if administrator_signed_in?
       @opportunity.destroy
       respond_to do |format|
-        format.html { redirect_to opportunities_url, notice: 'Opportunity was successfully destroyed.' }
+        flash[:success] = 'La oportunidad fue eliminada exitosamente'
+        format.html { redirect_to opportunities_url }
         format.json { head :no_content }
       end
     else
+      flash[:error] = 'No se pudo eliminar la oportunidad, por favor intentarlo nuevamente.'
       redirect_to root_path
     end
   end
@@ -80,7 +86,13 @@ class OpportunitiesController < ApplicationController
   end
 
   def applicants
-    @applicants = @opportunity.applied_users
+
+    if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4)
+      @applicants = @opportunity.applied_users
+    elsif user_signed_in? && current_user.role_id == 2
+      redirect_to root_path
+    end
+
   end
 
   def application_form
@@ -92,10 +104,10 @@ class OpportunitiesController < ApplicationController
     application.assign_attributes application_params
 
     if application.save
-      flash[:error] = 'Aplicaste satisfactoriamente a la oferta'
+      flash[:success] = 'Aplicaste satisfactoriamente a la oferta'
       redirect_to opportunities_path
     else
-      flash[:error] = 'Intentalo de nuevo'
+      flash[:error] = 'Se ha generado un error. Por favor aplica a la oferta nuevamente.'
       redirect_to @opportunity
     end
 
@@ -104,9 +116,10 @@ class OpportunitiesController < ApplicationController
   def approve
     if administrator_signed_in?
       @opportunity.approve
-      # TODO: Flash exito
+      flash[:success] = 'La oferta ha sido aprobada exitosamente.'
       redirect_to opportunities_administrators_path
     else
+      flash[:error] = 'La oferta no ha sido aprobada. Por favor intentalo nuevamente.'
       redirect_to root_path
     end
   end
