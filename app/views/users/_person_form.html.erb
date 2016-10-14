@@ -54,13 +54,13 @@
           <div class="col-md-6">
 
             <div class="form-group">
-              <%= f.label :city_id, 'Ciudad' %><br>
-              <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+              <%= f.label :country_id, 'Pais' %><br>
+              <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, class: 'form-control input-width' %>
             </div>
 
-            <div class="form-group">
-              <%= f.label :country_id, 'Pais' %><br>
-              <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+            <div class="form-group" id="userCity">
+              <%= f.label :city_id, 'Ciudad' %><br>
+              <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
             </div>
 
             <!-- Nested form (person) -->

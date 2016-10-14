@@ -76,9 +76,13 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  Fecha de inicio del trabajo:
-                  <%= @opportunity.date_ini.strftime('%Y/%m/%d ') %>
-                  <!-- TODO: Opportunities/show - Add two checkboxes: 'Indefinido' / 'Lo antes posible'  -->
+                  <% if @opportunity.date_ini_type.to_i == 2 %>
+                      Fecha de inicio:
+                      <%= @opportunity.date_ini.strftime('%Y/%m/%d ') %>
+                  <% else %>
+                      Fecha de inicio:
+                      <%= opportunity_date_ini_type_friendly(@opportunity) %>
+                  <% end %>
                 </p>
               </div>
             </div>
@@ -86,9 +90,13 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  Duración del trabajo (en días, semanas o meses):
-                  <%= @opportunity.opportunity_duration %>
-                  <!-- TODO: Opportunities/show - Add two checkboxes: 'Indefinido'  -->
+                  <% if @opportunity.opportunity_duration_type.to_i == 1 %>
+                      Duración del trabajo (en días, semanas o meses):
+                      <%= @opportunity.opportunity_duration %>
+                  <% else %>
+                      Duración del trabajo:
+                      <%= opportunity_duration_type_friendly(@opportunity) %>
+                  <% end %>
                 </p>
               </div>
             </div>
@@ -98,19 +106,24 @@
                 <p>
                   Tiempo requerido del estudiante:
                   <%= opportunity_availability_friendly(@opportunity) %>
-                  <!-- TODO: Opportunities/show - Must create a new attribute in Student (student_availability) to validate if a student meets the requirements of the opportunity (availability) -->
                 </p>
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-md-12">
-                <p>
-                  Valor: $
-                  <%= @opportunity.opportunity_cost %>
-                </p>
-              </div>
-            </div>
+            <% if @opportunity.opportunity_type.to_i == 0 %>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>
+                      <% if @opportunity.cost_or_offer_option.to_i == 0 %>
+                          Valor: $
+                          <%= @opportunity.opportunity_cost %>
+                      <% else %>
+                          Valor: <%= opportunity_cost_or_offer_friendly(@opportunity) %>
+                      <% end %>
+                    </p>
+                  </div>
+                </div>
+            <% end %>
 
             <div class="row">
               <div class="col-md-12">
@@ -126,18 +139,17 @@
 
         <div class="row">
           <div class="col-md-12 text-center">
-            <!-- TODO: Opportunities/show - cancan | Only Student can apply to opportunities -->
-            <!-- TODO: Opportunities/show - make it work like twitter follow/unfollow like the one on rails tutorial. Student can only apply once. Or have the button apply once, the next time he clicks apply, he cancels the application to the offer -->
+            <% unless administrator_signed_in?  %>
+                <% if @user_role.role_id == 2 %>
+                    <!-- TODO: Opportunities/show - make it work like twitter follow/unfollow like the one on rails tutorial. Student can only apply once. Or have the button apply once, the next time he clicks apply, he cancels the application to the offer -->
+                    <!-- TODO: Opportunities/show - allow User (student) to apply to an offer only once, pending for development -->
+                    <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
 
-            <% if @user_role.role_id == 2 %>
-                <!-- TODO: Opportunities/show - allow User (student) to apply to an offer only once, pending for development -->
-                <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
-
-                <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studNet' %>
-            <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
-                <!-- TODO: Opportunities/show - cancan | Only Company/Person can edit or archive the opportunities -->
-                <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studNet' %>
-                <%= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
+                    <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studNet' %>
+                <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
+                    <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studNet' %>
+                    <%= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
+                <% end %>
             <% end %>
           </div>
         </div>
@@ -147,22 +159,3 @@
 
   </div>
 </section>
-
-
-
-<!--
-
-Pregunta al estudiante:
-<%= @opportunity.question_for_student %>
-<%# TODO: Opportunities/show - Add tooltip to help understand this question. if answered: show the question on the opportunity view displayed to students %>
-<br>
-
-¿Quieres poner un valor para el proyecto o escuchar ofertas de los estudiantes?:
-<%= opportunity_cost_or_offer_friendly(@opportunity) %>
-<br>
-
-¿Quieres recibir el portafolio de los estudiantes que apliquen a tu oferta?:
-<%= @opportunity.receive_portfolio %>
-<br>
-
--->

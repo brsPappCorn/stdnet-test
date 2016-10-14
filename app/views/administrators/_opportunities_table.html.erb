@@ -54,10 +54,11 @@
           <% end %>
         </td>
 
+        <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-default btn-studnet' %></td>
         <% unless opportunity.approved_state %>
-            <td><%= link_to 'Aprobar', approve_opportunity_path(opportunity), method: :post %></td>
+            <td><%= link_to 'Aprobar', approve_opportunity_path(opportunity), method: :post, class: 'btn btn-success btn-studnet' %></td>
         <% end %>
-        <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-studnet' %></td>
 
       </tr>
   <% end %>

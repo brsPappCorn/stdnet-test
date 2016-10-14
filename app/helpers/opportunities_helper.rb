@@ -60,4 +60,41 @@ module OpportunitiesHelper
     end
   end
 
+  # Helper method for building rails helper select from constants declared in the model
+  def opportunity_date_ini_type_select
+    [
+        ['Indefinida', Opportunity::TYPE_UNDEFINED],
+        ['Lo antes posible', Opportunity::TYPE_AS_SOON_AS_POSSIBLE],
+        ['Fijar fecha', Opportunity::TYPE_SET_DATE_INI]
+    ]
+  end
+
+  # Helper method to display friendly name instead of select value
+  def opportunity_date_ini_type_friendly(opportunity)
+    if opportunity.date_ini_type == 0
+      'Indefinido'
+    elsif opportunity.date_ini_type == 1
+      'Lo antes posible'
+    else
+      'Fijar fecha'
+    end
+  end
+
+  # Helper method for building rails helper select from constants declared in the model
+  def opportunity_duration_type_select
+    [
+        ['Indefinida', Opportunity::OPTION_FOR_DURATION_UNDEFINED],
+        ['Fijar duración', Opportunity::OPTION_FOR_DURATION_DEFINED]
+    ]
+  end
+
+  # Helper method to display friendly name instead of select value
+  def opportunity_duration_type_friendly(opportunity)
+    if opportunity.opportunity_duration_type == 0
+      'Indefinida'
+    else
+      'Fijar duración'
+    end
+  end
+
 end

@@ -46,22 +46,26 @@
 
               <div class="col-md-6">
 
-                <div class="form-group">
-                  <%# TODO: opportunities/application_form - check to see how this works when company selects the option when creating the opportunity %>
-                  <% unless @opportunity.opportunity_cost.nil? %>
-                      <%= f.label :opportunity_value, 'Valor del proyecto' %>
-                      <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>
-                  <% end %>
-                </div>
+                <% if @opportunity.cost_or_offer_option.to_i == 1 %>
+                    <div class="form-group">
+                      <%# TODO: opportunities/application_form - check to see how this works when company selects the option when creating the opportunity %>
+                      <% unless @opportunity.opportunity_cost.nil? %>
+                          <%= f.label :opportunity_value, 'Valor del proyecto' %>
+                          <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>
+                      <% end %>
+                    </div>
+                <% end %>
 
-                <div class="form-group">
-                  <% unless @opportunity.receive_portfolio.nil? %>
-                      <div class="form-group">
-                        <%= f.label :portfolio, 'Por favor adjuntar los archivos de tu portafolio' %><br>
-                        <%= f.file_field :portfolio, class: 'form-control input-width' %>
-                      </div>
-                  <% end %>
-                </div>
+                <% if @opportunity.receive_portfolio == true %>
+                    <div class="form-group">
+                      <% unless @opportunity.receive_portfolio.nil? %>
+                          <div class="form-group">
+                            <%= f.label :portfolio, 'Por favor adjuntar los archivos de tu portafolio' %><br>
+                            <%= f.file_field :portfolio, class: 'form-control input-width' %>
+                          </div>
+                      <% end %>
+                    </div>
+                <% end %>
 
               </div>
             </div>
