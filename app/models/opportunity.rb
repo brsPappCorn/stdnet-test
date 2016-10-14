@@ -15,6 +15,13 @@ class Opportunity < ActiveRecord::Base
   OPTION_FOR_COST = 0
   OPTION_FOR_OFFER = 1
 
+  TYPE_UNDEFINED = 0
+  TYPE_AS_SOON_AS_POSSIBLE = 1
+  TYPE_SET_DATE_INI = 2
+
+  OPTION_FOR_DURATION_UNDEFINED = 0
+  OPTION_FOR_DURATION_DEFINED = 1
+
   #---------------------
   # Associations
   #---------------------

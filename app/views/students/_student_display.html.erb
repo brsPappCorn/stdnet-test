@@ -13,15 +13,14 @@
               <% end %>
             </span>
 
-            <spa>
-              <!-- # TODO: Students/show fix validation for nil? & fix error when displaying student/id when signed_in as other role -->
+            <span>
               <% if @user_role.role_id == 2 %>
                   <%= @student_user.first_name %>
                   <%= @student_user.last_name %>
               <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
                   <%= @student_user.first_name %>
               <% end %>
-            </spa>
+            </span>
 
             <span>
               <!--
@@ -67,11 +66,13 @@
               Descripción
             </a>
           </li>
+          <!-- TODO: Commented until client decides what to do with this section
           <li>
             <a href="#pane5" data-toggle="tab">
               Otros
             </a>
           </li>
+          -->
 
           <% unless @application.nil? %>
               <% if @application.applied_opportunity.user_id == current_user.id %>
@@ -151,18 +152,22 @@
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      Edad:
-                    </td>
-                    <td>
-                      <!-- TODO: Students/Show - only companies will see this info -->
+                  <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4 ) %>
+                      <!-- TODO: Pending: will show info once company has payed to view students full info -->
+                  <% elsif user_signed_in? && (current_user.role_id == 2 ) %>
                       <% unless @student_user.date_of_birth.nil?  %>
-                          <%= "#{user_age} años." %>
+                          <tr>
+                            <td>
+                              Edad:
+                            </td>
+                            <td>
+                              <%= "#{user_age} años." %>
+                            </td>
+                          </tr>
                       <% end %>
-                      <!-- TODO: Students/Show - only companies will see this info -->
-                    </td>
-                  </tr>
+                  <% elsif administrator_signed_in? %>
+                      admin
+                  <% end %>
 
                   <tr>
                     <td>
@@ -573,6 +578,7 @@
           <!-- ./Description -->
 
           <!-- Other -->
+          <!-- TODO: Commented until client decides what to do with this section
           <div id="pane5" class="tab-pane">
 
             <div class="row">
@@ -591,11 +597,11 @@
             </div>
 
           </div>
+          -->
           <!-- ./Other -->
 
-          <!-- TODO: Students/student_display - make conditional to display 'sobre la oferta' tab, so that only a company/person can view this info -->
-          <!-- About this offer -->
 
+          <!-- About this offer -->
           <% unless @application.nil? %>
               <% if @application.applied_opportunity.user_id == current_user.id %>
                   <div id="pane6" class="tab-pane">

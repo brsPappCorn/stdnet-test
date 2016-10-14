@@ -15,8 +15,13 @@ class OpportunitiesController < ApplicationController
   end
 
   def show
+    if user_signed_in?
     # Used to check what type of role is signed in
-    @user_role = User.find_by_id(current_user.id)
+      @user_role = User.find_by_id(current_user.id)
+    elsif administrator_signed_in?
+      @user_role = Administrator.find_by_id(current_administrator.id)
+    end
+
   end
 
   def new
@@ -118,7 +123,7 @@ class OpportunitiesController < ApplicationController
     params.require(:opportunity).permit(:opportunity_type, :opportunity_title, :activity_description, :skills_description,
                                         :major_id, :other_majors, :question_for_student, :date_ini, :opportunity_duration,
                                         :availability, :cost_or_offer_option, :opportunity_cost, :receive_portfolio,
-                                        :number_of_students, :user_id, :student_availability
+                                        :number_of_students, :user_id, :student_availability, :date_ini_type, :opportunity_duration_type
     )
   end
 

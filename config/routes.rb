@@ -30,11 +30,8 @@ Rails.application.routes.draw do
   resources :companies
   resources :people
   resources :students
-  resources :users do
-    member do
-      get 'basic_info'
-    end
-  end
+  resources :users
+
   resources :opportunities do
     member do
       get 'application_form'

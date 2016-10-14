@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'La cuenta fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'El perfil fue actualizado exitosamente.' }
       else
         format.html { render :edit }
       end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     if administrator_signed_in?
       @user.destroy
       respond_to do |format|
-        format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to users_url, notice: 'El usuario fue eliminado exitosamente.' }
         format.json { head :no_content }
       end
     else
