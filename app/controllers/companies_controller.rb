@@ -30,11 +30,11 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to @company, notice: 'La empresa fue creada exitosamente.' }
-        format.json { render :show, status: :created, location: @company }
+        flash[:success] = 'La empresa fue creada exitosamente.'
+        format.html { redirect_to @company }
       else
+        flash[:error] = 'La empresa no pudo ser creada, por favor intentarlo nuevamente.'
         format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +42,11 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'La empresa fue actualizada exitosamente.' }
-        format.json { render :show, status: :ok, location: @company }
+        flash[:success] = 'La empresa fue actualizada exitosamente.'
+        format.html { redirect_to @company }
       else
+        flash[:error] = 'La empresa no pudo ser actualizada, por favor intentarlo nuevamente.'
         format.html { render :edit }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,8 +55,8 @@ class CompaniesController < ApplicationController
     if administrator_signed_in?
       @company.destroy
       respond_to do |format|
-        format.html { redirect_to companies_url, notice: 'La empresa fue eliminada exitosamente.' }
-        format.json { head :no_content }
+        flash[:success] = 'La empresa fue eliminada exitosamente.'
+        format.html { redirect_to companies_url }
       end
     else
       redirect_to root_path

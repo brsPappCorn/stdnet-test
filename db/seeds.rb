@@ -7,7 +7,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# TODO: Seeds - revise this file once we receive the lists with info to build dropdowns and other elements
 
 # Linked with User
 Country.create([

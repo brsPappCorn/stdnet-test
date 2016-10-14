@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   # Root
   # =========================
   root to: 'static_pages#index'
-  # TODO: Make root point to Student, Company or User /show, depending on user role
 
   # =========================
   # Devise
   # =========================
   devise_for :users, path: '', path_names: {
       sign_in: 'ingreso', sign_up: 'registro'
+  }, controllers: {
+      registrations: 'users/registrations'
   }
 
   devise_for :administrators, path: '', path_names: {

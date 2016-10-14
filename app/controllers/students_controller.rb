@@ -43,8 +43,10 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to root_path, notice: 'El estudiante fue creado exitosamente.' }
+        flash[:success] = 'El estudiante fue creado exitosamente.'
+        format.html { redirect_to root_path }
       else
+        flash[:error] = 'El estudiante no pudo ser creado, por favor intentarlo nuevamente.'
         format.html { render :new }
       end
     end
@@ -53,8 +55,10 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to root_path, notice: 'El estudiante fue actualizado exitosamente.' }
+        flash[:success] = 'El estudiante fue actualizado exitosamente.'
+        format.html { redirect_to root_path }
       else
+        flash[:error] = 'El estudiante no pudo ser actualizado, por favor intentarlo nuevamente.'
         format.html { render :edit }
       end
     end
@@ -64,10 +68,11 @@ class StudentsController < ApplicationController
     if administrator_signed_in?
       @student.destroy
       respond_to do |format|
-        format.html { redirect_to students_url, notice: 'El estudiante fue eliminado exitosamente.' }
-        format.json { head :no_content }
+        flash[:success] = 'El estudiante fue eliminado exitosamente.'
+        format.html { redirect_to students_url }
       end
     else
+      flash[:error] = 'El estudiante no pudo ser eliminado, por favor intentarlo nuevamente.'
       redirect_to root_path
     end
   end

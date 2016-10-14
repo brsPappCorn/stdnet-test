@@ -22,11 +22,11 @@ class AdministratorsController < ApplicationController
 
     respond_to do |format|
       if @administrator.save
-        format.html { redirect_to @administrator, notice: 'El administrador fue creado exitosamente.' }
-        format.json { render :show, status: :created, location: @administrator }
+        flash[:success] = 'El administrador fue creado exitosamente.'
+        format.html { redirect_to @administrator }
       else
+        flash[:error] = 'El administrador no pudo ser creado, por favor intentarlo nuevamente.'
         format.html { render :new }
-        format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -34,11 +34,11 @@ class AdministratorsController < ApplicationController
   def update
     respond_to do |format|
       if @administrator.update(administrator_params)
-        format.html { redirect_to @administrator, notice: 'El administrador fue actualizado exitosamente.' }
-        format.json { render :show, status: :ok, location: @administrator }
+        flash[:success] = 'El administrador fue actualizado exitosamente.'
+        format.html { redirect_to @administrator }
       else
+        flash[:error] = 'El administrador no pudo ser actualizado, por favor intentarlo nuevamente.'
         format.html { render :edit }
-        format.json { render json: @administrator.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,8 +46,8 @@ class AdministratorsController < ApplicationController
   def destroy
     @administrator.destroy
     respond_to do |format|
-      format.html { redirect_to administrators_url, notice: 'El administrador fue eliminada exitosamente.' }
-      format.json { head :no_content }
+      flash[:success] = 'El administrador fue eliminada exitosamente.'
+      format.html { redirect_to administrators_url }
     end
   end
 

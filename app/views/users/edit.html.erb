@@ -93,13 +93,12 @@
     // Variables
     current_country_id_val = <%= @user.country_id.to_i %>
 
-        <% if @user.role_id == 2 %>
-        current_exchange_student_val = <%= @user.student.exchange_student.to_i %>
-            current_work_xp_val = <%= @user.student.work_xp.to_i %>
-                current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>
-                    current_programming_skills_val = <%= @user.student.programming_skills.to_i %>
+    <% if @user.role_id == 2 %>
+      current_exchange_student_val = <%= @user.student.exchange_student.to_i %>;
+      current_work_xp_val = <%= @user.student.work_xp.to_i %>;
+      current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>;
+      current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
     <% end %>
-
 
 
     // Function for country_id Select

@@ -1,5 +1,5 @@
 # encoding: UTF-8
-es-CO:
+es:
   devise:
     confirmations:
       confirmed: "Tu cuenta ha sido confirmada."

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013170100) do
+ActiveRecord::Schema.define(version: 20161014080442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20161013170100) do
     t.string   "opportunity_duration"
     t.integer  "availability"
     t.integer  "cost_or_offer_option"
-    t.integer  "opportunity_cost"
+    t.string   "opportunity_cost"
     t.boolean  "receive_portfolio"
     t.integer  "number_of_students"
     t.datetime "created_at",                                null: false
