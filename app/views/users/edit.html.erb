@@ -83,7 +83,6 @@
   </div>
 </section>
 
-
 <script type="text/javascript">
 
   //=======================
@@ -91,16 +90,41 @@
   //=======================
 
   $(function() {
-
-    select_value = [];
-
     // Variables
-    current_exchange_student_val = <%= @user.student.exchange_student.to_i %>
-    current_work_xp_val = <%= @user.student.work_xp.to_i %>
-    current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>
-    current_programming_skills_val = <%= @user.student.programming_skills.to_i %>
+    current_country_id_val = <%= @user.country_id.to_i %>
+
+        <% if @user.role_id == 2 %>
+        current_exchange_student_val = <%= @user.student.exchange_student.to_i %>
+            current_work_xp_val = <%= @user.student.work_xp.to_i %>
+                current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>
+                    current_programming_skills_val = <%= @user.student.programming_skills.to_i %>
+    <% end %>
 
 
+
+    // Function for country_id Select
+    if ( current_country_id_val == 0 ) {
+      $('#userCity').show();
+    } else {
+      $('#userCity').hide();
+    }
+
+    function displayUserCity() {
+      $('#user_country_id').change(function(){
+        if ( $('#user_country_id').val() == 1 ) {
+          $('#userCity').show();
+        } else {
+          $('#userCity').hide();
+        }
+
+      });
+
+      $('#user_country_id').val();
+
+    }
+
+    // Functions that apply only for Student
+    <% if @user.role_id == 2 %>
     // Function for exchange_student Select
     if ( current_exchange_student_val == 1 ) {
       $('.exchangeStudent').show();
@@ -142,7 +166,6 @@
       $('#user_student_attributes_work_xp').val();
 
     }
-
 
     // Function for volunteer_xp Select
     if ( current_volunteer_xp_val == 1 ) {
@@ -186,12 +209,19 @@
 
     }
 
+    <% end %>
+
+
     // Call functions
+    displayUserCity();
+
+    // Apply only for students
+    <% if @user.role_id == 2 %>
     displayExchangeStudent();
     displayWorkXp();
     displayVolunteerXp();
     displayProgrammingLanguages();
-
+    <% end %>
   });
 
 
@@ -200,26 +230,6 @@
   //=======================
 
   /* Student */
-  $('#user_student_attributes_university_id').select2();
-  $('#user_student_attributes_major_id').select2();
-  $('#user_student_attributes_ed_level_id').select2();
-  $('#user_student_attributes_last_semester').select2();
-
-  $('#user_date_of_birth_1i').select2();
-  $('#user_date_of_birth_2i').select2();
-  $('#user_date_of_birth_3i').select2();
-
-  $('#user_city_id').select2();
-  $('#user_country_id').select2();
-  $('#user_student_attributes_country_id').select2();
-
-  $('#user_student_attributes_language_id').select2();
-  $('#user_student_attributes_language_level').select2();
-
-  $('#user_referenced_by').select2();
-
-  /* Company */
-  $('#user_company_attributes_company_sector_id').select2();
-  $('#user_company_attributes_company_size').select2();
+  $('select').select2();
 
 </script>

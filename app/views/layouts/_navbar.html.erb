@@ -35,15 +35,30 @@
               -->
           <% end %>
 
+          <!--
           <li class="<%= is_active?('http://www.studnet.com.co/acerca-de-studnet/') %>">
             <%= link_to 'Acerca de', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
           </li>
           <li class="<%= is_active?('#') %>">
             <%= link_to 'Contacto', class: '' %>
           </li>
+          -->
 
           <!-- Account Menu Dropdown. Depends on the type of user signed in. -->
-          <% if user_signed_in? %> <!-- TODO: Update dropdown actions depending on the role -->
+          <% if user_signed_in? %>
+              <% if user_role_id(2) %>
+                  <li>
+                    <%= link_to 'Ver Ofertas', opportunities_path %>
+                  </li>
+                  <li>
+                    <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
+                  </li>
+              <% elsif user_role_id(3) ||user_role_id(4) %>
+                  <li>
+                    <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
+                  </li>
+              <% end %>
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   Perfil
@@ -52,19 +67,14 @@
 
                 <ul class="dropdown-menu dropdown-menu-fixed">
                   <% if user_role_id(2) %>
-                  <!-- Actions for Students -->
+                      <!-- Actions for Students -->
                       <li>
                         <%= link_to 'Ver Perfil', student_path(current_user.id) %>
                       </li>
                       <li>
                         <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
                       </li>
-                      <li>
-                        <%= link_to 'Ver Ofertas', opportunities_path %>
-                      </li>
-                      <li>
-                        <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
-                      </li>
+
                   <% elsif user_role_id(3) %>
                       <!-- Actions for Company -->
                       <li>
@@ -73,9 +83,6 @@
                       <li>
                         <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
                       </li>
-                      <li>
-                        <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
-                      </li>
                   <% elsif user_role_id(4) %>
                       <!-- Actions for Person -->
                       <li>
@@ -83,9 +90,6 @@
                       </li>
                       <li>
                         <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
-                      </li>
-                      <li>
-                        <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
                       </li>
                   <% elsif administrator_signed_in? %>
                       <!-- Actions for Admin -->

@@ -17,11 +17,10 @@ module ApplicationHelper
 
   # Method to calculate user's (student role only) age, so that companies/people will be able to know this information.
   def user_age
-    # TODO: Application_helper - Refactor user_age method
-    user = User.find_by_id(current_user.id)
+    user = User.find_by_id(params[:id])
+    now = Time.now.utc.to_date
     unless user.date_of_birth.nil?
-      Date.today.year - user.date_of_birth.year
-      # TODO: usar time_ago para la edad del estudiante
+      now.year - user.date_of_birth.year - (user.date_of_birth.to_date.change(:year => now.year) > now ? 1 : 0)
     end
   end
 

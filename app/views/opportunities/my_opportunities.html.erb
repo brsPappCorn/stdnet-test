@@ -47,11 +47,12 @@
                       <%= opportunity.created_at.strftime('%d/%m/%Y') %>
                     </td>
 
-                    <td><%= link_to 'Ver', applicants_opportunity_path(opportunity) %></td>
-                    <td><%= link_to 'Editar', edit_opportunity_path(opportunity) %></td>
+                    <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-default btn-studnet' %></td>
+                    <td><%= link_to 'Aplicantes', applicants_opportunity_path(opportunity), class: 'btn btn-info btn-studnet' %></td>
+                    <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-success btn-studnet' %></td>
 
-                    <!-- TODO: Opportunities/my_opportunities - cancan | only Company/Person can archive / close an opportunity. It will not be destroyed, but no one else can apply after it has been closed. -->
-                    <td><%= link_to 'Cerrar', '#' %></td>
+                    <!-- TODO: Opportunities/my_opportunities - Pending for dev. Close opportunity == Unpublish/Unapprove Opportunity -->
+                    <td><%= link_to 'Cerrar', '#', class: 'btn btn-danger btn-studnet' %></td>
 
                   </tr>
               <% end %>
@@ -125,7 +126,7 @@
                           <%= opportunity.opportunity_cost %>
                       <% end %>
                     </td>
-                    <td><%= link_to 'Detalles', opportunity %></td>
+                    <td><%= link_to 'Detalles', opportunity, class: 'btn btn-info btn-studnet' %></td>
                   </tr>
               <% end %>
               </tbody>

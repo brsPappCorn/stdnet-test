@@ -11,6 +11,7 @@
 
 # Linked with User
 Country.create([
+                   { country_name: 'Colombia' },
                    { country_name: 'Afganistán' },
                    { country_name: 'Albania' },
                    { country_name: 'Alemania' },
@@ -52,7 +53,6 @@ Country.create([
                    { country_name: 'China' },
                    { country_name: 'Chipre' },
                    { country_name: 'Ciudad del Vaticano' },
-                   { country_name: 'Colombia' },
                    { country_name: 'Comoras' },
                    { country_name: 'Corea del Norte' },
                    { country_name: 'Corea del Sur' },
@@ -572,6 +572,7 @@ Major.create([
              ])
 
 Language.create([
+                    { language_name: 'Español' },
                     { language_name: 'Afrikáans' },
                     { language_name: 'Albanés' },
                     { language_name: 'Alemán' },
@@ -599,7 +600,6 @@ Language.create([
                     { language_name: 'Danés' },
                     { language_name: 'Eslovaco' },
                     { language_name: 'Esloveno' },
-                    { language_name: 'Español' },
                     { language_name: 'Esperanto' },
                     { language_name: 'Estonio' },
                     { language_name: 'Euskera' },

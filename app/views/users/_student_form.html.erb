@@ -49,13 +49,13 @@
               </div>
 
               <div class="form-group">
-                <%= f.label :city_id, 'Ciudad' %><br>
-                <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                <%= f.label :country_id, 'Pais' %><br>
+                <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, class: 'form-control input-width' %>
               </div>
 
-              <div class="form-group">
-                <%= f.label :country_id, 'Pais' %><br>
-                <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+              <div class="form-group" id="userCity">
+                <%= f.label :city_id, 'Ciudad' %><br>
+                <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
               </div>
 
               <%= f.fields_for :student, @user.student do |s| %>
@@ -64,7 +64,6 @@
                     <%= s.file_field :avatar, class: 'form-control input-width' %>
                   </div>
               <% end %>
-
 
             </div>
             <!-- ./Personal Info Wrapper -->
@@ -162,7 +161,6 @@
                 <div class="users-students-professional-xp-wrapper">
                   <div class="form-group">
                     <%= s.label :work_xp, '¿Tienes experiencia laboral?' %><br />
-                    <!-- TODO: Users/edit - fix problem with how DB stores the values for work_xp -->
                     <%= s.select :work_xp, options_for_select(student_yes_no_select_type, @user.student.work_xp), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
@@ -248,7 +246,9 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <%= s.label :language_id, 'Idioma' %>
-                        <%= s.select :language_id, Language.all.map { |language| [language.language_name, language.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+
+
+                        <%= s.select :language_id, Language.all.map { |language| [language.language_name, language.id] }, { default: 28 }, class: 'form-control input-width' %>
                       </div>
 
                       <div class="form-group">

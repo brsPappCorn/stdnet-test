@@ -43,7 +43,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to root_path, notice: 'Student was successfully created.' }
+        format.html { redirect_to root_path, notice: 'El estudiante fue creado exitosamente.' }
       else
         format.html { render :new }
       end
@@ -53,19 +53,18 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to root_path, notice: 'Student was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'El estudiante fue actualizado exitosamente.' }
       else
         format.html { render :edit }
       end
     end
   end
 
-  # TODO: Students Controller - destroy action only allowed by Admin role
   def destroy
     if administrator_signed_in?
       @student.destroy
       respond_to do |format|
-        format.html { redirect_to students_url, notice: 'El estudiante se elimino exitosamente.' }
+        format.html { redirect_to students_url, notice: 'El estudiante fue eliminado exitosamente.' }
         format.json { head :no_content }
       end
     else

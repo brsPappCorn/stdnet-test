@@ -30,7 +30,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to root_path, notice: 'Person was successfully created.' }
+        format.html { redirect_to root_path, notice: 'La persona fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to root_path, notice: 'Person was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'La persona fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit }
@@ -55,7 +55,7 @@ class PeopleController < ApplicationController
     if administrator_signed_in?
       @person.destroy
       respond_to do |format|
-        format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
+        format.html { redirect_to people_url, notice: 'La persona fue eliminada exitosamente.' }
         format.json { head :no_content }
       end
     else
