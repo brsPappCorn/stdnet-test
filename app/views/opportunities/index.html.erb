@@ -36,38 +36,36 @@
 
           <tbody>
           <% @opportunities.each do |opportunity| %>
-              <% if opportunity.approved_state == true %>
-                  <tr>
-                    <td>
-                      <% if opportunity.user.company.nil? %>
-                          <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
-                      <% else %>
-                          <%= opportunity.user.company.company_name  %>
-                      <% end %>
-                    </td>
-                    <td>
-                      <%= opportunity.opportunity_title %>
-                    </td>
-                    <td>
-                      <%= opportunity.created_at.strftime('%d/%m/%Y') %>
-                    </td>
-                    <td>
-                      <%= opportunity.opportunity_duration %>
-                    </td>
-                    <td>
-                      <%= opportunity_availability_friendly(opportunity) %>
-                    </td>
-                    <td>
-                      <% if opportunity.opportunity_cost.nil? %>
-                          <%= 'Se permite ofertar' %>
-                      <% else %>
-                          <%= opportunity.opportunity_cost %>
-                      <% end %>
-                    </td>
-                    <td><%= link_to 'Detalles', opportunity_path(opportunity) %></td>
+              <tr>
+                <td>
+                  <% if opportunity.user.company.nil? %>
+                      <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
+                  <% else %>
+                      <%= opportunity.user.company.company_name  %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= opportunity.opportunity_title %>
+                </td>
+                <td>
+                  <%= opportunity.created_at.strftime('%d/%m/%Y') %>
+                </td>
+                <td>
+                  <%= opportunity.opportunity_duration %>
+                </td>
+                <td>
+                  <%= opportunity_availability_friendly(opportunity) %>
+                </td>
+                <td>
+                  <% if opportunity.opportunity_cost.nil? %>
+                      <%= 'Se permite ofertar' %>
+                  <% else %>
+                      <%= opportunity.opportunity_cost %>
+                  <% end %>
+                </td>
+                <td><%= link_to 'Detalles', opportunity_path(opportunity) %></td>
 
-                  </tr>
-              <% end %>
+              </tr>
           <% end %>
           </tbody>
         </table>
@@ -129,37 +127,34 @@
 
           <tbody>
           <% @all_opportunities.each do |opportunity| %>
-              <% if opportunity.approved_state == true %>
-                  <tr>
-                    <td>
-                      <% if opportunity.user.company.nil? %>
-                          <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
-                      <% else %>
-                          <%= opportunity.user.company.company_name  %>
-                      <% end %>
-                    </td>
-                    <td>
-                      <%= opportunity.opportunity_title %>
-                    </td>
-                    <td>
-                      <%= opportunity.created_at.strftime('%d/%m/%Y') %>
-                    </td>
-                    <td>
-                      <%= opportunity.opportunity_duration %>
-                    </td>
-                    <td>
-                      <%= opportunity_availability_friendly(opportunity) %>
-                    </td>
-                    <td>
-                      <% if opportunity.opportunity_cost.nil? %>
-                          <%= 'Se permite ofertar' %>
-                      <% else %>
-                          <%= opportunity.opportunity_cost %>
-                      <% end %>
-                    </td>
-
-                  </tr>
-              <% end %>
+              <tr>
+                <td>
+                  <% if opportunity.user.company.nil? %>
+                      <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
+                  <% else %>
+                      <%= opportunity.user.company.company_name  %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= opportunity.opportunity_title %>
+                </td>
+                <td>
+                  <%= opportunity.created_at.strftime('%d/%m/%Y') %>
+                </td>
+                <td>
+                  <%= opportunity.opportunity_duration %>
+                </td>
+                <td>
+                  <%= opportunity_availability_friendly(opportunity) %>
+                </td>
+                <td>
+                  <% if opportunity.opportunity_cost.nil? %>
+                      <%= 'Se permite ofertar' %>
+                  <% else %>
+                      <%= opportunity.opportunity_cost %>
+                  <% end %>
+                </td>
+              </tr>
           <% end %>
           </tbody>
         </table>

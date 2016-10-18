@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: opportunities
+#
+#  id                        :integer          not null, primary key
+#  opportunity_type          :integer
+#  opportunity_title         :string
+#  activity_description      :text
+#  skills_description        :text
+#  major_id                  :integer
+#  other_majors              :boolean
+#  question_for_student      :string
+#  date_ini                  :date
+#  opportunity_duration      :string
+#  availability              :integer
+#  cost_or_offer_option      :integer
+#  opportunity_cost          :string
+#  receive_portfolio         :boolean
+#  number_of_students        :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  user_id                   :integer
+#  approved_state            :boolean          default(FALSE)
+#  date_ini_type             :integer          default(0)
+#  opportunity_duration_type :integer          default(0)
+#
+
 class Opportunity < ActiveRecord::Base
 
   #---------------------
@@ -43,7 +70,11 @@ class Opportunity < ActiveRecord::Base
   # Methods
   #---------------------
   def self.opportunities_for_student(student)
-    where major_id: student.major_id
+    where major_id: student.major_id, approved_state: true
+  end
+
+  def self.approved
+    where approved_state: true
   end
 
   def self.pending_approval

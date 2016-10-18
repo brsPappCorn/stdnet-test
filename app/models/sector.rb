@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: sectors
+#
+#  id          :integer          not null, primary key
+#  sector_name :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Sector < ActiveRecord::Base
 
   #---------------------

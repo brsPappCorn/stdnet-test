@@ -1,0 +1,8 @@
+<h1>Nueva aplicación</h1>
+
+<p>El estudiante con los siguientes datos ha aplicado a la oferta <%= link_to @opportunity.opportunity_title, opportunity_url(@opportunity) %></p>
+<ul>
+  <li>Nombre: <%= @student.user.full_name %></li>
+  <li>Correo: <%= @student.user.email %></li>
+  <li>Carrera: <%= @student.major.major_name %></li>
+</ul>

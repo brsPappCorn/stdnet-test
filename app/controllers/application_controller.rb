@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :profile_incomplete
 
   protected
-
   # Used to pass aditional parameters for devise signup
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
@@ -26,5 +26,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  private
+  def profile_incomplete
+    if user_signed_in? && current_user.profile_incomplete?
+      flash.now[:warning] = 'Recuerda que debes completar tu perfil.'
+    end
+  end
 end
