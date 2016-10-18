@@ -78,13 +78,9 @@ class Student < ActiveRecord::Base
   end
 
   def profile_incomplete?
-    self.university_id.nil? || self.major_id.nil? || self.ed_level_id.nil? || self.exchange_student.nil? || \
-self.country_id.nil? || self.work_xp.nil? || self.volunteer_xp.nil? || self.language_id.nil? || \
-self.programming_skills.nil? || self.gpa.nil? || self.last_semester.blank? || self.exchange_university.blank? || \
-self.highschool.blank? || self.gpa_max.blank? || self.xp_company.blank? || self.xp_position.blank? || \
-self.xp_achievements.blank? || self.volunteer_org.blank? || self.volunteer_functions.blank? || \
-self.language_level.blank? || self.programing_languages.blank? || self.strengths.blank? || \
-self.areas_to_develop.blank? || self.hobbies.blank? || self.avatar.blank?
+    self.university_id.nil? || self.major_id.nil? || self.ed_level_id.nil? || self.country_id.nil? || self.language_id.nil? || \
+self.gpa.nil? || self.last_semester.blank? || self.highschool.blank? || self.gpa_max.blank? || \
+self.language_level.blank? || self.strengths.blank? || self.areas_to_develop.blank? || self.hobbies.blank?
   end
 
 end
