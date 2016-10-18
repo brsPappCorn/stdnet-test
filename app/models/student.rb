@@ -78,7 +78,7 @@ class Student < ActiveRecord::Base
   end
 
   def profile_incomplete?
-    self.university_id.nil? || self.major_id.nil? || self.ed_level_id.nil? || self.country_id.nil? || self.language_id.nil? || \
+    self.university_id.nil? || self.major_id.nil? || self.ed_level_id.nil? || self.language_id.nil? || \
 self.gpa.nil? || self.last_semester.blank? || self.highschool.blank? || self.gpa_max.blank? || \
 self.language_level.blank? || self.strengths.blank? || self.areas_to_develop.blank? || self.hobbies.blank?
   end
