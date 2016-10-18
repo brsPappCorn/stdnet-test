@@ -4,14 +4,13 @@ class OpportunitiesController < ApplicationController
   def index
     # Used to check what type of role is signed in
     @user_role = User.find_by_id(current_user.id)
-    if @user_role.role_id == 2
-      @all_opportunities = Opportunity.all
-      @opportunities = Opportunity.opportunities_for_student(@user_role.student)
 
-    elsif @user_role.role_id == 3 || @user_role.role_id == 3
+    if @user_role.role_id == 2
+      @all_opportunities = Opportunity.approved
+      @opportunities = Opportunity.opportunities_for_student(@user_role.student)
+    elsif @user_role.role_id == 3 || @user_role.role_id == 4
       redirect_to my_opportunities_opportunities_path
     end
-
   end
 
   def show
@@ -21,7 +20,6 @@ class OpportunitiesController < ApplicationController
     elsif administrator_signed_in?
       @user_role = Administrator.find_by_id(current_administrator.id)
     end
-
   end
 
   def new
@@ -36,6 +34,8 @@ class OpportunitiesController < ApplicationController
 
     respond_to do |format|
       if @opportunity.save
+        AdministratorMailer.new_offer(@opportunity).deliver_now
+
         flash[:success] = 'La oportunidad fue creada exitosamente'
         format.html { redirect_to my_opportunities_opportunities_path }
       else
@@ -63,7 +63,6 @@ class OpportunitiesController < ApplicationController
       respond_to do |format|
         flash[:success] = 'La oportunidad fue eliminada exitosamente'
         format.html { redirect_to opportunities_url }
-        format.json { head :no_content }
       end
     else
       flash[:error] = 'No se pudo eliminar la oportunidad, por favor intentarlo nuevamente.'
@@ -104,6 +103,8 @@ class OpportunitiesController < ApplicationController
     application.assign_attributes application_params
 
     if application.save
+      AdministratorMailer.new_apply(@opportunity, current_user.student).deliver_now
+
       flash[:success] = 'Aplicaste satisfactoriamente a la oferta'
       redirect_to opportunities_path
     else
@@ -116,6 +117,12 @@ class OpportunitiesController < ApplicationController
   def approve
     if administrator_signed_in?
       @opportunity.approve
+
+      possible_students = Student.students_for_opportunity @opportunity
+      possible_students.each do |student|
+        StudentMailer.notify_new_offer(@opportunity, student).deliver_now
+      end
+
       flash[:success] = 'La oferta ha sido aprobada exitosamente.'
       redirect_to opportunities_administrators_path
     else

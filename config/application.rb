@@ -25,5 +25,22 @@ module StudNet
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Loads local env file according to env
+    config.before_configuration do
+      env_file_path = File.join(Rails.root, 'config', 'env-vars.yml')
+
+      YAML.load(File.open(env_file_path)).each do |environment_key, environment_hash|
+        if environment_key.eql?(Rails.env) && !environment_hash.nil?
+          environment_hash.each do |key, value|
+            ENV[key.to_s.upcase] = value
+          end
+        end
+      end if File.exists?(env_file_path)
+    end
+
+    config.generators do |g|
+      g.test_framework nil
+    end
+
   end
 end

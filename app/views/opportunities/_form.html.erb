@@ -128,10 +128,10 @@
     select_value = [];
 
     // Variables
-      current_opportunity_type_val = <%= @opportunity.opportunity_type.to_i %>
-      current_date_ini_type_val = <%= @opportunity.date_ini_type.to_i %>
-      current_opportunity_duation_type_val = <%= @opportunity.opportunity_duration_type.to_i %>
-      current_cost_or_offer_option_val = <%= @opportunity.cost_or_offer_option.to_i %>
+    current_opportunity_type_val = <%= @opportunity.opportunity_type.to_i %>
+        current_date_ini_type_val = <%= @opportunity.date_ini_type.to_i %>
+            current_opportunity_duation_type_val = <%= @opportunity.opportunity_duration_type.to_i %>
+                current_cost_or_offer_option_val = <%= @opportunity.cost_or_offer_option.to_i %>
 
 
     // Function current_opportunity_type_val cost_or_offer Select
@@ -251,7 +251,9 @@
     //========================
 
     // Student
-    $('select').select2();
+    $('select').select2({
+      theme: "bootstrap"
+    });
 
   });
 

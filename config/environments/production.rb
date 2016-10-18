@@ -80,7 +80,7 @@ Rails.application.configure do
   #----------------
   # MAILER
   #----------------
-  config.action_mailer.default_url_options = { host: 'studnet-web.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: ENV['EMAIL_DOMAIN'] }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
@@ -89,11 +89,11 @@ Rails.application.configure do
   config.action_mailer.default charset: 'utf-8'
 
   config.action_mailer.smtp_settings = {
-      :address              => ENV['SENDGRID_SMTP_SERVER'],
-      :domain               => ENV['SENDGRID_DOMAIN'],
-      :user_name            => ENV['SENDGRID_USERNAME'],
-      :password             => ENV['SENDGRID_PASSWORD'],
-      :port                 => ENV['SENDGRID_PORT'],
+      :address              => ENV['EMAIL_SMTP_SERVER'],
+      :domain               => ENV['EMAIL_DOMAIN'],
+      :user_name            => ENV['EMAIL_USERNAME'],
+      :password             => ENV['EMAIL_PASSWORD'],
+      :port                 => ENV['EMAIL_PORT'],
       :authentication       => :plain,
       :enable_starttls_auto => true
   }

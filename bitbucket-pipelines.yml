@@ -1,0 +1,18 @@
+pipelines:
+  branches:
+    staging:
+      - step:
+          script:
+            - mkdir -p ~/.ssh
+            - cat known_hosts >> ~/.ssh/known_hosts
+            - (umask 077; echo $HEROKU_SSH_PK | base64 --decode > ~/.ssh/id_rsa)
+            - git clone git@bitbucket.org:disruptionlabs/dl-pipelines-deploy.git
+            - ./dl-pipelines-deploy/deploy.bash staging heroku
+    master:
+      - step:
+          script:
+            - mkdir -p ~/.ssh
+            - cat known_hosts >> ~/.ssh/known_hosts
+            - (umask 077; echo $HEROKU_SSH_PK | base64 --decode > ~/.ssh/id_rsa)
+            - git clone git@bitbucket.org:disruptionlabs/dl-pipelines-deploy.git
+            - ./dl-pipelines-deploy/deploy.bash production heroku
