@@ -1,8 +1,44 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  role_id                :integer
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
+#  promo_id               :integer
+#  referenced_by          :string
+#  first_name             :string
+#  last_name              :string
+#  date_of_birth          :date
+#  document_number        :string
+#  mobile_phone           :string
+#  city_id                :integer
+#  country_id             :integer
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#
+# Indexes
+#
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   #---------------------
   # Constants
@@ -71,12 +107,47 @@ class User < ActiveRecord::Base
   #---------------------
   # TODO: Declare validations
 
-
   #---------------------
   # Methods
   #---------------------
   def can_create_opportunity?
     self.role_id != 2
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  def profile_incomplete?
+    if basic_profile_incomplete?
+      true
+    else
+      if self.role_id == 2
+        self.student.profile_incomplete?
+      elsif self.role_id == 3
+        self.company.profile_incomplete?
+      elsif self.role_id == 4
+        self.person.profile_incomplete?
+      end
+    end
+  end
+
+  #---------------------
+  # Private methods
+  #---------------------
+  private
+  def basic_profile_incomplete?
+    basic_common_info = self.first_name.blank? || self.last_name.blank? || self.mobile_phone.blank? || self.city_id.nil? || self.country_id.nil?
+
+    if self.role_id == 2
+      basic_common_info = basic_common_info || self.document_number.blank? || self.date_of_birth.nil?
+    elsif self.role_id == 3
+      # Nothing for now
+    elsif self.role_id == 4
+      # Nothing for now
+    end
+
+    basic_common_info
   end
 
 end

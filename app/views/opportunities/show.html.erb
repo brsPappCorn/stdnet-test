@@ -144,7 +144,12 @@
                 <% if @user_role.role_id == 2 %>
                     <!-- TODO: Opportunities/show - make it work like twitter follow/unfollow like the one on rails tutorial. Student can only apply once. Or have the button apply once, the next time he clicks apply, he cancels the application to the offer -->
                     <!-- TODO: Opportunities/show - allow User (student) to apply to an offer only once, pending for development -->
-                    <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
+                    <% if @user_role.profile_incomplete? %>
+                        <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
+                        <%= link_to 'Terminar perfil', edit_user_path(@user_role), class: 'btn btn-primary btn-studNet' %>
+                    <% else %>
+                        <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
+                    <% end %>
 
                     <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studNet' %>
                 <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
