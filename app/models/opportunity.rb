@@ -86,4 +86,8 @@ class Opportunity < ActiveRecord::Base
     self.save
   end
 
+  def student_has_applied?(student)
+    self.applied_users.include? student
+  end
+
 end

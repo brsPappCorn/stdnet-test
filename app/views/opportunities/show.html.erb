@@ -148,7 +148,11 @@
                         <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
                         <%= link_to 'Terminar perfil', edit_user_path(@user_role), class: 'btn btn-primary btn-studNet' %>
                     <% else %>
-                        <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
+                        <% if @opportunity.student_has_applied?(current_user) %>
+                            <%= link_to 'Ya aplicaste a la oferta', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studNet' %>
+                        <% else %>
+                            <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
+                        <% end %>
                     <% end %>
 
                     <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studNet' %>

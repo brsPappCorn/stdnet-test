@@ -60,8 +60,8 @@
 
               <%= f.fields_for :student, @user.student do |s| %>
                   <div class="form-group">
-                    <%= s.label :avatar, 'Foto de perfil' %><br>
-                    <%= s.file_field :avatar, class: 'form-control input-width' %>
+                    <%= s.label :avatar, 'Foto de perfil (dimensión de 40px por 40px)' %><br>
+                    <%= s.file_field :avatar, class: 'input-width' %>
                   </div>
               <% end %>
 
