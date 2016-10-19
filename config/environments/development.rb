@@ -42,10 +42,4 @@ Rails.application.configure do
   # Mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # AWS
-  ENV['AWS_ACCESS_KEY_ID'] = ''
-  ENV['AWS_BUCKET_NAME'] = ''
-  ENV['AWS_REGION'] = ''
-  ENV['AWS_SECRET_ACCESS_KEY'] = ''
-
 end
