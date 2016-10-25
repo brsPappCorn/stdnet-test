@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   devise_for :users, path: '', path_names: {
       sign_in: 'ingreso', sign_up: 'registro'
   }, controllers: {
-      registrations: 'users/registrations'
+      registrations: 'users/registrations',
+      confirmations: 'users/confirmations'
   }
 
   devise_for :administrators, path: '', path_names: {
@@ -26,10 +27,11 @@ Rails.application.routes.draw do
       get 'pending_opportunities'
     end
   end
+  # TODO Remove new/create (views, actions, controllers)
   resources :companies
   resources :people
   resources :students
-  resources :users
+  resources :users, except: [:new, :create]
 
   resources :opportunities do
     member do

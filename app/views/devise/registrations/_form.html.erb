@@ -108,9 +108,9 @@
 
   $(function() {
     // Variables
-    select_value = [];
+    var select_value = [];
 
-    current_params_role_id_val = <%= params[:studnet].to_i %>;
+    var current_params_role_id_val = <%= params[:studnet].to_i %>;
 
     // Function to display company additional information
     if ( current_params_role_id_val == 2 ) {
@@ -142,7 +142,6 @@
       });
 
       $('#roleID').val();
-
     }
 
     // Function to display person additional information
@@ -172,21 +171,16 @@
 
     }
 
-
     // Calling Functions
     displayCompanyAdditionalInfo();
     displayPersonAdditionalInfo();
 
+    // Student
+    $('#user_student_attributes_university_id').select2({
+      theme: "bootstrap"
+    });
+    $('#user_student_attributes_major_id').select2({
+      theme: "bootstrap"
+    });
   });
-
-
-
-  // Student
-  $('#user_student_attributes_university_id').select2({
-    theme: "bootstrap"
-  });
-  $('#user_student_attributes_major_id').select2({
-    theme: "bootstrap"
-  });
-
 </script>

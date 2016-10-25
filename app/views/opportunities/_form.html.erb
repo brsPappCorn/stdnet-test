@@ -1,15 +1,5 @@
 <%= form_for(@opportunity) do |f| %>
-    <% if @opportunity.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
-
-          <ul>
-            <% @opportunity.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render partial: 'shared/error_messages', locals: { object: @opportunity } %>
 
     <div class="row">
       <div class="col-md-6">
@@ -42,8 +32,8 @@
         </div>
 
         <div class="form-group" id="opportunitySpecificMajor">
-          <%= f.label :major_id, 'Carrera'  %>
-          <%= f.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+          <%= f.label 'Carrera(s):' %>
+          <%= f.collection_select :major_ids, Major.all, :id, :major_name, { prompt: 'Por favor selecciona una opción' }, { multiple: true } %>
         </div>
 
         <div class="form-group">
@@ -231,7 +221,7 @@
         if( $(this).is(':checked') ) {
           $("#opportunitySpecificMajor").hide();
         } else {
-          console.log('esta chequeado')
+          console.log('esta chequeado');
           $("#opportunitySpecificMajor").show();
         }
       });

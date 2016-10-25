@@ -1,34 +1,16 @@
-<% if @contact.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <% if I18n.locale ==  :es %>
-            Por favor confirma tu información:
-        <% else %>
-            Please confirm your information:
-        <% end %>
-      </h2>
-
-      <ul>
-        <% @contact.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
-
-<!--
-<%# if object && object.errors.any? %>
+<% if object && object.errors.any? %>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 text-danger text-left">
         <div>
-          <%#= object.errors.count %> errors did not allow the action to complete:
+          <%= object.errors.count %> errores no permitieron completar la operación:
         </div>
         <ul>
-          <%# object.errors.full_messages.each do |msg| %>
-              <li><%#= msg %></li>
-          <%# end %>
+          <% object.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     </div>
-<%# end %>
--->
+
+    <br/>
+<% end %>

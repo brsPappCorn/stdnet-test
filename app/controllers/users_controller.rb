@@ -13,10 +13,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def new
-    @user = User.new
-  end
-
   def edit
     @user = User.find_by_id(current_user.id)
   end
@@ -80,7 +76,8 @@ class UsersController < ApplicationController
                                      :volunteer_functions, :language_id, :language_level, :programming_skills,
                                      :programing_languages, :strengths, :areas_to_develop, :hobbies, :student_availability,
                                      :avatar,
-                                     tool_ids:[]
+                                     tool_ids:[],
+                                     major_ids: []
                                  ],
                                  company_attributes: [
                                      :id, :position, :company_address, :company_nit, :company_description, :company_size,
