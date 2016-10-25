@@ -21,13 +21,26 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li class="<%= is_active?(root_path) %>">
-            <%= link_to 'Home', root_path,class: '' %>
+            <%= link_to 'HOME', root_path,class: '' %>
           </li>
 
           <% unless user_signed_in? %>
-              <li class="<%= is_active?(new_user_registration_path) %>">
-                <%= link_to 'Registro', new_user_registration_path,class: '' %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  REGISTRO
+                  <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-fixed">
+                  <li>
+                    <%= link_to 'ESTUDIANTES', new_user_registration_path(studnet: 2) %>
+                  </li>
+                  <li>
+                    <%= link_to 'EMPRESA/PERSONA', new_user_registration_path(studnet: 3) %>
+                  </li>
+                </ul>
               </li>
+
               <!--
               <li class="<%= is_active?(new_user_session_path) %>">
                 <%= link_to 'Ingresar', new_user_session_path,class: '' %>
@@ -35,14 +48,17 @@
               -->
           <% end %>
 
-          <!--
-          <li class="<%= is_active?('http://www.studnet.com.co/acerca-de-studnet/') %>">
-            <%= link_to 'Acerca de', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
+
+          <li>
+            <%= link_to 'EQUIPO', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
           </li>
-          <li class="<%= is_active?('#') %>">
-            <%= link_to 'Contacto', class: '' %>
+          <li>
+            <%= link_to 'ACERCA DE', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
           </li>
-          -->
+
+          <li>
+            <%= link_to 'CONTACTO', class: '' %>
+          </li>
 
           <!-- Account Menu Dropdown. Depends on the type of user signed in. -->
           <% if user_signed_in? %>

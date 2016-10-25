@@ -98,4 +98,6 @@ Rails.application.configure do
       :enable_starttls_auto => true
   }
 
+  # AWS
+
 end
