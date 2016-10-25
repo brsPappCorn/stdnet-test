@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby '2.2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -29,7 +29,7 @@ gem 'rails-i18n'
 gem 'annotate'
 
 # Others
-gem 'turbolinks'
+#gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -39,7 +39,7 @@ group :development, :test do
   gem 'spring'
   gem 'better_errors'
   gem 'debase'
-  gem 'ruby-debug-ide'
+  #gem 'ruby-debug-ide'
   gem 'awesome_print'
 end
 

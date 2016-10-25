@@ -261,17 +261,38 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
   padding-bottom: 0;
 }
 
+.navbar-default .navbar-nav > li > a {
+  font-weight: bold;
+}
+
 // ================
 // Footer
 // ================
 
+footer {
+  background-color: $cp-dark-gray;
+  padding: 80px 0;
+
+  h3 {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  p {
+    color: $cs-light-gray;
+    font-weight: 200;
+    margin-bottom: 0;
+  }
+}
 
 // ================
 // Devise
 // ================
 .devise-wrapper {
-  margin: 30px 0;
-  margin-top: 0;
+  margin: 0;
 
   // Sign Up
   .sign-up-select-account {
@@ -328,32 +349,86 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
 
   }
 
+  .students-signup-header {
+    background-color: $cp-blue;
+    color: white;
+    //font-size: ;
+    font-weight: bold;
+    padding: 10px 0;
+
+    p {
+      margin-bottom: 0;
+    }
+
+  }
   .students-signup-wrapper {
-    background-image: url(image_path('register_students.jpg'));
-    background-size: cover;
+    background-color: $cs-light-gray;
     color: white;
     padding-bottom: 40px;
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.25em;
+      margin: 40px 0;
+    }
+
+    a {
+      color: $cp-blue;
+    }
   }
 
+  .companies-signup-header {
+    background-color: $cs-brown;
+    color: white;
+    //font-size: ;
+    font-weight: bold;
+    padding: 10px 0;
+
+    p {
+      margin-bottom: 0;
+    }
+
+  }
   .companies-signup-wrapper {
-    background-image: url(image_path('register_companies.jpg'));
-    background-size: cover;
+    background-color: $cs-light-gray;
     color: white;
     padding-bottom: 40px;
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.25em;
+      margin: 40px 0;
+    }
+
+    a {
+      color: $cp-blue;
+    }
+
   }
 
   .people-signup-wrapper {
-    background-image: url(image_path('register_people.jpg'));
-    background-size: cover;
+    background-color: $cs-light-gray;
     color: white;
     padding-bottom: 40px;
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.25em;
+      margin: 40px 0;
+    }
+
+    a {
+      color: $cp-blue;
+    }
+
   }
 
   .register-form {
-    background: rgba(106,173,228,0.4);
+    background: transparent;
     padding: 20px 25px;
 
     .form-group {
+      color: $cp-dark-gray;
       text-align: left;
 
       .form-control {
@@ -361,6 +436,24 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
         color: $cp-dark-gray;
         -webkit-box-shadow: inset 0px 2px 3px #dddddd;
         border-radius: 5px;
+      }
+
+    }
+
+    label {
+      font-weight: normal;
+      font-size: 1.1em;
+    }
+
+    .terms-conditions {
+      margin-bottom: 20px;
+      p {
+        margin: 0;
+        font-size: 0.9em;
+      }
+
+      a {
+        font-size: 0.9em;
       }
 
     }
@@ -462,6 +555,10 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
       padding-top: 30px;
     }
 
+  }
+
+  .margin-bottom-20 {
+    margin-bottom: 20px;
   }
 
 }
