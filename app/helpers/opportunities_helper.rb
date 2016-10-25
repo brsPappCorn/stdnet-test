@@ -1,5 +1,9 @@
 module OpportunitiesHelper
 
+  def opportunity_majors_by_comma
+    @opportunity.majors.map{ |m| m.major_name }.join(', ')
+  end
+
   # Helper method for building rails helper select from constants declared in the model
   def opportunity_select_type
     [

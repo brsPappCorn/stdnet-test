@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018161518) do
+ActiveRecord::Schema.define(version: 20161025161501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,12 +93,21 @@ ActiveRecord::Schema.define(version: 20161018161518) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "majors_opportunities", id: false, force: :cascade do |t|
+    t.integer "major_id",       null: false
+    t.integer "opportunity_id", null: false
+  end
+
+  create_table "majors_students", id: false, force: :cascade do |t|
+    t.integer "major_id",   null: false
+    t.integer "student_id", null: false
+  end
+
   create_table "opportunities", force: :cascade do |t|
     t.integer  "opportunity_type"
     t.string   "opportunity_title"
     t.text     "activity_description"
     t.text     "skills_description"
-    t.integer  "major_id"
     t.boolean  "other_majors"
     t.string   "question_for_student"
     t.date     "date_ini"

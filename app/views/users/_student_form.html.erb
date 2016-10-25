@@ -94,8 +94,8 @@
                   </div>
 
                   <div class="form-group">
-                    Otra carrera(s):
-                    <!-- TODO: Users/Edit - Multiple select must be done. -->
+                    <%= s.label 'Otra carrera(s):' %>
+                    <%= s.collection_select :major_ids, Major.all, :id, :major_name, {}, { multiple: true } %>
                   </div>
 
                   <div class="form-group">
@@ -361,3 +361,119 @@
       </div>
     </div>
 <% end %>
+
+<script>
+  var current_country_val = <%= @user.country_id %>;
+  var current_exchange_student_val = <%= @user.student.exchange_student.to_i %>;
+  var current_work_xp_val = <%= @user.student.work_xp.to_i %>;
+  var current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>;
+  var current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
+
+  function elementVisible(selector, visible) {
+    var $element = $(selector);
+
+    if (visible) {
+      $element.show();
+    } else {
+      $element.hide();
+    }
+  }
+
+  if (current_country_val == 1) {
+    elementVisible('#userCity', true);
+  } else {
+    elementVisible('#userCity', false);
+  }
+
+  if (current_exchange_student_val == 1) {
+    elementVisible('.exchangeStudent', true);
+  } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
+    elementVisible('.exchangeStudent', false);
+  }
+
+  $("#user_country_id").change(function() {
+    if ($(this).val() == 1) {
+      elementVisible('#userCity', true);
+    } else {
+      elementVisible('#userCity', false);
+    }
+  });
+
+  function displayExchangeStudent() {
+    $('#user_student_attributes_exchange_student').change(function(){
+      if ( $('#user_student_attributes_exchange_student').val() == 1 ) {
+        elementVisible('.exchangeStudent', true);
+      } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
+        elementVisible('.exchangeStudent', false);
+      }
+
+    });
+
+    $('#user_student_attributes_exchange_student').val();
+  }
+
+  // Function for work_xp Select
+  if ( current_work_xp_val == 1 ) {
+    $('.workXp').show();
+  } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
+    $('.workXp').hide();
+  }
+
+  function displayWorkXp() {
+    $('#user_student_attributes_work_xp').change(function(){
+      if ( $('#user_student_attributes_work_xp').val() == 1 ) {
+        elementVisible('.workXp', true);
+      } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
+        elementVisible('.workXp', false);
+      }
+
+    });
+
+    $('#user_student_attributes_work_xp').val();
+  }
+
+  // Function for volunteer_xp Select
+  if ( current_volunteer_xp_val == 1 ) {
+    elementVisible('.volunteerXp', true);
+  } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
+    elementVisible('.volunteerXp', false);
+  }
+
+  function displayVolunteerXp() {
+    $('#user_student_attributes_volunteer_xp').change(function(){
+      if ( $('#user_student_attributes_volunteer_xp').val() == 1 ) {
+        elementVisible('.volunteerXp', true);
+      } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
+        elementVisible('.volunteerXp', false);
+      }
+
+    });
+
+    $('#user_student_attributes_volunteer_xp').val();
+  }
+
+  // Function for programming_languages Select
+  if ( current_programming_skills_val == 1 ) {
+    elementVisible('#programmingLanguages', true);
+  } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
+    elementVisible('#programmingLanguages', false);
+  }
+
+  function displayProgrammingLanguages() {
+    $('#user_student_attributes_programming_skills').change(function(){
+      if ( $('#user_student_attributes_programming_skills').val() == 1 ) {
+        elementVisible('#programmingLanguages', true);
+      } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
+        elementVisible('#programmingLanguages', false);
+      }
+
+    });
+
+    $('#user_student_attributes_programming_skills').val();
+  }
+
+  displayExchangeStudent();
+  displayWorkXp();
+  displayVolunteerXp();
+  displayProgrammingLanguages();
+</script>

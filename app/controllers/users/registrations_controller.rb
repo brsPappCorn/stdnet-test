@@ -6,7 +6,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     # Stores value of current role_id parameter
     session[:role_id] = params[:studnet]
-
     super
   end
 
@@ -27,6 +26,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
+      clean_up_passwords resource
+      set_minimum_password_length
 
       # Redirection depending on user role if Devise registration fails.
       if session[:role_id].to_i == 2
@@ -36,9 +37,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       elsif session[:role_id].to_i == 4
         redirect_to new_user_registration_path(studnet: session[:role_id].to_i)
       end
-
-      clean_up_passwords resource
-      set_minimum_password_length
     end
   end
 
