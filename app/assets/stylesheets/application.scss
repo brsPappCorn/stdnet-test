@@ -172,12 +172,8 @@ body {
 // ================
 
 .btn-studnet-basic {
-  background-color: #1db5f7;
-  background: -webkit-linear-gradient(#1db5f7,#0578d7);
-  background: -moz-linear-gradient(#1db5f7,#0578d7);
-  background: -ms-linear-gradient(#1db5f7,#0578d7);
-  background: -o-linear-gradient(#1db5f7,#0578d7);
-  background: linear-gradient(#1db5f7,#0578d7);
+  background-color: $cp-blue;
+  color: white;
   border: none;
   box-shadow: none;
   font-size: 1.25em;
@@ -282,7 +278,7 @@ footer {
   }
 
   p {
-    color: $cs-light-gray;
+    color: $cp-medium-gray;
     font-weight: 200;
     margin-bottom: 0;
   }
@@ -351,20 +347,20 @@ footer {
 
   .students-signup-header {
     background-color: $cp-blue;
-    color: white;
+    color: $cp-dark-gray;
     //font-size: ;
     font-weight: bold;
     padding: 10px 0;
 
     p {
+      color: white;
       margin-bottom: 0;
     }
 
   }
   .students-signup-wrapper {
     background-color: $cs-light-gray;
-    color: white;
-    padding-bottom: 40px;
+    color: $cp-dark-gray;
 
     p {
       color: $cp-dark-gray;
@@ -385,6 +381,7 @@ footer {
     padding: 10px 0;
 
     p {
+      color: white;
       margin-bottom: 0;
     }
 
@@ -392,7 +389,6 @@ footer {
   .companies-signup-wrapper {
     background-color: $cs-light-gray;
     color: white;
-    padding-bottom: 40px;
 
     p {
       color: $cp-dark-gray;
@@ -409,7 +405,6 @@ footer {
   .people-signup-wrapper {
     background-color: $cs-light-gray;
     color: white;
-    padding-bottom: 40px;
 
     p {
       color: $cp-dark-gray;
@@ -498,8 +493,12 @@ footer {
   .devise-shared-links {
     margin-top: 5px;
 
+    p {
+      margin: 20px 0;
+    }
+
     a, a:hover, a:focus, a:active {
-      color: white;
+      color: $cp-blue;
       text-decoration: none;
     }
 
@@ -565,8 +564,10 @@ footer {
 
 // Other devise classes
 .devise-links-color {
+  margin-bottom: 60px;
+  margin-top: 20px;
   a {
-    color: white;
+    color: $cp-blue;
   }
 }
 

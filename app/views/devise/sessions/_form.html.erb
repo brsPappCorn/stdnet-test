@@ -2,27 +2,25 @@
     <%= devise_error_messages! %>
 
     <div class="form-group">
-      <%= f.label :email, 'Correo electrónico' %><br />
-      <%= f.text_field :email, autofocus: true, class: 'form-control input-width' %>
+      <%= f.text_field :email, autofocus: true, placeholder: 'Correo electrónico', class: 'form-control input-width' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :password, 'Contraseña' %><br />
-      <%= f.password_field :password, autocomplete: 'off', class: 'form-control input-width' %>
+      <%= f.password_field :password, autocomplete: 'off', placeholder: 'Contraseña', class: 'form-control input-width' %>
     </div>
 
     <% if devise_mapping.rememberable? -%>
-        <div class="form-group">
+        <div class="form-group text-left">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me, 'Recordarme' %>
         </div>
     <% end -%>
 
-    <div class="actions text-right">
+    <div class="actions text-center">
       <%= f.submit 'Ingresar', class: 'btn btn-primary btn-studnet-basic' %>
     </div>
 <% end %>
 
-<div class="devise-links-color text-right">
+<div class="devise-links-color text-left">
   <%= render 'devise/shared/links' %>
 </div>
