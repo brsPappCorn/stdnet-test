@@ -36,10 +36,10 @@ class OpportunitiesController < ApplicationController
       if @opportunity.save
         AdministratorMailer.new_offer(@opportunity).deliver_now
 
-        flash[:success] = 'La oportunidad fue creada exitosamente'
+        flash[:success] = 'Tu oferta fue creada exitosamente. Cuando recibas nuevas aplicaciones te llegará un correo de notificación.'
         format.html { redirect_to my_opportunities_opportunities_path }
       else
-        flash[:error] = 'No se pudo crear la oportunidad, por favor intentarlo nuevamente.'
+        flash[:error] = 'No se pudo crear tu oferta, por favor inténtalo nuevamente.'
         format.html { render :new }
       end
     end
@@ -48,10 +48,10 @@ class OpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @opportunity.update(opportunity_params)
-        flash[:success] = 'La oportunidad fue actualizada exitosamente'
+        flash[:success] = 'Tu oferta se ha actualizada exitosamente. Cuando recibas nuevas aplicaciones te llegará un correo de notificación.'
         format.html { redirect_to @opportunity }
       else
-        flash[:error] = 'No se pudo actualizar la oportunidad, por favor intentarlo nuevamente.'
+        flash[:error] = 'No se pudo actualizar tu oferta, por favor inténtalo nuevamente.'
         format.html { render :edit }
       end
     end
@@ -61,11 +61,11 @@ class OpportunitiesController < ApplicationController
     if administrator_signed_in?
       @opportunity.destroy
       respond_to do |format|
-        flash[:success] = 'La oportunidad fue eliminada exitosamente'
+        flash[:success] = 'Tu oferta fue eliminada exitosamente'
         format.html { redirect_to opportunities_url }
       end
     else
-      flash[:error] = 'No se pudo eliminar la oportunidad, por favor intentarlo nuevamente.'
+      flash[:error] = 'No se pudo eliminar tu oferta, por favor inténtalo nuevamente.'
       redirect_to root_path
     end
   end
@@ -105,7 +105,7 @@ class OpportunitiesController < ApplicationController
     if application.save
       AdministratorMailer.new_apply(@opportunity, current_user.student).deliver_now
 
-      flash[:success] = 'Aplicaste satisfactoriamente a la oferta'
+      flash[:success] = 'Aplicaste exitosamente a esta oferta. Recuerda estar pendiente de tu correo y celular registrados por si la empresa / persona quiere contactarte'
       redirect_to opportunities_path
     else
       flash[:error] = 'Se ha generado un error. Por favor aplica a la oferta nuevamente.'

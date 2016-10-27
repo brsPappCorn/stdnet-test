@@ -31,6 +31,7 @@
 #  areas_to_develop     :text
 #  hobbies              :text
 #  avatar               :string
+#  type_of_student      :integer
 #
 
 class Student < ActiveRecord::Base
@@ -45,6 +46,12 @@ class Student < ActiveRecord::Base
 
   OPTION_FOR_NO = 0
   OPTION_FOR_YES = 1
+
+  TYPE_OF_STUDENT_DAY = 0
+  TYPE_OF_STUDENT_NIGHT = 1
+  TYPE_OF_STUDENT_VIRTUAL = 2
+  TYPE_OF_STUDENT_DIPLOMA_PENDING = 3
+  TYPE_OF_STUDENT_GRADUATE = 4
 
   #---------------------
   # Associations

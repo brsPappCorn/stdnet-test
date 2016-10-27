@@ -4,13 +4,49 @@ module OpportunitiesHelper
     @opportunity.majors.map{ |m| m.major_name }.join(', ')
   end
 
+
+  def opportunities_header_color
+    if current_user.role_id == 2
+      'students-show-view-header'
+    elsif current_user.role_id == 3
+      'companies-signup-header'
+    elsif current_user.role_id == 4
+      'people-signup-header'
+    end
+  end
+
+  def opportunities_tab_content_color
+    if current_user.role_id == 3
+      'company-tab-content'
+    elsif current_user.role_id == 4
+      'person-tab-content'
+    elsif current_user.role_id == 2
+      'company-tab-content student-title-blue'
+    else
+      ''
+    end
+  end
+
+
+
+
+
+
   # Helper method for building rails helper select from constants declared in the model
-  def opportunity_select_type
+  def company_opportunity_select_type
     [
         ['Proyecto virtual', Opportunity::TYPE_VIRTUAL],
-        ['Proyecto personal', Opportunity::TYPE_PERSONAL],
+        ['Proyecto presencial', Opportunity::TYPE_ON_SITE],
         ['Práctica', Opportunity::TYPE_PRACTICE],
-        ['Primer empleo', Opportunity::TYPE_FIRST_JOB]
+        ['Primer empleo', Opportunity::TYPE_FIRST_JOB],
+        ['Trabajo de temporada', Opportunity::TYPE_SEASONAL]
+    ]
+  end
+
+  def person_opportunity_select_type
+    [
+        ['Proyecto virtual', Opportunity::TYPE_VIRTUAL],
+        ['Proyecto presencial', Opportunity::TYPE_ON_SITE]
     ]
   end
 
@@ -22,8 +58,10 @@ module OpportunitiesHelper
       'Proyecto presencial'
     elsif opportunity.opportunity_type == 2
       'Práctica'
-    else
+    elsif opportunity.availability == 3
       'Primer Empleo'
+    elsif opportunity.availability == 4
+      'Trabajo de temporada'
     end
   end
 
@@ -42,7 +80,7 @@ module OpportunitiesHelper
       'Tiempo completo'
     elsif opportunity.availability == 1
       'Medio tiempo'
-    else
+    elsif opportunity.availability == 2
       'Menos de 20 horas por semana'
     end
   end

@@ -17,7 +17,7 @@
               <% if @user_role.role_id == 2 %>
                   <%= @student_user.first_name %>
                   <%= @student_user.last_name %>
-              <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
+              <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
                   <%= @student_user.first_name %>
               <% end %>
             </span>
@@ -42,30 +42,66 @@
 
       <div class="tabbable student-tab-wrapper">
 
-        <ul class="nav nav-tabs student-nav-tabs">
-          <li class="active">
-            <a href="#pane1" data-toggle="tab">
-              Información personal y educación
-            </a>
-          </li>
+        <ul class="nav nav-tabs student-nav-tabs"> <!-- nav-justified -->
 
-          <li>
-            <a href="#pane2" data-toggle="tab">
-              Experiencia laboral
-            </a>
-          </li>
+          <%if params[:opportunity].present?  %>
+              <li class="active li-width-30">
+                <a href="#pane1" data-toggle="tab">
+                  Información personal y educación
+                </a>
+              </li>
 
-          <li>
-            <a href="#pane3" data-toggle="tab">
-              Habilidades
-            </a>
-          </li>
+              <li class="border-left-none" id="studentApplicantXP">
+                <a href="#pane2" data-toggle="tab">
+                  Experiencia laboral
+                </a>
+              </li>
 
-          <li>
-            <a href="#pane4" data-toggle="tab">
-              Descripción
-            </a>
-          </li>
+              <li class="border-left-none li-width-17">
+                <a href="#pane3" data-toggle="tab">
+                  Habilidades
+                </a>
+              </li>
+
+              <li class="border-left-none li-width-17">
+                <a href="#pane4" data-toggle="tab">
+                  Descripción
+                </a>
+              </li>
+
+              <% unless @application.nil? %>
+                  <li class="border-left-none li-width-17">
+                    <a href="#pane6" data-toggle="tab">
+                      Sobre la oferta
+                    </a>
+                  </li>
+              <% end %>
+          <% else %>
+              <li class="active li-width-30">
+                <a href="#pane1" data-toggle="tab">
+                  Información personal y educación
+                </a>
+              </li>
+
+              <li class="border-left-none li-width-23">
+                <a href="#pane2" data-toggle="tab">
+                  Experiencia laboral
+                </a>
+              </li>
+
+              <li class="border-left-none li-width-23">
+                <a href="#pane3" data-toggle="tab">
+                  Habilidades
+                </a>
+              </li>
+
+              <li class="border-left-none li-width-23">
+                <a href="#pane4" data-toggle="tab">
+                  Descripción
+                </a>
+              </li>
+          <% end%>
+
           <!-- TODO: Commented until client decides what to do with this section
           <li>
             <a href="#pane5" data-toggle="tab">
@@ -73,123 +109,55 @@
             </a>
           </li>
           -->
-
-          <% unless @application.nil? %>
-              <% if @application.applied_opportunity.user_id == current_user.id %>
-                  <li>
-                    <a href="#pane6" data-toggle="tab">
-                      Sobre la oferta
-                    </a>
-                  </li>
-              <% end %>
-          <% end %>
         </ul>
 
         <div class="tab-content student-tab-content">
-          <!-- Personal Information -->
+
+          <!-- Personal & Education Info -->
           <div id="pane1" class="tab-pane active">
 
+            <!-- Personal Info -->
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
 
-                <!-- Personal Info Table -->
-                <table class="table studNet-table">
-                  <tbody>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3>
+                      Información personal
+                    </h3>
+                  </div>
+                </div>
 
-                  <tr>
-                    <td>
-                      Nombre:
-                    </td>
-                    <td id="studentMajorName">
-                      <% if @user_role.role_id == 2 %>
-                          <%= @student_user.first_name %>
-                          <%= @student_user.last_name %>
-                      <% elsif @user_role.role_id == 3 || @user_role.role_id == 3 %>
-                          <%= @student_user.first_name %>
-                      <% end %>
-                    </td>
-                  </tr>
 
-                  <tr>
-                    <td>
-                      Carrera:
-                    </td>
-                    <td id="studentMajorBlue">
-                      <% unless @student_user.student.major_id.nil? %>
-                          <%= @student_user.student.major.major_name %>
-                      <% end %>
-                    </td>
-                  </tr>
+                <div class="row">
+                  <div class="col-md-6">
 
-                  <tr>
-                    <td>
-                      Universidad:
-                    </td>
-                    <td>
-                      <% unless @student_user.student.university_id.nil? %>
-                          <%= @student_user.student.university.university_name %>
-                      <% end %>
-                    </td>
-                  </tr>
+                    <table class="table studNet-table">
+                      <tbody>
 
-                  <tr>
-                    <td>
-                      Nivel:
-                    </td>
-                    <td>
-                      <% unless @student_user.student.ed_level_id.nil? %>
-                          <%= @student_user.student.education_level.level_name %>
-                      <% end %>
-                    </td>
-                  </tr>
+                      <tr>
+                        <td>
+                          Nombre:
+                        </td>
+                        <td>
+                          <% if @user_role.role_id == 2 %>
+                              <%= @student_user.first_name %>
+                              <%= @student_user.last_name %>
+                          <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
+                              <%= @student_user.first_name %>
+                          <% end %>
+                        </td>
+                      </tr>
 
-                  <tr>
-                    <td>
-                      Ultimo semestre cursado:
-                    </td>
-                    <td>
-                      <%= @student_user.student.last_semester %>
-                    </td>
-                  </tr>
+                      <tr>
+                        <td>
+                          Edad:
+                        </td>
+                        <td>
+                          <%= "#{user_age} años" %>
+                        </td>
+                      </tr>
 
-                  <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4 ) %>
-                      <!-- TODO: Pending: will show info once company has payed to view students full info. Pending for dev, once this is clarified with client  -->
-                  <% elsif user_signed_in? && (current_user.role_id == 2 ) %>
-                      <% unless @student_user.date_of_birth.nil?  %>
-                          <tr>
-                            <td>
-                              Edad:
-                            </td>
-                            <td>
-                              <%= "#{user_age} años." %>
-                            </td>
-                          </tr>
-                      <% end %>
-                  <% elsif administrator_signed_in? %>
-                      admin
-                  <% end %>
-
-                  <tr>
-                    <td>
-                      Promedio académico:
-                    </td>
-                    <td>
-                      <% unless @student_user.student.gpa.blank?  %>
-                          <%= " #{@student_user.student.gpa} / #{@student_user.student.gpa_max}" %>
-                      <% end %>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      Colegio del que te graduaste:
-                    </td>
-                    <td>
-                      <%= @student_user.student.highschool %>
-                    </td>
-                  </tr>
-
-                  <% if @user_role.role_id == 2 %>
                       <tr>
                         <td>
                           Ciudad en la que vive:
@@ -201,127 +169,256 @@
                         </td>
                       </tr>
 
-                      <tr>
-                        <td>
-                          Número de documento:
-                        </td>
-                        <td>
-                          <%= @student_user.document_number %>
-                        </td>
-                      </tr>
+                      <tbody>
+                    </table>
 
-                      <tr>
-                        <td>
-                          Email:
-                        </td>
-                        <td>
-                          <%= @student_user.email %>
-                        </td>
-                      </tr>
+                  </div>
 
-                      <tr>
-                        <td>
-                          Teléfono de contacto:
-                        </td>
-                        <td>
-                          <%= @student_user.mobile_phone %>
-                        </td>
-                      </tr>
-                  <% end %>
-                  </tbody>
-                </table>
-                <!-- ./Personal Info Table -->
+                  <div class="col-md-6">
+
+                    <table class="table studNet-table">
+                      <tbody>
+
+                      <% if @user_role.role_id == 2 %>
+                          <tr>
+                            <td>
+                              Correo:
+                            </td>
+                            <td>
+                              <%= @student_user.email %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Celular:
+                            </td>
+                            <td>
+                              <%= @student_user.mobile_phone %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Número de documento:
+                            </td>
+                            <td>
+                              <%= @student_user.document_number %>
+                            </td>
+                          </tr>
+                      <% end %>
+
+                      <tbody>
+                      </table>
+
+                  </div>
+
+                </div>
 
               </div>
+              <!-- ./Personal Info Table -->
+            </div>
+            <!-- ./Personal Info -->
 
-              <div class="col-md-6">
+            <!-- ./Education Info -->
+            <div class="row">
+              <div class="col-md-12">
 
-                <!-- TODO: Show a second major + university + city + country -->
-                <!--
-                <h3>
-                  Otra carrera:
-                </h3>
-                -->
+                <div class="row">
+                  <!-- Education Info Table -->
+                  <div class="col-md-6">
 
-                <!-- Education Info Table -->
-                <table class="table studNet-table">
-                  <tbody>
-
-                  <!--  TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major
-                    <tr>
-                      <td>
-                        Carrera:
-                      </td>
-                      <td>
-                        'PENDIENTE
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        Universidad:
-                      </td>
-                      <td>
-                        <% unless @student_user.student.university_id.nil? %>
-                            <%= @student_user.student.university.university_name %>
-                        <% end %>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        Nivel:
-                      </td>
-                      <td>
-                        <% unless @student_user.student.ed_level_id.nil? %>
-                            <%= @student_user.student.education_level.level_name %>
-                        <% end %>
-                      </td>
-                    </tr>
-                    TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major -->
-
-                  </tbody>
-                </table>
-                <!-- ./Education Info Table -->
-
-                <!--  Exchange Info Table-->
-                <% unless @student_user.student.exchange_student == 0 %>
                     <h3>
-                      Intercambio académico:
+                      Educación
                     </h3>
+
 
                     <table class="table studNet-table">
                       <tbody>
 
                       <tr>
                         <td>
-                          Pais de intercambio:
+                          Carrera:
                         </td>
                         <td>
-                          <% unless @student_user.student.country_id.nil? %>
-                              <%= @student_user.student.country.country_name %>
+                          <% unless @student_user.student.major_id.nil? %>
+                              <%= @student_user.student.major.major_name %>
                           <% end %>
                         </td>
                       </tr>
 
                       <tr>
                         <td>
-                          Universidad de intercambio:
+                          Universidad:
                         </td>
                         <td>
-                          <%= @student_user.student.exchange_university %>
+                          <% unless @student_user.student.university_id.nil? %>
+                              <%= @student_user.student.university.university_name %>
+                          <% end %>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Nivel:
+                        </td>
+                        <td>
+                          <% unless @student_user.student.ed_level_id.nil? %>
+                              <%= @student_user.student.education_level.level_name %>
+                          <% end %>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Ultimo semestre cursado:
+                        </td>
+                        <td>
+                          <%= @student_user.student.last_semester %>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Promedio académico:
+                        </td>
+                        <td>
+                          <% unless @student_user.student.gpa.blank?  %>
+                              <%= " #{@student_user.student.gpa} / #{@student_user.student.gpa_max}" %>
+                          <% end %>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Tipo de estudiante:
+                        </td>
+                        <td>
+                          <%#= @student_user.student.highschool %> <!-- TODO: migration needed: add student_type (graduado, etc) -->
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Colegio:
+                        </td>
+                        <td>
+                          <%= @student_user.student.highschool %>
                         </td>
                       </tr>
 
                       </tbody>
                     </table>
-                <% end %>
-                <!--  Exchange Info Table-->
+
+                  </div>
+                  <!-- ./Education Info Table -->
+
+                  <!-- Other Major & Student Exchange Table -->
+                  <div class="col-md-6">
+
+                    <!-- Other Major Table -->
+                    <!-- TODO: Validate other major in order to display it -->
+                    <%# unless @student_user.student.exchange_student.nil? || @student_user.student.exchange_university.nil? %>
+                    <!--
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h3>
+                          Otra carrera
+                        </h3>
+
+                        <table class="table studNet-table">
+                          <tbody>
+
+                          <tr>
+                            <td>
+                              Carrera:
+                            </td>
+                            <td>
+                              <%# TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major %>
+                              'PENDIENTE
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Universidad:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.university_id.nil? %>
+                                  <%= @student_user.student.university.university_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Nivel:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.ed_level_id.nil? %>
+                                  <%= @student_user.student.education_level.level_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                        <!-- TODO: Students/show - pending for development: possibility to add another major + other university + other level for the other major -->
+                    <%# end %>
+                    <!-- ./Other Major Table -->
+
+                    <!-- Student Exchange Table -->
+                    <% unless @student_user.student.exchange_student.nil? || @student_user.student.exchange_university.nil? %>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h3>
+                              Intercambio académico
+                            </h3>
+
+                            <% unless @student_user.student.exchange_student == 0 %>
+                                <table class="table studNet-table">
+                                  <tbody>
+
+                                  <tr>
+                                    <td>
+                                      Universidad de intercambio:
+                                    </td>
+                                    <td>
+                                      <%= @student_user.student.exchange_university %>
+                                    </td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>
+                                      Pais de intercambio:
+                                    </td>
+                                    <td>
+                                      <% unless @student_user.student.country_id.nil? %>
+                                          <%= @student_user.student.country.country_name %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+
+                                  </tbody>
+                                </table>
+                            <% end %>
+                          </div>
+                        </div>
+                    <% end %>
+                    <!-- ./Student Exchange Table -->
+                  </div>
+                  <!-- ./Other Major & Student Exchange Table -->
+                </div>
+
               </div>
             </div>
+            <!-- ./Education Info -->
 
           </div>
-          <!-- ./Personal Information -->
+          <!-- ./Personal & Education Info -->
+
 
           <!-- Experience -->
           <div id="pane2" class="tab-pane">
@@ -589,7 +686,7 @@
 
                 <p>
                   Como te enteraste de studNet?:
-                  <%= @student_user.referenced_by %>
+                  <%= student_referenced_by_select_friendly(@student_user) %>
                 </p>
 
               </div>
@@ -675,7 +772,8 @@
         <div class="row">
           <div class="col-md-12 text-center student-actions-wrapper">
             <% if @user_role.role_id == 2 %>
-                <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet' %>
+                <%= link_to 'Editar perfil', edit_user_path(@student_user), class: 'btn btn-primary btn-studnet-basic' %>
+                <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
             <% elsif (@user_role.role_id == 3 || @user_role.role_id == 4) && params[:opportunity] %>
                 <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet' %>
 

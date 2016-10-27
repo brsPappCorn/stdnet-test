@@ -12,89 +12,110 @@
     <% end %>
 
     <div class="student-tab-wrapper ">
-      <div class="student-tab-content">
+      <div class="student-tab-content person-tab-content">
 
         <div class="row">
-          <div class="col-md-12 text-center">
-            <h3>
-              Datos de contacto
-            </h3>
-          </div>
-        </div>
-
-        <div class="row">
-
-          <!-- Contact Info Wrapper -->
           <div class="col-md-6">
 
-            <div class="form-group">
-              <%= f.label :first_name, 'Nombre(s)' %><br>
-              <%= f.text_field :first_name, class: 'form-control input-width' %>
+            <div class="row">
+              <div class="col-md-12">
+                <h3>
+                  Información de la persona
+                </h3>
+              </div>
             </div>
 
-            <div class="form-group">
-              <%= f.label :last_name, 'Apellidos' %><br>
-              <%= f.text_field :last_name, class: 'form-control input-width' %>
-            </div>
+            <div class="row">
+              <div class="col-md-12">
 
-            <div class="form-group">
-              <%= f.label :document_number, 'Documento de identidad' %><br>
-              <%= f.text_field :document_number, class: 'form-control input-width' %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :mobile_phone, 'Teléfono de contacto' %><br>
-              <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
-            </div>
-
-          </div>
-          <!-- ./Contact Info Wrapper -->
-
-          <!-- Company Info Wrapper -->
-          <div class="col-md-6">
-
-            <div class="form-group">
-              <%= f.label :country_id, 'Pais' %><br>
-              <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, class: 'form-control input-width' %>
-            </div>
-
-            <div class="form-group" id="userCity">
-              <%= f.label :city_id, 'Ciudad' %><br>
-              <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
-            </div>
-
-            <!-- Nested form (person) -->
-            <%= f.fields_for :person, @user.company do |person| %>
-                <div class="users-companies-company-info-wrapper">
-
-                  <div class="form-group">
-                    <%= person.label :profession, 'Profesión / Carrera' %><br>
-                    <%= person.text_field :profession, class: 'form-control input-width' %>
-                  </div>
-
-                  <div class="form-group">
-                    <%= person.label :occupation, 'Ocupación' %><br>
-                    <%= person.text_field :occupation, class: 'form-control input-width' %>
-                  </div>
-
+                <div class="form-group">
+                  <%= f.label :first_name, 'Nombre(s)' %><br>
+                  <%= f.text_field :first_name, class: 'form-control input-width' %>
                 </div>
-            <% end %>
-            <!-- ./Nested form (person) -->
 
-            <div class="form-group">
-              <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
-              <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
+                <div class="form-group">
+                  <%= f.label :last_name, 'Apellidos' %><br>
+                  <%= f.text_field :last_name, class: 'form-control input-width' %>
+                </div>
+
+                <!-- Nested form (person) -->
+                <%= f.fields_for :person, @user.company do |person| %>
+                    <div class="users-companies-company-info-wrapper">
+
+                      <div class="form-group">
+                        <%= person.label :occupation, 'Ocupación' %><br>
+                        <%= person.text_field :occupation, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= person.label :profession, 'Profesión / Carrera' %><br>
+                        <%= person.text_field :profession, class: 'form-control input-width' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :document_number, 'Documento de identidad' %><br>
+                        <%= f.text_field :document_number, class: 'form-control input-width' %>
+                      </div>
+
+                    </div>
+                <% end %>
+                <!-- ./Nested form (person) -->
+              </div>
             </div>
 
-            <!-- ./Nested form (company) -->
+          </div>
+
+          <div class="col-md-6">
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <h3>
+                  Datos de contacto
+                </h3>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="form-group">
+                  <%= f.label :mobile_phone, 'Teléfono de contacto' %><br>
+                  <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :country_id, 'Pais' %><br>
+                  <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, class: 'form-control input-width' %>
+                </div>
+
+                <div class="form-group" id="userCity">
+                  <%= f.label :city_id, 'Ciudad' %><br>
+                  <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
+                  <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
+                </div>
+
+                <div class="form-group margin-bot-40">
+                  <%= f.label :promo_id, 'Código promocional' %><br />
+                  <%= f.text_field :promo_id, class: 'form-control input-width' %>
+                </div>
+
+              </div>
+            </div>
 
           </div>
-          <!-- ./Company Info Wrapper -->
-
         </div>
 
-        <div class="actions text-right">
-          <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="actions text-center">
+              <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
+            </div>
+          </div>
         </div>
 
       </div>

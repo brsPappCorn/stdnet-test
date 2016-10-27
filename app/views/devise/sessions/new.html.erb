@@ -1,89 +1,138 @@
 <section class="devise-wrapper">
-  <!-- Sign In Account Type Selection -->
-  <% if current_page?(new_user_session_path(studnet: 2)) || current_page?(new_user_session_path(studnet: 3)) || current_page?(new_user_session_path(studnet: 4)) %>
-
-      <!-- Sign In Form -->
-      <div class="devise-signup-wrapper students-signup-wrapper">
-
-        <div class="sign-in-title">
-          <div class="container">
+  <% if params[:studnet].to_i == 2 %>
+      <div class="students-signup-header">
+        <div class="container">
+          <div class="row">
             <div class="col-md-12">
-              <h3>
-                Iniciar sesión como
-                <% if current_page?(new_user_session_path(studnet: 2)) %>
-                    estudiante.
-                <% else %>
-                    empresa / persona.
-                <% end %>
-              </h3>
+              <p>
+                Iniciar sesión como estudiante
+              </p>
             </div>
           </div>
         </div>
+      </div>
+  <% elsif params[:studnet].to_i == 3 || params[:studnet].to_i == 4 %>
+      <div class="companies-signup-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                Iniciar sesión como empresa / persona
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% else %>
+      <div class="students-signup-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                Iniciar sesión
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
 
-        <div class="container sign-in-form">
+  <!-- Sign In Form -->
+  <div class="devise-signup-wrapper students-signup-wrapper">
+    <div class="container sign-in-form">
 
+      <% if params[:studnet].to_i == 2 %>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            ¿Quieres publicar una oferta? Ingresa como
+            <%= link_to 'empresa / persona', new_user_session_path(studnet: 3) %>
+          </p>
+        </div>
+      </div>
+      <% elsif params[:studnet].to_i == 3 || params[:studnet].to_i == 4 %>
           <div class="row">
             <div class="col-md-12 text-center">
-              <h3>
-                Por favor ingresa tu correo y contraseña para iniciar sesión en la plataforma
-              </h3>
+              <p>
+                ¿Quieres aplicar a una oferta? Ingresa como
+                <%= link_to 'estudiante', new_user_session_path(studnet: 2) %>
+              </p>
             </div>
           </div>
-
+      <% else %>
           <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-              <!-- Form -->
-              <%= render 'devise/sessions/form' %>
-
-              <!-- Form -->
-
+            <div class="col-md-12 text-center">
+              <p>
+                Por favor ingresa tu correo y contraseña para iniciar sesión en la plataforma
+              </p>
             </div>
           </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+          <!-- Form -->
+          <%= render 'devise/sessions/form' %>
+
+          <!-- Form -->
 
         </div>
       </div>
-      <!-- ./Sign In Form -->
-  <% else %>
-      <!-- Companies/People preselection view -->
-      <div class="root-index-wrapper">
-        <div class="root-index-hero-bg-wrapper sign-in-wrapper-bg text-center">
-          <div class="container index-container-hero">
 
-            <div class="row">
-              <!-- Index Hero Left -->
-              <div class="col-md-6 root-index-hero-cont">
-                <h2>
-                  Empresas
-                </h2>
-                <h4>
-                  Publica tus ofertas de proyectos, prácticas y trabajos para estudiantes universitarios y recién egresados. Recibe aplicaciones y selecciona al candidato ideal
-                </h4>
-                <h6>
-                  <%= link_to 'Ingresar', new_user_session_path(studnet: 3), class: 'btn btn-primary btn-studnet-hero-index' %>
-                </h6>
-              </div>
-              <!-- ./Index Hero Left -->
-
-              <!-- Index Hero Right -->
-              <div class="col-md-6 root-index-hero-cont">
-                <h2>
-                  Personas
-                </h2>
-                <h4>
-                  ¿Necesitas una traducción, diseñar un logo, una página web, hacer encuestas, investigaciones, resúmenes u otros proyectos? Publica tu oferta y selecciona al candidato ideal
-                </h4>
-                <h6>
-                  <%= link_to 'Ingresar', new_user_session_path(studnet: 4), class: 'btn btn-primary btn-studnet-hero-index' %>
-                </h6>
-              </div>
-              <!-- ./Index Hero Right -->
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <!-- ./Companies/People preselection view -->
-  <% end %>
-  <!-- ./Sign In Account Type Selection -->
-
+    </div>
+  </div>
+  <!-- ./Sign In Form -->
 </section>
+
+
+
+
+
+
+
+
+
+
+<%# if current_page?(new_user_session_path(studnet: 2)) || current_page?(new_user_session_path(studnet: 3)) || current_page?(new_user_session_path(studnet: 4)) %>
+
+<%# else %>
+<!-- Companies/People preselection view
+<div class="root-index-wrapper">
+  <div class="root-index-hero-bg-wrapper sign-in-wrapper-bg text-center">
+    <div class="container index-container-hero">
+
+      <div class="row">
+        <!-- Index Hero Left
+        <div class="col-md-6 root-index-hero-cont">
+          <h2>
+            Empresas
+          </h2>
+          <h4>
+            Publica tus ofertas de proyectos, prácticas y trabajos para estudiantes universitarios y recién egresados. Recibe aplicaciones y selecciona al candidato ideal
+          </h4>
+          <h6>
+            <%#= link_to 'Ingresar', new_user_session_path(studnet: 3), class: 'btn btn-primary btn-studnet-hero-index' %>
+          </h6>
+        </div>
+        <!-- ./Index Hero Left -->
+
+<!-- Index Hero Right
+        <div class="col-md-6 root-index-hero-cont">
+          <h2>
+            Personas
+          </h2>
+          <h4>
+            ¿Necesitas una traducción, diseñar un logo, una página web, hacer encuestas, investigaciones, resúmenes u otros proyectos? Publica tu oferta y selecciona al candidato ideal
+          </h4>
+          <h6>
+            <%#= link_to 'Ingresar', new_user_session_path(studnet: 4), class: 'btn btn-primary btn-studnet-hero-index' %>
+          </h6>
+        </div>
+        <!-- ./Index Hero Right
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ./Companies/People preselection view -->
+<%# end %>

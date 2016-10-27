@@ -12,7 +12,7 @@
     <% end %>
 
     <div class="student-tab-wrapper ">
-      <div class="student-tab-content">
+      <div class="student-tab-content company-tab-content">
         <div class="row">
 
           <!-- Contact Info Wrapper -->
@@ -89,7 +89,7 @@
                   </div>
 
                   <div class="form-group">
-                    <%= c.label :company_description, 'Breve descripción de tu empresa' %><br>
+                    <%= c.label :company_description, 'Breve descripción de la empresa' %><br>
                     <%= c.text_area :company_description, rows: 5, class: 'form-control input-width' %>
                   </div>
 
@@ -107,7 +107,6 @@
                     <%= c.label :company_website_url, 'Página web' %><br>
                     <%= c.text_field :company_website_url, class: 'form-control input-width' %>
                   </div>
-
                 </div>
             <% end %>
 
@@ -116,6 +115,10 @@
               <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
             </div>
 
+            <div class="form-group margin-bot-40">
+              <%= f.label :promo_id, 'Código promocional' %><br />
+              <%= f.text_field :promo_id, class: 'form-control input-width' %>
+            </div>
             <!-- ./Nested form (company) -->
 
           </div>
@@ -123,7 +126,7 @@
 
         </div>
 
-        <div class="actions text-right">
+        <div class="actions text-center">
           <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
         </div>
 

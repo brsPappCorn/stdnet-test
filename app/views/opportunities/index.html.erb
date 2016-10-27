@@ -1,4 +1,18 @@
-<section class="studNet-wrapper">
+<section class="devise-wrapper">
+  <div class="students-signup-header ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Mis ofertas
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="studNet-wrapper padding-bot-40">
   <div class="container">
 
     <!-- List of opportunities that apply to me -->
@@ -9,11 +23,14 @@
           Posibles ofertas para mi
         </h1>
 
-        <table class="table table-striped">
+        <table class="table table-striped opportunity-table">
           <thead>
           <tr>
             <th>
               Empresa oferente
+            </th>
+            <th>
+              Tipo de Proyecto
             </th>
             <th>
               Nombre de la oferta
@@ -45,13 +62,21 @@
                   <% end %>
                 </td>
                 <td>
+                  <%= opportunity_type_friendly(opportunity)  %>
+                </td>
+                <td>
                   <%= opportunity.opportunity_title %>
                 </td>
                 <td>
                   <%= opportunity.created_at.strftime('%d/%m/%Y') %>
                 </td>
                 <td>
-                  <%= opportunity.opportunity_duration %>
+                  <% if opportunity.opportunity_duration.nil? ||opportunity.opportunity_duration.blank? %>
+                      <%= opportunity_duration_type_friendly(opportunity )%>
+                  <% else %>
+                      <%= opportunity.opportunity_duration %>
+                  <% end %>
+
                 </td>
                 <td>
                   <%= opportunity_availability_friendly(opportunity) %>
@@ -63,7 +88,7 @@
                       <%= opportunity.opportunity_cost %>
                   <% end %>
                 </td>
-                <td><%= link_to 'Detalles', opportunity_path(opportunity) %></td>
+                <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-default btn-studnet-details' %></td>
 
               </tr>
           <% end %>
@@ -79,13 +104,13 @@
     <% if user_signed_in? && (@user_role.role_id == 3 || @user_role.role_id == 4) %>
         <div class="row">
           <div class="col-md-12 text-center">
-            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
+            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
           </div>
         </div>
     <% elsif user_signed_in? && @user_role.role_id == 2 %>
         <div class="row">
           <div class="col-md-12 text-center">
-            <%= link_to 'Ver mis ofertas', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studnet' %>
+            <%= link_to 'Ver mis ofertas', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
           </div>
         </div>
     <% end %>

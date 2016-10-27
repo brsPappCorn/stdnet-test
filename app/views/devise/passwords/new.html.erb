@@ -1,31 +1,50 @@
 <section class="devise-wrapper">
-
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3 text-center admin-form">
-
-      <h2>
-        ¿Olvidaste tu contraseña?
-      </h2>
-
-      <!-- Form -->
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-          <%= devise_error_messages! %>
-
-          <div class="form-group">
-            <%= f.label :email, 'Correo Electrónico' %><br />
-            <%= f.email_field :email, autofocus: true, class: 'form-control input-width' %>
-          </div>
-
-          <div class="actions text-right">
-            <%= f.submit 'Recuperar contraseña', class: 'btn btn-primary btn-studnet-basic' %>
-          </div>
-      <% end %>
-
-      <div class="text-right">
-        <%= render 'devise/shared/links' %>
+  <div class="students-signup-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            ¿Olvidaste tu contraseña?
+          </p>
+        </div>
       </div>
-      <!-- Form -->
     </div>
   </div>
 
+  <div class="devise-signup-wrapper students-signup-wrapper">
+    <div class="container sign-in-form">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            Por favor ingresa tu correo para recuperar tu contraseña
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center admin-form">
+          <!-- Form -->
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="form-group">
+                <%= f.email_field :email, autofocus: true, placeholder: 'Correo Electrónico', class: 'form-control input-width' %>
+              </div>
+
+              <div class="actions text-right">
+                <%= f.submit 'Recuperar contraseña', class: 'btn btn-primary btn-studnet-basic' %>
+              </div>
+          <% end %>
+
+          <div class="text-right">
+            <%= render 'devise/shared/links' %>
+          </div>
+          <!-- Form -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </section>
