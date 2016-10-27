@@ -18,10 +18,91 @@
 
 }
 
+
 .studNet-form {
   &.no-border {
     border: none;
   }
 
+}
 
+.opportunity-links {
+  margin-top: 20px;
+}
+
+//========================
+// INDEX
+//========================
+.opportunity-table {
+  tbody {
+    tr {
+      td {
+        padding-top: 8px;
+      }
+
+      td:last-child {
+        padding-bottom: 2px;
+        padding-top: 2px;
+      }
+    }
+  }
+
+}
+
+//========================
+// APPLICATION FORM
+//========================
+.opportunity-value {
+  label {
+    margin-bottom: 0;
+  }
+
+  h6 {
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+}
+
+//========================
+// FORM
+//========================
+.opportunity-question-for-student {
+  label {
+    margin-bottom: 0;
+  }
+
+  h6 {
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+}
+
+
+//========================
+// MY OPPORTUNITIES
+//========================
+.my-opportunities-table {
+  tbody {
+    tr {
+      td {
+        padding-top: 8px;
+      }
+
+      td:nth-child(n+5) {
+        padding-bottom: 2px;
+        padding-top: 2px;
+      }
+    }
+  }
+
+}
+
+
+//========================
+// APPLICANTS
+//========================
+#applicantsGetInfo {
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
 }

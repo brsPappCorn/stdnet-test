@@ -30,9 +30,10 @@ class Opportunity < ActiveRecord::Base
   # Constants
   #---------------------
   TYPE_VIRTUAL = 0
-  TYPE_PERSONAL = 1
+  TYPE_ON_SITE = 1
   TYPE_PRACTICE = 2
   TYPE_FIRST_JOB = 3
+  TYPE_SEASONAL = 4
 
   AVAILABILITY_FULL_TIME = 0
   AVAILABILITY_PART_TIME = 1
@@ -64,7 +65,7 @@ class Opportunity < ActiveRecord::Base
   # Validations
   #---------------------
   validates_presence_of :opportunity_type, :opportunity_title, :activity_description, :skills_description, :major_ids,
-                        :question_for_student, :availability, :cost_or_offer_option, :opportunity_cost,
+                        :question_for_student, :availability, :opportunity_cost,
                         :number_of_students, :user_id, :date_ini_type, :opportunity_duration_type
 
   #---------------------

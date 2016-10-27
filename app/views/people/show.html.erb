@@ -1,106 +1,155 @@
-<section class="studNet-wrapper student-tab-wrapper">
+<section class="devise-wrapper">
+  <div class="people-signup-header margin-bot-40">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Ver perfil de persona
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="studNet-wrapper student-tab-wrapper padding-bot-40">
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 student-tab-content">
+      <div class="col-md-10 col-md-offset-1 student-tab-content person-tab-content">
 
-        <!-- Person Info -->
         <div class="row">
-          <!-- Contact Info -->
-          <div class="col-md-6 text-center">
-            <h3>
-              Datos de contacto
-            </h3>
+          <!-- Person Info -->
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <h3>
+                  Información de la persona
+                </h3>
+              </div>
+            </div>
 
-            <table class="table studNet-table">
-              <tbody>
+            <div class="row">
+              <div class="col-md-12">
 
-              <tr>
-                <td>
-                  Nombre:
-                </td>
-                <td>
-                  <%= "#{@user.first_name} #{@user.last_name}" %>
-                </td>
-              </tr>
+                <table class="table studNet-table">
+                  <tbody>
+                  <tr>
+                    <td>
+                      Nombre:
+                    </td>
+                    <td>
+                      <%= "#{@user.first_name} #{@user.last_name}" %>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td>
-                  Ocupación:
-                </td>
-                <td>
-                  <%= @person.occupation %>
-                </td>
-              </tr>
+                  <tr>
+                    <td>
+                      Ocupación:
+                    </td>
+                    <td>
+                      <%= @person.occupation %>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td>
-                  Profesión:
-                </td>
-                <td>
-                  <%= @person.profession %>
-                </td>
-              </tr>
+                  <tr>
+                    <td>
+                      Profesión:
+                    </td>
+                    <td>
+                      <%= @person.profession %>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td>
-                  Email de tu cuenta:
-                </td>
-                <td>
-                  <%= @user.email %>
-                </td>
-              </tr>
+                  <tr>
+                    <td>
+                      Documento de identidad:
+                    </td>
+                    <td>
+                      <%= @user.document_number %>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
 
-              <tr>
-                <td>
-                  Teléfono de tu cuenta:
-                </td>
-                <td>
-                  <%= @user.mobile_phone %>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  Ciudad:
-                </td>
-                <td>
-                  <% unless @user.city_id.nil? %>
-                      <%= @user.city.city_name %>
-                  <% end %>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  País:
-                </td>
-                <td>
-                  <% unless @user.country_id.nil? %>
-                      <%= @user.country.country_name %>
-                  <% end %>
-                </td>
-              </tr>
-
-              </tbody>
-            </table>
-
+              </div>
+            </div>
           </div>
+          <!-- ./Person Info -->
+
           <!-- Contact Info -->
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <h3>
+                  Datos de contacto
+                </h3>
+              </div>
+            </div>
 
-        </div>
-        <!-- ./Person Info -->
+            <div class="row">
+              <div class="col-md-12">
 
-        <!-- Actions -->
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <%= link_to 'Crear Oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
-            <%= link_to 'Editar Perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
+                <table class="table studNet-table">
+                  <tbody>
+                  <tr>
+                    <td>
+                      Email de tu cuenta:
+                    </td>
+                    <td>
+                      <%= @user.email %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Teléfono de tu cuenta:
+                    </td>
+                    <td>
+                      <%= @user.mobile_phone %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      País:
+                    </td>
+                    <td>
+                      <% unless @user.country_id.nil? %>
+                          <%= @user.country.country_name %>
+                      <% end %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Ciudad:
+                    </td>
+                    <td>
+                      <% unless @user.city_id.nil? %>
+                          <%= @user.city.city_name %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
           </div>
+          <!-- ./Contact Info -->
         </div>
-        <!-- ./Actions-->
       </div>
     </div>
+
+    <!-- Actions -->
+    <div class="row">
+      <div class="col-md-12 student-actions-wrapper text-center">
+        <%= link_to 'Crear Oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
+        <%= link_to 'Editar Perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
+      </div>
+    </div>
+    <!-- ./Actions-->
 
   </div>
 </section>

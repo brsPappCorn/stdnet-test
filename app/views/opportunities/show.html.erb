@@ -1,14 +1,32 @@
-<section class="studNet-wrapper student-tab-wrapper opportunity-wrapper">
+<section class="devise-wrapper">
+  <div class="students-show-view-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Ver oferta
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="studNet-wrapper student-tab-wrapper opportunity-wrapper padding-bot-40">
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 student-tab-content ">
+      <div class="col-md-10 col-md-offset-1 student-tab-content <%= opportunities_tab_content_color %>">
 
-        <h1 class="text-center">
-          Detalles de
-          <%= @opportunity.opportunity_title %>
-          <br>
-        </h1>
+        <div class="row">
+          <div class="col-md-6 margin-bot-20">
+            <h3>
+              <%= @opportunity.opportunity_title %>
+            </h3>
+
+          </div>
+        </div>
+
 
         <div class="row">
           <div class="col-md-6">
@@ -16,7 +34,10 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  Tipo de oferta:
+                  <strong>
+                    Tipo de oferta:
+                  </strong>
+                  <br>
                   <%= opportunity_type_friendly(@opportunity) %>
                 </p>
               </div>
@@ -24,26 +45,24 @@
 
             <div class="row">
               <div class="col-md-12">
-                <h4>
-                  Descripción de las actividades a realizar:
-                </h4>
                 <p>
                   <strong>
-                    <%= @opportunity.activity_description %>
+                    Actividades a realizar:
                   </strong>
+                  <br>
+                  <%= @opportunity.activity_description %>
                 </p>
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-12">
-                <h4>
-                  Descripción de las habilidades y conocimientos requeridos:
-                </h4>
                 <p>
                   <strong>
-                    <%= @opportunity.skills_description %>
+                    Habilidades y conocimientos requeridos:
                   </strong>
+                  <br>
+                  <%= @opportunity.skills_description %>
                 </p>
               </div>
             </div>
@@ -63,7 +82,10 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  Carreras:
+                  <strong>
+                    Carreras:
+                  </strong>
+                  <br>
                   <%= opportunity_majors_by_comma %>
                 </p>
               </div>
@@ -77,10 +99,16 @@
               <div class="col-md-12">
                 <p>
                   <% if @opportunity.date_ini_type.to_i == 2 %>
-                      Fecha de inicio:
+                      <strong>
+                        Fecha de inicio del trabajo / proyecto:
+                      </strong>
+                      <br>
                       <%= @opportunity.date_ini.strftime('%Y/%m/%d ') %>
                   <% else %>
-                      Fecha de inicio:
+                      <strong>
+                        Fecha de inicio del trabajo / proyecto:
+                      </strong>
+                      <br>
                       <%= opportunity_date_ini_type_friendly(@opportunity) %>
                   <% end %>
                 </p>
@@ -91,10 +119,16 @@
               <div class="col-md-12">
                 <p>
                   <% if @opportunity.opportunity_duration_type.to_i == 1 %>
-                      Duración del trabajo (en días, semanas o meses):
+                      <strong>
+                        Duración del trabajo / proyecto:
+                      </strong>
+                      <br>
                       <%= @opportunity.opportunity_duration %>
                   <% else %>
-                      Duración del trabajo:
+                      <strong>
+                        Duración del trabajo / proyecto:
+                      </strong>
+                      <br>
                       <%= opportunity_duration_type_friendly(@opportunity) %>
                   <% end %>
                 </p>
@@ -104,7 +138,10 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  Tiempo requerido del estudiante:
+                  <strong>
+                    Tiempo requerido del estudiante:
+                  </strong>
+                  <br>
                   <%= opportunity_availability_friendly(@opportunity) %>
                 </p>
               </div>
@@ -115,10 +152,17 @@
                   <div class="col-md-12">
                     <p>
                       <% if @opportunity.cost_or_offer_option.to_i == 0 %>
-                          Valor: $
-                          <%= @opportunity.opportunity_cost %>
+                          <strong>
+                            Salario / valor del proyecto:
+                          </strong>
+                          <br>
+                          <%= "COP #{@opportunity.opportunity_cost}" %>
                       <% else %>
-                          Valor: <%= opportunity_cost_or_offer_friendly(@opportunity) %>
+                          <strong>
+                            Salario / valor del proyecto:
+                          </strong>
+                          <br>
+                          <%= opportunity_cost_or_offer_friendly(@opportunity) %>
                       <% end %>
                     </p>
                   </div>
@@ -128,7 +172,10 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  Número de estudiantes que necesitamos:
+                  <strong>
+                    Número de estudiantes:
+                  </strong>
+                  <br>
                   <%= @opportunity.number_of_students %>
                 </p>
               </div>
@@ -137,32 +184,30 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <% unless administrator_signed_in?  %>
-                <% if @user_role.role_id == 2 %>
-                    <!-- TODO: Opportunities/show - make it work like twitter follow/unfollow like the one on rails tutorial. Student can only apply once. Or have the button apply once, the next time he clicks apply, he cancels the application to the offer -->
-                    <!-- TODO: Opportunities/show - allow User (student) to apply to an offer only once, pending for development -->
-                    <% if @user_role.profile_incomplete? %>
-                        <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
-                        <%= link_to 'Terminar perfil', edit_user_path(@user_role), class: 'btn btn-primary btn-studNet' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-center student-actions-wrapper">
+        <% unless administrator_signed_in?  %>
+            <% if @user_role.role_id == 2 %>
+                <% if @user_role.profile_incomplete? %>
+                    <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
+                    <%= link_to 'Terminar perfil', edit_user_path(@user_role), class: 'btn btn-primary btn-studnet-basic' %>
+                <% else %>
+                    <% if @opportunity.student_has_applied?(current_user) %>
+                        <%= link_to 'Ya aplicaste a la oferta', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
                     <% else %>
-                        <% if @opportunity.student_has_applied?(current_user) %>
-                            <%= link_to 'Ya aplicaste a la oferta', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studNet' %>
-                        <% else %>
-                            <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studNet' %>
-                        <% end %>
+                        <%= link_to 'Aplicar', application_form_opportunity_path(@opportunity), class: 'btn btn-primary btn-studnet-basic' %>
                     <% end %>
-
-                    <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studNet' %>
-                <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
-                    <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studNet' %>
-                    <%= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
                 <% end %>
-            <% end %>
-          </div>
-        </div>
 
+                <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
+            <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
+                <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studnet-basic' %>
+                <%#= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
+            <% end %>
+        <% end %>
       </div>
     </div>
 

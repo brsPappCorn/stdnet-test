@@ -701,6 +701,7 @@ Tool.create([
                 { tool_name: 'Excel - Tablas dinámicas' },
                 { tool_name: 'Final Cut' },
                 { tool_name: 'GAMS' },
+                { tool_name: 'Google Docs' },
                 { tool_name: 'Google Forms' },
                 { tool_name: 'HELISA' },
                 { tool_name: 'HFSS' },
@@ -727,6 +728,7 @@ Tool.create([
                 { tool_name: 'Statgraphics' },
                 { tool_name: 'Survey Monkey' },
                 { tool_name: 'Windows Movie Maker' },
+                { tool_name: 'Wix' },
                 { tool_name: 'WordPress' }
             ])
 
@@ -759,7 +761,7 @@ Sector.create([
                   { sector_name: 'Electronico' },
                   { sector_name: 'Farmaceutico' },
                   { sector_name: 'Financiero' },
-                  { sector_name: 'Informatico y Software' },
+                  { sector_name: 'Informático y software' },
                   { sector_name: 'Inmobiliario' },
                   { sector_name: 'Medio Ambiente' },
                   { sector_name: 'Metalúrgico' },

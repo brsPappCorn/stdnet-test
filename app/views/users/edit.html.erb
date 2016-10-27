@@ -1,15 +1,29 @@
 <section class="studNet-wrapper profile-wrapper">
-  <div class="container">
 
-    <% if @user.role_id == 2 %>
+  <% if @user.role_id == 2 %>
+      <!-- Student Edit -->
+      <section class="devise-wrapper">
+        <div class="students-show-view-header">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  Editar perfil de estudiante
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Student Edit -->
+      <div class="container">
+
         <div class="row">
           <div class="col-md-10 col-md-offset-1 student-edit-wrapper">
 
-            <h3>
-              Student Form
-            </h3>
+            <h2 class="text-center">
+              Perfil del estudiante
+            </h2>
 
             <div class="tabbable student-tab-wrapper">
               <!--  -->
@@ -20,24 +34,25 @@
                   </a>
                 </li>
 
-                <li>
+                <li class="border-left-none li-width-18">
                   <a href="#pane2" data-toggle="tab">
                     Experiencia laboral
                   </a>
                 </li>
 
-                <li>
+                <li class="border-left-none li-width-18">
                   <a href="#pane3" data-toggle="tab">
                     Habilidades
                   </a>
                 </li>
 
-                <li>
+                <li class="border-left-none li-width-18">
                   <a href="#pane4" data-toggle="tab">
                     Descripción
                   </a>
                 </li>
-                <li>
+
+                <li class="border-left-none li-width-18">
                   <a href="#pane5" data-toggle="tab">
                     Otros
                   </a>
@@ -53,11 +68,29 @@
 
           </div>
         </div>
-        <!-- ./Student Edit -->
 
-    <% elsif @user.role_id == 3 %>
+      </div>
+      <!-- ./Student Edit -->
 
-        <!-- Company Edit -->
+  <% elsif @user.role_id == 3 %>
+
+      <!-- Company Edit -->
+      <section class="devise-wrapper">
+        <div class="companies-signup-header margin-bot-40">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  Editar perfil de empresa
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+
         <div class="row">
           <div class="col-md-10 col-md-offset-1 student-edit-wrapper">
 
@@ -65,11 +98,29 @@
 
           </div>
         </div>
-        <!-- ./Company Edit -->
 
-    <% elsif @user.role_id == 4 %>
+      </div>
+      <!-- ./Company Edit -->
 
-        <!-- Company Edit -->
+  <% elsif @user.role_id == 4 %>
+
+      <!-- Company Edit -->
+      <section class="devise-wrapper">
+        <div class="people-signup-header margin-bot-40">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  Editar perfil de persona
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+
         <div class="row">
           <div class="col-md-10 col-md-offset-1 student-edit-wrapper">
 
@@ -77,10 +128,12 @@
 
           </div>
         </div>
-        <!-- Company Edit -->
 
-    <% end %>
-  </div>
+      </div>
+      <!-- Company Edit -->
+
+  <% end %>
+
 </section>
 
 <script type="text/javascript">

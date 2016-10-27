@@ -1,13 +1,27 @@
-<section class="studNet-wrapper student-tab-wrapper">
+<section class="devise-wrapper">
+  <div class="companies-signup-header margin-bot-40">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Ver perfil de estudiante
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="studNet-wrapper student-tab-wrapper padding-bot-40">
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 student-tab-content">
+      <div class="col-md-10 col-md-offset-1 student-tab-content company-tab-content">
 
         <!-- Company Info -->
         <div class="row">
           <!-- Contact Info -->
-          <div class="col-md-6 text-center">
+          <div class="col-md-6">
             <h3>
               Datos de contacto
             </h3>
@@ -35,7 +49,7 @@
 
               <tr>
                 <td>
-                  Email de tu cuenta:
+                  Correo:
                 </td>
                 <td>
                   <%= @user.email %>
@@ -62,22 +76,22 @@
 
               <tr>
                 <td>
-                  Ciudad:
+                  País:
                 </td>
                 <td>
-                  <% unless @user.city_id.nil? %>
-                      <%= @user.city.city_name %>
+                  <% unless @user.country_id.nil? %>
+                      <%= @user.country.country_name %>
                   <% end %>
                 </td>
               </tr>
 
               <tr>
                 <td>
-                  País:
+                  Ciudad:
                 </td>
                 <td>
-                  <% unless @user.country_id.nil? %>
-                      <%= @user.country.country_name %>
+                  <% unless @user.city_id.nil? %>
+                      <%= @user.city.city_name %>
                   <% end %>
                 </td>
               </tr>
@@ -89,7 +103,7 @@
           <!-- Contact Info -->
 
           <!-- Company Info -->
-          <div class="col-md-6 text-center">
+          <div class="col-md-6">
             <h3>
               Información de la empresa:
             </h3>
@@ -160,21 +174,21 @@
           <!-- Company Info -->
         </div>
         <!-- ./Company Info -->
-
-        <!-- Actions -->
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <% if @user.profile_incomplete? %>
-                <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
-            <% else %>
-                <%= link_to 'Crear Oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
-            <% end %>
-            <%= link_to 'Editar Perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
-          </div>
-        </div>
-        <!-- ./Actions-->
       </div>
     </div>
+
+    <!-- Actions -->
+    <div class="row">
+      <div class="col-md-12 student-actions-wrapper text-center">
+        <% if @user.profile_incomplete? %>
+            <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
+        <% else %>
+            <%= link_to 'Crear Oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
+        <% end %>
+        <%= link_to 'Editar Perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
+      </div>
+    </div>
+    <!-- ./Actions-->
 
   </div>
 </section>

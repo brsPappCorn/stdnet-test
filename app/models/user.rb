@@ -64,17 +64,15 @@ class User < ActiveRecord::Base
       'Correo electróncio'
   ]
 
-  REFERENCES_STUDENT = [
-      'Anuncios / publicidad en Facebook',
-      'Publicaciones en grupos de Facebook',
-      'Linked In',
-      'Instagram',
-      'Un/a amigo/a',
-      'Evento o conferencia',
-      'Google u otro motor de búsqueda',
-      'Correo electróncio',
-      'Universidad'
-  ]
+  REF_FACEBOOK_AD = 0
+  REF_FACEBOOK_GROUPS = 1
+  REF_LINKED_IN = 2
+  REF_INSTAGRAM = 3
+  REF_FRIEND = 4
+  REF_EVENT = 5
+  REF_SEM = 6
+  REF_EMAIL = 7
+  REF_STUDENT_UNIVERSITY = 8
 
   PROMO_CODE = [
       # TODO: User Model - Promotional codes will be defined later on.

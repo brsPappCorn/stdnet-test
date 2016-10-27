@@ -8,7 +8,6 @@ module StudentsHelper
     ]
   end
 
-
   # Helper methods to display friendly name instead of select value
   def student_exchange_student_select_friendly(student)
     if student.exchange_student.to_i == 0
@@ -22,7 +21,7 @@ module StudentsHelper
     if student.work_xp.to_i == 0
       'No'
     else student.work_xp.to_i == 1
-      'Sí'
+    'Sí'
     end
   end
 
@@ -42,6 +41,36 @@ module StudentsHelper
     end
   end
 
+
+  # Helper method for building rails helper select from constants declared in the model
+  def type_of_student_select_type
+    [
+        ['Diurno', Student::TYPE_OF_STUDENT_DAY],
+        ['Nocturno', Student::TYPE_OF_STUDENT_NIGHT],
+        ['Virtual', Student::TYPE_OF_STUDENT_VIRTUAL],
+        ['Esperando Diploma', Student::TYPE_OF_STUDENT_DIPLOMA_PENDING],
+        ['Graduado', Student::TYPE_OF_STUDENT_GRADUATE]
+    ]
+  end
+
+  def type_of_student_select_friendly(student)
+    if student.type_of_student.to_i == 0
+      'Diurno'
+    elsif student.type_of_student.to_i == 1
+      'Nocturno'
+    elsif student.type_of_student.to_i == 2
+      'Virtual'
+    elsif student.type_of_student.to_i == 3
+      'Esperando Diploma'
+    elsif student.type_of_student.to_i == 4
+      'Graduado'
+    end
+  end
+
 end
+
+
+
+
 
 
