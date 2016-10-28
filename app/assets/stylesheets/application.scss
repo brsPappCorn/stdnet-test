@@ -10,6 +10,7 @@ $f-normal: normal;
 $cp-dark-gray: #3B3B3C;
 $cp-medium-gray: #BFBFBF;
 $cp-blue: #6AADE4;
+$cp-dark-blue: #1E2056;
 // Secondary Colors
 $cs-brown: #5A2A00;
 $cs-light-gray: #F2F2F2;
@@ -28,6 +29,11 @@ body {
 // General wrapper with basic CSS structure for the site
 .studNet-wrapper {
   margin: 0;
+
+  h1 {
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
 
   h3 {
     margin-top: 0;
@@ -76,6 +82,18 @@ body {
     padding: 40px 0;
   }
 
+}
+
+.margin-bot-20 {
+  margin-bottom: 20px;
+}
+
+.margin-bot-40 {
+  margin-bottom: 40px;
+}
+
+.padding-bot-40 {
+  padding-bottom: 40px;
 }
 
 // Profile wrapper applies to Student, Company & Person show view
@@ -172,17 +190,13 @@ body {
 // ================
 
 .btn-studnet-basic {
-  background-color: #1db5f7;
-  background: -webkit-linear-gradient(#1db5f7,#0578d7);
-  background: -moz-linear-gradient(#1db5f7,#0578d7);
-  background: -ms-linear-gradient(#1db5f7,#0578d7);
-  background: -o-linear-gradient(#1db5f7,#0578d7);
-  background: linear-gradient(#1db5f7,#0578d7);
+  background-color: $cp-blue;
+  color: white;
   border: none;
   box-shadow: none;
   font-size: 1.25em;
   font-weight: bold;
-  padding: 5px 25px;
+  padding: 5px 10px;
   text-shadow: none;
 }
 
@@ -194,6 +208,33 @@ body {
   font-weight: bold;
   padding: 15px 30px;
   text-shadow: none;
+}
+
+.btn-studnet-details {
+  border: 2px solid $cp-blue;
+  color: $cp-blue;
+  font-weight: bold;
+  padding: 4px 10px;
+}
+
+.li-width-30 {
+  text-align: center;
+  width: 30%;
+}
+
+.li-width-23 {
+  text-align: center;
+  width: 23.335%;
+}
+
+.li-width-18 {
+  text-align: center;
+  width: 17.91%;
+}
+
+.li-width-17 {
+  text-align: center;
+  width: 17.2%;
 }
 
 // ================
@@ -261,17 +302,45 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
   padding-bottom: 0;
 }
 
+.navbar-default .navbar-nav > li > a {
+  color: $cp-dark-gray;
+  font-weight: bold;
+}
+
+.navbar-links-normal-weight {
+  a {
+    font-weight: normal !important;
+  }
+}
+
 // ================
 // Footer
 // ================
 
+footer {
+  background-color: $cp-dark-gray;
+  padding: 80px 0;
+
+  h3 {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  p {
+    color: $cp-medium-gray;
+    font-weight: 200;
+    margin-bottom: 0;
+  }
+}
 
 // ================
 // Devise
 // ================
 .devise-wrapper {
-  margin: 30px 0;
-  margin-top: 0;
+  margin: 0;
 
   // Sign Up
   .sign-up-select-account {
@@ -328,32 +397,111 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
 
   }
 
+  .students-show-view-header {
+    background-color: $cs-light-gray;
+    color: $cp-dark-gray;
+    font-weight: bold;
+    margin-bottom: 40px;
+    padding: 10px 0;
+
+    p {
+      color: $cp-dark-gray;
+      margin-bottom: 0;
+    }
+
+  }
+
+  .students-signup-header {
+    background-color: $cp-blue;
+    color: $cp-dark-gray;
+    font-weight: bold;
+    padding: 10px 0;
+
+    p {
+      color: white;
+      margin-bottom: 0;
+    }
+
+  }
   .students-signup-wrapper {
-    background-image: url(image_path('register_students.jpg'));
-    background-size: cover;
-    color: white;
-    padding-bottom: 40px;
+    background-color: $cs-light-gray;
+    color: $cp-dark-gray;
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.25em;
+      margin: 40px 0;
+    }
+
+    a {
+      color: $cp-blue;
+    }
   }
 
+  .companies-signup-header {
+    background-color: $cs-brown;
+    color: white;
+    //font-size: ;
+    font-weight: bold;
+    padding: 10px 0;
+
+    p {
+      color: white;
+      margin-bottom: 0;
+    }
+
+  }
   .companies-signup-wrapper {
-    background-image: url(image_path('register_companies.jpg'));
-    background-size: cover;
+    background-color: $cs-light-gray;
     color: white;
-    padding-bottom: 40px;
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.25em;
+      margin: 40px 0;
+    }
+
+    a {
+      color: $cp-blue;
+    }
+
   }
 
-  .people-signup-wrapper {
-    background-image: url(image_path('register_people.jpg'));
-    background-size: cover;
+  .people-signup-header {
+    background-color: $cp-dark-blue;
     color: white;
-    padding-bottom: 40px;
+    //font-size: ;
+    font-weight: bold;
+    padding: 10px 0;
+
+    p {
+      color: white;
+      margin-bottom: 0;
+    }
+
+  }
+  .people-signup-wrapper {
+    background-color: $cs-light-gray;
+    color: white;
+
+    p {
+      color: $cp-dark-gray;
+      font-size: 1.25em;
+      margin: 40px 0;
+    }
+
+    a {
+      color: $cp-blue;
+    }
+
   }
 
   .register-form {
-    background: rgba(106,173,228,0.4);
+    background: transparent;
     padding: 20px 25px;
 
     .form-group {
+      color: $cp-dark-gray;
       text-align: left;
 
       .form-control {
@@ -361,6 +509,24 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
         color: $cp-dark-gray;
         -webkit-box-shadow: inset 0px 2px 3px #dddddd;
         border-radius: 5px;
+      }
+
+    }
+
+    label {
+      font-weight: normal;
+      font-size: 1.1em;
+    }
+
+    .terms-conditions {
+      margin-bottom: 20px;
+      p {
+        margin: 0;
+        font-size: 0.9em;
+      }
+
+      a {
+        font-size: 0.9em;
       }
 
     }
@@ -405,8 +571,12 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
   .devise-shared-links {
     margin-top: 5px;
 
+    p {
+      margin: 20px 0;
+    }
+
     a, a:hover, a:focus, a:active {
-      color: white;
+      color: $cp-blue;
       text-decoration: none;
     }
 
@@ -464,12 +634,18 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
 
   }
 
+  .margin-bottom-20 {
+    margin-bottom: 20px;
+  }
+
 }
 
 // Other devise classes
 .devise-links-color {
+  margin-bottom: 60px;
+  margin-top: 20px;
   a {
-    color: white;
+    color: $cp-blue;
   }
 }
 

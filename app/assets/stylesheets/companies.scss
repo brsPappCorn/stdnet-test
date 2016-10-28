@@ -1,3 +1,54 @@
-// Place all the styles related to the Companies controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+//=================================
+// Show
+//=================================
+
+.student-tab-content {
+  &.company-tab-content {
+    border: 3px solid $cp-medium-gray;
+    padding: 20px 30px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding-top: 40px;
+
+    h1 {
+      color: $cp-medium-gray;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      color: $cs-brown;
+      border-bottom: 3px solid $cs-brown;
+      font-size: 1.5em;
+      padding-bottom: 5px;
+    }
+
+    h4 {
+      margin-bottom: 5px;
+    }
+
+    h5 {
+      color: $cp-dark-gray;
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .actions-margin-top {
+      margin-top: 20px;
+    }
+
+    &.student-title-blue {
+      h3 {
+        color: $cp-blue !important;
+        border-bottom: 3px solid $cp-blue;
+        font-size: 1.5em;
+        padding-bottom: 5px;
+      }
+    }
+
+  }
+}

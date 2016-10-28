@@ -15,6 +15,7 @@ class CompaniesController < ApplicationController
     else
       puts '---------------->>>>>'
       puts 'no existe usuario'
+      puts '---------------->>>>>'
     end
   end
 

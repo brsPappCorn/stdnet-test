@@ -2,9 +2,42 @@
 // EDIT
 //========================
 .student-edit-wrapper {
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   padding-left: 0;
   padding-right: 0;
+
+  .student-nav-tabs {
+    margin: 0 30px;
+  }
+
+  h3 {
+    font-size: 2em;
+
+  }
+
+  h2 {
+    font-weight: bold;
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+
+  .border-left-none {
+    a {
+      border-left: 0 !important;
+    }
+
+  }
+
+  .li-width-30 {
+    text-align: center;
+    width: 30%;
+  }
+
+  .li-width-18 {
+    text-align: center;
+    width: 17.91%;
+  }
+
 }
 
 //========================
@@ -25,14 +58,21 @@
 
 .student-tab-wrapper {
 
+  .student-nav-tabs {
+    margin: 0 30px;
+  }
+
   .nav-tabs > li > a {
-    background-color: $cs-light-gray;
+    background-color: $cp-medium-gray;
     border: 3px solid $cp-blue;
     border-bottom: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    color: $cp-blue;
+    color: $cp-dark-gray;
+    font-weight: bold;
+    margin-right: 0;
+    //min-height: 63px;
   }
 
   .nav-tabs > li > a:hover, .nav-tabs > li > a:focus, .nav-tabs > li > a:active  {
@@ -42,15 +82,35 @@
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    color: $cp-blue;
+    color: $cp-dark-gray;
+    margin-right: 0;
   }
+
+  .border-left-none {
+    a {
+      border-left: 0 !important;
+    }
+
+  }
+
+  .li-width-30 {
+    text-align: center;
+    width: 30%;
+  }
+
+  .li-width-23 {
+    text-align: center;
+    width: 23.335%;
+  }
+
 
   .student-tab-content {
     border: 3px solid $cp-blue;
-    padding: 20px 25px;
+    padding: 20px 30px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+    padding-top: 40px;
 
     h1 {
       color: $cp-blue;
@@ -60,6 +120,9 @@
 
     h3 {
       color: $cp-blue;
+      border-bottom: 3px solid $cp-blue;
+      font-size: 1.5em;
+      padding-bottom: 5px;
     }
 
     h4 {
@@ -77,6 +140,17 @@
 
     .actions-margin-top {
       margin-top: 20px;
+    }
+
+  }
+
+  .studNet-table {
+    tr {
+
+      td:nth-child(odd) {
+        font-weight: bold;
+      }
+
     }
 
   }
@@ -107,7 +181,13 @@
   }
 
   .student-actions-wrapper {
-    margin-top: 20px;
+    margin-bottom: 60px;
+    margin-top: 40px;
+
+    a {
+      margin: 0 40px;
+    }
+
   }
 
   #glyphiconPencilSize {
@@ -115,14 +195,15 @@
     font-size: 18px;
   }
 
-  #studentMajorName {
-    font-weight: bold;
-    font-size: 1.1em;
+  .nav-tabs > .active > a, .nav-tabs.nav-justified > .active > a, .nav-tabs-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs-justified > .active > a:focus, .nav-tabs.nav-justified > .active > a:focus {
+    border: 3px solid #6AADE4;
+    border-bottom: 0;
+    background-color: white;
+    color: $cp-dark-gray;
   }
 
-  #studentMajorBlue {
-    color: $cp-blue;
-    font-weight: bold;
-  }
+}
 
+#studentApplicantXP {
+  width: 18.4%;
 }

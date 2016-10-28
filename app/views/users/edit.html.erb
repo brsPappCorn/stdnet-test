@@ -1,15 +1,29 @@
 <section class="studNet-wrapper profile-wrapper">
-  <div class="container">
 
-    <% if @user.role_id == 2 %>
+  <% if @user.role_id == 2 %>
+      <!-- Student Edit -->
+      <section class="devise-wrapper">
+        <div class="students-show-view-header">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  Editar perfil de estudiante
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Student Edit -->
+      <div class="container">
+
         <div class="row">
           <div class="col-md-10 col-md-offset-1 student-edit-wrapper">
 
-            <h3>
-              Student Form
-            </h3>
+            <h2 class="text-center">
+              Perfil del estudiante
+            </h2>
 
             <div class="tabbable student-tab-wrapper">
               <!--  -->
@@ -20,24 +34,25 @@
                   </a>
                 </li>
 
-                <li>
+                <li class="border-left-none li-width-18">
                   <a href="#pane2" data-toggle="tab">
                     Experiencia laboral
                   </a>
                 </li>
 
-                <li>
+                <li class="border-left-none li-width-18">
                   <a href="#pane3" data-toggle="tab">
                     Habilidades
                   </a>
                 </li>
 
-                <li>
+                <li class="border-left-none li-width-18">
                   <a href="#pane4" data-toggle="tab">
                     Descripción
                   </a>
                 </li>
-                <li>
+
+                <li class="border-left-none li-width-18">
                   <a href="#pane5" data-toggle="tab">
                     Otros
                   </a>
@@ -53,11 +68,29 @@
 
           </div>
         </div>
-        <!-- ./Student Edit -->
 
-    <% elsif @user.role_id == 3 %>
+      </div>
+      <!-- ./Student Edit -->
 
-        <!-- Company Edit -->
+  <% elsif @user.role_id == 3 %>
+
+      <!-- Company Edit -->
+      <section class="devise-wrapper">
+        <div class="companies-signup-header margin-bot-40">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  Editar perfil de empresa
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+
         <div class="row">
           <div class="col-md-10 col-md-offset-1 student-edit-wrapper">
 
@@ -65,11 +98,29 @@
 
           </div>
         </div>
-        <!-- ./Company Edit -->
 
-    <% elsif @user.role_id == 4 %>
+      </div>
+      <!-- ./Company Edit -->
 
-        <!-- Company Edit -->
+  <% elsif @user.role_id == 4 %>
+
+      <!-- Company Edit -->
+      <section class="devise-wrapper">
+        <div class="people-signup-header margin-bot-40">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  Editar perfil de persona
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+
         <div class="row">
           <div class="col-md-10 col-md-offset-1 student-edit-wrapper">
 
@@ -77,153 +128,15 @@
 
           </div>
         </div>
-        <!-- Company Edit -->
 
-    <% end %>
-  </div>
+      </div>
+      <!-- Company Edit -->
+
+  <% end %>
+
 </section>
 
 <script type="text/javascript">
-
-  //=======================
-  // Display/Hide options
-  //=======================
-
-  $(function() {
-    // Variables
-    current_country_id_val = <%= @user.country_id.to_i %>
-
-    <% if @user.role_id == 2 %>
-      current_exchange_student_val = <%= @user.student.exchange_student.to_i %>;
-      current_work_xp_val = <%= @user.student.work_xp.to_i %>;
-      current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>;
-      current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
-    <% end %>
-
-
-    // Function for country_id Select
-    if ( current_country_id_val == 0 ) {
-      $('#userCity').show();
-    } else {
-      $('#userCity').hide();
-    }
-
-    function displayUserCity() {
-      $('#user_country_id').change(function(){
-        if ( $('#user_country_id').val() == 1 ) {
-          $('#userCity').show();
-        } else {
-          $('#userCity').hide();
-        }
-
-      });
-
-      $('#user_country_id').val();
-
-    }
-
-    // Functions that apply only for Student
-    <% if @user.role_id == 2 %>
-    // Function for exchange_student Select
-    if ( current_exchange_student_val == 1 ) {
-      $('.exchangeStudent').show();
-    } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
-      $('.exchangeStudent').hide();
-    }
-
-    function displayExchangeStudent() {
-      $('#user_student_attributes_exchange_student').change(function(){
-        if ( $('#user_student_attributes_exchange_student').val() == 1 ) {
-          $('.exchangeStudent').show();
-        } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
-          $('.exchangeStudent').hide();
-        }
-
-      });
-
-      $('#user_student_attributes_exchange_student').val();
-
-    }
-
-    // Function for work_xp Select
-    if ( current_work_xp_val == 1 ) {
-      $('.workXp').show();
-    } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
-      $('.workXp').hide();
-    }
-
-    function displayWorkXp() {
-      $('#user_student_attributes_work_xp').change(function(){
-        if ( $('#user_student_attributes_work_xp').val() == 1 ) {
-          $('.workXp').show();
-        } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
-          $('.workXp').hide();
-        }
-
-      });
-
-      $('#user_student_attributes_work_xp').val();
-
-    }
-
-    // Function for volunteer_xp Select
-    if ( current_volunteer_xp_val == 1 ) {
-      $('.volunteerXp').show();
-    } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
-      $('.volunteerXp').hide();
-    }
-
-    function displayVolunteerXp() {
-      $('#user_student_attributes_volunteer_xp').change(function(){
-        if ( $('#user_student_attributes_volunteer_xp').val() == 1 ) {
-          $('.volunteerXp').show();
-        } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
-          $('.volunteerXp').hide();
-        }
-
-      });
-
-      $('#user_student_attributes_volunteer_xp').val();
-
-    }
-
-    // Function for programming_languages Select
-    if ( current_programming_skills_val == 1 ) {
-      $('#programmingLanguages').show();
-    } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
-      $('#programmingLanguages').hide();
-    }
-
-    function displayProgrammingLanguages() {
-      $('#user_student_attributes_programming_skills').change(function(){
-        if ( $('#user_student_attributes_programming_skills').val() == 1 ) {
-          $('#programmingLanguages').show();
-        } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
-          $('#programmingLanguages').hide();
-        }
-
-      });
-
-      $('#user_student_attributes_programming_skills').val();
-
-    }
-
-    <% end %>
-
-
-    // Call functions
-    displayUserCity();
-
-    // Apply only for students
-    <% if @user.role_id == 2 %>
-    displayExchangeStudent();
-    displayWorkXp();
-    displayVolunteerXp();
-    displayProgrammingLanguages();
-    <% end %>
-  });
-
-
   //=======================
   // Select2
   //=======================
@@ -232,5 +145,6 @@
   $('select').select2({
     theme: "bootstrap"
   });
+
 
 </script>

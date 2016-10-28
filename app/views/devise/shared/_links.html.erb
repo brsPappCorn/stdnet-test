@@ -1,18 +1,31 @@
 <div class="devise-shared-links">
   <%- if controller_name != 'sessions' %>
-      <%= link_to 'Ingresar', new_session_path(resource_name) %><br />
-  <% end -%>
-
-  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <%= link_to 'Registrarme', new_registration_path(resource_name) %><br />
+        <%#= link_to 'iniciar sesión', new_session_path(resource_name) %><br />
   <% end -%>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-      <%= link_to 'Recuperar contraseña', new_password_path(resource_name) %><br />
+      <%= link_to '¿Olvidaste tu contraseña?', new_password_path(resource_name) %><br />
+  <% end -%>
+
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <% if params[:studnet] %>
+          <% if params[:studnet].eql? '2' %>
+              ¿Aún no estas registrado? Haz click
+              <%= link_to 'aquí', new_registration_path(resource_name, studnet: 2) %><br />
+          <% elsif params[:studnet].eql? '3' %>
+              ¿Aún no estas registrado? Haz click
+              <%= link_to 'aquí', new_registration_path(resource_name, studnet: 3) %><br />
+          <% elsif params[:studnet].eql? '4' %>
+              ¿Aún no estas registrado? Haz click
+              <%= link_to 'aquí', new_registration_path(resource_name, studnet: 4) %><br />
+          <% end %>
+      <% else %>
+          <%= link_to 'Registrarme', new_registration_path(resource_name) %><br />
+      <% end %>
   <% end -%>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-      <%= link_to 'Recibir instrucciones de confirmación', new_confirmation_path(resource_name) %><br />
+      <%#= link_to 'Recibir instrucciones de confirmación', new_confirmation_path(resource_name) %><br />
   <% end -%>
 
   <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

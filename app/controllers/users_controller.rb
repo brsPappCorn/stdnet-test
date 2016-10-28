@@ -13,10 +13,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def new
-    @user = User.new
-  end
-
   def edit
     @user = User.find_by_id(current_user.id)
   end
@@ -26,10 +22,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:success] = 'La cuenta fue creada exitosamente.'
+        flash[:success] = 'Tu perfil fue creado exitosamente.'
         format.html { redirect_to @user }
       else
-        flash[:error] = 'La cuenta no pudo ser creada, por favor intentarlo nuevamente.'
+        flash[:error] = 'Tu perfil no pudo ser creado, por favor inténtalo nuevamente.'
         format.html { render :new }
       end
     end
@@ -40,10 +36,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        flash[:success] = 'La cuenta fue actualizada exitosamente.'
+        flash[:success] = 'Tu perfil se ha actualizado exitosamente.'
         format.html { redirect_to root_path }
       else
-        flash[:error] = 'La cuenta no pudo ser actualizada, por favor intentarlo nuevamente.'
+        flash[:error] = 'Tu perfil no pudo ser actualizado, por favor inténtalo nuevamente.'
         format.html { render :edit }
       end
     end
@@ -53,11 +49,11 @@ class UsersController < ApplicationController
     if administrator_signed_in?
       @user.destroy
       respond_to do |format|
-        flash[:success] = 'La cuenta fue eliminada exitosamente.'
+        flash[:success] = 'Tu perfil fue eliminado exitosamente.'
         format.html { redirect_to users_url }
       end
     else
-      flash[:error] = 'La cuenta no pudo ser eliminada, por favor intentarlo nuevamente.'
+      flash[:error] = 'Tu perfil no pudo ser eliminado, por favor inténtalo nuevamente.'
       redirect_to root_path
     end
   end
@@ -74,13 +70,14 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :document_number, :mobile_phone, :city_id,
                                  :country_id, :university_id, :major_id, :referenced_by, :avatar,
                                  student_attributes: [
-                                     :id, :university_id, :major_id, :ed_level_id, :last_semester, :gpa, :gpa_max,
+                                     :id, :university_id, :major_id, :ed_level_id, :last_semester, :gpa, :gpa_max, :type_of_student,
                                      :exchange_student, :country_id, :exchange_university, :highschool, :work_xp,
                                      :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org,
                                      :volunteer_functions, :language_id, :language_level, :programming_skills,
                                      :programing_languages, :strengths, :areas_to_develop, :hobbies, :student_availability,
                                      :avatar,
-                                     tool_ids:[]
+                                     tool_ids:[],
+                                     major_ids: []
                                  ],
                                  company_attributes: [
                                      :id, :position, :company_address, :company_nit, :company_description, :company_size,

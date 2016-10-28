@@ -12,17 +12,19 @@
           <%= devise_error_messages! %>
           <%= f.hidden_field :reset_password_token %>
 
+          <% if signed_in? %>
+              <div class="form-group">
+                <%= f.label :current_password, 'Contraseña actual' %> <i>(we need your current password to confirm your changes)</i><br />
+                <%= f.password_field :current_password, autocomplete: 'off', class: 'form-control input-width' %>
+              </div>
+          <% end %>
+
           <div class="form-group">
             <%= f.label :password, 'Contraseña nueva' %><br />
             <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> characters minimum)</em><br />
             <% end %>
             <%= f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control input-width' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :current_password, 'Contraseña actual' %> <i>(we need your current password to confirm your changes)</i><br />
-            <%= f.password_field :current_password, autocomplete: 'off', class: 'form-control input-width' %>
           </div>
 
           <div class="form-group">

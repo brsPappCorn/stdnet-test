@@ -31,6 +31,7 @@
 #  areas_to_develop     :text
 #  hobbies              :text
 #  avatar               :string
+#  type_of_student      :integer
 #
 
 class Student < ActiveRecord::Base
@@ -46,6 +47,12 @@ class Student < ActiveRecord::Base
   OPTION_FOR_NO = 0
   OPTION_FOR_YES = 1
 
+  TYPE_OF_STUDENT_DAY = 0
+  TYPE_OF_STUDENT_NIGHT = 1
+  TYPE_OF_STUDENT_VIRTUAL = 2
+  TYPE_OF_STUDENT_DIPLOMA_PENDING = 3
+  TYPE_OF_STUDENT_GRADUATE = 4
+
   #---------------------
   # Associations
   #---------------------
@@ -57,6 +64,9 @@ class Student < ActiveRecord::Base
   belongs_to :education_level, foreign_key: 'ed_level_id'
 
   has_and_belongs_to_many :tools
+  has_and_belongs_to_many :majors
+
+  accepts_nested_attributes_for :majors
 
   #---------------------
   # Uploaders
@@ -74,7 +84,11 @@ class Student < ActiveRecord::Base
   # Methods
   #---------------------
   def self.students_for_opportunity(opportunity)
-    where(major_id: opportunity.major_id).includes(:user)
+    major_ids = opportunity.majors.map { |m| m.id }
+
+    joins('INNER JOIN majors_students ON majors_students.student_id = students.id').
+        where('students.major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids).
+        includes(:user)
   end
 
   def profile_incomplete?

@@ -1,8 +1,31 @@
-<section class="studNet-wrapper student-tab-wrapper opportunity-wrapper">
+<section class="devise-wrapper">
+  <div class="students-show-view-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Aplicar a oferta
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="studNet-wrapper student-tab-wrapper opportunity-wrapper padding-bot-40">
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 student-tab-content ">
+      <div class="col-md-10 col-md-offset-1 student-tab-content margin-bot-20">
+
+        <div class="row">
+          <div class="col-md-6 margin-bot-20">
+            <h3>
+              Aplicar a
+              <%= @opportunity.opportunity_title %>
+            </h3>
+          </div>
+        </div>
 
         <%= form_for(@application, url: apply_opportunity_path(@opportunity), multipart: true) do |f| %>
             <% if @opportunity.errors.any? %>
@@ -21,22 +44,22 @@
               <div class="col-md-6">
 
                 <div class="form-group">
-                  <%= f.label :student_characteristics, '¿Cuáles características tienes que te hacen ideal para esta oferta?' %>
-                  <%= f.text_area :student_characteristics, rows: 5, class: 'form-control input-width' %>
+                  <%= f.label :student_characteristics, '¿Qué características tienes que te hacen ideal para esta oferta?' %>
+                  <%= f.text_area :student_characteristics, rows: 6, class: 'form-control input-width' %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :student_interests, '¿Qué te interesa de la oferta?' %>
-                  <%= f.text_area :student_interests, rows: 5, class: 'form-control input-width'  %>
+                  <%= f.label :student_interests, '¿Por qué te interesa esta oferta?' %>
+                  <%= f.text_area :student_interests, rows: 4, class: 'form-control input-width'  %>
                 </div>
 
                 <div class="form-group">
                   <% unless @opportunity.question_for_student.nil? %>
-                      <h3>
-                        Pregunta de la empresa
-                      </h3>
+                      <strong>
+                        Pregunta de la empresa:
+                      </strong>
                       <%= f.label :student_answer, @opportunity.question_for_student %>
-                      <%= f.text_area :student_answer, rows: 5, class: 'form-control input-width'  %>
+                      <%= f.text_area :student_answer, rows: 4, class: 'form-control input-width'  %>
                   <% end %>
                 </div>
 
@@ -45,9 +68,12 @@
               <div class="col-md-6">
 
                 <% if @opportunity.cost_or_offer_option.to_i == 1 %>
-                    <div class="form-group">
+                    <div class="form-group opportunity-value">
                       <% unless @opportunity.opportunity_cost.nil? %>
-                          <%= f.label :opportunity_value, 'Valor del proyecto' %>
+                          <%= f.label :opportunity_value, 'Indica el valor que cobrarías por hacer este proyecto' %>
+                          <h6>
+                            (Recuerda que studNet cobra un 10% de comisión sobre este valor)
+                          </h6>
                           <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>
                       <% end %>
                     </div>
@@ -57,7 +83,7 @@
                     <div class="form-group">
                       <% unless @opportunity.receive_portfolio.nil? %>
                           <div class="form-group">
-                            <%= f.label :portfolio, 'Por favor adjuntar los archivos de tu portafolio' %><br>
+                            <%= f.label :portfolio, 'Por favor adjunta un archivo con ejemplos de tu portafolio' %><br>
                             <%= f.file_field :portfolio, class: 'form-control input-width' %>
                           </div>
                       <% end %>
@@ -70,11 +96,6 @@
             <!-- Application Form Modal -->
             <div class="row">
               <div class="col-md-12 text-center">
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-studnet" data-toggle="modal" data-target="#myModal">
-                  Aplicar
-                </button>
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -108,7 +129,7 @@
                       </div>
                       <div class="modal-footer">
                         <div class="actions">
-                          <%= f.submit 'Aceptar', class: 'btn btn-primary btn-studnet', id: 'applyButton', disabled: true %>
+                          <%= f.submit 'Aplicar', class: 'btn btn-primary btn-studnet-basic', id: 'applyButton', disabled: true %>
                         </div>
                       </div>
                     </div>
@@ -119,6 +140,15 @@
             </div>
             <!-- ./Application Form Modal -->
         <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 text-center">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-studnet-basic" data-toggle="modal" data-target="#myModal">
+          Aplicar
+        </button>
       </div>
     </div>
 

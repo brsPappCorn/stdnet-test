@@ -20,87 +20,106 @@
       <div class="collapse navbar-collapse" id="">
 
         <ul class="nav navbar-nav navbar-right">
-          <li class="<%= is_active?(root_path) %>">
-            <%= link_to 'Home', root_path,class: '' %>
-          </li>
-
-          <% unless user_signed_in? %>
-              <li class="<%= is_active?(new_user_registration_path) %>">
-                <%= link_to 'Registro', new_user_registration_path,class: '' %>
+          <% if user_signed_in? || administrator_signed_in? %>
+              <li class="navbar-links-normal-weight <%= is_active?(root_path) %>">
+                <%= link_to 'home', root_path,class: '' %>
               </li>
+          <% else %>
+              <li class="<%= is_active?(root_path) %>">
+                <%= link_to 'HOME', root_path,class: '' %>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  REGISTRO
+                  <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-fixed">
+                  <li>
+                    <%= link_to 'ESTUDIANTES', new_user_registration_path(studnet: 2) %>
+                  </li>
+                  <li>
+                    <%= link_to 'EMPRESA/PERSONA', new_user_registration_path(studnet: 3) %>
+                  </li>
+                </ul>
+              </li>
+
               <!--
               <li class="<%= is_active?(new_user_session_path) %>">
-                <%= link_to 'Ingresar', new_user_session_path,class: '' %>
+                <%= link_to 'INGRESAR', new_user_session_path,class: '' %>
               </li>
               -->
-          <% end %>
 
-          <!--
-          <li class="<%= is_active?('http://www.studnet.com.co/acerca-de-studnet/') %>">
-            <%= link_to 'Acerca de', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
-          </li>
-          <li class="<%= is_active?('#') %>">
-            <%= link_to 'Contacto', class: '' %>
-          </li>
-          -->
+              <li>
+                <%= link_to 'EQUIPO', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
+              </li>
+              <li>
+                <%= link_to 'ACERCA DE', 'http://www.studnet.com.co/acerca-de-studnet/',class: '' %>
+              </li>
+
+              <li>
+                <%= link_to 'CONTACTO', class: '' %>
+              </li>
+          <% end %>
 
           <!-- Account Menu Dropdown. Depends on the type of user signed in. -->
           <% if user_signed_in? %>
               <% if user_role_id(2) %>
-                  <li>
-                    <%= link_to 'Ver Ofertas', opportunities_path %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'ver ofertas', opportunities_path %>
                   </li>
-                  <li>
-                    <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
                   </li>
               <% elsif user_role_id(3) ||user_role_id(4) %>
-                  <li>
-                    <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
                   </li>
               <% end %>
 
-              <li class="dropdown">
+              <li class="dropdown navbar-links-normal-weight">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  Perfil
+                  perfil
                   <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-fixed">
                   <% if user_role_id(2) %>
                       <!-- Actions for Students -->
-                      <li>
-                        <%= link_to 'Ver Perfil', student_path(current_user.id) %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'ver perfil', student_path(current_user.id) %>
                       </li>
-                      <li>
-                        <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'editar perfil', edit_user_path(current_user.id) %>
                       </li>
 
                   <% elsif user_role_id(3) %>
                       <!-- Actions for Company -->
-                      <li>
-                        <%= link_to 'Ver Perfil', company_path(current_user.id) %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'ver perfil', company_path(current_user.id) %>
                       </li>
-                      <li>
-                        <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'editar perfil', edit_user_path(current_user.id) %>
                       </li>
                   <% elsif user_role_id(4) %>
                       <!-- Actions for Person -->
-                      <li>
-                        <%= link_to 'Ver Perfil', person_path(current_user.id) %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'ver perfil', person_path(current_user.id) %>
                       </li>
-                      <li>
-                        <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'editar perfil', edit_user_path(current_user.id) %>
                       </li>
                   <% elsif administrator_signed_in? %>
                       <!-- Actions for Admin -->
-                      <li>
-                        <%= link_to 'Lista de Usuarios', users_path  %>
+                      <li class="navbar-links-normal-weight">
+                        <%= link_to 'lista de usuarios', users_path  %>
                       </li>
                   <% end %>
                   <li role="separator" class="divider"></li>
-                  <li>
+                  <li class="navbar-links-normal-weight">
                     <%= link_to destroy_user_session_path, method: :delete do %>
-                        Sign out
+                        salir
                     <% end %>
                   </li>
 
@@ -112,33 +131,33 @@
 
           <!-- Admin drop-down -->
           <% if administrator_signed_in? %>
-              <li class="dropdown">
+
+              <li class="dropdown navbar-links-normal-weight">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  Perfil
+                  perfil
                   <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-fixed">
-                  <li>
-                    <%= link_to 'Ofertas', opportunities_administrators_path  %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'ofertas', opportunities_administrators_path  %>
                   </li>
-                  <li>
-                    <%= link_to 'Usuarios', users_path  %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'usuarios', users_path  %>
                   </li>
-                  <li>
-                    <%= link_to 'Estudiantes', students_path  %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'estudiantes', students_path  %>
                   </li>
-                  <li>
-                    <%= link_to 'Empresas', companies_path  %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'empresas', companies_path  %>
                   </li>
-                  <li>
-                    <%= link_to 'Personas', people_path  %>
+                  <li class="navbar-links-normal-weight">
+                    <%= link_to 'personas', people_path  %>
                   </li>
-
                   <li role="separator" class="divider"></li>
-                  <li>
+                  <li class="navbar-links-normal-weight">
                     <%= link_to destroy_administrator_session_path, method: :delete do %>
-                        Sign out
+                        salir
                     <% end %>
                   </li>
 
