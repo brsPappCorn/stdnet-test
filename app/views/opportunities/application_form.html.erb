@@ -83,7 +83,7 @@
                     <div class="form-group">
                       <% unless @opportunity.receive_portfolio.nil? %>
                           <div class="form-group">
-                            <%= f.label :portfolio, 'Por favor adjunta un archivo con ejemplos de tu portafolio' %><br>
+                            <%= f.label :portfolio, 'Por favor adjunta un archivo con ejemplos de tu portafolio (de máximo 3 MB).' %><br>
                             <%= f.file_field :portfolio, class: 'form-control input-width' %>
                           </div>
                       <% end %>

@@ -56,7 +56,7 @@
             </div>
 
             <div class="form-group">
-              <%= f.label :country_id, 'Pais' %><br>
+              <%= f.label :country_id, 'País' %><br>
               <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, class: 'form-control input-width' %>
             </div>
 
@@ -100,7 +100,7 @@
 
                   <div class="form-group">
                     <%= c.label :company_size, 'Tamaño' %><br />
-                    <%= c.select(:company_size, Company::COMPANY_SIZE, {}, { :class => 'form-control' }) %>
+                    <%= c.select(:company_size, Company::COMPANY_SIZE, { prompt: 'Por favor selecciona una opción' }, { :class => 'form-control' }) %>
                   </div>
 
                   <div class="form-group">
@@ -112,7 +112,7 @@
 
             <div class="form-group">
               <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
-              <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
+              <%= f.select(:referenced_by, User::REFERENCES_USER, { prompt: 'Por favor selecciona una opción' }, { :class => 'form-control' }) %>
             </div>
 
             <div class="form-group margin-bot-40">

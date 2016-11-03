@@ -204,7 +204,10 @@
 
                 <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
             <% elsif @user_role.role_id == 3 || @user_role.role_id == 4 %>
-                <%= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studnet-basic' %>
+                <%= link_to 'Mis ofertas', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
+
+                <%#= link_to 'Editar', edit_opportunity_path(@opportunity.id), class: 'btn btn-primary btn-studnet-basic' %>
+
                 <%#= link_to 'Archivar', '#',class: 'btn btn-primary btn-studNet' %>
             <% end %>
         <% end %>
