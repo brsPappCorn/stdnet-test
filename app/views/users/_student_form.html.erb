@@ -59,6 +59,11 @@
                 <%= f.select :city_id, City.all.map { |city| [city.city_name, city.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
               </div>
 
+              <div class="form-group" id="otherCity">
+                <%= f.label :other_city, 'Otra ciudad' %><br>
+                <%= f.text_field :other_city, class: 'form-control input-width' %>
+              </div>
+
               <div class="form-group">
                 <%= f.label :mobile_phone, 'Teléfono celular' %><br>
                 <%= f.text_field :mobile_phone, class: 'form-control input-width' %>
@@ -86,9 +91,16 @@
             <div class="users-students-education-info-wrapper">
               <!-- Nested form (student) -->
               <%= f.fields_for :student, @user.student do |s| %>
+                  <h4>Primera carrera</h4><br/>
+
                   <div class="form-group">
                     <%= s.label :university_id, 'Universidad' %>
                     <%= s.select :university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group" id="otherUniversity">
+                    <%= s.label :other_university, 'Otra universidad'  %>
+                    <%= s.text_field :other_university, class: 'form-control input-width' %>
                   </div>
 
                   <div class="form-group">
@@ -96,10 +108,35 @@
                     <%= s.select :major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
+                  <div class="form-group" id="otherMajor">
+                    <%= s.label :other_major, 'Otra carrera'  %>
+                    <%= s.text_field :other_major, class: 'form-control input-width' %>
+                  </div>
+
                   <div class="form-group">
                     <%= s.label :ed_level_id, 'Nivel' %>
                     <%= s.select :ed_level_id, EducationLevel.all.map { |ed_level| [ed_level.level_name, ed_level.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
+
+                  <hr/>
+                  <h4>Segunda carrera</h4><br/>
+
+                  <div class="form-group">
+                    <%= s.label :second_university_id, 'Universidad' %>
+                    <%= s.select :second_university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :second_major_id, 'Carrera'  %>
+                    <%= s.select :second_major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= s.label :second_ed_level_id, 'Nivel' %>
+                    <%= s.select :second_ed_level_id, EducationLevel.all.map { |ed_level| [ed_level.level_name, ed_level.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <hr/>
 
                   <div class="form-group">
                     <%= s.label 'Otra carrera(s):' %>
@@ -427,41 +464,46 @@
 <% end %>
 
 <script>
-  var current_country_val = <%= @user.country_id %>;
   var current_exchange_student_val = <%= @user.student.exchange_student.to_i %>;
   var current_work_xp_val = <%= @user.student.work_xp.to_i %>;
   var current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>;
   var current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
+  var current_major_val = '<%= @user.student.major.major_name %>';
+  var current_university_val = '<%= @user.student.university.university_name %>';
 
-  function elementVisible(selector, visible) {
-    var $element = $(selector);
-
-    if (visible) {
-      $element.show();
-    } else {
-      $element.hide();
-    }
-  }
-
-  if (current_country_val == 1) {
-    elementVisible('#userCity', true);
+  if (current_major_val == 'Otra') {
+    elementVisible("#otherMajor", true);
   } else {
-    elementVisible('#userCity', false);
+    elementVisible("#otherMajor", false);
   }
+
+  if (current_university_val == 'Otra') {
+    elementVisible("#otherUniversity", true);
+  } else {
+    elementVisible("#otherUniversity", false);
+  }
+
+  $("#user_student_attributes_university_id").change(function() {
+    if ($(this).find("option:selected").text() == 'Otra') {
+      elementVisible("#otherUniversity", true);
+    } else {
+      elementVisible("#otherUniversity", false);
+    }
+  });
+
+  $("#user_student_attributes_major_id").change(function() {
+    if ($(this).find("option:selected").text() == 'Otra') {
+      elementVisible("#otherMajor", true);
+    } else {
+      elementVisible("#otherMajor", false);
+    }
+  });
 
   if (current_exchange_student_val == 1) {
     elementVisible('.exchangeStudent', true);
   } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
     elementVisible('.exchangeStudent', false);
   }
-
-  $("#user_country_id").change(function() {
-    if ($(this).val() == 1) {
-      elementVisible('#userCity', true);
-    } else {
-      elementVisible('#userCity', false);
-    }
-  });
 
   function displayExchangeStudent() {
     $('#user_student_attributes_exchange_student').change(function(){
