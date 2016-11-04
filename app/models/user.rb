@@ -134,15 +134,19 @@ class User < ActiveRecord::Base
   def definitive_location
     city = ''
 
-    if self.country.country_name.eql? 'Colombia'
-      if self.city.city_name.eql? 'Otra'
-        city = "#{self.other_city}, "
-      else
-        city = "#{self.city.city_name},  "
+    if self.country.nil?
+      'N/D'
+    else
+      if self.country.country_name.eql? 'Colombia'
+        if self.city.city_name.eql? 'Otra'
+          city = "#{self.other_city}, "
+        else
+          city = "#{self.city.city_name},  "
+        end
       end
-    end
 
-    city << self.country.country_name
+      city << self.country.country_name
+    end
   end
 
   #---------------------

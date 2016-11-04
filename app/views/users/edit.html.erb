@@ -137,8 +137,8 @@
 </section>
 
 <script type="text/javascript">
-  var current_country_val = <%= @user.country_id %>;
-  var current_city_val = '<%= @user.city.city_name %>';
+  var current_country_val = <%= @user.country_id ? @user.country_id : -1 %>;
+  var current_city_val = '<%= @user.city_id ? @user.city.city_name : '' %>';
 
   if (current_country_val == 1) {
     elementVisible('#userCity', true);
