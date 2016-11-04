@@ -570,7 +570,7 @@ Major.create([
                  { major_name: 'Tecnologías de información para el negocio' },
                  { major_name: 'Trabajo social' },
                  { major_name: 'Zootecnia' },
-                 { university_name: 'Otra' }
+                 { major_name: 'Otra' }
              ])
 
 Language.create([
