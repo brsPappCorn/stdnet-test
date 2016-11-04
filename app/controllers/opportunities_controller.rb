@@ -61,7 +61,7 @@ class OpportunitiesController < ApplicationController
     if administrator_signed_in?
       @opportunity.destroy
       respond_to do |format|
-        flash[:success] = 'Tu oferta fue eliminada exitosamente'
+        flash[:success] = 'Tu oferta fue eliminada exitosamente.'
         format.html { redirect_to opportunities_url }
       end
     else
@@ -105,7 +105,7 @@ class OpportunitiesController < ApplicationController
     if application.save
       AdministratorMailer.new_apply(@opportunity, current_user.student).deliver_now
 
-      flash[:success] = 'Aplicaste exitosamente a esta oferta. Recuerda estar pendiente de tu correo y celular registrados por si la empresa / persona quiere contactarte'
+      flash[:success] = 'Aplicaste exitosamente a esta oferta. Recuerda estar pendiente de tu correo y celular registrados por si la empresa / persona quiere contactarte.'
       redirect_to opportunities_path
     else
       flash[:error] = 'Se ha generado un error. Por favor aplica a la oferta nuevamente.'

@@ -76,6 +76,7 @@ class UsersController < ApplicationController
                                      :volunteer_functions, :language_id, :language_level, :programming_skills,
                                      :programing_languages, :strengths, :areas_to_develop, :hobbies, :student_availability,
                                      :avatar,
+                                     :other_tools_skills,
                                      tool_ids:[],
                                      major_ids: []
                                  ],

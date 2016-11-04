@@ -28,10 +28,10 @@
               <thead>
               <tr>
                 <th>
-                  ID
+                  Nombre de la oferta
                 </th>
                 <th>
-                  Nombre de la oferta
+                  Tipo de Proyecto
                 </th>
                 <th>
                   # Aplicaciones
@@ -47,10 +47,10 @@
               <% @my_opportunities.each do |opportunity| %>
                   <tr>
                     <td>
-                      <%= opportunity.id %>
+                      <%= opportunity.opportunity_title %>
                     </td>
                     <td>
-                      <%= opportunity.opportunity_title %>
+                      <%= opportunity_type_friendly(opportunity)  %>
                     </td>
                     <td>
                       <%= "#{opportunity.applied_users.count} estudiantes" %>
@@ -61,7 +61,7 @@
 
                     <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
                     <td><%= link_to 'Aplicantes', applicants_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
-                    <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
+                    <!-- <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td> -->
 
                     <!-- TODO: Opportunities/my_opportunities - Pending for dev. Close opportunity == Unpublish/Unapprove Opportunity -->
                     <td><%= link_to 'Cerrar', '#', class: 'btn btn-studnet-details' %></td>
@@ -88,6 +88,9 @@
               <tr>
                 <th>
                   Empresa oferente
+                </th>
+                <th>
+                  Tipo de Proyecto
                 </th>
                 <th>
                   Nombre de la oferta
@@ -117,6 +120,9 @@
                       <% else %>
                           <%= opportunity.user.company.company_name  %>
                       <% end %>
+                    </td>
+                    <td>
+                      <%= opportunity_type_friendly(opportunity)  %>
                     </td>
                     <td>
                       <%= opportunity.opportunity_title %>

@@ -58,7 +58,7 @@
 
               <tr>
                 <td>
-                  Teléfono de tu cuenta:
+                  Teléfono de contacto:
                 </td>
                 <td>
                   <%= @user.mobile_phone %>
@@ -105,7 +105,7 @@
           <!-- Company Info -->
           <div class="col-md-6">
             <h3>
-              Información de la empresa:
+              Información de la empresa
             </h3>
 
             <table class="table studNet-table">
@@ -180,12 +180,11 @@
     <!-- Actions -->
     <div class="row">
       <div class="col-md-12 student-actions-wrapper text-center">
+        <%= link_to 'Editar perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
         <% if @user.profile_incomplete? %>
-            <p>Debes completar tu perfil para poder aplicar a la oferta.</p>
         <% else %>
-            <%= link_to 'Crear Oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
+            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
         <% end %>
-        <%= link_to 'Editar Perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
       </div>
     </div>
     <!-- ./Actions-->

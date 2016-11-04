@@ -32,6 +32,7 @@
 #  hobbies              :text
 #  avatar               :string
 #  type_of_student      :integer
+#  other_tools_skills   :string
 #
 
 class Student < ActiveRecord::Base

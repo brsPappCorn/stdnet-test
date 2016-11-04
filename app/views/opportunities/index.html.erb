@@ -76,7 +76,6 @@
                   <% else %>
                       <%= opportunity.opportunity_duration %>
                   <% end %>
-
                 </td>
                 <td>
                   <%= opportunity_availability_friendly(opportunity) %>
@@ -132,6 +131,9 @@
               Empresa oferente
             </th>
             <th>
+              Tipo de Proyecto
+            </th>
+            <th>
               Nombre de la oferta
             </th>
             <th>
@@ -146,7 +148,9 @@
             <th>
               Salario / Valor
             </th>
+            <!--
             <th colspan="5">Acciones</th>
+            -->
           </tr>
           </thead>
 
@@ -161,13 +165,20 @@
                   <% end %>
                 </td>
                 <td>
+                  <%= opportunity_type_friendly(opportunity)  %>
+                </td>
+                <td>
                   <%= opportunity.opportunity_title %>
                 </td>
                 <td>
                   <%= opportunity.created_at.strftime('%d/%m/%Y') %>
                 </td>
                 <td>
-                  <%= opportunity.opportunity_duration %>
+                  <% if opportunity.opportunity_duration.nil? ||opportunity.opportunity_duration.blank? %>
+                      <%= opportunity_duration_type_friendly(opportunity )%>
+                  <% else %>
+                      <%= opportunity.opportunity_duration %>
+                  <% end %>
                 </td>
                 <td>
                   <%= opportunity_availability_friendly(opportunity) %>

@@ -26,7 +26,7 @@
     <div class="form-group">
       <div class="row">
         <div class="col-md-4 text-right">
-          <%= f.label :email, 'Correo Electrónico' %>
+          <%= f.label :email, 'Correo electrónico' %>
         </div>
         <div class="col-md-8">
           <%= f.email_field :email, class: 'form-control input-width' %>
@@ -162,7 +162,7 @@
 
 <div class="text-right devise-shared-links">
   <p>
-    ¿Ya estas registrado? Puedes ingresar
+    ¿Ya estás registrado? Puedes ingresar
     <% if current_page?(new_user_registration_path(studnet: 2)) %>
         <%= link_to 'aquí', new_session_path(resource_name, studnet: 2) %><br />
     <% elsif current_page?(new_user_registration_path(studnet: 3)) %>
