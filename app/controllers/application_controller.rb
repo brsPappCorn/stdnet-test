@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
       if current_user.role_id == 2
         flash.now[:warning] = 'Recuerda que debes completar tu perfil para poder aplicar a las ofertas.'
       elsif current_user.role_id == 3 || current_user.role_id == 4
-        flash.now[:warning] = 'Por favor completa la información de tu perfil para crear y publicar ofertas'
+        flash.now[:warning] = 'Por favor completa la información de tu perfil para crear y publicar ofertas.'
       else
         flash.now[:warning] = 'Recuerda que debes completar tu perfil.'
       end

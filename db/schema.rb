@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026233127) do
+ActiveRecord::Schema.define(version: 20161104215431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20161026233127) do
     t.boolean  "approved_state",            default: false
     t.integer  "date_ini_type",             default: 0
     t.integer  "opportunity_duration_type", default: 0
+    t.boolean  "closed",                    default: false
   end
 
   create_table "people", force: :cascade do |t|
@@ -169,6 +170,12 @@ ActiveRecord::Schema.define(version: 20161026233127) do
     t.text     "hobbies"
     t.string   "avatar"
     t.integer  "type_of_student"
+    t.string   "other_major"
+    t.string   "other_university"
+    t.integer  "second_university_id"
+    t.integer  "second_major_id"
+    t.integer  "second_ed_level_id"
+    t.string   "other_tools_skills"
   end
 
   create_table "students_tools", id: false, force: :cascade do |t|
@@ -215,6 +222,7 @@ ActiveRecord::Schema.define(version: 20161026233127) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "other_city"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

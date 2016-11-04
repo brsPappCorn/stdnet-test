@@ -287,7 +287,8 @@ City.create([
                 { city_name: 'Villavicencio' },
                 { city_name: 'Yopal' },
                 { city_name: 'Yumbo' },
-                { city_name: 'Zipaquirá' }
+                { city_name: 'Zipaquirá' },
+                { city_name: 'Otra' }
             ])
 
 # Linked with Student
@@ -419,7 +420,8 @@ University.create([
                       { university_name: 'Universidad Tecnológica de Bolívar' },
                       { university_name: 'Universidad Tecnológica de Pereira' },
                       { university_name: 'Universidad Tecnológica del Chocó' },
-                      { university_name: 'Universidade de Sao Paulo' }
+                      { university_name: 'Universidade de Sao Paulo' },
+                      { university_name: 'Otra' }
                   ])
 
 Major.create([
@@ -567,7 +569,8 @@ Major.create([
                  { major_name: 'Tecnología en sistematización de datos' },
                  { major_name: 'Tecnologías de información para el negocio' },
                  { major_name: 'Trabajo social' },
-                 { major_name: 'Zootecnia' }
+                 { major_name: 'Zootecnia' },
+                 { university_name: 'Otra' }
              ])
 
 Language.create([

@@ -31,7 +31,7 @@
               Nombre(s)
             </th>
             <th>
-              Promedio
+              Estudiante
             </th>
             <th>
               Carrera
@@ -40,7 +40,7 @@
               Universidad
             </th>
             <th>
-              Promedio académico
+              Promedio
             </th>
             <th>
               Nivel
@@ -70,24 +70,24 @@
                   <%= applicant.first_name %>
                 </td>
                 <td>
-                  <%= applicant.student.gpa %>
+                  <%= type_of_student_select_friendly(applicant) %>
                 </td>
                 <td>
                   <% if applicant.student.major_id.nil? %>
                       No disponible
                   <% else %>
-                      <%= applicant.student.major.major_name %>
+                      <%= applicant.student.definitive_major %>
                   <% end %>
                 </td>
                 <td>
                   <% if applicant.student.university_id.nil? %>
                       No disponible
                   <% else %>
-                      <%= applicant.student.university.university_name  %>
+                      <%= applicant.student.definitive_university  %>
                   <% end %>
                 </td>
                 <td>
-                  <%= applicant.student.gpa_max %>
+                  <%= "#{applicant.student.gpa} / #{applicant.student.gpa_max}" %>
                 </td>
                 <td>
                   <% if applicant.student.ed_level_id.nil? %>
@@ -139,7 +139,7 @@
     <div class="row">
       <div class="col-md-12 text-center">
         <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4) %>
-            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet' %>
+            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
         <% end %>
       </div>
     </div>

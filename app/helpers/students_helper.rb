@@ -53,16 +53,16 @@ module StudentsHelper
     ]
   end
 
-  def type_of_student_select_friendly(student)
-    if student.type_of_student.to_i == 0
+  def type_of_student_select_friendly(user)
+    if user.student.type_of_student.to_i == 0
       'Diurno'
-    elsif student.type_of_student.to_i == 1
+    elsif user.student.type_of_student.to_i == 1
       'Nocturno'
-    elsif student.type_of_student.to_i == 2
+    elsif user.student.type_of_student.to_i == 2
       'Virtual'
-    elsif student.type_of_student.to_i == 3
-      'Esperando Diploma'
-    elsif student.type_of_student.to_i == 4
+    elsif user.student.type_of_student.to_i == 3
+      'Esperando diploma'
+    elsif user.student.type_of_student.to_i == 4
       'Graduado'
     end
   end

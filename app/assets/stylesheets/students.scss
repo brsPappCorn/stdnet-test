@@ -121,21 +121,31 @@
     h3 {
       color: $cp-blue;
       border-bottom: 3px solid $cp-blue;
-      font-size: 1.5em;
+      font-size: 1.3em;
       padding-bottom: 5px;
     }
 
     h4 {
+      font-size: 1.1em;
       margin-bottom: 5px;
     }
 
     h5 {
-      color: $cp-blue;
+      color: $cs-brown;
       font-weight: bold;
+      margin-top: 0;
     }
 
     a {
       text-decoration: none;
+    }
+
+    ul {
+      padding-left: 20px;
+      li:last-child {
+        margin-bottom: 40px;
+      }
+
     }
 
     .actions-margin-top {
@@ -151,6 +161,11 @@
         font-weight: bold;
       }
 
+    }
+
+    .student-language-name {
+      color: $cs-brown;
+      font-weight: bold;
     }
 
   }
@@ -178,6 +193,10 @@
     h3 {
       border-bottom: 3px solid #6AADE4;
     }
+  }
+
+  .student-xp-title-blank {
+    min-height: 150px;
   }
 
   .student-actions-wrapper {

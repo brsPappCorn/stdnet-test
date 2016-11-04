@@ -160,12 +160,10 @@
 
                       <tr>
                         <td>
-                          Ciudad en la que vive:
+                          Ubicación:
                         </td>
                         <td>
-                          <% unless @student_user.city_id.nil? %>
-                              <%= @student_user.city.city_name %>
-                          <% end %>
+                          <%= @student_user.definitive_location %>
                         </td>
                       </tr>
 
@@ -242,7 +240,7 @@
                         </td>
                         <td>
                           <% unless @student_user.student.major_id.nil? %>
-                              <%= @student_user.student.major.major_name %>
+                              <%= @student_user.student.definitive_major %>
                           <% end %>
                         </td>
                       </tr>
@@ -253,7 +251,7 @@
                         </td>
                         <td>
                           <% unless @student_user.student.university_id.nil? %>
-                              <%= @student_user.student.university.university_name %>
+                              <%= @student_user.student.definitive_university %>
                           <% end %>
                         </td>
                       </tr>
@@ -269,9 +267,47 @@
                         </td>
                       </tr>
 
+
+                      <% if @student_user.student.has_second_major? %>
+                          <tr></tr>
+
+                          <tr>
+                            <td>
+                              Segunda carrera:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.second_major_id.nil? %>
+                                  <%= @student_user.student.second_major.major_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Universidad:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.second_university_id.nil? %>
+                                  <%= @student_user.student.second_university.university_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Nivel:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.second_ed_level_id.nil? %>
+                                  <%= @student_user.student.second_education_level.level_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+                      <% end %>
+
                       <tr>
                         <td>
-                          Ultimo semestre cursado:
+                          Último semestre cursado:
                         </td>
                         <td>
                           <%= @student_user.student.last_semester %>
@@ -294,7 +330,7 @@
                           Tipo de estudiante:
                         </td>
                         <td>
-                          <%#= @student_user.student.highschool %> <!-- TODO: migration needed: add student_type (graduado, etc) -->
+                          <%= type_of_student_select_friendly(@student_user) %>
                         </td>
                       </tr>
 
@@ -345,7 +381,7 @@
                             </td>
                             <td>
                               <% unless @student_user.student.university_id.nil? %>
-                                  <%= @student_user.student.university.university_name %>
+                                  <%= @student_user.student.definitive_university %>
                               <% end %>
                             </td>
                           </tr>
@@ -432,7 +468,15 @@
                 <div class="student-work-outside-studnet">
                   <!-- Professional XP -->
 
-                  <% unless @student_user.student.work_xp == 0 %>
+                  <% if @student_user.student.work_xp == 0 %>
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title student-xp-title-blank">
+                          <h3>
+                            Experiencia profesional
+                          </h3>
+                        </div>
+                      </div>
+                  <% else %>
                       <div class="row">
                         <div class="col-md-6 student-xp-title">
                           <h3>
@@ -446,7 +490,6 @@
                           <h4>
                             <%= @student_user.student.xp_position %>
                           </h4>
-
                           <h5>
                             <%= @student_user.student.xp_company %>
                           </h5>
@@ -456,12 +499,13 @@
 
                       <div class="row">
                         <div class="col-md-12">
-                          <p>
-                            Funciones y logros
-                            <br>
-                            <%= @student_user.student.xp_achievements %>
-                            <br>
-                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                <%= @student_user.student.xp_achievements %>
+                              </p>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                   <% end %>
@@ -469,41 +513,50 @@
 
                   <!-- Other Activities XP -->
 
-                  <div class="row">
-                    <div class="col-md-6 student-xp-title">
-                      <h3>
-                        Actividades sociales y de voluntariado
-                      </h3>
-                    </div>
-                  </div>
+                  <% if @student_user.student.volunteer_xp == 0 %>
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title student-xp-title-blank">
+                          <h3>
+                            Actividades sociales y de voluntariado
+                          </h3>
+                        </div>
+                      </div>
+                  <% else %>
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title">
+                          <h3>
+                            Actividades sociales y de voluntariado
+                          </h3>
+                        </div>
+                      </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <% if @student_user.student.volunteer_xp == 0 %>
-                          <p>
-                            No cuenta con experiencia disponible.
-                          </p>
-                      <% else %>
-                          <p>
-                            Nombre de la empresa:
+                      <div class="row">
+                        <div class="col-md-6 student-xp-title">
+                          <h5>
                             <%= @student_user.student.volunteer_org %>
-                            <br>
+                          </h5>
+                        </div>
+                      </div>
 
-                            Cargo:
-                            <%= @student_user.student.volunteer_functions %>
-                            <br>
-                          </p>
-                      <% end %>
-                    </div>
-                  </div>
-
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ul>
+                            <li>
+                              <p>
+                                <%= @student_user.student.volunteer_functions %>
+                              </p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                  <% end %>
                 </div>
 
                 <!-- ./Work Experience outside studNet  -->
 
                 <!-- Work Experience inside studNet  -->
                 <div class="row">
-                  <div class="col-md-6 student-xp-title">
+                  <div class="col-md-6 student-xp-title margin-bot-20">
                     <h3>
                       Proyectos desarrollados en studNet
                     </h3>
@@ -513,13 +566,19 @@
                 <div class="row">
                   <div class="col-md-12">
                     <p>
+                    <ul>
+                      <li>
+                        El estudiante todavía no ha realizado proyectos en studNet
+                      </li>
+                    </ul>
+                    <!--
                       Título del proyecto (oferta):
                       <%#= @student.volunteer_org TODO: Students/show - show opportunity title applied by the student %>
                       <br>
-
                       Descripción del proyecto:
                       <%#= @student.volunteer_functions TODO: Students/show - show opportunity description applied by the student %>
-                      <br>
+                      -->
+                    <br>
                     </p>
                   </div>
                 </div>
@@ -553,14 +612,14 @@
                           <td>
                             <strong>
                               <% unless @student_user.student.language_id.nil? %>
-                                  <strong>
-                                    <%= @student_user.student.language.language_name %>
-                                  </strong>
+                                  <%= @student_user.student.language.language_name %>
                               <% end %>
                             </strong>
                           </td>
                           <td>
-                            <%= @student_user.student.language_level %>
+                            <span class="student-language-name">
+                              <%= @student_user.student.language_level %>
+                            </span>
                           </td>
                         </tr>
                         </tbody>
@@ -571,7 +630,7 @@
 
                   <!-- Student Tools -->
                   <div class="student-xp-title">
-                    <div class="col-md-6 users-students-skills-tools-wrapper">
+                    <div class="col-md-6 users-students-skills-tools-wrapper margin-bot-40">
                       <h3>
                         Herramientas
                       </h3>
@@ -590,13 +649,13 @@
                   <!-- Student Tools -->
                 </div>
 
-                <!-- Student Programming Skills/Languages -->
-                <% unless @student_user.student.programming_skills == 0 %>
-                    <div class="row">
-                      <div class="col-md-12">
+                <div class="row">
+                  <!-- Student Programming Skills/Languages -->
+                  <% unless @student_user.student.programming_skills == 0 %>
+                      <div class="col-md-6">
 
                         <div class="row">
-                          <div class="col-md-6 student-xp-title">
+                          <div class="col-md-12 student-xp-title">
                             <h3>
                               Lenguajes de programación
                             </h3>
@@ -608,9 +667,36 @@
                         </p>
 
                       </div>
-                    </div>
-                <% end %>
-                <!-- ./Student Programming Skills/Languages -->
+                  <% end %>
+                  <!-- ./Student Programming Skills/Languages -->
+
+                  <div class="col-md-6 margin-bot-40">
+                    <!-- Student Other Tools & Skills -->
+                    <% if @student_user.student.other_tools_skills.nil? %>
+                        <div class="row">
+                          <div class="col-md-12 student-xp-title">
+                            <h3>
+                              Otras herraientas y habilidades
+                            </h3>
+                          </div>
+                        </div>
+                    <% else %>
+                        <div class="row">
+                          <div class="col-md-12 student-xp-title">
+                            <h3>
+                              Otras herraientas y habilidades
+                            </h3>
+                          </div>
+                        </div>
+
+                        <p>
+                          <%= @student_user.student.other_tools_skills %>
+                        </p>
+                    <% end %>
+                  </div>
+                  <!-- ./Student Other Tools & Skills -->
+
+                </div>
               </div>
             </div>
 
@@ -621,49 +707,60 @@
           <div id="pane4" class="tab-pane">
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 student-skills">
 
                 <div class="row">
                   <div class="col-md-6 student-xp-title">
                     <h3>
-                      Proyectos desarrollados en studNet
+                      Principales fortalezas
                     </h3>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-12 student-skills">
-
-                    <h4>
-                      Principales fortalezas
-                    </h4>
-
+                  <div class="col-md-12">
                     <ul>
                       <li>
                         <%= @student_user.student.strengths %>
                       </li>
                     </ul>
+                  </div>
+                </div>
 
-                    <h4>
-                      Áreas en la que les gustaría desarrollar su carrera profesional
-                    </h4>
 
+                <div class="row">
+                  <div class="col-md-8 student-xp-title">
+                    <h3>
+                      Áreas en las que les gustaría desarrollar su carrera profesional
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
                     <ul>
                       <li>
                         <%= @student_user.student.areas_to_develop %>
                       </li>
                     </ul>
+                  </div>
+                </div>
 
-                    <h4>
+                <div class="row">
+                  <div class="col-md-6 student-xp-title">
+                    <h3>
                       Intereses, hobbies y otros
-                    </h4>
+                    </h3>
+                  </div>
+                </div>
 
+                <div class="row">
+                  <div class="col-md-12">
                     <ul>
                       <li>
                         <%= @student_user.student.hobbies %>
                       </li>
                     </ul>
-
                   </div>
                 </div>
 
@@ -703,7 +800,7 @@
                   <div id="pane6" class="tab-pane">
 
                     <div class="row">
-                      <div class="col-md-12 text-center">
+                      <div class="col-md-6 text-center">
                         <h3>
                           <%= @application.applied_opportunity.opportunity_title %>
                         </h3>
@@ -711,7 +808,7 @@
                     </div>
 
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
 
                         <p>
                           <strong>
@@ -722,7 +819,7 @@
 
                         <p>
                           <strong>
-                            ¿Qué te interesa de la oferta?
+                            ¿Por qué te interesa esta oferta?
                           </strong> <br>
                           <%= @application.student_interests %>
                         </p>
@@ -775,10 +872,9 @@
                 <%= link_to 'Editar perfil', edit_user_path(@student_user), class: 'btn btn-primary btn-studnet-basic' %>
                 <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
             <% elsif (@user_role.role_id == 3 || @user_role.role_id == 4) && params[:opportunity] %>
-                <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet' %>
-
+                <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet-basic' %>
                 <%# TODO: student/show/student_display - Make 'acquire informacion' work %>
-                <%= link_to 'Adquirir información', '#', class: 'btn btn-primary btn-studnet' %>
+                <%= link_to 'Adquirir información', '#', class: 'btn btn-primary btn-studnet-basic' %>
             <% end %>
           </div>
         </div>

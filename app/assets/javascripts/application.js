@@ -15,3 +15,13 @@
 // require turbolinks
 //= require bootstrap
 //= require_tree .
+
+function elementVisible(selector, visible) {
+    var $element = $(selector);
+
+    if (visible) {
+        $element.show();
+    } else {
+        $element.hide();
+    }
+}

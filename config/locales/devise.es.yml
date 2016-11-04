@@ -37,7 +37,7 @@ es:
       signed_up: "¡Bienvenido! Te has registrado exitosamente."
       signed_up_but_inactive: "Te has registrado correctamente. Pero no has podido iniciar sesión porque no has activado tu cuenta."
       signed_up_but_locked: "Te has registrado correctamente. Pero no has podido iniciar sesión porque tu cuenta está bloqueada."
-      signed_up_but_unconfirmed: "Se te ha enviado un mensaje con un enlace de confirmación. Por favor visita el enlace para activar tu cuenta."
+      signed_up_but_unconfirmed: "Hemos enviado un mensaje de activación a tu correo electrónico. Para activar tu cuenta, por favor activa el link dentro de este correo."
       update_needs_confirmation: "Actualizaste tu cuenta correctamente, pero necesitamos verificar tu nueva cuenta de correo. Por favor revisa tu correo electrónico y visita el enlace para finalizar la confirmación de tu nueva dirección de correo electrónico."
       updated: "Has actualizado tu cuenta correctamente."
     sessions:

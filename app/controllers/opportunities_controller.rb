@@ -1,5 +1,5 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve]
+  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve, :close]
 
   def index
     # Used to check what type of role is signed in
@@ -27,6 +27,10 @@ class OpportunitiesController < ApplicationController
   end
 
   def edit
+    if @opportunity.approved_state
+      flash[:warning] = 'No puedes editar una oferta que ya ha sido aprobada.'
+      redirect_to my_opportunities_opportunities_path
+    end
   end
 
   def create
@@ -61,7 +65,7 @@ class OpportunitiesController < ApplicationController
     if administrator_signed_in?
       @opportunity.destroy
       respond_to do |format|
-        flash[:success] = 'Tu oferta fue eliminada exitosamente'
+        flash[:success] = 'Tu oferta fue eliminada exitosamente.'
         format.html { redirect_to opportunities_url }
       end
     else
@@ -105,7 +109,7 @@ class OpportunitiesController < ApplicationController
     if application.save
       AdministratorMailer.new_apply(@opportunity, current_user.student).deliver_now
 
-      flash[:success] = 'Aplicaste exitosamente a esta oferta. Recuerda estar pendiente de tu correo y celular registrados por si la empresa / persona quiere contactarte'
+      flash[:success] = 'Aplicaste exitosamente a esta oferta. Recuerda estar pendiente de tu correo y celular registrados por si la empresa / persona quiere contactarte.'
       redirect_to opportunities_path
     else
       flash[:error] = 'Se ha generado un error. Por favor aplica a la oferta nuevamente.'
@@ -131,6 +135,15 @@ class OpportunitiesController < ApplicationController
     end
   end
 
+  def close
+    if @opportunity.close
+      flash[:success] = "La oferta '#{@opportunity.opportunity_title}' ha sido cerrada exitosamente."
+    else
+      flash[:error] = "La oferta '#{@opportunity.opportunity_title}' no se pudo cerrar. Inténtalo nuevamente."
+    end
+
+    redirect_to my_opportunities_opportunities_path
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.

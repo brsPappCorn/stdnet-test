@@ -28,10 +28,13 @@
               <thead>
               <tr>
                 <th>
-                  ID
+                  Nombre de la oferta
                 </th>
                 <th>
-                  Nombre de la oferta
+                  Tipo de Proyecto
+                </th>
+                <th>
+                  Estado
                 </th>
                 <th>
                   # Aplicaciones
@@ -39,7 +42,7 @@
                 <th>
                   Fecha de publicación
                 </th>
-                <th colspan="5">Acciones</th>
+                <th colspan="4">Acciones</th>
               </tr>
               </thead>
 
@@ -47,13 +50,17 @@
               <% @my_opportunities.each do |opportunity| %>
                   <tr>
                     <td>
-                      <%= opportunity.id %>
-                    </td>
-                    <td>
                       <%= opportunity.opportunity_title %>
                     </td>
                     <td>
+                      <%= opportunity_type_friendly(opportunity)  %>
+                    </td>
+                    <td>
                       <%= "#{opportunity.applied_users.count} estudiantes" %>
+                    </td>
+                    <td>
+                      <%= opportunity.approved_state ? 'Aprobada' : 'Por aprobar' %> |
+                      <%= opportunity.closed ? 'Cerrada' : 'Abierta' %>
                     </td>
                     <td>
                       <%= opportunity.created_at.strftime('%d/%m/%Y') %>
@@ -61,11 +68,14 @@
 
                     <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
                     <td><%= link_to 'Aplicantes', applicants_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
-                    <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
 
-                    <!-- TODO: Opportunities/my_opportunities - Pending for dev. Close opportunity == Unpublish/Unapprove Opportunity -->
-                    <td><%= link_to 'Cerrar', '#', class: 'btn btn-studnet-details' %></td>
+                    <% unless opportunity.approved_state %>
+                        <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
+                    <% end %>
 
+                    <% unless opportunity.closed %>
+                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), class: 'btn btn-studnet-details', method: :post %></td>
+                    <% end %>
                   </tr>
               <% end %>
               </tbody>
@@ -88,6 +98,9 @@
               <tr>
                 <th>
                   Empresa oferente
+                </th>
+                <th>
+                  Tipo de Proyecto
                 </th>
                 <th>
                   Nombre de la oferta
@@ -117,6 +130,9 @@
                       <% else %>
                           <%= opportunity.user.company.company_name  %>
                       <% end %>
+                    </td>
+                    <td>
+                      <%= opportunity_type_friendly(opportunity)  %>
                     </td>
                     <td>
                       <%= opportunity.opportunity_title %>
