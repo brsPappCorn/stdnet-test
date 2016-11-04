@@ -34,12 +34,15 @@
                   Tipo de Proyecto
                 </th>
                 <th>
+                  Estado
+                </th>
+                <th>
                   # Aplicaciones
                 </th>
                 <th>
                   Fecha de publicación
                 </th>
-                <th colspan="5">Acciones</th>
+                <th colspan="4">Acciones</th>
               </tr>
               </thead>
 
@@ -56,16 +59,23 @@
                       <%= "#{opportunity.applied_users.count} estudiantes" %>
                     </td>
                     <td>
+                      <%= opportunity.approved_state ? 'Aprobada' : 'Por aprobar' %> |
+                      <%= opportunity.closed ? 'Cerrada' : 'Abierta' %>
+                    </td>
+                    <td>
                       <%= opportunity.created_at.strftime('%d/%m/%Y') %>
                     </td>
 
                     <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
                     <td><%= link_to 'Aplicantes', applicants_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
-                    <!-- <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td> -->
 
-                    <!-- TODO: Opportunities/my_opportunities - Pending for dev. Close opportunity == Unpublish/Unapprove Opportunity -->
-                    <td><%= link_to 'Cerrar', '#', class: 'btn btn-studnet-details' %></td>
+                    <% unless opportunity.approved_state %>
+                        <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-studnet-details' %></td>
+                    <% end %>
 
+                    <% unless opportunity.closed %>
+                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), class: 'btn btn-studnet-details', method: :post %></td>
+                    <% end %>
                   </tr>
               <% end %>
               </tbody>

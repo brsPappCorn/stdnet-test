@@ -137,9 +137,36 @@
 </section>
 
 <script type="text/javascript">
-  //=======================
-  // Select2
-  //=======================
+  var current_country_val = <%= @user.country_id %>;
+  var current_city_val = '<%= @user.city.city_name %>';
+
+  if (current_country_val == 1) {
+    elementVisible('#userCity', true);
+  } else {
+    elementVisible('#userCity', false);
+  }
+
+  $("#user_country_id").change(function() {
+    if ($(this).val() == 1) {
+      elementVisible('#userCity', true);
+    } else {
+      elementVisible('#userCity', false);
+    }
+  });
+
+  if (current_city_val == 'Otra') {
+    elementVisible('#otherCity', true);
+  } else {
+    elementVisible('#otherCity', false);
+  }
+
+  $("#user_city_id").change(function() {
+    if ($(this).find("option:selected").text() == 'Otra') {
+      elementVisible('#otherCity', true);
+    } else {
+      elementVisible('#otherCity', false);
+    }
+  });
 
   /* Student */
   $('select').select2({

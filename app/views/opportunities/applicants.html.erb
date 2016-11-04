@@ -76,14 +76,14 @@
                   <% if applicant.student.major_id.nil? %>
                       No disponible
                   <% else %>
-                      <%= applicant.student.major.major_name %>
+                      <%= applicant.student.definitive_major %>
                   <% end %>
                 </td>
                 <td>
                   <% if applicant.student.university_id.nil? %>
                       No disponible
                   <% else %>
-                      <%= applicant.student.university.university_name  %>
+                      <%= applicant.student.definitive_university  %>
                   <% end %>
                 </td>
                 <td>

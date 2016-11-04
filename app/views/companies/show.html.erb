@@ -76,23 +76,10 @@
 
               <tr>
                 <td>
-                  País:
+                  Ubicación:
                 </td>
                 <td>
-                  <% unless @user.country_id.nil? %>
-                      <%= @user.country.country_name %>
-                  <% end %>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  Ciudad:
-                </td>
-                <td>
-                  <% unless @user.city_id.nil? %>
-                      <%= @user.city.city_name %>
-                  <% end %>
+                  <%= @user.definitive_location %>
                 </td>
               </tr>
 

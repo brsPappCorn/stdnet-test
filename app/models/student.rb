@@ -33,6 +33,11 @@
 #  avatar               :string
 #  type_of_student      :integer
 #  other_tools_skills   :string
+#  other_major          :string
+#  other_university     :string
+#  second_university_id :integer
+#  second_major_id      :integer
+#  second_ed_level_id   :integer
 #
 
 class Student < ActiveRecord::Base
@@ -58,11 +63,17 @@ class Student < ActiveRecord::Base
   # Associations
   #---------------------
   belongs_to :user
+
   belongs_to :university
   belongs_to :major
+  belongs_to :education_level, foreign_key: 'ed_level_id'
+
+  belongs_to :second_university, class_name: 'University', foreign_key: 'second_university_id'
+  belongs_to :second_major, class_name: 'Major', foreign_key: 'second_major_id'
+  belongs_to :second_education_level, class_name: 'EducationLevel', foreign_key: 'second_ed_level_id'
+
   belongs_to :country
   belongs_to :language
-  belongs_to :education_level, foreign_key: 'ed_level_id'
 
   has_and_belongs_to_many :tools
   has_and_belongs_to_many :majors
@@ -90,6 +101,18 @@ class Student < ActiveRecord::Base
     joins('INNER JOIN majors_students ON majors_students.student_id = students.id').
         where('students.major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids).
         includes(:user)
+  end
+
+  def definitive_major
+    self.major.major_name.eql?('Otra') ? self.other_major : self.major.major_name
+  end
+
+  def definitive_university
+    self.university.university_name.eql?('Otra') ? self.other_university : self.university.university_name
+  end
+
+  def has_second_major?
+    !self.second_major.nil?
   end
 
   def profile_incomplete?

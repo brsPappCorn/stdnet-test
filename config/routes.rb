@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       post 'apply'
       get 'applicants'
       post 'approve'
+      post 'close'
     end
     collection do
       get 'my_opportunities'

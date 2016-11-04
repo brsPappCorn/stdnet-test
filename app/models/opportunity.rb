@@ -22,6 +22,7 @@
 #  approved_state            :boolean          default(FALSE)
 #  date_ini_type             :integer          default(0)
 #  opportunity_duration_type :integer          default(0)
+#  closed                    :boolean          default(FALSE)
 #
 
 class Opportunity < ActiveRecord::Base
@@ -88,6 +89,11 @@ class Opportunity < ActiveRecord::Base
 
   def approve
     self.approved_state = true
+    self.save
+  end
+
+  def close
+    self.closed = true
     self.save
   end
 

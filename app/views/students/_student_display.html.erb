@@ -160,12 +160,10 @@
 
                       <tr>
                         <td>
-                          Ciudad en la que vive:
+                          Ubicación:
                         </td>
                         <td>
-                          <% unless @student_user.city_id.nil? %>
-                              <%= @student_user.city.city_name %>
-                          <% end %>
+                          <%= @student_user.definitive_location %>
                         </td>
                       </tr>
 
@@ -242,7 +240,7 @@
                         </td>
                         <td>
                           <% unless @student_user.student.major_id.nil? %>
-                              <%= @student_user.student.major.major_name %>
+                              <%= @student_user.student.definitive_major %>
                           <% end %>
                         </td>
                       </tr>
@@ -253,7 +251,7 @@
                         </td>
                         <td>
                           <% unless @student_user.student.university_id.nil? %>
-                              <%= @student_user.student.university.university_name %>
+                              <%= @student_user.student.definitive_university %>
                           <% end %>
                         </td>
                       </tr>
@@ -268,6 +266,44 @@
                           <% end %>
                         </td>
                       </tr>
+
+
+                      <% if @student_user.student.has_second_major? %>
+                          <tr></tr>
+
+                          <tr>
+                            <td>
+                              Segunda carrera:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.second_major_id.nil? %>
+                                  <%= @student_user.student.second_major.major_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Universidad:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.second_university_id.nil? %>
+                                  <%= @student_user.student.second_university.university_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              Nivel:
+                            </td>
+                            <td>
+                              <% unless @student_user.student.second_ed_level_id.nil? %>
+                                  <%= @student_user.student.second_education_level.level_name %>
+                              <% end %>
+                            </td>
+                          </tr>
+                      <% end %>
 
                       <tr>
                         <td>
@@ -345,7 +381,7 @@
                             </td>
                             <td>
                               <% unless @student_user.student.university_id.nil? %>
-                                  <%= @student_user.student.university.university_name %>
+                                  <%= @student_user.student.definitive_university %>
                               <% end %>
                             </td>
                           </tr>

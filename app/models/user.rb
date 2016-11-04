@@ -29,6 +29,7 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  other_city             :string
 #
 # Indexes
 #
@@ -128,6 +129,20 @@ class User < ActiveRecord::Base
         self.person.profile_incomplete?
       end
     end
+  end
+
+  def definitive_location
+    city = ''
+
+    if self.country.country_name.eql? 'Colombia'
+      if self.city.city_name.eql? 'Otra'
+        city = "#{self.other_city}, "
+      else
+        city = "#{self.city.city_name},  "
+      end
+    end
+
+    city << self.country.country_name
   end
 
   #---------------------

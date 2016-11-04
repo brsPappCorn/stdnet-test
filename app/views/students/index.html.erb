@@ -26,8 +26,8 @@
                 <td><%= student.user.email %></td>
                 <td><%= student.id %></td>
                 <% unless user_signed_in? %>
-                    <td><%= student.university.university_name %></td>
-                    <td><%= student.major.major_name %></td>
+                    <td><%= student.definitive_university %></td>
+                    <td><%= student.definitive_major %></td>
                 <% end %>
                 <td><%= student.user.role_id %></td>
                 <td><%= link_to 'Show', student_path(student.id) %></td>

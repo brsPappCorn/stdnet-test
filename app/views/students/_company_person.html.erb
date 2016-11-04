@@ -86,7 +86,7 @@
                     </td>
                     <td id="studentMajorBlue">
                       <% unless @student.major_id.nil? %>
-                          <%= @student.major.major_name %>
+                          <%= @student.definitive_major %>
                       <% end %>
                     </td>
                   </tr>
@@ -97,7 +97,7 @@
                     </td>
                     <td>
                       <% unless @student.university_id.nil? %>
-                          <%= @student.university.university_name %>
+                          <%= @student.definitive_university %>
                       <% end %>
                     </td>
                   </tr>
@@ -212,7 +212,7 @@
                       </td>
                       <td>
                         <% unless @student.university_id.nil? %>
-                            <%= @student.university.university_name %>
+                            <%= @student.definitive_university %>
                         <% end %>
                       </td>
                     </tr>

@@ -1,5 +1,5 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve]
+  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve, :close]
 
   def index
     # Used to check what type of role is signed in
@@ -27,6 +27,10 @@ class OpportunitiesController < ApplicationController
   end
 
   def edit
+    if @opportunity.approved_state
+      flash[:warning] = 'No puedes editar una oferta que ya ha sido aprobada.'
+      redirect_to my_opportunities_opportunities_path
+    end
   end
 
   def create
@@ -131,6 +135,15 @@ class OpportunitiesController < ApplicationController
     end
   end
 
+  def close
+    if @opportunity.close
+      flash[:success] = "La oferta '#{@opportunity.opportunity_title}' ha sido cerrada exitosamente."
+    else
+      flash[:error] = "La oferta '#{@opportunity.opportunity_title}' no se pudo cerrar. Inténtalo nuevamente."
+    end
+
+    redirect_to my_opportunities_opportunities_path
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
