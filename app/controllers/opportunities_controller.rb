@@ -2,14 +2,18 @@ class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve, :close]
 
   def index
-    # Used to check what type of role is signed in
-    @user_role = User.find_by_id(current_user.id)
+    if administrator_signed_in?
+      redirect_to opportunities_administrators_path
+    elsif user_signed_in?
+      # Used to check what type of role is signed in
+      @user_role = User.find_by_id(current_user.id)
 
-    if @user_role.role_id == 2
-      @all_opportunities = Opportunity.approved
-      @opportunities = Opportunity.opportunities_for_student(@user_role.student)
-    elsif @user_role.role_id == 3 || @user_role.role_id == 4
-      redirect_to my_opportunities_opportunities_path
+      if @user_role.role_id == 2
+        @all_opportunities = Opportunity.approved
+        @opportunities = Opportunity.opportunities_for_student(@user_role.student)
+      elsif @user_role.role_id == 3 || @user_role.role_id == 4
+        redirect_to my_opportunities_opportunities_path
+      end
     end
   end
 
@@ -23,7 +27,7 @@ class OpportunitiesController < ApplicationController
   end
 
   def new
-    @opportunity = Opportunity.new
+    @opportunity = current_user.opportunities.build
   end
 
   def edit

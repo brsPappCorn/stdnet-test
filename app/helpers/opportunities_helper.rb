@@ -16,21 +16,18 @@ module OpportunitiesHelper
   end
 
   def opportunities_tab_content_color
-    if current_user.role_id == 3
-      'company-tab-content'
-    elsif current_user.role_id == 4
-      'person-tab-content'
-    elsif current_user.role_id == 2
-      'company-tab-content student-title-blue'
+    if user_signed_in?
+      if current_user.role_id == 3
+        'company-tab-content'
+      elsif current_user.role_id == 4
+        'person-tab-content'
+      elsif current_user.role_id == 2
+        'company-tab-content student-title-blue'
+      end
     else
       ''
     end
   end
-
-
-
-
-
 
   # Helper method for building rails helper select from constants declared in the model
   def company_opportunity_select_type

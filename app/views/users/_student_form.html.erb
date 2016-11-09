@@ -344,14 +344,14 @@
 
                 <div class="languages-container">
                   <%= s.fields_for :learnt_languages, @user.student.learnt_languages do |l| %>
-                      <%= render partial: 'users/student/student_language_fields', locals: { l: l, new: false } %>
+                      <%= render partial: 'users/student/student_language_fields', locals: { l: l } %>
                   <% end %>
                 </div>
 
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <%= link_to 'Agregar otro', build_learnt_language_user_path(@user), class: 'btn btn-primary btn-studnet-basic', method: :post, remote: :true %>
+                      <%= link_to 'Agregar otro', build_learnt_language_user_path(@user), class: 'btn btn-primary btn-studnet-basic btn-add-other-language', method: :post, remote: :true %>
                     </div>
                   </div>
                 </div>
