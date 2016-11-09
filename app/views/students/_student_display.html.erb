@@ -44,7 +44,7 @@
 
         <ul class="nav nav-tabs student-nav-tabs"> <!-- nav-justified -->
 
-          <%if params[:opportunity].present?  %>
+          <% if params[:opportunity].present?  %>
               <li class="active li-width-30">
                 <a href="#pane1" data-toggle="tab">
                   Información personal y educación
@@ -100,7 +100,7 @@
                   Descripción
                 </a>
               </li>
-          <% end%>
+          <% end %>
 
           <!-- TODO: Commented until client decides what to do with this section
           <li>
@@ -508,6 +508,62 @@
                           </ul>
                         </div>
                       </div>
+
+                      <% if @student_user.student.has_second_work_xp? %>
+                          <hr />
+
+                          <div class="row">
+                            <div class="col-md-6 student-xp-title">
+                              <h4>
+                                <%= @student_user.student.second_xp_position %>
+                              </h4>
+                              <h5>
+                                <%= @student_user.student.second_xp_company %>
+                              </h5>
+                            </div>
+                          </div>
+
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <ul>
+                                <li>
+                                  <p>
+                                    <%= @student_user.student.second_xp_achievements %>
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                      <% end %>
+
+                      <% if @student_user.student.has_third_work_xp? %>
+                          <hr />
+
+                          <div class="row">
+                            <div class="col-md-6 student-xp-title">
+                              <h4>
+                                <%= @student_user.student.third_xp_position %>
+                              </h4>
+                              <h5>
+                                <%= @student_user.student.third_xp_company %>
+                              </h5>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <ul>
+                                <li>
+                                  <p>
+                                    <%= @student_user.student.third_xp_achievements %>
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                      <% end %>
+
                   <% end %>
                   <!-- Professional XP -->
 
@@ -549,6 +605,55 @@
                           </ul>
                         </div>
                       </div>
+
+                      <% if @student_user.student.has_second_volunteer_xp? %>
+                          <hr />
+
+                          <div class="row">
+                            <div class="col-md-6 student-xp-title">
+                              <h5>
+                                <%= @student_user.student.second_volunteer_org %>
+                              </h5>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <ul>
+                                <li>
+                                  <p>
+                                    <%= @student_user.student.second_volunteer_functions %>
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                      <% end %>
+
+                      <% if @student_user.student.has_third_volunteer_xp? %>
+                          <hr />
+
+                          <div class="row">
+                            <div class="col-md-6 student-xp-title">
+                              <h5>
+                                <%= @student_user.student.third_volunteer_org %>
+                              </h5>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <ul>
+                                <li>
+                                  <p>
+                                    <%= @student_user.student.third_volunteer_functions %>
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                      <% end %>
+
                   <% end %>
                 </div>
 
@@ -608,20 +713,20 @@
                       <!-- TODO: Students/show - fix languages to create more than one language and show them here -->
                       <table class="table studNet-table">
                         <tbody>
-                        <tr>
-                          <td>
-                            <strong>
-                              <% unless @student_user.student.language_id.nil? %>
-                                  <%= @student_user.student.language.language_name %>
-                              <% end %>
-                            </strong>
-                          </td>
-                          <td>
+                        <% @student_user.student.learnt_languages.each do |learnt_language| %>
+                            <tr>
+                              <td>
+                                <strong>
+                                  <%= learnt_language.language.language_name %>
+                                </strong>
+                              </td>
+                              <td>
                             <span class="student-language-name">
-                              <%= @student_user.student.language_level %>
+                              <%= learnt_language.language_level %>
                             </span>
-                          </td>
-                        </tr>
+                              </td>
+                            </tr>
+                        <% end %>
                         </tbody>
                       </table>
                     </div>

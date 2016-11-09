@@ -20,8 +20,8 @@ function elementVisible(selector, visible) {
     var $element = $(selector);
 
     if (visible) {
-        $element.show();
+        $element.show('fast');
     } else {
-        $element.hide();
+        $element.hide('fast');
     }
 }

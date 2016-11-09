@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104215431) do
+ActiveRecord::Schema.define(version: 20161108212251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,12 @@ ActiveRecord::Schema.define(version: 20161104215431) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "learnt_languages", force: :cascade do |t|
+    t.integer "language_id"
+    t.integer "student_id"
+    t.string  "language_level"
+  end
+
   create_table "majors", force: :cascade do |t|
     t.string   "major_name"
     t.datetime "created_at", null: false
@@ -143,8 +149,8 @@ ActiveRecord::Schema.define(version: 20161104215431) do
   create_table "students", force: :cascade do |t|
     t.integer  "university_id"
     t.integer  "major_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
     t.integer  "ed_level_id"
     t.string   "last_semester"
@@ -161,8 +167,6 @@ ActiveRecord::Schema.define(version: 20161104215431) do
     t.integer  "volunteer_xp"
     t.string   "volunteer_org"
     t.text     "volunteer_functions"
-    t.integer  "language_id"
-    t.string   "language_level"
     t.integer  "programming_skills"
     t.text     "programing_languages"
     t.text     "strengths"
@@ -176,6 +180,16 @@ ActiveRecord::Schema.define(version: 20161104215431) do
     t.integer  "second_major_id"
     t.integer  "second_ed_level_id"
     t.string   "other_tools_skills"
+    t.string   "second_xp_company"
+    t.text     "second_xp_position"
+    t.text     "second_xp_achievements"
+    t.string   "third_xp_company"
+    t.text     "third_xp_position"
+    t.text     "third_xp_achievements"
+    t.string   "second_volunteer_org"
+    t.text     "second_volunteer_functions"
+    t.string   "third_volunteer_org"
+    t.text     "third_volunteer_functions"
   end
 
   create_table "students_tools", id: false, force: :cascade do |t|

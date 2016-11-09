@@ -211,6 +211,8 @@
                     <%= s.select :work_xp, options_for_select(student_yes_no_select_type, @user.student.work_xp), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
+                  <hr />
+
                   <div class="form-group workXp">
                     <%= s.label :xp_company, 'Indica el nombre de la empresa en la que trabajaste' %>
                     <%= s.text_field :xp_company, class: 'form-control input-width' %>
@@ -222,14 +224,49 @@
                   </div>
 
                   <div class="form-group workXp">
-                    <%= s.label :xp_achievements, 'Indica tus funciones y logros en este cargo ' %>
+                    <%= s.label :xp_achievements, 'Indica tus funciones y logros en este cargo' %>
                     <%= s.text_area :xp_achievements, rows: 4, class: 'form-control input-width' %>
                   </div>
 
-                  <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
-                  <button class="btn btn-primary btn-studnet-basic pull-right">
-                    Agregar otra
-                  </button>
+                  <!-- Second work experience -->
+
+                  <hr class="secondWorkXp" />
+
+                  <div class="form-group secondWorkXp">
+                    <%= s.label :second_xp_company, 'Indica el nombre de la empresa en la que trabajaste' %>
+                    <%= s.text_field :second_xp_company, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group secondWorkXp">
+                    <%= s.label :second_xp_position, 'Indica el nombre del cargo' %>
+                    <%= s.text_field :second_xp_position, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group secondWorkXp">
+                    <%= s.label :second_xp_achievements, 'Indica tus funciones y logros en este cargo' %>
+                    <%= s.text_area :second_xp_achievements, rows: 4, class: 'form-control input-width' %>
+                  </div>
+
+                  <!-- Third work experience -->
+
+                  <hr class="thirdWorkXp" />
+
+                  <div class="form-group thirdWorkXp">
+                    <%= s.label :third_xp_company, 'Indica el nombre de la empresa en la que trabajaste' %>
+                    <%= s.text_field :third_xp_company, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group thirdWorkXp">
+                    <%= s.label :third_xp_position, 'Indica el nombre del cargo' %>
+                    <%= s.text_field :third_xp_position, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group thirdWorkXp">
+                    <%= s.label :third_xp_achievements, 'Indica tus funciones y logros en este cargo' %>
+                    <%= s.text_area :third_xp_achievements, rows: 4, class: 'form-control input-width' %>
+                  </div>
+
+                  <%= link_to 'Agregar otra', '#', class: 'btn btn-primary btn-studnet-basic pull-right workXp add-work-xp-btn' %>
                 </div>
                 <!-- ./Professional Experience Wrapper -->
               </div>
@@ -244,8 +281,9 @@
                   <div class="form-group">
                     <%= s.label :volunteer_xp, '¿Realizas o has realizado una actividad social / de voluntariado?' %><br />
                     <%= s.select :volunteer_xp, options_for_select(student_yes_no_select_type, @user.student.volunteer_xp), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
-
                   </div>
+
+                  <hr />
 
                   <div class="form-group volunteerXp">
                     <%= s.label :volunteer_org, 'Indica el nombre de la organización en la que trabajaste' %>
@@ -257,10 +295,31 @@
                     <%= s.text_area :volunteer_functions, rows: 4, class: 'form-control input-width' %>
                   </div>
 
-                  <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
-                  <button class="btn btn-primary btn-studnet-basic pull-right">
-                    Agregar otra
-                  </button>
+                  <hr class="secondVolunteerXp" />
+
+                  <div class="form-group secondVolunteerXp">
+                    <%= s.label :second_volunteer_org, 'Indica el nombre de la organización en la que trabajaste' %>
+                    <%= s.text_field :second_volunteer_org, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group secondVolunteerXp">
+                    <%= s.label :second_volunteer_functions, 'Indica tus funciones y logros en esta organización ' %>
+                    <%= s.text_area :second_volunteer_functions, rows: 4, class: 'form-control input-width' %>
+                  </div>
+
+                  <hr class="thirdVolunteerXp" />
+
+                  <div class="form-group thirdVolunteerXp">
+                    <%= s.label :third_volunteer_org, 'Indica el nombre de la organización en la que trabajaste' %>
+                    <%= s.text_field :third_volunteer_org, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group thirdVolunteerXp">
+                    <%= s.label :third_volunteer_functions, 'Indica tus funciones y logros en esta organización ' %>
+                    <%= s.text_area :third_volunteer_functions, rows: 4, class: 'form-control input-width' %>
+                  </div>
+
+                  <%= link_to 'Agregar otra', '#', class: 'btn btn-primary btn-studnet-basic pull-right volunteerXp add-volunteer-xp-btn' %>
                 </div>
                 <!-- ./Other Experience Wrapper -->
               </div>
@@ -283,27 +342,16 @@
                   Idiomas
                 </h3>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <%= s.label :language_id, 'Idioma' %>
-                      <%= s.select :language_id, Language.all.map { |language| [language.language_name, language.id] }, { default: 28 }, class: 'form-control input-width' %>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <%= s.label :language_level, 'Nivel' %>
-                      <%= s.select(:language_level, Student::LANGUAGE_LEVEL, {}, { :class => 'form-control' }) %>
-                    </div>
-                  </div>
+                <div class="languages-container">
+                  <%= s.fields_for :learnt_languages, @user.student.learnt_languages do |l| %>
+                      <%= render partial: 'users/student/student_language_fields', locals: { l: l, new: false } %>
+                  <% end %>
                 </div>
 
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <!-- TODO: Users/edit make this button add new question. Possible need to create a model to store Work XP, beacuse a Student can have many work xps -->
-                      <%= link_to 'Agregar otro', '', class: 'btn btn-primary btn-studnet-basic' %>
+                      <%= link_to 'Agregar otro', build_learnt_language_user_path(@user), class: 'btn btn-primary btn-studnet-basic', method: :post, remote: :true %>
                     </div>
                   </div>
                 </div>
@@ -470,7 +518,12 @@
   var current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
   var current_major_val = '<%= @user.student.major.major_name %>';
   var current_university_val = '<%= @user.student.university.university_name %>';
+  var has_second_work_xp = <%= @user.student.has_second_work_xp? %>;
+  var has_third_work_xp = <%= @user.student.has_third_work_xp? %>;
+  var has_second_volunteer_xp = <%= @user.student.has_second_volunteer_xp? %>;
+  var has_third_volunteer_xp = <%= @user.student.has_third_volunteer_xp? %>;
 
+  // Function for eduaction
   if (current_major_val == 'Otra') {
     elementVisible("#otherMajor", true);
   } else {
@@ -505,18 +558,13 @@
     elementVisible('.exchangeStudent', false);
   }
 
-  function displayExchangeStudent() {
-    $('#user_student_attributes_exchange_student').change(function(){
-      if ( $('#user_student_attributes_exchange_student').val() == 1 ) {
-        elementVisible('.exchangeStudent', true);
-      } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
-        elementVisible('.exchangeStudent', false);
-      }
-
-    });
-
-    $('#user_student_attributes_exchange_student').val();
-  }
+  $('#user_student_attributes_exchange_student').change(function(){
+    if ( $(this).val() == 1 ) {
+      elementVisible('.exchangeStudent', true);
+    } else if ( $(this).val() == 0 ) {
+      elementVisible('.exchangeStudent', false);
+    }
+  });
 
   // Function for work_xp Select
   if ( current_work_xp_val == 1 ) {
@@ -525,18 +573,45 @@
     $('.workXp').hide();
   }
 
-  function displayWorkXp() {
-    $('#user_student_attributes_work_xp').change(function(){
-      if ( $('#user_student_attributes_work_xp').val() == 1 ) {
-        elementVisible('.workXp', true);
-      } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
-        elementVisible('.workXp', false);
-      }
-
-    });
-
-    $('#user_student_attributes_work_xp').val();
+  if (has_second_work_xp) {
+    elementVisible(".secondWorkXp", true);
+  } else {
+    elementVisible(".secondWorkXp", false);
   }
+
+  if (has_third_work_xp) {
+    elementVisible(".thirdWorkXp", true);
+    elementVisible(".add-work-xp-btn", false);
+  } else {
+    elementVisible(".thirdWorkXp", false);
+  }
+
+  $('#user_student_attributes_work_xp').change(function(){
+    if ( $(this).val() == 1 ) {
+      elementVisible('.workXp', true);
+    } else if ( $(this).val() == 0 ) {
+      elementVisible('.workXp', false);
+    }
+  });
+
+  $(".add-work-xp-btn").click(function(e) {
+    e.preventDefault();
+
+    var secondXpHidden = $(".secondWorkXp").is(":hidden");
+    var thirdXpHidden = $(".thirdWorkXp").is(":hidden");
+
+    if (secondXpHidden) {
+      elementVisible(".secondWorkXp", true);
+      secondXpHidden = false;
+    } else if (thirdXpHidden) {
+      elementVisible(".thirdWorkXp", true);
+      thirdXpHidden = false;
+    }
+
+    if (!secondXpHidden && !thirdXpHidden) {
+      $(this).hide();
+    }
+  });
 
   // Function for volunteer_xp Select
   if ( current_volunteer_xp_val == 1 ) {
@@ -545,18 +620,45 @@
     elementVisible('.volunteerXp', false);
   }
 
-  function displayVolunteerXp() {
-    $('#user_student_attributes_volunteer_xp').change(function(){
-      if ( $('#user_student_attributes_volunteer_xp').val() == 1 ) {
-        elementVisible('.volunteerXp', true);
-      } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
-        elementVisible('.volunteerXp', false);
-      }
-
-    });
-
-    $('#user_student_attributes_volunteer_xp').val();
+  if (has_second_volunteer_xp) {
+    elementVisible(".secondVolunteerXp", true);
+  } else {
+    elementVisible(".secondVolunteerXp", false);
   }
+
+  if (has_third_volunteer_xp) {
+    elementVisible(".thirdVolunteerXp", true);
+    elementVisible(".add-volunteer-xp-btn", false);
+  } else {
+    elementVisible(".thirdVolunteerXp", false);
+  }
+
+  $('#user_student_attributes_volunteer_xp').change(function(){
+    if ( $(this).val() == 1 ) {
+      elementVisible('.volunteerXp', true);
+    } else if ( $(this).val() == 0 ) {
+      elementVisible('.volunteerXp', false);
+    }
+  });
+
+  $(".add-volunteer-xp-btn").click(function(e) {
+    e.preventDefault();
+
+    var secondXpHidden = $(".secondVolunteerXp").is(":hidden");
+    var thirdXpHidden = $(".thirdVolunteerXp").is(":hidden");
+
+    if (secondXpHidden) {
+      elementVisible(".secondVolunteerXp", true);
+      secondXpHidden = false;
+    } else if (thirdXpHidden) {
+      elementVisible(".thirdVolunteerXp", true);
+      thirdXpHidden = false;
+    }
+
+    if (!secondXpHidden && !thirdXpHidden) {
+      $(this).hide();
+    }
+  });
 
   // Function for programming_languages Select
   if ( current_programming_skills_val == 1 ) {
@@ -565,21 +667,11 @@
     elementVisible('#programmingLanguages', false);
   }
 
-  function displayProgrammingLanguages() {
-    $('#user_student_attributes_programming_skills').change(function(){
-      if ( $('#user_student_attributes_programming_skills').val() == 1 ) {
-        elementVisible('#programmingLanguages', true);
-      } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
-        elementVisible('#programmingLanguages', false);
-      }
-
-    });
-
-    $('#user_student_attributes_programming_skills').val();
-  }
-
-  displayExchangeStudent();
-  displayWorkXp();
-  displayVolunteerXp();
-  displayProgrammingLanguages();
+  $('#user_student_attributes_programming_skills').change(function(){
+    if ( $(this).val() == 1 ) {
+      elementVisible('#programmingLanguages', true);
+    } else if ( $(this).val() == 0 ) {
+      elementVisible('#programmingLanguages', false);
+    }
+  });
 </script>

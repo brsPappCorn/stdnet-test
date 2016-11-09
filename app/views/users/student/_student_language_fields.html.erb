@@ -1,0 +1,19 @@
+<div>
+  <%= l.hidden_field :id %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= l.label :language_id, 'Idioma' %>
+        <%= l.select :language_id, Language.all.map { |language| [language.language_name, language.id] }, {}, { class: "form-control input-width #{ new ? 'new-select' : '' }" } %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= l.label :language_level, 'Nivel' %>
+        <%= l.select :language_level, LearntLanguage::LANGUAGE_LEVEL, {}, { class: "form-control input-width #{ new ? 'new-select' : '' }" } %>
+      </div>
+    </div>
+  </div>
+</div>

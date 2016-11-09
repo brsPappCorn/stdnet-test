@@ -13,9 +13,8 @@ class Language < ActiveRecord::Base
   #---------------------
   # Associations
   #---------------------
-  has_many :students, dependent: :destroy
-
-  accepts_nested_attributes_for :students
+  has_many :learnt_languages
+  has_many :students, through: :learnt_languages
 
   #---------------------
   # Validations
