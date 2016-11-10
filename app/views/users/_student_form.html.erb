@@ -119,20 +119,20 @@
                   </div>
 
                   <hr/>
-                  <h4>Segunda carrera</h4><br/>
+                  <h4>Otra carrera (opcional)</h4><br/>
 
                   <div class="form-group">
-                    <%= s.label :second_university_id, 'Universidad' %>
+                    <%= s.label :second_university_id, 'Universidad de otra carrera (opcional)' %>
                     <%= s.select :second_university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
                   <div class="form-group">
-                    <%= s.label :second_major_id, 'Carrera'  %>
+                    <%= s.label :second_major_id, 'Otra carrera (opcional)'  %>
                     <%= s.select :second_major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
                   <div class="form-group">
-                    <%= s.label :second_ed_level_id, 'Nivel' %>
+                    <%= s.label :second_ed_level_id, 'Nivel de otra carrera (opcional)' %>
                     <%= s.select :second_ed_level_id, EducationLevel.all.map { |ed_level| [ed_level.level_name, ed_level.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 

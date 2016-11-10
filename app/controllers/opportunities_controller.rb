@@ -27,7 +27,11 @@ class OpportunitiesController < ApplicationController
   end
 
   def new
-    @opportunity = current_user.opportunities.build
+    if current_user.profile_incomplete?
+      redirect_to root_path
+    else
+      @opportunity = current_user.opportunities.build
+    end
   end
 
   def edit
@@ -93,13 +97,11 @@ class OpportunitiesController < ApplicationController
   end
 
   def applicants
-
     if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4)
       @applicants = @opportunity.applied_users
     elsif user_signed_in? && current_user.role_id == 2
       redirect_to root_path
     end
-
   end
 
   def application_form
@@ -107,17 +109,17 @@ class OpportunitiesController < ApplicationController
   end
 
   def apply
-    application = @opportunity.applications.build user_id: current_user.id
-    application.assign_attributes application_params
+    @application = @opportunity.applications.build user_id: current_user.id
+    @application.assign_attributes application_params
 
-    if application.save
+    if @application.save
       AdministratorMailer.new_apply(@opportunity, current_user.student).deliver_now
 
       flash[:success] = 'Aplicaste exitosamente a esta oferta. Recuerda estar pendiente de tu correo y celular registrados por si la empresa / persona quiere contactarte.'
       redirect_to opportunities_path
     else
       flash[:error] = 'Se ha generado un error. Por favor aplica a la oferta nuevamente.'
-      redirect_to @opportunity
+      render :application_form
     end
 
   end

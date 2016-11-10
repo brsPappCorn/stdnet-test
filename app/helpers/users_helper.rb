@@ -37,6 +37,16 @@ module UsersHelper
     end
   end
 
+  def role_show_route(user)
+    if user.has_role? User::ROLE_STUDENT
+      student_path(user.student)
+    elsif user.has_role? User::ROLE_COMPANY
+      company_path(user.company)
+    elsif user.has_role? User::ROLE_PERSON
+      person_path(user.person)
+    end
+  end
+
 end
 
 

@@ -11,24 +11,15 @@ class StudentsController < ApplicationController
   end
 
   def show
-    id = params[:id].to_i
-    # Used to check what type of role is signed in
-    @user_role = User.find_by_id(current_user.id)
-
     if user_signed_in? || administrator_signed_in?
-
       if params[:opportunity]
         user_id = params[:id]
         opportunity_id = params[:opportunity]
         @application = Application.where(user_id: user_id, opportunity_id: opportunity_id).first
       end
-
-      @student_user = User.find_by_id(id)
-
     else
       redirect_to root_path
     end
-
   end
 
   def new
@@ -78,26 +69,17 @@ class StudentsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_student
-    if user_signed_in?
-      user_id = current_user.id
-      @student = Student.find_by_user_id(user_id)
-    else
-      redirect_to '/ingreso'
-    end
+    @student = Student.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def student_params
-    params.require(:student).permit(:id, :university_id, :major_id, :referenced_by,
-                                    :ed_level_id, :last_semester, :gpa, :gpa_max, :type_of_student, :exchange_student, :country_id, :exchange_university, :highschool,
-                                    :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp, :volunteer_org, :volunteer_functions,
-                                    :language_id, :language_level, :programming_skills, :programing_languages, :strengths, :areas_to_develop, :hobbies,
-                                    :student_availability,
-                                    :avatar,
-                                    :other_tools_skills,
-                                    tool_ids:[]
+    params.require(:student).permit(:id, :university_id, :major_id, :referenced_by, :ed_level_id, :last_semester, :gpa,
+                                    :gpa_max, :type_of_student, :exchange_student, :country_id, :exchange_university,
+                                    :highschool, :work_xp, :xp_company, :xp_position, :xp_achievements, :volunteer_xp,
+                                    :volunteer_org, :volunteer_functions, :language_id, :language_level,
+                                    :programming_skills, :programing_languages, :strengths, :areas_to_develop, :hobbies,
+                                    :student_availability, :avatar, :other_tools_skills, tool_ids:[]
     )
   end
 

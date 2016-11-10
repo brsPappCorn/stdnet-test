@@ -98,6 +98,7 @@ class Student < ActiveRecord::Base
   # TODO: Student.rb - Declare validations
   # validates_presence_of :major_id
   # validates_presence_of :university_id
+  validates :avatar, file_size: { less_than: 500.kilobytes }
 
   #---------------------
   # Methods
@@ -106,7 +107,7 @@ class Student < ActiveRecord::Base
     major_ids = opportunity.majors.map { |m| m.id }
 
     joins('INNER JOIN majors_students ON majors_students.student_id = students.id').
-        where('students.major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids).
+        where('students.major_id IN (?) OR students.second_major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids, major_ids).
         includes(:user)
   end
 

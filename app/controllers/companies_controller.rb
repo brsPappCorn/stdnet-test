@@ -10,12 +10,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      @user = User.find_by_id(current_user.id)
+    if user_signed_in? || administrator_signed_in?
     else
-      puts '---------------->>>>>'
-      puts 'no existe usuario'
-      puts '---------------->>>>>'
+      redirect_to root_path
     end
   end
 
@@ -65,18 +62,11 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      if user_signed_in?
-        user_id = current_user.id
-        @company = Company.find_by_user_id(user_id)
-      else
-        redirect_to '/ingreso'
-      end
-    end
+  def set_company
+    @company = Company.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def company_params
-      params.require(:company).permit(:id, :company_name, :position, :company_address, :company_nit, :company_description, :company_size, :company_website_url, :company_sector_id)
-    end
+  def company_params
+    params.require(:company).permit(:id, :company_name, :position, :company_address, :company_nit, :company_description, :company_size, :company_website_url, :company_sector_id)
+  end
 end

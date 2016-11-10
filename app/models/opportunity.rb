@@ -65,18 +65,17 @@ class Opportunity < ActiveRecord::Base
   #---------------------
   # Validations
   #---------------------
-  validates_presence_of :opportunity_type, :opportunity_title, :activity_description, :skills_description, :major_ids,
-                        :question_for_student, :availability, :opportunity_cost,
-                        :number_of_students, :user_id, :date_ini_type, :opportunity_duration_type
+  validates_presence_of :opportunity_type, :opportunity_title, :activity_description, :skills_description,
+                        :availability, :number_of_students, :user_id, :date_ini_type, :opportunity_duration_type
 
   #---------------------
   # Methods
   #---------------------
   def self.opportunities_for_student(student)
-    major_ids = [student.major_id] + student.majors.map { |m| m.id }
+    major_ids = [student.major_id, student.second_major_id] + student.majors.map { |m| m.id }
 
     joins('INNER JOIN majors_opportunities ON majors_opportunities.opportunity_id = opportunities.id').
-        where('(majors_opportunities.major_id IN (?) AND approved_state = ?) OR (other_majors = ?)', major_ids, true, true)
+        where('(majors_opportunities.major_id IN (?) OR other_majors = ?) AND approved_state = ? AND closed = ?', major_ids, true, true, false)
   end
 
   def self.approved
