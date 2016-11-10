@@ -1,0 +1,7 @@
+<%= fields_for @user do |f| %>
+    <%= f.fields_for :student, @user.student do |s| %>
+        <%= s.fields_for :learnt_languages, @user.student.learnt_languages.build do |l| %>
+            <%= render partial: 'users/student/student_language_fields', locals: { l: l } %>
+        <% end %>
+    <% end %>
+<% end %>

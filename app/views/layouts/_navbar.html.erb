@@ -65,14 +65,14 @@
 
           <!-- Account Menu Dropdown. Depends on the type of user signed in. -->
           <% if user_signed_in? %>
-              <% if user_role_id(2) %>
+              <% if current_user.has_role? User::ROLE_STUDENT %>
                   <li class="navbar-links-normal-weight">
                     <%= link_to 'ver ofertas', opportunities_path %>
                   </li>
                   <li class="navbar-links-normal-weight">
                     <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
                   </li>
-              <% elsif user_role_id(3) ||user_role_id(4) %>
+              <% elsif current_user.has_role?(User::ROLE_COMPANY) || current_user.has_role?(User::ROLE_PERSON) %>
                   <li class="navbar-links-normal-weight">
                     <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
                   </li>
@@ -85,27 +85,9 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-fixed">
-                  <% if user_role_id(2) %>
-                      <!-- Actions for Students -->
+                  <% if user_signed_in? %>
                       <li class="navbar-links-normal-weight">
-                        <%= link_to 'ver perfil', student_path(current_user.id) %>
-                      </li>
-                      <li class="navbar-links-normal-weight">
-                        <%= link_to 'editar perfil', edit_user_path(current_user.id) %>
-                      </li>
-
-                  <% elsif user_role_id(3) %>
-                      <!-- Actions for Company -->
-                      <li class="navbar-links-normal-weight">
-                        <%= link_to 'ver perfil', company_path(current_user.id) %>
-                      </li>
-                      <li class="navbar-links-normal-weight">
-                        <%= link_to 'editar perfil', edit_user_path(current_user.id) %>
-                      </li>
-                  <% elsif user_role_id(4) %>
-                      <!-- Actions for Person -->
-                      <li class="navbar-links-normal-weight">
-                        <%= link_to 'ver perfil', person_path(current_user.id) %>
+                        <%= link_to 'ver perfil', role_show_route(current_user) %>
                       </li>
                       <li class="navbar-links-normal-weight">
                         <%= link_to 'editar perfil', edit_user_path(current_user.id) %>

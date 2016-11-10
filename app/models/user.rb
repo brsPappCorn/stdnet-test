@@ -45,14 +45,9 @@ class User < ActiveRecord::Base
   # Constants
   #---------------------
 
-  ROLE_ID = [1, 2, 3, 4]
-  ROLE_NAME = ['Admin', 'Estudiante', 'Empresa', 'Persona']
-  # List of Roles. If you are going to include a new role, please add it also to the comment below, to keep track of role_id
-  # with its equivalent name.
-  # 1 = Administrator
-  # 2 = Student
-  # 3 = Company
-  # 4 = Person
+  ROLE_STUDENT = 2
+  ROLE_COMPANY = 3
+  ROLE_PERSON = 4
 
   REFERENCES_USER = [
       'Anuncios / publicidad en Facebook',
@@ -109,6 +104,23 @@ class User < ActiveRecord::Base
   #---------------------
   # Methods
   #---------------------
+  def has_role?(role)
+    self.role_id == role
+  end
+
+  def role_name
+    case self.role_id
+      when ROLE_STUDENT
+        'Estudiante'
+      when ROLE_COMPANY
+        'Empresa'
+      when ROLE_PERSON
+        'Persona'
+      else
+        'N/D'
+    end
+  end
+
   def can_create_opportunity?
     self.role_id != 2
   end

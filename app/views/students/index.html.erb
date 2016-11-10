@@ -4,17 +4,14 @@
     <div class="row">
       <div class="col-md-12">
 
-        <h1>Listing Students</h1>
+        <h1>Lista de estudiantes</h1>
 
         <table class="table">
           <thead>
           <tr>
-            <th>User ID</th>
             <th>Correo Usuario</th>
-            <th>Student ID</th>
             <th>Universidad</th>
             <th>Carrera</th>
-            <th>Role ID</th>
             <th colspan="3"></th>
           </tr>
           </thead>
@@ -22,26 +19,16 @@
           <tbody>
           <% @students.each do |student| %>
               <tr>
-                <td><%= student.user_id %></td>
                 <td><%= student.user.email %></td>
-                <td><%= student.id %></td>
                 <% unless user_signed_in? %>
                     <td><%= student.definitive_university %></td>
                     <td><%= student.definitive_major %></td>
                 <% end %>
-                <td><%= student.user.role_id %></td>
-                <td><%= link_to 'Show', student_path(student.id) %></td>
-                <td><%= link_to 'Edit', edit_student_path(student) %></td>
-                <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: '¿Estás seguro que deseas eliminar al estudiante?' } %>
-
+                <td><%= link_to 'Show', student, class: 'btn btn-default btn-studnet-details' %></td>
               </tr>
           <% end %>
           </tbody>
         </table>
-
-        <br>
-
-        <%= link_to 'New Student', new_student_path %>
 
       </div>
     </div>

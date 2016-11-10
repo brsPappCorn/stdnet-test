@@ -31,7 +31,12 @@ Rails.application.routes.draw do
   resources :companies
   resources :people
   resources :students
-  resources :users, except: [:new, :create]
+
+  resources :users, except: [:new, :create] do
+    member do
+      post 'build_learnt_language'
+    end
+  end
 
   resources :opportunities do
     member do

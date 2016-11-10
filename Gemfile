@@ -12,6 +12,7 @@ gem 'fog'
 gem 'pg'
 gem 'thin'
 #gem 'newrelic_rpm'
+gem 'file_validators'
 
 
 # Assets

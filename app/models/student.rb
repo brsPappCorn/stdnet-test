@@ -2,42 +2,50 @@
 #
 # Table name: students
 #
-#  id                   :integer          not null, primary key
-#  university_id        :integer
-#  major_id             :integer
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  user_id              :integer
-#  ed_level_id          :integer
-#  last_semester        :string
-#  gpa                  :float
-#  exchange_student     :integer
-#  exchange_university  :string
-#  highschool           :string
-#  gpa_max              :string
-#  country_id           :integer
-#  work_xp              :integer
-#  xp_company           :string
-#  xp_position          :text
-#  xp_achievements      :text
-#  volunteer_xp         :integer
-#  volunteer_org        :string
-#  volunteer_functions  :text
-#  language_id          :integer
-#  language_level       :string
-#  programming_skills   :integer
-#  programing_languages :text
-#  strengths            :text
-#  areas_to_develop     :text
-#  hobbies              :text
-#  avatar               :string
-#  type_of_student      :integer
-#  other_tools_skills   :string
-#  other_major          :string
-#  other_university     :string
-#  second_university_id :integer
-#  second_major_id      :integer
-#  second_ed_level_id   :integer
+#  id                         :integer          not null, primary key
+#  university_id              :integer
+#  major_id                   :integer
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  user_id                    :integer
+#  ed_level_id                :integer
+#  last_semester              :string
+#  gpa                        :float
+#  exchange_student           :integer
+#  exchange_university        :string
+#  highschool                 :string
+#  gpa_max                    :string
+#  country_id                 :integer
+#  work_xp                    :integer
+#  xp_company                 :string
+#  xp_position                :text
+#  xp_achievements            :text
+#  volunteer_xp               :integer
+#  volunteer_org              :string
+#  volunteer_functions        :text
+#  programming_skills         :integer
+#  programing_languages       :text
+#  strengths                  :text
+#  areas_to_develop           :text
+#  hobbies                    :text
+#  avatar                     :string
+#  type_of_student            :integer
+#  other_major                :string
+#  other_university           :string
+#  second_university_id       :integer
+#  second_major_id            :integer
+#  second_ed_level_id         :integer
+#  other_tools_skills         :string
+#  second_xp_company          :string
+#  second_xp_position         :text
+#  second_xp_achievements     :text
+#  third_xp_company           :string
+#  third_xp_position          :text
+#  third_xp_achievements      :text
+#  second_volunteer_org       :string
+#  second_volunteer_functions :text
+#  third_volunteer_org        :string
+#  third_volunteer_functions  :text
 #
 
 class Student < ActiveRecord::Base
@@ -45,10 +53,6 @@ class Student < ActiveRecord::Base
   # Constants
   #---------------------
   LAST_SEMESTER = %w[1 2 3 4 5 6 7 8 9 10 11 12 13 14]
-
-  LANGUAGE_LEVEL = [
-      'Nativo', 'Avanzado', 'Intermedio', 'Básico' # Language levels
-  ]
 
   OPTION_FOR_NO = 0
   OPTION_FOR_YES = 1
@@ -73,12 +77,15 @@ class Student < ActiveRecord::Base
   belongs_to :second_education_level, class_name: 'EducationLevel', foreign_key: 'second_ed_level_id'
 
   belongs_to :country
-  belongs_to :language
 
   has_and_belongs_to_many :tools
   has_and_belongs_to_many :majors
 
+  has_many :learnt_languages
+  has_many :languages, through: :learnt_languages
+
   accepts_nested_attributes_for :majors
+  accepts_nested_attributes_for :learnt_languages
 
   #---------------------
   # Uploaders
@@ -91,6 +98,7 @@ class Student < ActiveRecord::Base
   # TODO: Student.rb - Declare validations
   # validates_presence_of :major_id
   # validates_presence_of :university_id
+  validates :avatar, file_size: { less_than: 500.kilobytes }
 
   #---------------------
   # Methods
@@ -99,7 +107,7 @@ class Student < ActiveRecord::Base
     major_ids = opportunity.majors.map { |m| m.id }
 
     joins('INNER JOIN majors_students ON majors_students.student_id = students.id').
-        where('students.major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids).
+        where('students.major_id IN (?) OR students.second_major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids, major_ids).
         includes(:user)
   end
 
@@ -116,9 +124,25 @@ class Student < ActiveRecord::Base
   end
 
   def profile_incomplete?
-    self.university_id.nil? || self.major_id.nil? || self.ed_level_id.nil? || self.language_id.nil? || \
+    self.university_id.nil? || self.major_id.nil? || self.ed_level_id.nil? || \
 self.gpa.nil? || self.last_semester.blank? || self.highschool.blank? || self.gpa_max.blank? || \
-self.language_level.blank? || self.strengths.blank? || self.areas_to_develop.blank? || self.hobbies.blank?
+self.strengths.blank? || self.areas_to_develop.blank? || self.hobbies.blank?
+  end
+
+  def has_second_work_xp?
+    !self.second_xp_company.to_s.empty?
+  end
+
+  def has_third_work_xp?
+    !self.third_xp_company.to_s.empty?
+  end
+
+  def has_second_volunteer_xp?
+    !self.second_volunteer_org.to_s.empty?
+  end
+
+  def has_third_volunteer_xp?
+    !self.third_volunteer_org.to_s.empty?
   end
 
 end

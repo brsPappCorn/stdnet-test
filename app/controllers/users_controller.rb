@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy, :build_learnt_language]
 
   def index
     if administrator_signed_in?
@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by_id(current_user.id)
   end
 
   def create
@@ -32,8 +31,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by_id(current_user.id)
-
     respond_to do |format|
       if @user.update(user_params)
         flash[:success] = 'Tu perfil se ha actualizado exitosamente.'
@@ -58,15 +55,15 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    # @user = User.find(params[:id])
+  def build_learnt_language
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  private
+  def set_user
+    @user = User.find_by_id(current_user.id)
+  end
+
   def user_params
-    #params.fetch(:user, {})
     params.require(:user).permit(:first_name, :last_name, :date_of_birth, :document_number, :mobile_phone, :city_id,
                                  :country_id, :university_id, :major_id, :referenced_by, :avatar, :other_city,
                                  student_attributes: [
@@ -76,9 +73,14 @@ class UsersController < ApplicationController
                                      :volunteer_functions, :language_id, :language_level, :programming_skills,
                                      :programing_languages, :strengths, :areas_to_develop, :hobbies, :student_availability,
                                      :other_tools_skills, :avatar, :other_major, :other_university, :second_university_id,
-                                     :second_major_id, :second_ed_level_id,
+                                     :second_major_id, :second_ed_level_id, :second_xp_company, :second_xp_position,
+                                     :second_xp_achievements, :third_xp_company, :third_xp_position, :third_xp_achievements,
+                                     :second_volunteer_org, :second_volunteer_functions, :third_volunteer_org, :third_volunteer_functions,
                                      tool_ids:[],
-                                     major_ids: []
+                                     major_ids: [],
+                                     learnt_languages_attributes: [
+                                         :language_id, :language_level, :id
+                                     ]
                                  ],
                                  company_attributes: [
                                      :id, :position, :company_address, :company_nit, :company_description, :company_size,

@@ -53,11 +53,19 @@
           <% end %>
         </td>
 
-        <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-default btn-studnet' %></td>
+        <td><%= link_to 'Detalles', opportunity_path(opportunity), class: 'btn btn-default btn-studnet-details' %></td>
         <% unless opportunity.approved_state %>
-            <td><%= link_to 'Aprobar', approve_opportunity_path(opportunity), method: :post, class: 'btn btn-success btn-studnet' %></td>
+            <td><%= link_to 'Aprobar', approve_opportunity_path(opportunity), method: :post, class: 'btn btn-default btn-studnet-details' %></td>
         <% end %>
-        <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-studnet' %></td>
+        <td><%= link_to 'Borrar', opportunity, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-default btn-studnet-details' %></td>
+
+        <% unless opportunity.approved_state %>
+            <td><%= link_to 'Editar', edit_opportunity_path(opportunity), class: 'btn btn-default btn-studnet-details' %></td>
+        <% end %>
+
+        <% unless opportunity.closed %>
+            <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), class: 'btn btn-default btn-studnet-details', method: :post %></td>
+        <% end %>
 
       </tr>
   <% end %>

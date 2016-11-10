@@ -165,7 +165,7 @@
     <% end %>
 
     <!-- My Opportunities Actions -->
-    <% if @user_role.role_id == 3 || @user_role.role_id == 4 %>
+    <% if (@user_role.role_id == 3 || @user_role.role_id == 4) && !current_user.profile_incomplete? %>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>

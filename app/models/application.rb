@@ -27,6 +27,12 @@ class Application < ActiveRecord::Base
   belongs_to :applied_opportunity, class_name: 'Opportunity', foreign_key: 'opportunity_id'
 
   #---------------------
+  # Validations
+  #---------------------
+  validates_presence_of :student_characteristics, :student_interests, :student_answer
+  validates :portfolio, file_size: { less_than: 3.megabytes }
+
+  #---------------------
   # Uploaders
   #---------------------
   mount_uploader :portfolio, PortfolioUploader
