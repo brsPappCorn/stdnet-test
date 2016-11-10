@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-12">
           <p>
-            Ver perfil de estudiante
+            Ver perfil de empresa
           </p>
         </div>
       </div>
@@ -34,7 +34,7 @@
                   Nombre:
                 </td>
                 <td>
-                  <%= "#{@user.first_name} #{@user.last_name}" %>
+                  <%= "#{@company.user.first_name} #{@company.user.last_name}" %>
                 </td>
               </tr>
 
@@ -52,7 +52,7 @@
                   Correo:
                 </td>
                 <td>
-                  <%= @user.email %>
+                  <%= @company.user.email %>
                 </td>
               </tr>
 
@@ -61,7 +61,7 @@
                   Teléfono de contacto:
                 </td>
                 <td>
-                  <%= @user.mobile_phone %>
+                  <%= @company.user.mobile_phone %>
                 </td>
               </tr>
 
@@ -79,7 +79,7 @@
                   Ubicación:
                 </td>
                 <td>
-                  <%= @user.definitive_location %>
+                  <%= @company.user.definitive_location %>
                 </td>
               </tr>
 
@@ -164,17 +164,19 @@
       </div>
     </div>
 
-    <!-- Actions -->
-    <div class="row">
-      <div class="col-md-12 student-actions-wrapper text-center">
-        <%= link_to 'Editar perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
-        <% if @user.profile_incomplete? %>
-        <% else %>
-            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
-        <% end %>
-      </div>
-    </div>
-    <!-- ./Actions-->
+    <% if user_signed_in? %>
+        <!-- Actions -->
+        <div class="row">
+          <div class="col-md-12 student-actions-wrapper text-center">
+            <%= link_to 'Editar perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
+
+            <% unless @company.user.profile_incomplete? %>
+                <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
+            <% end %>
+          </div>
+        </div>
+        <!-- ./Actions-->
+    <% end %>
 
   </div>
 </section>

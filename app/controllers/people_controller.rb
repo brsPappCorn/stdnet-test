@@ -10,11 +10,9 @@ class PeopleController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      @user = User.find_by_id(current_user.id)
+    if user_signed_in? || administrator_signed_in?
     else
-      puts '---------------->>>>>'
-      puts 'no existe usuario'
+      redirect_to root_path
     end
   end
 
@@ -65,17 +63,10 @@ class PeopleController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_person
-    if user_signed_in?
-      user_id = current_user.id
-      @person = Person.find_by_user_id(user_id)
-    else
-      redirect_to '/ingreso'
-    end
+    @person = Person.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def person_params
     params.require(:person).permit(:id, :occupation, :profession)
   end

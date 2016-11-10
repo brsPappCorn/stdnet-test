@@ -39,7 +39,7 @@
                       Nombre:
                     </td>
                     <td>
-                      <%= "#{@user.first_name} #{@user.last_name}" %>
+                      <%= "#{@person.user.first_name} #{@person.user.last_name}" %>
                     </td>
                   </tr>
 
@@ -66,7 +66,7 @@
                       Documento de identidad:
                     </td>
                     <td>
-                      <%= @user.document_number %>
+                      <%= @person.user.document_number %>
                     </td>
                   </tr>
                   </tbody>
@@ -97,7 +97,7 @@
                       Email de tu cuenta:
                     </td>
                     <td>
-                      <%= @user.email %>
+                      <%= @person.user.email %>
                     </td>
                   </tr>
 
@@ -106,7 +106,7 @@
                       Teléfono de tu cuenta:
                     </td>
                     <td>
-                      <%= @user.mobile_phone %>
+                      <%= @person.user.mobile_phone %>
                     </td>
                   </tr>
 
@@ -115,8 +115,8 @@
                       País:
                     </td>
                     <td>
-                      <% unless @user.country_id.nil? %>
-                          <%= @user.country.country_name %>
+                      <% unless @person.user.country_id.nil? %>
+                          <%= @person.user.country.country_name %>
                       <% end %>
                     </td>
                   </tr>
@@ -126,8 +126,8 @@
                       Ciudad:
                     </td>
                     <td>
-                      <% unless @user.city_id.nil? %>
-                          <%= @user.city.city_name %>
+                      <% unless @person.user.city_id.nil? %>
+                          <%= @person.user.city.city_name %>
                       <% end %>
                     </td>
                   </tr>
@@ -142,14 +142,16 @@
       </div>
     </div>
 
-    <!-- Actions -->
-    <div class="row">
-      <div class="col-md-12 student-actions-wrapper text-center">
-        <%= link_to 'Editar perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
-        <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
-      </div>
-    </div>
-    <!-- ./Actions-->
+    <% if user_signed_in? %>
+        <!-- Actions -->
+        <div class="row">
+          <div class="col-md-12 student-actions-wrapper text-center">
+            <%= link_to 'Editar perfil', edit_user_path(current_user.id), class: 'btn btn-primary btn-studnet-basic' %>
+            <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
+          </div>
+        </div>
+        <!-- ./Actions-->
+    <% end %>
 
   </div>
 </section>
