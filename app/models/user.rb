@@ -150,10 +150,14 @@ class User < ActiveRecord::Base
       'N/D'
     else
       if self.country.country_name.eql? 'Colombia'
-        if self.city.city_name.eql? 'Otra'
-          city = "#{self.other_city}, "
+        if self.city
+          if self.city.city_name.eql? 'Otra'
+            city = "#{self.other_city}, "
+          else
+            city = "#{self.city.city_name},  "
+          end
         else
-          city = "#{self.city.city_name},  "
+          city = ''
         end
       end
 
