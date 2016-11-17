@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                  <% unless @opportunity.question_for_student.nil? %>
+                  <% unless @opportunity.question_for_student.to_s.empty? %>
                       <strong>
                         Pregunta de la empresa:
                       </strong>
@@ -57,15 +57,13 @@
 
               <div class="col-md-6">
 
-                <% if @opportunity.cost_or_offer_option.to_i == 1 %>
+                <% if @opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER %>
                     <div class="form-group opportunity-value">
-                      <% unless @opportunity.opportunity_cost.nil? %>
-                          <%= f.label :opportunity_value, 'Indica el valor que cobrarías por hacer este proyecto' %>
-                          <h6>
-                            (Recuerda que studNet cobra un 10% de comisión sobre este valor)
-                          </h6>
-                          <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>
-                      <% end %>
+                      <%= f.label :opportunity_value, 'Indica el valor que cobrarías por hacer este proyecto' %>
+                      <h6>
+                        (Recuerda que studNet cobra un 10% de comisión sobre este valor)
+                      </h6>
+                      <%= f.text_field :opportunity_value, class: 'form-control input-width'  %>
                     </div>
                 <% end %>
 
@@ -74,7 +72,7 @@
                       <% unless @opportunity.receive_portfolio.nil? %>
                           <div class="form-group">
                             <%= f.label :portfolio, 'Por favor adjunta un archivo con ejemplos de tu portafolio (de máximo 3 MB).' %><br>
-                            <%= f.file_field :portfolio, class: 'form-control input-width' %>
+                            <%= f.file_field :portfolio %>
                           </div>
                       <% end %>
                     </div>

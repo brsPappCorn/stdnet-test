@@ -147,22 +147,22 @@
               </div>
             </div>
 
-            <% if @opportunity.opportunity_type.to_i == 0 %>
+            <% if @opportunity.opportunity_type.to_i == Opportunity::TYPE_VIRTUAL %>
                 <div class="row">
                   <div class="col-md-12">
                     <p>
-                      <% if @opportunity.cost_or_offer_option.to_i == 0 %>
-                          <strong>
-                            Salario / valor del proyecto:
-                          </strong>
-                          <br>
-                          <%= "COP #{@opportunity.opportunity_cost}" %>
-                      <% else %>
+                      <% if @opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER%>
                           <strong>
                             Salario / valor del proyecto:
                           </strong>
                           <br>
                           <%= opportunity_cost_or_offer_friendly(@opportunity) %>
+                      <% else %>
+                          <strong>
+                            Salario / valor del proyecto:
+                          </strong>
+                          <br>
+                          <%= "COP #{@opportunity.opportunity_cost}" %>
                       <% end %>
                     </p>
                   </div>

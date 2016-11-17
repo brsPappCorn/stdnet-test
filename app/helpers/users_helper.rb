@@ -47,6 +47,16 @@ module UsersHelper
     end
   end
 
+  def average_rating(user)
+    rating = user.average_rating
+
+    if rating < 0
+      'No tiene'
+    else
+      rating
+    end
+  end
+
 end
 
 

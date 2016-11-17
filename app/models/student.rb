@@ -46,6 +46,8 @@
 #  second_volunteer_functions :text
 #  third_volunteer_org        :string
 #  third_volunteer_functions  :text
+#  second_other_major         :string
+#  second_other_university    :string
 #
 
 class Student < ActiveRecord::Base
@@ -95,9 +97,6 @@ class Student < ActiveRecord::Base
   #---------------------
   # Validations
   #---------------------
-  # TODO: Student.rb - Declare validations
-  # validates_presence_of :major_id
-  # validates_presence_of :university_id
   validates :avatar, file_size: { less_than: 500.kilobytes }
 
   #---------------------
@@ -121,6 +120,14 @@ class Student < ActiveRecord::Base
 
   def has_second_major?
     !self.second_major.nil?
+  end
+
+  def definitive_second_major
+    self.second_major.major_name.eql?('Otra') ? self.second_other_major : self.second_major.major_name
+  end
+
+  def definitive_second_university
+    self.second_university.university_name.eql?('Otra') ? self.second_other_university : self.second_university.university_name
   end
 
   def profile_incomplete?

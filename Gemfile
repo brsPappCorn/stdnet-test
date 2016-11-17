@@ -14,7 +14,6 @@ gem 'thin'
 #gem 'newrelic_rpm'
 gem 'file_validators'
 
-
 # Assets
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '~> 5.0'

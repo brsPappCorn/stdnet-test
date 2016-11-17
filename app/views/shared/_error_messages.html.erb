@@ -1,7 +1,7 @@
 <% if object && object.errors.any? %>
-    <div class="row">
+    <div class="row error-messages">
       <div class="col-sm-12 text-danger text-left">
-        <div>
+        <div class="title">
           <%= object.errors.count %> errores no permitieron completar la operación:
         </div>
         <ul>
@@ -11,6 +11,4 @@
         </ul>
       </div>
     </div>
-
-    <br/>
 <% end %>

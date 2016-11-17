@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create] do
     member do
       post 'build_learnt_language'
+      post 'mark_as_selected'
+      post 'rate_opportunity'
     end
   end
 
@@ -45,6 +47,7 @@ Rails.application.routes.draw do
       get 'applicants'
       post 'approve'
       post 'close'
+      post 'acquire_information'
     end
     collection do
       get 'my_opportunities'

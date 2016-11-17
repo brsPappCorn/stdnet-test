@@ -44,23 +44,6 @@
         </div>
       </div>
     </div>
-
-    <!--
-    <%# if @minimum_password_length %>
-          <em>(<%#= @minimum_password_length %> characters minimum)</em>
-      <%# end %><br />
-      -->
-
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-4 text-right">
-          <%= f.label :password_confirmation, 'Confirmar contraseña' %>
-        </div>
-        <div class="col-md-8">
-          <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control input-width' %>
-        </div>
-      </div>
-    </div>
     <!-- ./User Information -->
 
     <!-- Student Information -->
@@ -173,11 +156,6 @@
 
   </p>
 </div>
-
-<div class="text-right">
-  <%= render 'devise/shared/links' %>
-</div>
-<!-- Form -->
 
 <script type="text/javascript">
 

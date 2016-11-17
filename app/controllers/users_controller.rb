@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy, :build_learnt_language]
+  before_action :set_user, only: [:edit, :update, :destroy, :build_learnt_language, :mark_as_selected, :rate_opportunity]
 
   def index
     if administrator_signed_in?
@@ -58,9 +58,41 @@ class UsersController < ApplicationController
   def build_learnt_language
   end
 
+  def mark_as_selected
+    if administrator_signed_in?
+      application = @user.application_for_opportunity params[:opportunity]
+
+      if application.mark_as_selected
+        flash[:success] = "Ha marcado a #{@user.first_name} como el seleccionado para esta oferta."
+      else
+        flash[:error] = 'Ha ocurrido un error, por favor inténtelo de nuevo.'
+      end
+
+      redirect_to applicants_opportunity_path(params[:opportunity])
+    else
+      redirect_to root_path
+    end
+  end
+
+  def rate_opportunity
+    if administrator_signed_in?
+      application = @user.application_for_opportunity params[:opportunity]
+
+      if application.rate(params[:rating])
+        flash[:success] = "Se ha calificado a #{@user.first_name} con #{params[:rating]}."
+      else
+        flash[:error] = 'Ha ocurrido un error, por favor inténtelo de nuevo.'
+      end
+
+      redirect_to applicants_opportunity_path(params[:opportunity])
+    else
+      redirect_to root_path
+    end
+  end
+
   private
   def set_user
-    @user = User.find_by_id(current_user.id)
+    @user = User.find_by_id(params[:id])
   end
 
   def user_params
@@ -76,6 +108,7 @@ class UsersController < ApplicationController
                                      :second_major_id, :second_ed_level_id, :second_xp_company, :second_xp_position,
                                      :second_xp_achievements, :third_xp_company, :third_xp_position, :third_xp_achievements,
                                      :second_volunteer_org, :second_volunteer_functions, :third_volunteer_org, :third_volunteer_functions,
+                                     :second_other_major, :second_other_university,
                                      tool_ids:[],
                                      major_ids: [],
                                      learnt_languages_attributes: [

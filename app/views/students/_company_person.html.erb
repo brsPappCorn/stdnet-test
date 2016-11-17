@@ -115,7 +115,7 @@
 
                   <tr>
                     <td>
-                      Ultimo semestre cursado:
+                      Último semestre cursado:
                     </td>
                     <td>
                       <%= @student.last_semester %>
@@ -127,9 +127,7 @@
                       Edad:
                     </td>
                     <td>
-                      <% unless @student.user.date_of_birth.nil?  %>
-                          <%= "#{user_age} años." %>
-                      <% end %>
+                      <%= @student.user.friendly_age %>
                     </td>
                   </tr>
 
@@ -508,7 +506,7 @@
                     </ul>
 
                     <h4>
-                      Áreas en la que les gustaría desarrollar su carrera profesional
+                      Áreas en la que le gustaría desarrollar su carrera profesional
                     </h4>
 
                     <ul>
