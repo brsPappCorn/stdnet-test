@@ -74,12 +74,16 @@ class Opportunity < ActiveRecord::Base
   def self.opportunities_for_student(student)
     major_ids = [student.major_id, student.second_major_id] + student.majors.map { |m| m.id }
 
-    joins('INNER JOIN majors_opportunities ON majors_opportunities.opportunity_id = opportunities.id').
+    matching_opportunities = joins('INNER JOIN majors_opportunities ON majors_opportunities.opportunity_id = opportunities.id').
         where('(majors_opportunities.major_id IN (?) OR other_majors = ?) AND approved_state = ? AND closed = ?', major_ids, true, true, false)
+
+    for_all_opportunities = where(other_majors: true)
+
+    matching_opportunities + for_all_opportunities
   end
 
   def self.approved
-    where approved_state: true
+    where approved_state: true, closed: false
   end
 
   def self.pending_approval

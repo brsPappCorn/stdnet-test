@@ -49,15 +49,15 @@ module OpportunitiesHelper
 
   # Helper method to display friendly name instead of select value
   def opportunity_type_friendly(opportunity)
-    if opportunity.opportunity_type == 0
+    if opportunity.opportunity_type == Opportunity::TYPE_VIRTUAL
       'Proyecto virtual'
-    elsif opportunity.opportunity_type == 1
+    elsif opportunity.opportunity_type == Opportunity::TYPE_ON_SITE
       'Proyecto presencial'
-    elsif opportunity.opportunity_type == 2
+    elsif opportunity.opportunity_type == Opportunity::TYPE_PRACTICE
       'Práctica'
-    elsif opportunity.availability == 3
+    elsif opportunity.opportunity_type == Opportunity::TYPE_FIRST_JOB
       'Primer Empleo'
-    elsif opportunity.availability == 4
+    elsif opportunity.opportunity_type == Opportunity::TYPE_SEASONAL
       'Trabajo de temporada'
     end
   end
@@ -133,6 +133,14 @@ module OpportunitiesHelper
       'Indefinida'
     else
       'Fijar duración'
+    end
+  end
+
+  def opportunity_salary_friendly(opportunity)
+    if opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER
+      'Recibo ofertas'
+    else
+      opportunity.opportunity_cost
     end
   end
 

@@ -1,5 +1,5 @@
 <section class="devise-wrapper">
-  <div class="<%= current_user.role_id == 3 ? 'companies-signup-header' : 'people-signup-header' %> margin-bot-20">
+  <div class="<%= user_signed_in? && current_user.role_id == 3 ? 'companies-signup-header' : 'people-signup-header' %> margin-bot-20">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -52,15 +52,15 @@
               Edad
             </th>
             <th>
-              Calificación
+              Calificación promedio
             </th>
-            <th colspan="2">Acciones</th>
+            <th colspan="3">Acciones</th>
           </tr>
           </thead>
 
           <tbody>
           <% @applicants.each do |applicant| %>
-              <tr>
+              <tr class="<%= applicant.application_for_opportunity(@opportunity.id).selected ? 'success' : '' %>">
                 <td class="student-avatar-index">
                   <% unless applicant.student.avatar.file.nil? %>
                       <%= image_tag aws_url(applicant.student.avatar), class: 'img-circle' %>
@@ -107,25 +107,26 @@
                   <%= "#{Time.now.year - applicant.date_of_birth.year} años" %>
                 </td>
                 <td>
-                  No disponible
-                  <!-- TODO: Opportunities/applicants - Make rating system,pending for dev -->
+                  <%= average_rating applicant %>
                 </td>
-
-                <!--
-                <td>
-                  <% if applicant.student.gpa.nil? %>
-                      No disponible
-                  <% else %>
-                      <%= "#{applicant.student.gpa}/#{applicant.student.gpa_max}" %>
-                  <% end %>
-                </td>
-                -->
 
                 <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4) %>
                     <td><%= link_to 'Ver', student_path(applicant, opportunity: params[:id]), class: 'btn btn-studnet-details' %></td>
 
-                    <!-- TODO: Opportunities/applicants - only Company/Person can view complete info from student, once they have payed. Pending for dev once it has been clarified with the client -->
-                    <td><%= link_to 'Adquirir información', '#', id: 'applicantsGetInfo' %></td>
+                    <% unless applicant.application_for_opportunity(@opportunity.id).selected %>
+                        <td><%= link_to 'Contactar', acquire_information_opportunity_path(@opportunity, applicant_id: applicant.id), id: 'applicantsGetInfo', class: 'btn btn-studnet-details', method: :post %></td>
+                    <% end %>
+                <% end %>
+
+                <% if administrator_signed_in? %>
+                    <% if applicant.application_for_opportunity(@opportunity.id).selected %>
+                        <td>
+                          <button type="button" class="btn btn-studnet-details" data-toggle="modal" data-target="#<%= "application-#{applicant.application_for_opportunity(@opportunity.id).id}" %>">Calificar</button>
+                        </td>
+                        <%= render partial: 'opportunities/rating_modal', locals: { application: applicant.application_for_opportunity(@opportunity.id), applicant: applicant } %>
+                    <% else %>
+                        <td><%= link_to 'Marcar como seleccionado', mark_as_selected_user_path(applicant, opportunity: params[:id]), data: { confirm: '¿Está seguro?' }, class: 'btn btn-studnet-details', method: :post %></td>
+                    <% end %>
                 <% end %>
 
               </tr>

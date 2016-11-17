@@ -1,15 +1,5 @@
 <%= form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
-
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', object: @user %>
 
     <div class="student-tab-wrapper ">
       <div class="student-tab-content person-tab-content">
@@ -86,7 +76,7 @@
 
                 <div class="form-group">
                   <%= f.label :country_id, 'País' %><br>
-                  <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, class: 'form-control input-width' %>
+                  <%= f.select :country_id, Country.all.map { |country| [country.country_name, country.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                 </div>
 
                 <div class="form-group" id="userCity">
@@ -101,7 +91,7 @@
 
                 <div class="form-group">
                   <%= f.label :referenced_by, '¿Cómo te enteraste de studNet?' %><br />
-                  <%= f.select(:referenced_by, User::REFERENCES_USER, {}, { :class => 'form-control' }) %>
+                  <%= f.select(:referenced_by, User::REFERENCES_USER, { prompt: 'Por favor selecciona una opción' }, { :class => 'form-control' }) %>
                 </div>
 
                 <div class="form-group margin-bot-40">

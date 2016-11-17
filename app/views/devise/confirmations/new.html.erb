@@ -1,31 +1,51 @@
 <section class="devise-wrapper">
-
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3 text-center admin-form">
-
-      <h2>
-        Reenviar instrucciones de confirmación
-      </h2>
-
-      <!-- Form -->
-      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-          <%= devise_error_messages! %>
-
-          <div class="form-group">
-            <%= f.label :email, 'Correo Electrónico' %><br />
-            <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control input-width' %>
-          </div>
-
-          <div class="actions text-right">
-            <%= f.submit 'Reenviar instrucciones', class: 'btn btn-primary btn-studnet-basic' %>
-          </div>
-      <% end %>
-
-      <div class="text-right">
-        <%= render 'devise/shared/links' %>
+  <div class="students-signup-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Reenviar instrucciones de confirmación
+          </p>
+        </div>
       </div>
-      <!-- Form -->
     </div>
   </div>
 
+  <div class="devise-signup-wrapper students-signup-wrapper">
+    <div class="container sign-in-form">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            Por favor ingresa tu correo para recibir las instrucciones
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center admin-form">
+
+          <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="form-group">
+                <%= f.label :email, 'Correo Electrónico' %><br />
+                <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: 'Correo Electrónico', class: 'form-control input-width' %>
+              </div>
+
+              <div class="actions text-right">
+                <%= f.submit 'Reenviar instrucciones', class: 'btn btn-primary btn-studnet-basic' %>
+              </div>
+          <% end %>
+
+          <div class="text-right">
+            <%= render 'devise/shared/links' %>
+          </div>
+          <!-- Form -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </section>

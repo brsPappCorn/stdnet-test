@@ -1,0 +1,8 @@
+<h1>Solicitud de información</h1>
+
+<p>
+  El usuario de tipo <%= @opportunity.user.role_name %> con correo
+  <%= link_to @opportunity.user.email, user_url(@opportunity.user), target: :blank %> ha solicitado la información del
+  estudiante <%= link_to @student.user.email, user_url(@student.user), target: :blank %> para la oportunidad
+  <%= link_to @opportunity.opportunity_title, opportunity_url(@opportunity) %>.
+</p>
