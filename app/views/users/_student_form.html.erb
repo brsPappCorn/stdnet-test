@@ -1,15 +1,5 @@
 <%= form_for(@user, multipart: true) do |f| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %> no permitieron que los datos del usuario fueran guardados:</h2>
-
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', object: @user %>
 
     <div class="tab-content student-tab-content">
 
@@ -126,9 +116,19 @@
                     <%= s.select :second_university_id, University.all.map { |university| [university.university_name, university.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
+                  <div class="form-group" id="secondOtherUniversity">
+                    <%= s.label :second_other_university, 'Otra universidad'  %>
+                    <%= s.text_field :second_other_university, class: 'form-control input-width' %>
+                  </div>
+
                   <div class="form-group">
                     <%= s.label :second_major_id, 'Otra carrera (opcional)'  %>
                     <%= s.select :second_major_id, Major.all.map { |major| [major.major_name, major.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+                  </div>
+
+                  <div class="form-group" id="secondOtherMajor">
+                    <%= s.label :second_other_major, 'Otra carrera (opcional)'  %>
+                    <%= s.text_field :second_other_major, class: 'form-control input-width' %>
                   </div>
 
                   <div class="form-group">
@@ -144,7 +144,7 @@
                   </div>
 
                   <div class="form-group">
-                    <%= s.label :last_semester, 'Ultimo semestre cursado:' %>
+                    <%= s.label :last_semester, 'Último semestre cursado:' %>
                     <%= s.select :last_semester, Student::LAST_SEMESTER, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
                   </div>
 
@@ -368,13 +368,19 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <%= s.label :tools_ids, '¿Cuáles de estas herramientas sabes usar?' %>
-                      <%= s.collection_check_boxes :tool_ids, Tool.all, :id, :tool_name do |b| %>
-                          <div class="collection-check-box">
-                            <%= b.check_box %>
-                            <%= b.label %>
-                          </div>
-                      <% end %>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <%= s.label :tools_ids, '¿Cuáles de estas herramientas sabes usar?' %>
+                        </div>
+                        <%= s.collection_check_boxes :tool_ids, Tool.all, :id, :tool_name do |b| %>
+                            <div class="col-md-6">
+                              <div class="collection-check-box">
+                                <%= b.check_box %>
+                                <%= b.label %>
+                              </div>
+                            </div>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -518,6 +524,8 @@
   var current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
   var current_major_val = '<%= @user.student.major.major_name %>';
   var current_university_val = '<%= @user.student.university.university_name %>';
+  var current_second_major_val = '<%= @user.student.second_major ? @user.student.second_major.major_name : '' %>';
+  var current_second_university_val = '<%= @user.student.second_university ? @user.student.second_university.university_name : '' %>';
   var has_second_work_xp = <%= @user.student.has_second_work_xp? %>;
   var has_third_work_xp = <%= @user.student.has_third_work_xp? %>;
   var has_second_volunteer_xp = <%= @user.student.has_second_volunteer_xp? %>;
@@ -536,6 +544,18 @@
     elementVisible("#otherUniversity", false);
   }
 
+  if (current_second_major_val == 'Otra') {
+    elementVisible("#secondOtherMajor", true);
+  } else {
+    elementVisible("#secondOtherMajor", false);
+  }
+
+  if (current_second_university_val == 'Otra') {
+    elementVisible("#secondOtherUniversity", true);
+  } else {
+    elementVisible("#secondOtherUniversity", false);
+  }
+
   $("#user_student_attributes_university_id").change(function() {
     if ($(this).find("option:selected").text() == 'Otra') {
       elementVisible("#otherUniversity", true);
@@ -549,6 +569,22 @@
       elementVisible("#otherMajor", true);
     } else {
       elementVisible("#otherMajor", false);
+    }
+  });
+
+  $("#user_student_attributes_second_university_id").change(function() {
+    if ($(this).find("option:selected").text() == 'Otra') {
+      elementVisible("#secondOtherUniversity", true);
+    } else {
+      elementVisible("#secondOtherUniversity", false);
+    }
+  });
+
+  $("#user_student_attributes_second_major_id").change(function() {
+    if ($(this).find("option:selected").text() == 'Otra') {
+      elementVisible("#secondOtherMajor", true);
+    } else {
+      elementVisible("#secondOtherMajor", false);
     }
   });
 

@@ -1,5 +1,6 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants, :approve, :close]
+  before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants,
+                                         :approve, :close, :acquire_information]
 
   def index
     if administrator_signed_in?
@@ -35,7 +36,7 @@ class OpportunitiesController < ApplicationController
   end
 
   def edit
-    if @opportunity.approved_state
+    if @opportunity.approved_state && user_signed_in?
       flash[:warning] = 'No puedes editar una oferta que ya ha sido aprobada.'
       redirect_to my_opportunities_opportunities_path
     end
@@ -97,7 +98,7 @@ class OpportunitiesController < ApplicationController
   end
 
   def applicants
-    if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4)
+    if (user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4)) || administrator_signed_in?
       @applicants = @opportunity.applied_users
     elsif user_signed_in? && current_user.role_id == 2
       redirect_to root_path
@@ -128,7 +129,8 @@ class OpportunitiesController < ApplicationController
     if administrator_signed_in?
       @opportunity.approve
 
-      possible_students = Student.students_for_opportunity @opportunity
+      possible_students = @opportunity.other_majors ? Student.all : Student.students_for_opportunity(@opportunity)
+
       possible_students.each do |student|
         StudentMailer.notify_new_offer(@opportunity, student).deliver_now
       end
@@ -148,7 +150,15 @@ class OpportunitiesController < ApplicationController
       flash[:error] = "La oferta '#{@opportunity.opportunity_title}' no se pudo cerrar. Inténtalo nuevamente."
     end
 
-    redirect_to my_opportunities_opportunities_path
+    redirect_to administrator_signed_in? ? opportunities_administrators_path : my_opportunities_opportunities_path
+  end
+
+  def acquire_information
+    student = User.find(params[:applicant_id]).student
+    AdministratorMailer.acquire_information(@opportunity, student).deliver_now
+
+    flash[:success] = 'Tu solicitud ha sido recibida exitosamente. En unos momentos nuestro equipo comercial se pondrá en contacto contigo para indicarte cómo realizar el pago y enviarte la información del estudiante.'
+    redirect_to applicants_opportunity_path @opportunity
   end
 
   private

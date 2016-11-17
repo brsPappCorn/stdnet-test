@@ -13,7 +13,7 @@ module StudentsHelper
     if student.exchange_student.to_i == 0
       'No'
     else student.exchange_student.to_i == 1
-    'Sí'
+      'Sí'
     end
   end
 
@@ -21,7 +21,7 @@ module StudentsHelper
     if student.work_xp.to_i == 0
       'No'
     else student.work_xp.to_i == 1
-    'Sí'
+     'Sí'
     end
   end
 
@@ -37,7 +37,7 @@ module StudentsHelper
     if student.programming_skills.to_i == 0
       'No'
     else student.programming_skills.to_i == 1
-    'Sí'
+     'Sí'
     end
   end
 
@@ -48,22 +48,24 @@ module StudentsHelper
         ['Diurno', Student::TYPE_OF_STUDENT_DAY],
         ['Nocturno', Student::TYPE_OF_STUDENT_NIGHT],
         ['Virtual', Student::TYPE_OF_STUDENT_VIRTUAL],
-        ['Esperando Diploma', Student::TYPE_OF_STUDENT_DIPLOMA_PENDING],
+        ['Esperando diploma', Student::TYPE_OF_STUDENT_DIPLOMA_PENDING],
         ['Graduado', Student::TYPE_OF_STUDENT_GRADUATE]
     ]
   end
 
   def type_of_student_select_friendly(user)
-    if user.student.type_of_student.to_i == 0
-      'Diurno'
-    elsif user.student.type_of_student.to_i == 1
-      'Nocturno'
-    elsif user.student.type_of_student.to_i == 2
-      'Virtual'
-    elsif user.student.type_of_student.to_i == 3
-      'Esperando diploma'
-    elsif user.student.type_of_student.to_i == 4
-      'Graduado'
+    unless user.student.type_of_student.nil?
+      if user.student.type_of_student.to_i == 0
+        'Diurno'
+      elsif user.student.type_of_student.to_i == 1
+        'Nocturno'
+      elsif user.student.type_of_student.to_i == 2
+        'Virtual'
+      elsif user.student.type_of_student.to_i == 3
+        'Esperando diploma'
+      elsif user.student.type_of_student.to_i == 4
+        'Graduado'
+      end
     end
   end
 

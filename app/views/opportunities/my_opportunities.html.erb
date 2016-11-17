@@ -31,7 +31,7 @@
                   Nombre de la oferta
                 </th>
                 <th>
-                  Tipo de Proyecto
+                  Tipo de proyecto
                 </th>
                 <th>
                   Estado
@@ -74,7 +74,7 @@
                     <% end %>
 
                     <% unless opportunity.closed %>
-                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), class: 'btn btn-studnet-details', method: :post %></td>
+                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), data: { confirm: '¿Estás seguro? Esta acción es irreversible y una vez la cierra la oferta no será visible por los estudiantes' }, class: 'btn btn-studnet-details', method: :post %></td>
                     <% end %>
                   </tr>
               <% end %>
@@ -100,7 +100,7 @@
                   Empresa oferente
                 </th>
                 <th>
-                  Tipo de Proyecto
+                  Tipo de proyecto
                 </th>
                 <th>
                   Nombre de la oferta
@@ -133,6 +133,7 @@
                     </td>
                     <td>
                       <%= opportunity_type_friendly(opportunity)  %>
+                      opportunity.
                     </td>
                     <td>
                       <%= opportunity.opportunity_title %>
@@ -147,11 +148,7 @@
                       <%= opportunity_availability_friendly(opportunity) %>
                     </td>
                     <td>
-                      <% if opportunity.opportunity_cost.nil? %>
-                          <%= 'Se permite ofertar' %>
-                      <% else %>
-                          <%= opportunity.opportunity_cost %>
-                      <% end %>
+                      <%= opportunity_salary_friendly(opportunity) %>
                     </td>
                     <td><%= link_to 'Detalles', opportunity, class: 'btn btn-studnet-details' %></td>
                   </tr>

@@ -165,6 +165,31 @@ class User < ActiveRecord::Base
     end
   end
 
+  def friendly_age
+    now = Time.now.utc.to_date
+
+    if self.date_of_birth
+      "#{now.year - self.date_of_birth.year - (self.date_of_birth.to_date.change(year: now.year) > now ? 1 : 0)} años"
+    else
+      'N/D'
+    end
+  end
+
+  def application_for_opportunity(opportunity_id)
+    self.applications.where(opportunity_id: opportunity_id).first
+  end
+
+  def average_rating
+    rated_applications = self.applications.where('selected = ? AND rating != ?', true, 0)
+
+    if rated_applications.count > 0
+      average = rated_applications.inject(0) { |memo, object| memo + object.rating }.to_f / rated_applications.count
+      average.round 1
+    else
+      -1
+    end
+  end
+
   #---------------------
   # Private methods
   #---------------------

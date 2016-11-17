@@ -9,4 +9,10 @@ class AdministratorMailer < ApplicationMailer
     @student = student
     mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Nueva aplicación'
   end
+
+  def acquire_information(opportunity, student)
+    @opportunity = opportunity
+    @student = student
+    mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Solicitud de información de estudiantes'
+  end
 end

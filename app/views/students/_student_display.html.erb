@@ -154,7 +154,7 @@
                           Edad:
                         </td>
                         <td>
-                          <%= "#{user_age} años" %>
+                          <%= @student.user.friendly_age %>
                         </td>
                       </tr>
 
@@ -172,47 +172,36 @@
 
                   </div>
 
-                  <div class="col-md-6">
+                  <% if administrator_signed_in? || (user_signed_in? && current_user.role_id == User::ROLE_STUDENT) %>
+                      <div class="col-md-6">
 
-                    <table class="table studNet-table">
-                      <tbody>
+                        <table class="table studNet-table">
+                          <tbody>
 
-                      <% if @student.user.role_id == 2 %>
-                          <tr>
-                            <td>
-                              Correo:
-                            </td>
-                            <td>
-                              <%= @student.user.email %>
-                            </td>
-                          </tr>
+                          <% if @student.user.role_id == 2 %>
+                              <tr>
+                                <td>Correo:</td>
+                                <td><%= @student.user.email %></td>
+                              </tr>
 
-                          <tr>
-                            <td>
-                              Celular:
-                            </td>
-                            <td>
-                              <%= @student.user.mobile_phone %>
-                            </td>
-                          </tr>
+                              <tr>
+                                <td>Celular:</td>
+                                <td><%= @student.user.mobile_phone %></td>
+                              </tr>
 
-                          <tr>
-                            <td>
-                              Número de documento:
-                            </td>
-                            <td>
-                              <%= @student.user.document_number %>
-                            </td>
-                          </tr>
-                      <% end %>
+                              <tr>
+                                <td>Número de documento:</td>
+                                <td><%= @student.user.document_number %></td>
+                              </tr>
+                          <% end %>
 
-                      <tbody>
-                      </table>
+                          <tbody>
+                          </table>
 
-                  </div>
+                      </div>
+                  <% end %>
 
                 </div>
-
               </div>
               <!-- ./Personal Info Table -->
             </div>
@@ -277,7 +266,7 @@
                             </td>
                             <td>
                               <% unless @student.user.student.second_major_id.nil? %>
-                                  <%= @student.user.student.second_major.major_name %>
+                                  <%= @student.user.student.definitive_second_major %>
                               <% end %>
                             </td>
                           </tr>
@@ -288,7 +277,7 @@
                             </td>
                             <td>
                               <% unless @student.user.student.second_university_id.nil? %>
-                                  <%= @student.user.student.second_university.university_name %>
+                                  <%= @student.user.student.definitive_second_university %>
                               <% end %>
                             </td>
                           </tr>
@@ -781,7 +770,7 @@
                         <div class="row">
                           <div class="col-md-12 student-xp-title">
                             <h3>
-                              Otras herraientas y habilidades
+                              Otras herramientas y habilidades
                             </h3>
                           </div>
                         </div>
@@ -789,7 +778,7 @@
                         <div class="row">
                           <div class="col-md-12 student-xp-title">
                             <h3>
-                              Otras herraientas y habilidades
+                              Otras herramientas y habilidades
                             </h3>
                           </div>
                         </div>
@@ -836,7 +825,7 @@
                 <div class="row">
                   <div class="col-md-8 student-xp-title">
                     <h3>
-                      Áreas en las que les gustaría desarrollar su carrera profesional
+                      Áreas en las que le gustaría desarrollar su carrera profesional
                     </h3>
                   </div>
                 </div>
@@ -974,13 +963,12 @@
             <!-- Student Actions -->
             <div class="row">
               <div class="col-md-12 text-center student-actions-wrapper">
-                <% if @student.user.role_id == 2 %>
+                <% if current_user.role_id == 2 %>
                     <%= link_to 'Editar perfil', edit_user_path(@student.user), class: 'btn btn-primary btn-studnet-basic' %>
                     <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
-                <% elsif (@student.user.role_id == 3 || @student.user.role_id == 4) && params[:opportunity] %>
+                <% elsif (current_user.role_id == 3 || current_user.role_id == 4) && params[:opportunity] %>
                     <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet-basic' %>
-                    <%# TODO: student/show/student_display - Make 'acquire informacion' work %>
-                    <%= link_to 'Adquirir información', '#', class: 'btn btn-primary btn-studnet-basic' %>
+                    <%= link_to 'Contactar', acquire_information_opportunity_path(params[:opportunity], applicant_id: @student.id), class: 'btn btn-primary btn-studnet-basic', method: :post %>
                 <% end %>
               </div>
             </div>
