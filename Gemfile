@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 ruby '2.2.5'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7.1'
 
 # Core
@@ -11,7 +10,7 @@ gem 'devise'
 gem 'fog'
 gem 'pg'
 gem 'thin'
-#gem 'newrelic_rpm'
+#gem 'newrelic_rpm' #TODO: Configure NewRelic
 gem 'file_validators'
 
 # Assets
@@ -27,6 +26,7 @@ gem 'rails-i18n'
 
 # Other
 gem 'annotate'
+gem 'roo', '~> 2.4.0'
 
 # Others
 #gem 'turbolinks'

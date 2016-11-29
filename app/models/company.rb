@@ -45,8 +45,7 @@ class Company < ActiveRecord::Base
   #---------------------
   def profile_incomplete?
     self.company_name.blank? || self.position.blank? || self.company_address.blank? || self.company_nit.blank? || \
-self.company_description.blank? || self.company_size.blank? || self.company_website_url.blank? || \
-self.company_sector_id.nil?
+self.company_description.blank? || self.company_size.blank? || self.company_sector_id.nil?
   end
 
 end

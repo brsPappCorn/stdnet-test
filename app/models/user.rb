@@ -133,11 +133,11 @@ class User < ActiveRecord::Base
     if basic_profile_incomplete?
       true
     else
-      if self.role_id == 2
+      if self.role_id == User::ROLE_STUDENT
         self.student.profile_incomplete?
-      elsif self.role_id == 3
+      elsif self.role_id == User::ROLE_COMPANY
         self.company.profile_incomplete?
-      elsif self.role_id == 4
+      elsif self.role_id == User::ROLE_PERSON
         self.person.profile_incomplete?
       end
     end
@@ -197,11 +197,11 @@ class User < ActiveRecord::Base
   def basic_profile_incomplete?
     basic_common_info = self.first_name.blank? || self.last_name.blank? || self.mobile_phone.blank? || self.city_id.nil? || self.country_id.nil?
 
-    if self.role_id == 2
+    if self.role_id == User::ROLE_STUDENT
       basic_common_info = basic_common_info || self.document_number.blank? || self.date_of_birth.nil?
-    elsif self.role_id == 3
+    elsif self.role_id == User::ROLE_COMPANY
       # Nothing for now
-    elsif self.role_id == 4
+    elsif self.role_id == User::ROLE_PERSON
       # Nothing for now
     end
 

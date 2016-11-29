@@ -51,9 +51,9 @@ module UsersHelper
     rating = user.average_rating
 
     if rating < 0
-      'No tiene'
+      'Sin calificación'
     else
-      rating
+      "#{rating}/5"
     end
   end
 
