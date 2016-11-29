@@ -594,7 +594,6 @@ Major.create([
                  { major_name: 'Gestión humana y desarrollo organizacional'},
                  { major_name: 'Gestión logística'},
                  { major_name: 'Gestión y desarrollo urbanos'},
-                 { major_name: 'Gestión y desarrollo urbanos'},
                  { major_name: 'Gestión y evaluación de proyectos de inversión'},
                  { major_name: 'Gobierno'},
                  { major_name: 'Gobierno y asuntos públicos'},

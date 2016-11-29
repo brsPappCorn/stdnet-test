@@ -1,27 +1,30 @@
 module OpportunitiesHelper
 
   def opportunity_majors_by_comma
-    @opportunity.majors.map{ |m| m.major_name }.join(', ')
+    if @opportunity.other_majors
+      'Todas las carreras'
+    else
+      @opportunity.majors.map{ |m| m.major_name }.join(', ')
+    end
   end
 
-
   def opportunities_header_color
-    if current_user.role_id == 2
+    if current_user.role_id == User::ROLE_STUDENT
       'students-show-view-header'
-    elsif current_user.role_id == 3
+    elsif current_user.role_id == User::ROLE_COMPANY
       'companies-signup-header'
-    elsif current_user.role_id == 4
+    elsif current_user.role_id == User::ROLE_PERSON
       'people-signup-header'
     end
   end
 
   def opportunities_tab_content_color
     if user_signed_in?
-      if current_user.role_id == 3
+      if current_user.role_id == User::ROLE_COMPANY
         'company-tab-content'
-      elsif current_user.role_id == 4
+      elsif current_user.role_id == User::ROLE_PERSON
         'person-tab-content'
-      elsif current_user.role_id == 2
+      elsif current_user.role_id == User::ROLE_STUDENT
         'company-tab-content student-title-blue'
       end
     else
@@ -33,17 +36,20 @@ module OpportunitiesHelper
   def company_opportunity_select_type
     [
         ['Proyecto virtual', Opportunity::TYPE_VIRTUAL],
-        ['Proyecto presencial', Opportunity::TYPE_ON_SITE],
-        ['Práctica', Opportunity::TYPE_PRACTICE],
-        ['Primer empleo', Opportunity::TYPE_FIRST_JOB],
-        ['Trabajo de temporada', Opportunity::TYPE_SEASONAL]
+        ['Trabajos express', Opportunity::TYPE_SEASONAL],
+        ['Empleo temporal', Opportunity::TYPE_ON_SITE],
+        ['Empleo', Opportunity::TYPE_FIRST_JOB],
+        ['Práctica', Opportunity::TYPE_PRACTICE]
     ]
   end
 
   def person_opportunity_select_type
     [
         ['Proyecto virtual', Opportunity::TYPE_VIRTUAL],
-        ['Proyecto presencial', Opportunity::TYPE_ON_SITE]
+        ['Trabajos express', Opportunity::TYPE_SEASONAL],
+        ['Empleo temporal', Opportunity::TYPE_ON_SITE],
+        ['Empleo', Opportunity::TYPE_FIRST_JOB],
+        ['Práctica', Opportunity::TYPE_PRACTICE]
     ]
   end
 
@@ -52,13 +58,13 @@ module OpportunitiesHelper
     if opportunity.opportunity_type == Opportunity::TYPE_VIRTUAL
       'Proyecto virtual'
     elsif opportunity.opportunity_type == Opportunity::TYPE_ON_SITE
-      'Proyecto presencial'
+      'Empleo temporal'
     elsif opportunity.opportunity_type == Opportunity::TYPE_PRACTICE
       'Práctica'
     elsif opportunity.opportunity_type == Opportunity::TYPE_FIRST_JOB
-      'Primer Empleo'
+      'Empleo'
     elsif opportunity.opportunity_type == Opportunity::TYPE_SEASONAL
-      'Trabajo de temporada'
+      'Trabajos express'
     end
   end
 

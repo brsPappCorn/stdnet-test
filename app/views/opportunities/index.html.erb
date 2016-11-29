@@ -96,13 +96,13 @@
 
 
     <!-- Companiy/Person Actions -->
-    <% if user_signed_in? && (@user_role.role_id == 3 || @user_role.role_id == 4) %>
+    <% if user_signed_in? && (@user_role.role_id == User::ROLE_COMPANY || @user_role.role_id == User::ROLE_PERSON) %>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
           </div>
         </div>
-    <% elsif user_signed_in? && @user_role.role_id == 2 %>
+    <% elsif user_signed_in? && @user_role.role_id == User::ROLE_STUDENT %>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= link_to 'Ver mis ofertas', my_opportunities_opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
@@ -180,7 +180,7 @@
                   <%= opportunity_availability_friendly(opportunity) %>
                 </td>
                 <td>
-                  <%= opportunity_availability_friendly(opportunity) %>
+                  <%= opportunity_salary_friendly(opportunity) %>
                 </td>
               </tr>
           <% end %>

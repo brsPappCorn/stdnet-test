@@ -9,10 +9,10 @@ class OpportunitiesController < ApplicationController
       # Used to check what type of role is signed in
       @user_role = User.find_by_id(current_user.id)
 
-      if @user_role.role_id == 2
+      if @user_role.role_id == User::ROLE_STUDENT
         @all_opportunities = Opportunity.approved
         @opportunities = Opportunity.opportunities_for_student(@user_role.student)
-      elsif @user_role.role_id == 3 || @user_role.role_id == 4
+      elsif @user_role.role_id == User::ROLE_COMPANY || @user_role.role_id == User::ROLE_PERSON
         redirect_to my_opportunities_opportunities_path
       end
     end
@@ -91,16 +91,16 @@ class OpportunitiesController < ApplicationController
     @user_role = User.find_by_id(current_user.id)
 
     # Used for companies/people that create opportunities
-    @my_opportunities = Opportunity.where(user_id: [current_user.id])
+    @my_opportunities = Opportunity.where(user_id: [current_user.id], closed: false)
 
     # Used for students that applied to opportunities
-    @student_opportunities = @user_role.applied_opportunities
+    @student_opportunities = @user_role.applied_opportunities.where(closed: false)
   end
 
   def applicants
-    if (user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4)) || administrator_signed_in?
+    if (user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON)) || administrator_signed_in?
       @applicants = @opportunity.applied_users
-    elsif user_signed_in? && current_user.role_id == 2
+    elsif user_signed_in? && current_user.role_id == User::ROLE_STUDENT
       redirect_to root_path
     end
   end
