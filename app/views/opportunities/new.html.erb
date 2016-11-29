@@ -1,5 +1,5 @@
 <section class="devise-wrapper">
-  <div class="<%= current_user.role_id == 3 ? 'companies-signup-header' : 'people-signup-header' %> margin-bot-40">
+  <div class="<%= current_user.role_id == User::ROLE_COMPANY ? 'companies-signup-header' : 'people-signup-header' %> margin-bot-40">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -16,7 +16,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 student-tab-content <%= current_user.role_id == 3 ? 'company-tab-content' : 'person-tab-content' %> ">
+      <div class="col-md-10 col-md-offset-1 student-tab-content <%= current_user.role_id == User::ROLE_COMPANY ? 'company-tab-content' : 'person-tab-content' %> ">
 
         <div class="row">
           <div class="col-md-6">

@@ -1,6 +1,6 @@
 <section class="studNet-wrapper profile-wrapper">
 
-  <% if @user.role_id == 2 %>
+  <% if @user.role_id == User::ROLE_STUDENT %>
       <!-- Student Edit -->
       <section class="devise-wrapper">
         <div class="students-show-view-header">
@@ -72,7 +72,7 @@
       </div>
       <!-- ./Student Edit -->
 
-  <% elsif @user.role_id == 3 %>
+  <% elsif @user.role_id == User::ROLE_COMPANY %>
 
       <!-- Company Edit -->
       <section class="devise-wrapper">
@@ -102,7 +102,7 @@
       </div>
       <!-- ./Company Edit -->
 
-  <% elsif @user.role_id == 4 %>
+  <% elsif @user.role_id == User::ROLE_PERSON %>
 
       <!-- Company Edit -->
       <section class="devise-wrapper">
@@ -140,7 +140,7 @@
   var current_country_val = <%= @user.country_id ? @user.country_id : -1 %>;
   var current_city_val = '<%= @user.city_id ? @user.city.city_name : '' %>';
 
-  if (current_country_val == 1) {
+  if (current_country_val == 1 || current_country_val == -1) {
     elementVisible('#userCity', true);
   } else {
     elementVisible('#userCity', false);

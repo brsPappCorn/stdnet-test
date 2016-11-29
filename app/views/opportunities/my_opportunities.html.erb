@@ -15,7 +15,7 @@
 <section class="studNet-wrapper padding-bot-40">
   <div class="container">
 
-    <% if @user_role.role_id == 3 || @user_role.role_id == 4 %>
+    <% if @user_role.role_id == User::ROLE_COMPANY || @user_role.role_id == User::ROLE_PERSON %>
         <!-- My Opportunities for Companies/People -->
         <div class="row">
           <div class="col-md-12">
@@ -74,7 +74,7 @@
                     <% end %>
 
                     <% unless opportunity.closed %>
-                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), data: { confirm: '¿Estás seguro? Esta acción es irreversible y una vez la cierra la oferta no será visible por los estudiantes' }, class: 'btn btn-studnet-details', method: :post %></td>
+                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), data: { confirm: '¿Estás seguro? Esta acción es irreversible y una vez se cierre la oferta, ésta no será visible para los estudiantes' }, class: 'btn btn-studnet-details', method: :post %></td>
                     <% end %>
                   </tr>
               <% end %>
@@ -84,7 +84,7 @@
           </div>
         </div>
         <!-- ./My Opportunities for Companies/People -->
-    <% elsif @user_role.role_id == 2 %>
+    <% elsif @user_role.role_id == User::ROLE_STUDENT %>
         <!-- My Opportunities for Students -->
         <div class="row">
           <div class="col-md-12">
@@ -162,13 +162,13 @@
     <% end %>
 
     <!-- My Opportunities Actions -->
-    <% if (@user_role.role_id == 3 || @user_role.role_id == 4) && !current_user.profile_incomplete? %>
+    <% if (@user_role.role_id == User::ROLE_COMPANY || @user_role.role_id == User::ROLE_PERSON) && !current_user.profile_incomplete? %>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
           </div>
         </div>
-    <% elsif @user_role.role_id == 2 %>
+    <% elsif @user_role.role_id == User::ROLE_STUDENT %>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= link_to 'Ver más ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>

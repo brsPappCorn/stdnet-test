@@ -14,18 +14,16 @@
             </span>
 
             <span>
-              <% if @student.user.role_id == 2 %>
+              <% if @student.user.role_id == User::ROLE_STUDENT %>
                   <%= @student.user.first_name %>
                   <%= @student.user.last_name %>
-              <% elsif @student.user.role_id == 3 || @student.user.role_id == 4 %>
+              <% elsif @student.user.role_id == User::ROLE_COMPANY || @student.user.role_id == User::ROLE_PERSON %>
                   <%= @student.user.first_name %>
               <% end %>
             </span>
 
             <span>
-              <!--
-              Calificación (maximo 4 estrellas) TODO: Students/student_display - pending for dev: Rating 'stars'
-              -->
+                - <%= average_rating @student.user %>
             </span>
           </h2>
         </div>
@@ -140,10 +138,10 @@
                           Nombre:
                         </td>
                         <td>
-                          <% if @student.user.role_id == 2 %>
+                          <% if @student.user.role_id == User::ROLE_STUDENT %>
                               <%= @student.user.first_name %>
                               <%= @student.user.last_name %>
-                          <% elsif @student.user.role_id == 3 || @student.user.role_id == 4 %>
+                          <% elsif @student.user.role_id == User::ROLE_COMPANY || @student.user.role_id == User::ROLE_PERSON %>
                               <%= @student.user.first_name %>
                           <% end %>
                         </td>
@@ -178,7 +176,7 @@
                         <table class="table studNet-table">
                           <tbody>
 
-                          <% if @student.user.role_id == 2 %>
+                          <% if @student.user.role_id == User::ROLE_STUDENT %>
                               <tr>
                                 <td>Correo:</td>
                                 <td><%= @student.user.email %></td>
@@ -645,7 +643,6 @@
 
                   <% end %>
                 </div>
-
                 <!-- ./Work Experience outside studNet  -->
 
                 <!-- Work Experience inside studNet  -->
@@ -659,21 +656,14 @@
 
                 <div class="row">
                   <div class="col-md-12">
-                    <p>
                     <ul>
                       <li>
-                        El estudiante todavía no ha realizado proyectos en studNet
+                        <p>
+                          El estudiante todavía no ha realizado proyectos en studNet
+                        </p>
                       </li>
                     </ul>
-                    <!--
-                      Título del proyecto (oferta):
-                      <%#= @student.volunteer_org TODO: Students/show - show opportunity title applied by the student %>
-                      <br>
-                      Descripción del proyecto:
-                      <%#= @student.volunteer_functions TODO: Students/show - show opportunity description applied by the student %>
-                      -->
                     <br>
-                    </p>
                   </div>
                 </div>
                 <!-- ./Work Experience inside studNet  -->
@@ -864,30 +854,6 @@
           </div>
           <!-- ./Description -->
 
-          <!-- Other -->
-          <!-- TODO: Commented until client decides what to do with this section
-          <div id="pane5" class="tab-pane">
-
-            <div class="row">
-              <div class="col-md-12">
-
-                <h3>
-                  Otros
-                </h3>
-
-                <p>
-                  Como te enteraste de studNet?:
-                  <%= student_referenced_by_select_friendly(@student.user) %>
-                </p>
-
-              </div>
-            </div>
-
-          </div>
-          -->
-          <!-- ./Other -->
-
-
           <!-- About this offer -->
           <% unless @application.nil? %>
               <% if @application.applied_opportunity.user_id == current_user.id %>
@@ -963,10 +929,10 @@
             <!-- Student Actions -->
             <div class="row">
               <div class="col-md-12 text-center student-actions-wrapper">
-                <% if current_user.role_id == 2 %>
+                <% if current_user.role_id == User::ROLE_STUDENT %>
                     <%= link_to 'Editar perfil', edit_user_path(@student.user), class: 'btn btn-primary btn-studnet-basic' %>
                     <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
-                <% elsif (current_user.role_id == 3 || current_user.role_id == 4) && params[:opportunity] %>
+                <% elsif (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && params[:opportunity] %>
                     <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet-basic' %>
                     <%= link_to 'Contactar', acquire_information_opportunity_path(params[:opportunity], applicant_id: @student.id), class: 'btn btn-primary btn-studnet-basic', method: :post %>
                 <% end %>

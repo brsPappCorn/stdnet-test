@@ -1,5 +1,5 @@
 <section class="devise-wrapper">
-  <div class="<%= user_signed_in? && current_user.role_id == 3 ? 'companies-signup-header' : 'people-signup-header' %> margin-bot-20">
+  <div class="<%= user_signed_in? && current_user.role_id == User::ROLE_COMPANY ? 'companies-signup-header' : 'people-signup-header' %> margin-bot-20">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -110,7 +110,7 @@
                   <%= average_rating applicant %>
                 </td>
 
-                <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4) %>
+                <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) %>
                     <td><%= link_to 'Ver', student_path(applicant, opportunity: params[:id]), class: 'btn btn-studnet-details' %></td>
 
                     <% unless applicant.application_for_opportunity(@opportunity.id).selected %>
@@ -139,7 +139,7 @@
 
     <div class="row">
       <div class="col-md-12 text-center">
-        <% if user_signed_in? && (current_user.role_id == 3 || current_user.role_id == 4) %>
+        <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) %>
             <%= link_to 'Crear oferta', new_opportunity_path, class: 'btn btn-primary btn-studnet-basic' %>
         <% end %>
       </div>

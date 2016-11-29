@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
   private
   def profile_incomplete
     if user_signed_in? && current_user.profile_incomplete?
-      if current_user.role_id == 2
+      if current_user.role_id == User::ROLE_STUDENT
         flash.now[:warning] = 'Recuerda que debes completar tu perfil para poder aplicar a las ofertas.'
-      elsif current_user.role_id == 3 || current_user.role_id == 4
+      elsif current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON
         flash.now[:warning] = 'Por favor completa la información de tu perfil para crear y publicar ofertas.'
       else
         flash.now[:warning] = 'Recuerda que debes completar tu perfil.'
