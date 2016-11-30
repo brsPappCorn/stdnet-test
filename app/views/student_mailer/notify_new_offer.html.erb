@@ -1,6 +1,65 @@
-<h1>Nueva oferta publicada</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>
+    Nueva oferta - estudiantes
+  </title>
+</head>
 
-<p>
-  Estimado estudiante, existe una nueva oferta (<%= @opportunity.opportunity_title %>) que puede ser de tu interés.
-  Ingresa a studNet y revisa las <%= link_to 'ofertas', opportunities_url %> que tenemos disponibles para ti.
-</p>
+<body style="color: #3B3B3C; font-family: 'Ubuntu', sans-serif; margin: 0">
+
+<!-- Logo -->
+<div style="text-align: center;">
+  <%= image_tag 'logo.png', alt: 'Studnet Logo', style: 'margin: 30px 0; max-width: 160px;' %>
+</div>
+<!-- ./Logo -->
+
+<!-- Header -->
+<header style="background-color: #6AADE4; color: white; margin-bottom: 60px; padding: 15px 10px; text-align: center;">
+  <h2 style="font-size: 1.2em; margin: 0">
+    ¡Hemos recibido una nueva oferta en nuestra plataforma!
+  </h2>
+</header>
+<!-- ./Header -->
+
+<!-- Content -->
+<div style="margin-bottom: 60px; margin-left: auto; margin-right: auto; text-align: center; width: 80%;">
+  <p style="margin-bottom: 60px;">
+    ¡Hola <%= @student.user.first_name %>!
+    <br><br>
+    Se ha publicado una nueva oferta (<%= "#{@opportunity.opportunity_title}" %>)
+    que puede ser de tu interés.
+    Haz click <%= link_to 'aquí', opportunities_url, target: '_blank', style: 'color: #6AADE4; text-decoration: none;' %>
+    para revisar las ofertas que tenemos disponibles para ti.
+    <br><br>
+    Cordialmente,
+    <br><br>
+    Equipo studNet
+    <br>
+    <%= mail_to 'info@studNet.com.co', 'info@studNet.com.co', style: 'color: #6AADE4; text-decoration: none;' %>
+  </p>
+</div>
+<!-- ./Content -->
+
+
+<!-- Footer -->
+<footer style="background-color: #BFBFBF; padding: 30px 0; text-align: center;">
+  <p style="margin: 0 0 5px;">
+    <strong>
+      studNet
+    </strong>
+  </p>
+  <p style="margin: 0 0 5px;">
+    +57 1 656 4840
+  </p>
+  <p style="margin: 0 0 5px;">
+    Cra. 15 # 88 - 64
+  </p>
+  <p style="margin: 0;">
+    Bogotá, Colombia
+  </p>
+</footer>
+<!-- ./Footer -->
+
+</body>
+</html>
