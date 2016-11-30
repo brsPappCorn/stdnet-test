@@ -1,5 +1,128 @@
-<p>¡Bienvenido <%= @email %>!</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>
+    <% if @resource.role_id  == User::ROLE_STUDENT %>
+        Registro - estudiantes
+    <% elsif @resource.role_id == User::ROLE_COMPANY %>
+        Registro - empresas
+    <% elsif @resource.role_id == User::ROLE_PERSON %>
+        Registro - personas
+    <% end %>
+  </title>
+</head>
 
-<p>Puedes confirmar el correo electrónico asociado a tu cuenta haciendo clic en el siguiente enlace:</p>
+<body style="color: #3B3B3C; font-family: 'Ubuntu', sans-serif; margin: 0">
 
-<p><%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token) %></p>
+<!-- Logo -->
+<div style="text-align: center;">
+  <%= image_tag 'logo.png', alt: 'Studnet Logo', style: 'margin: 30px 0; max-width: 160px;' %>
+</div>
+<!-- ./Logo -->
+
+<!-- Header -->
+<% if @resource.role_id  == User::ROLE_STUDENT %>
+    <header style="background-color: #6AADE4; color: white; margin-bottom: 60px; padding: 15px 10px; text-align: center;">
+      <h2 style="font-size: 1.2em; margin: 0">
+        ¡Te has registrado exitosamente en nuestra plataforma!
+      </h2>
+    </header>
+<% elsif @resource.role_id == User::ROLE_COMPANY %>
+    <header style="background-color: #5A2A00; color: white; margin-bottom: 60px; padding: 15px 10px; text-align: center;">
+      <h2 style="font-size: 1.2em; margin: 0">
+        ¡Te has registrado exitosamente en nuestra plataforma!
+      </h2>
+    </header>
+<% elsif @resource.role_id == User::ROLE_PERSON %>
+    <header style="background-color: #1E2056; color: white; margin-bottom: 60px; padding: 15px 10px; text-align: center;">
+      <h2 style="font-size: 1.2em; margin: 0">
+        ¡Te has registrado exitosamente en nuestra plataforma!
+      </h2>
+    </header>
+<% end %>
+<!-- ./Header -->
+
+<!-- Content -->
+<div style="margin-bottom: 40px; text-align: center">
+  <h1 style="font-size: 2.25em; margin: 0;">
+    ¡Bienvenido a studNet!
+  </h1>
+</div>
+
+<div style="margin-bottom: 60px; margin-left: auto; margin-right: auto; text-align: center; width: 80%;">
+  <p style="margin-bottom: 60px;">
+    <% if @resource.role_id  == User::ROLE_STUDENT %>
+        Ahora puedes ingresar a la plataforma para crear tu perfil y aplicar a tus ofertas favoritas.
+        Puedes confirmar tu correo <%= mail_to @email, @email %> haciendo click en el siguiente enlace:
+    <% elsif @resource.role_id == User::ROLE_COMPANY %>
+        Ahora puedes ingresar a la plataforma para crear tu perfil y publicar tus ofertas.
+        Puedes confirmar tu correo <%= mail_to @email, @email %> haciendo click en el siguiente enlace:
+    <% elsif @resource.role_id == User::ROLE_PERSON %>
+        Ahora puedes ingresar a la plataforma para crear tu perfil y publicar tus ofertas.
+        Puedes confirmar tu correo <%= mail_to @email, @email %> haciendo click en el siguiente enlace:
+    <% end %>
+  </p>
+
+  <p style="margin-bottom: 60px;">
+    <%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token), style: 'background-color: #6AADE4; border-radius: 5px; color: white; font-size: 1.2em; font-weight: bold; padding: 10px 20px; text-decoration: none;' %>
+  </p>
+</div>
+<!-- ./Content -->
+
+<!-- SM -->
+<table style="margin-bottom: 60px; margin-left: auto; margin-right: auto; width: 80%;">
+  <tbody>
+  <tr>
+    <td></td>
+    <td style="text-align: center; width: 60%">
+      ¡Síguenos en redes sociales para ver nuestras <br>
+      últimas ofertas, noticias y actualizaciones!
+    </td>
+
+    <td style="text-align: center; width: 40%">
+
+      <table style="margin-left: auto; margin-right: auto; width: 50%;">
+        <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <%= link_to image_tag('mailer_fb.png', alt: 'studnet | Facebook', style: 'max-width: 40px;'), 'https://www.facebook.com/studNet-1747679552133074/', target: '_blank'  %>
+          </td>
+          <td>
+            <%= link_to image_tag('mailer_ig.png', alt: 'studnet | Instagram', style: 'max-width: 40px;'), '', target: '_blank'  %>
+          </td>
+          <td>
+            <%= link_to image_tag('mailer_in.png', alt: 'studnet | LinkedIn', style: 'max-width: 40px;'), 'https://www.linkedin.com/company/10804303?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A10804303%2Cidx%3A2-1-2%2CtarId%3A1467063701110%2Ctas%3Astudnet', target: '_blank'  %>
+          </td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!-- ./SM -->
+
+<!-- Footer -->
+<footer style="background-color: #BFBFBF; padding: 30px 0; text-align: center;">
+  <p style="margin: 0 0 5px;">
+    <strong>
+      studNet
+    </strong>
+  </p>
+  <p style="margin: 0 0 5px;">
+    +57 1 656 4840
+  </p>
+  <p style="margin: 0 0 5px;">
+    Cra. 15 # 88 - 64
+  </p>
+  <p style="margin: 0;">
+    Bogotá, Colombia
+  </p>
+</footer>
+<!-- ./Footer -->
+
+</body>
+</html>
