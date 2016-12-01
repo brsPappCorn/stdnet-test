@@ -34,12 +34,6 @@ class Company < ActiveRecord::Base
   belongs_to :user
   belongs_to :sector, foreign_key: 'company_sector_id'
 
-
-  #---------------------
-  # Validations
-  #---------------------
-  # TODO: Declare validations
-
   #---------------------
   # Methods
   #---------------------

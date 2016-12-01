@@ -70,10 +70,6 @@ class User < ActiveRecord::Base
   REF_EMAIL = 7
   REF_STUDENT_UNIVERSITY = 8
 
-  PROMO_CODE = [
-      # TODO: User Model - Promotional codes will be defined later on.
-  ]
-
 
   #---------------------
   # Associations

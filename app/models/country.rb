@@ -17,11 +17,6 @@ class Country < ActiveRecord::Base
   has_many :students, dependent: :destroy
 
   accepts_nested_attributes_for :users
-  accepts_nested_attributes_for :students # TODO: Review if this is necessary
-
-  #---------------------
-  # Validations
-  #---------------------
-  # TODO: Declare validations
+  accepts_nested_attributes_for :students
 
 end

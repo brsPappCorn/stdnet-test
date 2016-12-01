@@ -1,4 +1,6 @@
 class StudentMailer < ApplicationMailer
+  helper OpportunitiesHelper
+
   def notify_new_offer(opportunity, student)
     @opportunity = opportunity
     @student = student

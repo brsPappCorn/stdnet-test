@@ -29,6 +29,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
 
+      unless resource.errors.empty?
+        resource.errors.messages.each do |key, value|
+          message = value.join(', ')
+          flash[:error] = "#{key.to_s.capitalize} #{message}."
+        end
+      end
+
       # Redirection depending on user role if Devise registration fails.
       if session[:role_id].to_i == 2
         redirect_to new_user_registration_path(studnet: session[:role_id].to_i)
