@@ -27,7 +27,7 @@
   <p style="margin-bottom: 60px;">
     ¡Hola <%= @student.user.first_name %>!
     <br><br>
-    Se ha publicado una nueva oferta (<%= "#{@opportunity.opportunity_title}" %>)
+    Se ha publicado una nueva oferta (<%= "#{@opportunity.opportunity_title}" %>, <%= opportunity_type_friendly(@opportunity) %>)
     que puede ser de tu interés.
     Haz click <%= link_to 'aquí', opportunities_url, target: '_blank', style: 'color: #6AADE4; text-decoration: none;' %>
     para revisar las ofertas que tenemos disponibles para ti.

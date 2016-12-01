@@ -10,7 +10,6 @@ gem 'devise'
 gem 'fog'
 gem 'pg'
 gem 'thin'
-#gem 'newrelic_rpm' #TODO: Configure NewRelic
 gem 'file_validators'
 
 # Assets
@@ -43,3 +42,6 @@ group :development, :test do
   gem 'awesome_print'
 end
 
+group :production do
+  gem 'newrelic_rpm'
+end

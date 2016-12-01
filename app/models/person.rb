@@ -17,12 +17,6 @@ class Person < ActiveRecord::Base
   #---------------------
   belongs_to :user
 
-
-  #---------------------
-  # Validations
-  #---------------------
-  # TODO: Declare validations
-
   #---------------------
   # Methods
   #---------------------

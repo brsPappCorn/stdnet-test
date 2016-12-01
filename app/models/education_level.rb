@@ -16,9 +16,4 @@ class EducationLevel < ActiveRecord::Base
   has_many :students, dependent: :destroy
 
   accepts_nested_attributes_for :students
-
-  #---------------------
-  # Validations
-  #---------------------
-  # TODO: Declare validations
 end

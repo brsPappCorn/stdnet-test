@@ -74,7 +74,7 @@
                     <% end %>
 
                     <% unless opportunity.closed %>
-                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), data: { confirm: '¿Estás seguro? Esta acción es irreversible y una vez se cierre la oferta, ésta no será visible para los estudiantes' }, class: 'btn btn-studnet-details', method: :post %></td>
+                        <td><%= link_to 'Cerrar', close_opportunity_path(opportunity), data: { confirm: '¿Estás seguro? Esta acción es irreversible y una vez se cierre la oferta, esta no será visible para los estudiantes' }, class: 'btn btn-studnet-details', method: :post %></td>
                     <% end %>
                   </tr>
               <% end %>
