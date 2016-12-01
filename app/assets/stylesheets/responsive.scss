@@ -1,5 +1,140 @@
-@media (max-width: 768px) {
+//==========================================
+// Custom, iPhone Retina
+//==========================================
+@media only screen and (min-width : 320px) {
 
+  // Navbar
+  header {
+
+    .navbar {
+      z-index: 10000;
+    }
+
+    .navbar-default {
+
+      &.navbar-custom {
+        padding-top: 10px;
+
+        .container-fluid {
+          background-color: white;
+
+          .navbar-header {
+            padding-left: 10px;
+
+            .navbar-logo {
+              width: 45%;
+            }
+
+          }
+
+        }
+
+
+      }
+
+    }
+
+  }
+
+  header .navbar-custom .navbar-collapse .navbar-nav > .active > a {
+    border-bottom: 0;
+    padding-bottom: 10px;
+  }
+
+  header .navbar-custom .navbar-collapse .navbar-nav > li:hover a, header .navbar-custom .navbar-collapse .navbar-nav > li:active a, header .navbar-custom .navbar-collapse .navbar-nav > li:focus a {
+    color: $cp-blue;
+    padding-bottom: 10px;
+  }
+
+  .navbar-nav > li > a {
+    padding-bottom: 10px;
+  }
+
+  .navbar-nav > li > a:focus, .navbar-nav > li > a:hover, .navbar-nav > li > a:active  {
+    padding-bottom: 10px;
+  }
+
+}
+
+
+//==========================================
+// Small Devices, Tablets (768px and up)
+//==========================================
+@media only screen and (min-width : 768px) {
+  
+  //==========
+  // Navbar
+  //==========
+  header {
+
+    .navbar {
+      z-index: 10000;
+    }
+
+    .navbar-default {
+
+      &.navbar-custom {
+
+        .container-fluid {
+
+          .navbar-header {
+
+            .navbar-logo {
+              width: 60%;
+            }
+
+          }
+
+        }
+
+
+      }
+
+    }
+
+  }
+
+}
+
+
+//==========================================
+// Large devices (large desktops, 1200px and up)
+//==========================================
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+
+  //==========
+  // Navbar
+  //==========
+  header {
+
+    .navbar {
+      z-index: 10000;
+    }
+
+    .navbar-default {
+
+      &.navbar-custom {
+
+        .container-fluid {
+
+          .navbar-header {
+
+            .navbar-logo {
+              width: 60%;
+            }
+
+          }
+
+        }
+
+
+      }
+
+    }
+
+  }
 
 
 }

@@ -17,9 +17,4 @@ class City < ActiveRecord::Base
 
   accepts_nested_attributes_for :users
 
-  #---------------------
-  # Validations
-  #---------------------
-  # TODO: Declare validations
-
 end

@@ -67,18 +67,6 @@
               </div>
             </div>
 
-
-            <!-- TODO: Opportunities/show - Include City where opportunity will take place.
-            <div class="row">
-              <div class="col-md-12">
-                <p>
-                  Ciudad
-                  <%#=  %>
-                </p>
-              </div>
-            </div>
-            -->
-
             <div class="row">
               <div class="col-md-12">
                 <p>
@@ -147,27 +135,25 @@
               </div>
             </div>
 
-            <% if @opportunity.opportunity_type.to_i == Opportunity::TYPE_VIRTUAL %>
-                <div class="row">
-                  <div class="col-md-12">
-                    <p>
-                      <% if @opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER%>
-                          <strong>
-                            Salario / valor del proyecto:
-                          </strong>
-                          <br>
-                          <%= opportunity_cost_or_offer_friendly(@opportunity) %>
-                      <% else %>
-                          <strong>
-                            Salario / valor del proyecto:
-                          </strong>
-                          <br>
-                          <%= "COP #{@opportunity.opportunity_cost}" %>
-                      <% end %>
-                    </p>
-                  </div>
-                </div>
-            <% end %>
+            <div class="row">
+              <div class="col-md-12">
+                <p>
+                  <% if @opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER%>
+                      <strong>
+                        Salario / valor del proyecto:
+                      </strong>
+                      <br>
+                      <%= opportunity_cost_or_offer_friendly(@opportunity) %>
+                  <% else %>
+                      <strong>
+                        Salario / valor del proyecto:
+                      </strong>
+                      <br>
+                      <%= "COP #{@opportunity.opportunity_cost}" %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
 
             <div class="row">
               <div class="col-md-12">

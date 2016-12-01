@@ -17,9 +17,4 @@ class Sector < ActiveRecord::Base
 
   accepts_nested_attributes_for :companies
 
-  #---------------------
-  # Validations
-  #---------------------
-  # TODO: Declare validations
-
 end

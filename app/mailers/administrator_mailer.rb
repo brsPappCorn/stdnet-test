@@ -7,7 +7,7 @@ class AdministratorMailer < ApplicationMailer
   def new_apply(opportunity, student)
     @opportunity = opportunity
     @student = student
-    mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Nueva aplicación'
+    mail to: @opportunity.user.email, bcc: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Nueva aplicación'
   end
 
   def acquire_information(opportunity, student)
