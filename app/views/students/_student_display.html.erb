@@ -22,9 +22,11 @@
               <% end %>
             </span>
 
-            <span>
-                - <%= average_rating @student.user %>
-            </span>
+            <div class="star-container">
+              <% if @student.user.average_rating > 0 %>
+                  <span class="stars"><%= average_rating @student.user %></span>
+              <% end %>
+            </div>
           </h2>
         </div>
       </div>
@@ -42,71 +44,37 @@
 
         <ul class="nav nav-tabs student-nav-tabs"> <!-- nav-justified -->
 
-          <% if params[:opportunity].present?  %>
-              <li class="active li-width-30">
-                <a href="#pane1" data-toggle="tab">
-                  Información personal y educación
-                </a>
-              </li>
+          <li class="active li-width-30">
+            <a href="#pane1" data-toggle="tab">
+              Información personal y educación
+            </a>
+          </li>
 
-              <li class="border-left-none" id="studentApplicantXP">
-                <a href="#pane2" data-toggle="tab">
-                  Experiencia laboral
-                </a>
-              </li>
+          <li class="border-left-none" id="studentApplicantXP">
+            <a href="#pane2" data-toggle="tab">
+              Experiencia laboral
+            </a>
+          </li>
 
+          <li class="border-left-none li-width-17">
+            <a href="#pane3" data-toggle="tab">
+              Habilidades
+            </a>
+          </li>
+
+          <li class="border-left-none li-width-17">
+            <a href="#pane4" data-toggle="tab">
+              Descripción
+            </a>
+          </li>
+
+          <% if @application %>
               <li class="border-left-none li-width-17">
-                <a href="#pane3" data-toggle="tab">
-                  Habilidades
-                </a>
-              </li>
-
-              <li class="border-left-none li-width-17">
-                <a href="#pane4" data-toggle="tab">
-                  Descripción
-                </a>
-              </li>
-
-              <% unless @application.nil? %>
-                  <li class="border-left-none li-width-17">
-                    <a href="#pane6" data-toggle="tab">
-                      Sobre la oferta
-                    </a>
-                  </li>
-              <% end %>
-          <% else %>
-              <li class="active li-width-30">
-                <a href="#pane1" data-toggle="tab">
-                  Información personal y educación
-                </a>
-              </li>
-
-              <li class="border-left-none li-width-23">
-                <a href="#pane2" data-toggle="tab">
-                  Experiencia laboral
-                </a>
-              </li>
-
-              <li class="border-left-none li-width-23">
-                <a href="#pane3" data-toggle="tab">
-                  Habilidades
-                </a>
-              </li>
-
-              <li class="border-left-none li-width-23">
-                <a href="#pane4" data-toggle="tab">
-                  Descripción
+                <a href="#pane6" data-toggle="tab">
+                  Sobre la oferta
                 </a>
               </li>
           <% end %>
-
-          <!-- TODO: Commented until client decides what to do with this section
-          <li>
-            <a href="#pane5" data-toggle="tab">
-              Otros
-            </a>
-          </li>
-          -->
         </ul>
 
         <div class="tab-content student-tab-content">
@@ -657,11 +625,19 @@
                 <div class="row">
                   <div class="col-md-12">
                     <ul>
-                      <li>
-                        <p>
-                          El estudiante todavía no ha realizado proyectos en studNet
-                        </p>
-                      </li>
+                      <% if @student.user.studnet_experience_projects.count > 0 %>
+                          <% @student.user.studnet_experience_projects.each do |project| %>
+                              <li>
+                                <p><%= "#{project.applied_opportunity.opportunity_title}: #{project.applied_opportunity.activity_description}" %></p>
+                              </li>
+                          <% end %>
+                      <% else %>
+                          <li>
+                            <p>
+                              El estudiante todavía no ha realizado proyectos en studNet
+                            </p>
+                          </li>
+                      <% end %>
                     </ul>
                     <br>
                   </div>

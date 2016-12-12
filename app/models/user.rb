@@ -186,6 +186,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def studnet_experience_projects
+    self.applications.where('selected = ? AND rating != ?', true, 0)
+  end
+
   #---------------------
   # Private methods
   #---------------------
