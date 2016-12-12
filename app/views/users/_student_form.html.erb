@@ -109,7 +109,12 @@
                   </div>
 
                   <hr/>
-                  <h4>Otra carrera (opcional)</h4><br/>
+                  <h4>
+                    Otra carrera (opcional)
+                    <% if @user.student.has_second_major? %>
+                        <span><small><%= link_to '(Eliminar carrera)', delete_second_major_student_path(@user.student), class: 'text-danger', method: :post %></small></span>
+                    <% end %>
+                  </h4><br/>
 
                   <div class="form-group">
                     <%= s.label :second_university_id, 'Universidad de otra carrera (opcional)' %>
@@ -518,196 +523,196 @@
 <% end %>
 
 <script>
-  var current_exchange_student_val = <%= @user.student.exchange_student.to_i %>;
-  var current_work_xp_val = <%= @user.student.work_xp.to_i %>;
-  var current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>;
-  var current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
-  var current_major_val = '<%= @user.student.major.major_name %>';
-  var current_university_val = '<%= @user.student.university.university_name %>';
-  var current_second_major_val = '<%= @user.student.second_major ? @user.student.second_major.major_name : '' %>';
-  var current_second_university_val = '<%= @user.student.second_university ? @user.student.second_university.university_name : '' %>';
-  var has_second_work_xp = <%= @user.student.has_second_work_xp? %>;
-  var has_third_work_xp = <%= @user.student.has_third_work_xp? %>;
-  var has_second_volunteer_xp = <%= @user.student.has_second_volunteer_xp? %>;
-  var has_third_volunteer_xp = <%= @user.student.has_third_volunteer_xp? %>;
+    var current_exchange_student_val = <%= @user.student.exchange_student.to_i %>;
+    var current_work_xp_val = <%= @user.student.work_xp.to_i %>;
+    var current_volunteer_xp_val = <%= @user.student.volunteer_xp.to_i %>;
+    var current_programming_skills_val = <%= @user.student.programming_skills.to_i %>;
+    var current_major_val = '<%= @user.student.major.major_name %>';
+    var current_university_val = '<%= @user.student.university.university_name %>';
+    var current_second_major_val = '<%= @user.student.second_major ? @user.student.second_major.major_name : '' %>';
+    var current_second_university_val = '<%= @user.student.second_university ? @user.student.second_university.university_name : '' %>';
+    var has_second_work_xp = <%= @user.student.has_second_work_xp? %>;
+    var has_third_work_xp = <%= @user.student.has_third_work_xp? %>;
+    var has_second_volunteer_xp = <%= @user.student.has_second_volunteer_xp? %>;
+    var has_third_volunteer_xp = <%= @user.student.has_third_volunteer_xp? %>;
 
-  // Function for eduaction
-  if (current_major_val == 'Otra') {
-    elementVisible("#otherMajor", true);
-  } else {
-    elementVisible("#otherMajor", false);
-  }
-
-  if (current_university_val == 'Otra') {
-    elementVisible("#otherUniversity", true);
-  } else {
-    elementVisible("#otherUniversity", false);
-  }
-
-  if (current_second_major_val == 'Otra') {
-    elementVisible("#secondOtherMajor", true);
-  } else {
-    elementVisible("#secondOtherMajor", false);
-  }
-
-  if (current_second_university_val == 'Otra') {
-    elementVisible("#secondOtherUniversity", true);
-  } else {
-    elementVisible("#secondOtherUniversity", false);
-  }
-
-  $("#user_student_attributes_university_id").change(function() {
-    if ($(this).find("option:selected").text() == 'Otra') {
-      elementVisible("#otherUniversity", true);
+    // Function for eduaction
+    if (current_major_val == 'Otra') {
+        elementVisible("#otherMajor", true);
     } else {
-      elementVisible("#otherUniversity", false);
+        elementVisible("#otherMajor", false);
     }
-  });
 
-  $("#user_student_attributes_major_id").change(function() {
-    if ($(this).find("option:selected").text() == 'Otra') {
-      elementVisible("#otherMajor", true);
+    if (current_university_val == 'Otra') {
+        elementVisible("#otherUniversity", true);
     } else {
-      elementVisible("#otherMajor", false);
+        elementVisible("#otherUniversity", false);
     }
-  });
 
-  $("#user_student_attributes_second_university_id").change(function() {
-    if ($(this).find("option:selected").text() == 'Otra') {
-      elementVisible("#secondOtherUniversity", true);
+    if (current_second_major_val == 'Otra') {
+        elementVisible("#secondOtherMajor", true);
     } else {
-      elementVisible("#secondOtherUniversity", false);
+        elementVisible("#secondOtherMajor", false);
     }
-  });
 
-  $("#user_student_attributes_second_major_id").change(function() {
-    if ($(this).find("option:selected").text() == 'Otra') {
-      elementVisible("#secondOtherMajor", true);
+    if (current_second_university_val == 'Otra') {
+        elementVisible("#secondOtherUniversity", true);
     } else {
-      elementVisible("#secondOtherMajor", false);
-    }
-  });
-
-  if (current_exchange_student_val == 1) {
-    elementVisible('.exchangeStudent', true);
-  } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
-    elementVisible('.exchangeStudent', false);
-  }
-
-  $('#user_student_attributes_exchange_student').change(function(){
-    if ( $(this).val() == 1 ) {
-      elementVisible('.exchangeStudent', true);
-    } else if ( $(this).val() == 0 ) {
-      elementVisible('.exchangeStudent', false);
-    }
-  });
-
-  // Function for work_xp Select
-  if ( current_work_xp_val == 1 ) {
-    $('.workXp').show();
-  } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
-    $('.workXp').hide();
-  }
-
-  if (has_second_work_xp) {
-    elementVisible(".secondWorkXp", true);
-  } else {
-    elementVisible(".secondWorkXp", false);
-  }
-
-  if (has_third_work_xp) {
-    elementVisible(".thirdWorkXp", true);
-    elementVisible(".add-work-xp-btn", false);
-  } else {
-    elementVisible(".thirdWorkXp", false);
-  }
-
-  $('#user_student_attributes_work_xp').change(function(){
-    if ( $(this).val() == 1 ) {
-      elementVisible('.workXp', true);
-    } else if ( $(this).val() == 0 ) {
-      elementVisible('.workXp', false);
-    }
-  });
-
-  $(".add-work-xp-btn").click(function(e) {
-    e.preventDefault();
-
-    var secondXpHidden = $(".secondWorkXp").is(":hidden");
-    var thirdXpHidden = $(".thirdWorkXp").is(":hidden");
-
-    if (secondXpHidden) {
-      elementVisible(".secondWorkXp", true);
-      secondXpHidden = false;
-    } else if (thirdXpHidden) {
-      elementVisible(".thirdWorkXp", true);
-      thirdXpHidden = false;
+        elementVisible("#secondOtherUniversity", false);
     }
 
-    if (!secondXpHidden && !thirdXpHidden) {
-      $(this).hide();
-    }
-  });
+    $("#user_student_attributes_university_id").change(function() {
+        if ($(this).find("option:selected").text() == 'Otra') {
+            elementVisible("#otherUniversity", true);
+        } else {
+            elementVisible("#otherUniversity", false);
+        }
+    });
 
-  // Function for volunteer_xp Select
-  if ( current_volunteer_xp_val == 1 ) {
-    elementVisible('.volunteerXp', true);
-  } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
-    elementVisible('.volunteerXp', false);
-  }
+    $("#user_student_attributes_major_id").change(function() {
+        if ($(this).find("option:selected").text() == 'Otra') {
+            elementVisible("#otherMajor", true);
+        } else {
+            elementVisible("#otherMajor", false);
+        }
+    });
 
-  if (has_second_volunteer_xp) {
-    elementVisible(".secondVolunteerXp", true);
-  } else {
-    elementVisible(".secondVolunteerXp", false);
-  }
+    $("#user_student_attributes_second_university_id").change(function() {
+        if ($(this).find("option:selected").text() == 'Otra') {
+            elementVisible("#secondOtherUniversity", true);
+        } else {
+            elementVisible("#secondOtherUniversity", false);
+        }
+    });
 
-  if (has_third_volunteer_xp) {
-    elementVisible(".thirdVolunteerXp", true);
-    elementVisible(".add-volunteer-xp-btn", false);
-  } else {
-    elementVisible(".thirdVolunteerXp", false);
-  }
+    $("#user_student_attributes_second_major_id").change(function() {
+        if ($(this).find("option:selected").text() == 'Otra') {
+            elementVisible("#secondOtherMajor", true);
+        } else {
+            elementVisible("#secondOtherMajor", false);
+        }
+    });
 
-  $('#user_student_attributes_volunteer_xp').change(function(){
-    if ( $(this).val() == 1 ) {
-      elementVisible('.volunteerXp', true);
-    } else if ( $(this).val() == 0 ) {
-      elementVisible('.volunteerXp', false);
-    }
-  });
-
-  $(".add-volunteer-xp-btn").click(function(e) {
-    e.preventDefault();
-
-    var secondXpHidden = $(".secondVolunteerXp").is(":hidden");
-    var thirdXpHidden = $(".thirdVolunteerXp").is(":hidden");
-
-    if (secondXpHidden) {
-      elementVisible(".secondVolunteerXp", true);
-      secondXpHidden = false;
-    } else if (thirdXpHidden) {
-      elementVisible(".thirdVolunteerXp", true);
-      thirdXpHidden = false;
+    if (current_exchange_student_val == 1) {
+        elementVisible('.exchangeStudent', true);
+    } else if ( $('#user_student_attributes_exchange_student').val() == 0 ) {
+        elementVisible('.exchangeStudent', false);
     }
 
-    if (!secondXpHidden && !thirdXpHidden) {
-      $(this).hide();
-    }
-  });
+    $('#user_student_attributes_exchange_student').change(function(){
+        if ( $(this).val() == 1 ) {
+            elementVisible('.exchangeStudent', true);
+        } else if ( $(this).val() == 0 ) {
+            elementVisible('.exchangeStudent', false);
+        }
+    });
 
-  // Function for programming_languages Select
-  if ( current_programming_skills_val == 1 ) {
-    elementVisible('#programmingLanguages', true);
-  } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
-    elementVisible('#programmingLanguages', false);
-  }
-
-  $('#user_student_attributes_programming_skills').change(function(){
-    if ( $(this).val() == 1 ) {
-      elementVisible('#programmingLanguages', true);
-    } else if ( $(this).val() == 0 ) {
-      elementVisible('#programmingLanguages', false);
+    // Function for work_xp Select
+    if ( current_work_xp_val == 1 ) {
+        $('.workXp').show();
+    } else if ( $('#user_student_attributes_work_xp').val() == 0 ) {
+        $('.workXp').hide();
     }
-  });
+
+    if (has_second_work_xp) {
+        elementVisible(".secondWorkXp", true);
+    } else {
+        elementVisible(".secondWorkXp", false);
+    }
+
+    if (has_third_work_xp) {
+        elementVisible(".thirdWorkXp", true);
+        elementVisible(".add-work-xp-btn", false);
+    } else {
+        elementVisible(".thirdWorkXp", false);
+    }
+
+    $('#user_student_attributes_work_xp').change(function(){
+        if ( $(this).val() == 1 ) {
+            elementVisible('.workXp', true);
+        } else if ( $(this).val() == 0 ) {
+            elementVisible('.workXp', false);
+        }
+    });
+
+    $(".add-work-xp-btn").click(function(e) {
+        e.preventDefault();
+
+        var secondXpHidden = $(".secondWorkXp").is(":hidden");
+        var thirdXpHidden = $(".thirdWorkXp").is(":hidden");
+
+        if (secondXpHidden) {
+            elementVisible(".secondWorkXp", true);
+            secondXpHidden = false;
+        } else if (thirdXpHidden) {
+            elementVisible(".thirdWorkXp", true);
+            thirdXpHidden = false;
+        }
+
+        if (!secondXpHidden && !thirdXpHidden) {
+            $(this).hide();
+        }
+    });
+
+    // Function for volunteer_xp Select
+    if ( current_volunteer_xp_val == 1 ) {
+        elementVisible('.volunteerXp', true);
+    } else if ( $('#user_student_attributes_volunteer_xp').val() == 0 ) {
+        elementVisible('.volunteerXp', false);
+    }
+
+    if (has_second_volunteer_xp) {
+        elementVisible(".secondVolunteerXp", true);
+    } else {
+        elementVisible(".secondVolunteerXp", false);
+    }
+
+    if (has_third_volunteer_xp) {
+        elementVisible(".thirdVolunteerXp", true);
+        elementVisible(".add-volunteer-xp-btn", false);
+    } else {
+        elementVisible(".thirdVolunteerXp", false);
+    }
+
+    $('#user_student_attributes_volunteer_xp').change(function(){
+        if ( $(this).val() == 1 ) {
+            elementVisible('.volunteerXp', true);
+        } else if ( $(this).val() == 0 ) {
+            elementVisible('.volunteerXp', false);
+        }
+    });
+
+    $(".add-volunteer-xp-btn").click(function(e) {
+        e.preventDefault();
+
+        var secondXpHidden = $(".secondVolunteerXp").is(":hidden");
+        var thirdXpHidden = $(".thirdVolunteerXp").is(":hidden");
+
+        if (secondXpHidden) {
+            elementVisible(".secondVolunteerXp", true);
+            secondXpHidden = false;
+        } else if (thirdXpHidden) {
+            elementVisible(".thirdVolunteerXp", true);
+            thirdXpHidden = false;
+        }
+
+        if (!secondXpHidden && !thirdXpHidden) {
+            $(this).hide();
+        }
+    });
+
+    // Function for programming_languages Select
+    if ( current_programming_skills_val == 1 ) {
+        elementVisible('#programmingLanguages', true);
+    } else if ( $('#user_student_attributes_programming_skills').val() == 0 ) {
+        elementVisible('#programmingLanguages', false);
+    }
+
+    $('#user_student_attributes_programming_skills').change(function(){
+        if ( $(this).val() == 1 ) {
+            elementVisible('#programmingLanguages', true);
+        } else if ( $(this).val() == 0 ) {
+            elementVisible('#programmingLanguages', false);
+        }
+    });
 </script>

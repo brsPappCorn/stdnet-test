@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!
+  before_action :authenticate_platform_users
   before_action :profile_incomplete
 
   protected
@@ -39,6 +39,10 @@ class ApplicationController < ActionController::Base
         flash.now[:warning] = 'Recuerda que debes completar tu perfil.'
       end
     end
+  end
+
+  def authenticate_platform_users
+    authenticate_user! if !user_signed_in? && !administrator_signed_in? && !controller_name.eql?('static_pages')
   end
 end
 

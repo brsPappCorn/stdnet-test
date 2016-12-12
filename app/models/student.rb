@@ -152,4 +152,12 @@ self.strengths.blank? || self.areas_to_develop.blank? || self.hobbies.blank?
     !self.third_volunteer_org.to_s.empty?
   end
 
+  def delete_second_major
+    self.second_university = nil
+    self.second_major = nil
+    self.second_education_level = nil
+
+    self.save
+  end
+
 end
