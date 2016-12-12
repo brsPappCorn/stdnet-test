@@ -111,7 +111,7 @@
                 </td>
 
                 <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) %>
-                    <td><%= link_to 'Ver', student_path(applicant, opportunity: params[:id]), class: 'btn btn-studnet-details' %></td>
+                    <td><%= link_to 'Ver', student_path(applicant.student, opportunity: params[:id]), class: 'btn btn-studnet-details' %></td>
 
                     <% unless applicant.application_for_opportunity(@opportunity.id).selected %>
                         <td><%= link_to 'Contactar', acquire_information_opportunity_path(@opportunity, applicant_id: applicant.id), id: 'applicantsGetInfo', class: 'btn btn-studnet-details', method: :post %></td>

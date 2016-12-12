@@ -30,7 +30,11 @@ Rails.application.routes.draw do
   # TODO Remove new/create (views, actions, controllers)
   resources :companies
   resources :people
-  resources :students
+  resources :students, only: [:show, :index] do
+    member do
+      post 'delete_second_major'
+    end
+  end
 
   resources :users, except: [:new, :create] do
     member do
