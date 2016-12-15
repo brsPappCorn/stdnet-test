@@ -105,7 +105,7 @@ class Student < ActiveRecord::Base
   def self.students_for_opportunity(opportunity)
     major_ids = opportunity.majors.map { |m| m.id }
 
-    joins('INNER JOIN majors_students ON majors_students.student_id = students.id').
+    joins('LEFT JOIN majors_students ON majors_students.student_id = students.id').
         where('students.major_id IN (?) OR students.second_major_id IN (?) OR majors_students.major_id IN (?) ', major_ids, major_ids, major_ids).
         includes(:user)
   end
