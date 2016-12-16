@@ -98,6 +98,7 @@ class Student < ActiveRecord::Base
   # Validations
   #---------------------
   validates :avatar, file_size: { less_than: 500.kilobytes }
+  validates_presence_of :major, :university
 
   #---------------------
   # Methods

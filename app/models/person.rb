@@ -18,6 +18,11 @@ class Person < ActiveRecord::Base
   belongs_to :user
 
   #---------------------
+  # Validations
+  #---------------------
+  validates_presence_of :occupation
+
+  #---------------------
   # Methods
   #---------------------
   def profile_incomplete?
