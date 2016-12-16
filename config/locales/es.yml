@@ -48,6 +48,15 @@ es:
         mobile_phone: "Número de celular"
         city_id: "ID de Ciudad"
         country_id: "ID de País"
+        password: "Contraseña"
+        custom: ""
+      student:
+        university: "Universidad"
+        major: "Carrera"
+      company:
+        company_name: "Nombre de la empresa"
+      person:
+        occupation: "Ocupación"
   actions:
     show: "Mostrar"
     edit: "Editar"
