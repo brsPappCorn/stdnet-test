@@ -35,6 +35,11 @@ class Company < ActiveRecord::Base
   belongs_to :sector, foreign_key: 'company_sector_id'
 
   #---------------------
+  # Validations
+  #---------------------
+  validates_presence_of :company_name
+
+  #---------------------
   # Methods
   #---------------------
   def profile_incomplete?

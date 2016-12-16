@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
+# GET /resource/sign_up
   def new
     # Stores value of current role_id parameter
     session[:role_id] = params[:studnet]
@@ -30,10 +30,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
 
       unless resource.errors.empty?
-        resource.errors.messages.each do |key, value|
-          message = value.join(', ')
-          flash[:error] = "#{key.to_s.capitalize} #{message}."
-        end
+        message = resource.errors.full_messages.join(', ')
+        flash[:error] = "#{message}."
       end
 
       # Redirection depending on user role if Devise registration fails.

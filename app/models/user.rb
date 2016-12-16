@@ -95,7 +95,9 @@ class User < ActiveRecord::Base
   #---------------------
   # Validations
   #---------------------
-  # TODO: Declare validations
+  validates_presence_of :student, if: Proc.new { |u| u.role_id == ROLE_STUDENT }
+  validates_presence_of :company, if: Proc.new { |u| u.role_id == ROLE_COMPANY }
+  validates_presence_of :person, if: Proc.new { |u| u.role_id == ROLE_PERSON }
 
   #---------------------
   # Methods
