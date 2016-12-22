@@ -26,6 +26,10 @@ body {
   font-weight: $f-normal;
 }
 
+small, .small {
+  font-size: 70%;
+}
+
 // General wrapper with basic CSS structure for the site
 .studNet-wrapper {
   margin: 0;

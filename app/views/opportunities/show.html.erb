@@ -138,18 +138,20 @@
             <div class="row">
               <div class="col-md-12">
                 <p>
-                  <% if @opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER%>
+                  <% if @opportunity.cost_or_offer_option == Opportunity::OPTION_FOR_OFFER %>
                       <strong>
                         Salario / valor del proyecto:
                       </strong>
+                      <small>(Para proyectos virtuales, recuerda que studNet cobra un 10% más IVA de comisión sobre este valor. Adicionalmente, si el proyecto fue publicado por una empresa, esta podrá retener hasta un 12% sobre este valor por concepto de retención en la fuente y retención de ICA)</small>
                       <br>
                       <%= opportunity_cost_or_offer_friendly(@opportunity) %>
                   <% else %>
                       <strong>
                         Salario / valor del proyecto:
                       </strong>
+                      <small>(Para proyectos virtuales, recuerda que studNet cobra un 10% más IVA de comisión sobre este valor. Adicionalmente, si el proyecto fue publicado por una empresa, esta podrá retener hasta un 12% sobre este valor por concepto de retención en la fuente y retención de ICA)</small>
                       <br>
-                      <%= "COP #{@opportunity.opportunity_cost}" %>
+                      <%= @opportunity.opportunity_cost %>
                   <% end %>
                 </p>
               </div>
