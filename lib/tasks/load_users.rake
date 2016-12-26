@@ -22,63 +22,65 @@ namespace :load_users do
 
   desc 'Loads information for companies'
   task :companies => :environment do |tasks, args|
-    process_file 'Companies.xlsx', User::ROLE_COMPANY
+    process_file User::ROLE_COMPANY, Company
   end
 
   desc 'Loads information for Persons'
   task :persons => :environment do |tasks, args|
-    process_file 'People.xlsx', User::ROLE_PERSON
+    process_file User::ROLE_PERSON, Person
   end
 
   desc 'Loads information for Students'
   task :students => :environment do |tasks, args|
-    process_file 'Students.xlsx', User::ROLE_STUDENT
+    process_file User::ROLE_STUDENT, Student
   end
 
   desc 'Load all information'
   task :all => :environment do |tasks, args|
     puts 'Processing Companies.xlsx'
-    process_file 'Companies.xlsx', User::ROLE_COMPANY
+    process_file User::ROLE_COMPANY, Company
 
     puts 'Processing People.xlsx'
-    process_file 'People.xlsx', User::ROLE_PERSON
+    process_file User::ROLE_PERSON, Person
 
     puts 'Processing Students.xlsx'
-    process_file 'Students.xlsx', User::ROLE_STUDENT
+    process_file User::ROLE_STUDENT, Student
   end
 
   private
-  def process_file(file_name, role)
+  def process_file(role, klass)
     require 'roo'
 
-    file_path = Rails.root.join 'users', file_name
-    file = File.open file_path
-    xlsx = Roo::Spreadsheet.open file
-    sheet = xlsx.sheet 0
-    header = sheet.row 2
+    dir_path = Rails.root.join 'users', klass.to_s.downcase.pluralize
+    Dir[dir_path.join('*.xlsx')].each do |file_name|
+      file = File.open dir_path.join(file_name)
+      xlsx = Roo::Spreadsheet.open file
+      sheet = xlsx.sheet 0
+      header = sheet.row 2
 
-    (3..sheet.last_row).each do |i|
-      row = sheet.row i
+      (3..sheet.last_row).each do |i|
+        row = sheet.row i
 
-      begin
-        user = process_user_row row, header, role
+        begin
+          user = process_user_row row, header, role
 
-        case role
-          when User::ROLE_COMPANY
-            process_company_row user, row, header
-          when User::ROLE_PERSON
-            process_person_row user, row, header
-          when User::ROLE_STUDENT
-            process_student_row user, row, header
-          else
-            puts "Incorrect role id: #{role}"
-        end
-      rescue Exception => e
-        puts "==> Row number #{i} could be loaded: #{e.message}"
+          case role
+            when User::ROLE_COMPANY
+              process_company_row user, row, header
+            when User::ROLE_PERSON
+              process_person_row user, row, header
+            when User::ROLE_STUDENT
+              process_student_row user, row, header
+            else
+              puts "Incorrect role id: #{role}"
+          end
+        rescue Exception => e
+          puts "==> Row number #{i} could be loaded: #{e.message}"
 
-        if user
-          user.errors.messages.map { |key, value| puts "* #{key.to_s} #{value}" } unless user.valid?
-          user.destroy if user.persisted?
+          if user
+            user.errors.messages.map { |key, value| puts "* #{key.to_s} #{value}" } unless user.valid?
+            user.destroy if user.persisted?
+          end
         end
       end
     end
@@ -88,16 +90,14 @@ namespace :load_users do
     temp_password = Devise.friendly_token
     attributes = { password: temp_password, password_confirmation: temp_password, role_id: role_id }
 
-    user = process_attributes User, header, row, USER_ROW_HEADERS, USER_REFERENCE_MODEL_HEADERS, attributes
-    user.save!
-    user
+    process_attributes User, header, row, USER_ROW_HEADERS, USER_REFERENCE_MODEL_HEADERS, attributes
   end
 
   def process_company_row(user, row, header)
     attributes = { user: user }
 
     company = process_attributes Company, header, row, COMPANY_ROW_HEADERS, COMPANY_REFERENCE_MODEL_HEADERS, attributes
-    company.save!
+    user.save!
     company
   end
 
@@ -105,15 +105,14 @@ namespace :load_users do
     attributes = { user: user }
 
     person = process_attributes Person, header, row, PERSON_ROW_HEADERS, Hash.new, attributes
-    person.save!
+    user.save!
     person
   end
 
   def process_student_row(user, row, header)
     attributes = { user: user }
 
-    student = process_attributes Student, header, row, PERSON_ROW_HEADERS, Hash.new, attributes
-    student.save!
+    student = process_attributes Student, header, row, STUDENT_ROW_HEADERS, STUDENT_REFERENCE_MODEL_HEADERS, attributes
 
     header.each_with_index do |header_name, index|
       if header_name.eql? 'tool_name'
@@ -138,7 +137,7 @@ namespace :load_users do
       end
     end
 
-    student.save!
+    user.save!
     student
   end
 
