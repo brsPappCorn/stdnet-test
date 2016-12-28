@@ -26,7 +26,7 @@ namespace :load_users do
   end
 
   desc 'Loads information for Persons'
-  task :persons => :environment do |tasks, args|
+  task :people => :environment do |tasks, args|
     process_file User::ROLE_PERSON, Person
   end
 
@@ -37,13 +37,13 @@ namespace :load_users do
 
   desc 'Load all information'
   task :all => :environment do |tasks, args|
-    puts 'Processing Companies.xlsx'
+    puts 'Processing companies'
     process_file User::ROLE_COMPANY, Company
 
-    puts 'Processing People.xlsx'
+    puts 'Processing people'
     process_file User::ROLE_PERSON, Person
 
-    puts 'Processing Students.xlsx'
+    puts 'Processing students'
     process_file User::ROLE_STUDENT, Student
   end
 
@@ -58,11 +58,14 @@ namespace :load_users do
       sheet = xlsx.sheet 0
       header = sheet.row 2
 
+      puts "=====> Loading file: #{file_name} <====="
+
       (3..sheet.last_row).each do |i|
         row = sheet.row i
 
         begin
           user = process_user_row row, header, role
+          user.skip_confirmation!
 
           case role
             when User::ROLE_COMPANY
@@ -75,7 +78,7 @@ namespace :load_users do
               puts "Incorrect role id: #{role}"
           end
         rescue Exception => e
-          puts "==> Row number #{i} could be loaded: #{e.message}"
+          puts "==> Row number #{i} could not be loaded: #{e.message}"
 
           if user
             user.errors.messages.map { |key, value| puts "* #{key.to_s} #{value}" } unless user.valid?
