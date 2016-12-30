@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def after_sign_out_path_for(resource)
+    'http://www.studnet.com.co'
+  end
+
   def profile_incomplete
     if user_signed_in? && current_user.profile_incomplete?
       if current_user.role_id == User::ROLE_STUDENT
@@ -45,5 +49,3 @@ class ApplicationController < ActionController::Base
     authenticate_user! if !user_signed_in? && !administrator_signed_in? && !controller_name.eql?('static_pages')
   end
 end
-
-
