@@ -192,6 +192,10 @@ class User < ActiveRecord::Base
     self.applications.where('selected = ? AND rating != ?', true, 0)
   end
 
+  def self.filter_by_email(email)
+    where('email ILIKE ?', "%#{email}%")
+  end
+
   #---------------------
   # Private methods
   #---------------------

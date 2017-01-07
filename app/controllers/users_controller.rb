@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   def index
     if administrator_signed_in?
-      @users = User.all
+      if params[:email]
+        @users = User.filter_by_email(params[:email]).page params[:page]
+      else
+        @users = User.all.page params[:page]
+      end
     else
       redirect_to root_path
     end

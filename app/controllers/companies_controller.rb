@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
 
   def index
     if administrator_signed_in?
-      @companies = Company.all
+      @companies = Company.all.page params[:page]
     else
       redirect_to root_path
     end

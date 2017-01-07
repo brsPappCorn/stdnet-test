@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
 
   def index
     if administrator_signed_in?
-      @students = Student.all
+      @students = Student.all.page params[:page]
     else
       redirect_to root_path
     end
@@ -64,6 +64,3 @@ class StudentsController < ApplicationController
 
 
 end
-
-
-
