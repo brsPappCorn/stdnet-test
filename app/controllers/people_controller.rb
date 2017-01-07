@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
 
   def index
     if administrator_signed_in?
-      @people = Person.all
+      @people = Person.all.page params[:page]
     else
       redirect_to root_path
     end

@@ -1,5 +1,4 @@
 source 'http://rubygems.org'
-ruby '2.2.5'
 
 gem 'rails', '4.2.7.1'
 
@@ -11,6 +10,7 @@ gem 'fog'
 gem 'pg'
 gem 'thin'
 gem 'file_validators'
+gem 'kaminari'
 
 # Assets
 gem 'bootstrap-sass', '~> 3.3.5'

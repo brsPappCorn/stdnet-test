@@ -8,6 +8,19 @@
           Lista de Usuarios
         </h1>
 
+        <div class="jumbotron text-center">
+          <%= form_tag users_path, method: :get, class: 'form-inline' do %>
+              <div class="form-group">
+                <%= label_tag :email %>
+                <%= text_field_tag :email, params[:email], class: 'form-control' %>
+              </div>
+              <%= submit_tag 'Filtrar', class: 'btn btn-primary' %>
+              <% if params[:email] %>
+                  <%= link_to 'Borrar búsqueda', users_path, class: 'btn btn-default' %>
+              <% end %>
+          <% end %>
+        </div>
+
         <table class="table">
           <thead>
           <tr>
@@ -64,6 +77,8 @@
           <% end %>
           </tbody>
         </table>
+
+        <%= paginate @users %>
 
       </div>
     </div>
