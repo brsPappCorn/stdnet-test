@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'no-reply@studnet.com.co'
+  default from: "no-reply@#{ENV['EMAIL_DOMAIN']}"
+  
   layout 'mailer'
 end
