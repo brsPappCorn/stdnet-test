@@ -80,7 +80,7 @@ Rails.application.configure do
   #----------------
   # MAILER
   #----------------
-  config.action_mailer.default_url_options = { host: ENV['EMAIL_DOMAIN'] }
+  config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'] }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
