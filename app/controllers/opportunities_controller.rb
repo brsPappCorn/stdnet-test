@@ -129,11 +129,14 @@ class OpportunitiesController < ApplicationController
     if administrator_signed_in?
       @opportunity.approve
 
-      possible_students = @opportunity.other_majors ? Student.all : Student.students_for_opportunity(@opportunity)
-
-      possible_students.each do |student|
-        StudentMailer.notify_new_offer(@opportunity, student).deliver_now
+      send_mails_thread = Thread.new do
+        possible_students = @opportunity.other_majors ? Student.all : Student.students_for_opportunity(@opportunity)
+        possible_students.each do |student|
+          StudentMailer.notify_new_offer(@opportunity, student).deliver_now
+        end
       end
+
+      send_mails_thread.run
 
       flash[:success] = 'La oferta ha sido aprobada exitosamente.'
       redirect_to opportunities_administrators_path
