@@ -14,15 +14,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
       if user_params[:role_id].to_i == User::ROLE_STUDENT
         # Student Model
-        user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
+        user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by, :mobile_phone,
                            student_attributes: [:university_id, :major_id])
       elsif user_params[:role_id].to_i == User::ROLE_COMPANY
         # Company
-        user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
+        user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by, :mobile_phone,
                            company_attributes: [:company_name])
       elsif user_params[:role_id].to_i == User::ROLE_PERSON
         # Person Model
-        user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by,
+        user_params.permit(:email, :password, :password_confirmation, :role_id, :promo_id, :referenced_by, :mobile_phone,
                            person_attributes: [:occupation])
       end
     end

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, except: [:new, :create] do
+  resources :users, except: [:new, :create, :show] do
     member do
       post 'build_learnt_language'
       post 'mark_as_selected'

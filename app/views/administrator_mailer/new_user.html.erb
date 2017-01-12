@@ -1,0 +1,9 @@
+<h1>Nuevo usuario</h1>
+
+<p>El siguiente usuario se acaba de registrar:</p>
+
+<ul>
+  <li>Correo: <%= @user.email %></li>
+  <li>Teléfono: <%= @user.mobile_phone.nil? ? 'N/D' : @user.mobile_phone %></li>
+  <li>Tipo de usurio: <%= @user.role_name %></li>
+</ul>
