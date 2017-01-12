@@ -27,9 +27,9 @@ Rails.application.routes.draw do
       get 'pending_opportunities'
     end
   end
-  # TODO Remove new/create (views, actions, controllers)
-  resources :companies
-  resources :people
+
+  resources :companies, only: [:show, :index]
+  resources :people, only: [:show, :index]
   resources :students, only: [:show, :index] do
     member do
       post 'delete_second_major'
