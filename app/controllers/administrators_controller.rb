@@ -1,7 +1,7 @@
 class AdministratorsController < ApplicationController
+  include AdministratorsHelper
+
   before_action :set_administrator, only: [:show, :edit, :update, :destroy]
-
-
 
   def index
     @administrators = Administrator.all
@@ -49,6 +49,11 @@ class AdministratorsController < ApplicationController
       flash[:success] = 'El administrador fue eliminada exitosamente.'
       format.html { redirect_to administrators_url }
     end
+  end
+
+  def download_excel
+    path = get_user_excel_path
+    send_file path
   end
 
   #===================

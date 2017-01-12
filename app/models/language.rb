@@ -16,4 +16,6 @@ class Language < ActiveRecord::Base
   has_many :learnt_languages
   has_many :students, through: :learnt_languages
 
+  alias_attribute :name, :language_name
+
 end

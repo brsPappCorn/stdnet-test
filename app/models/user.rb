@@ -196,6 +196,10 @@ class User < ActiveRecord::Base
     where('email ILIKE ?', "%#{email}%")
   end
 
+  def self.all_by_role(role_id)
+    where role_id: role_id
+  end
+
   #---------------------
   # Private methods
   #---------------------

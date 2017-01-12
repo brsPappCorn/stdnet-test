@@ -26,6 +26,8 @@ gem 'rails-i18n'
 # Other
 gem 'annotate'
 gem 'roo', '~> 2.4.0'
+gem 'zip-zip'
+gem 'axlsx'
 
 # Others
 #gem 'turbolinks'

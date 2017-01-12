@@ -136,11 +136,14 @@
                 </li>
                 <li role="separator" class="divider"></li>
                 <li class="navbar-links-normal-weight">
+                  <%= link_to 'descargar excel', download_excel_administrators_path, method: :post %>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li class="navbar-links-normal-weight">
                   <%= link_to destroy_administrator_session_path, method: :delete do %>
                       salir
                   <% end %>
                 </li>
-
               </ul>
             </li>
         <% end %>

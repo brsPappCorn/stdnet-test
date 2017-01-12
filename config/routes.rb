@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     collection do
       get 'opportunities'
       get 'pending_opportunities'
+      post 'download_excel'
     end
   end
 

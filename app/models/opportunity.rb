@@ -104,4 +104,48 @@ class Opportunity < ActiveRecord::Base
     self.applied_users.include? student
   end
 
+  def opportunity_type_description
+    if self.opportunity_type == Opportunity::TYPE_VIRTUAL
+      'Proyecto virtual'
+    elsif self.opportunity_type == Opportunity::TYPE_ON_SITE
+      'Empleo temporal'
+    elsif self.opportunity_type == Opportunity::TYPE_PRACTICE
+      'Práctica'
+    elsif self.opportunity_type == Opportunity::TYPE_FIRST_JOB
+      'Empleo'
+    elsif self.opportunity_type == Opportunity::TYPE_SEASONAL
+      'Trabajos express'
+    end
+  end
+
+  def cost_or_offer_description
+    if self.cost_or_offer_option == 0
+      'Quiero poner un valor para el proyecto'
+    else
+      'Quiero escuchar ofertas de los estudiantes'
+    end
+  end
+
+  def availability_description
+    if self.availability == 0
+      'Tiempo completo'
+    elsif self.availability == 1
+      'Medio tiempo'
+    elsif self.availability == 2
+      'Menos de 20 horas por semana'
+    end
+  end
+
+  def duration_type_description
+    if self.opportunity_duration_type == 0
+      'Indefinida'
+    else
+      'Fijar duración'
+    end
+  end
+
+  def selected_students
+    self.applications.where selected: true
+  end
+
 end
