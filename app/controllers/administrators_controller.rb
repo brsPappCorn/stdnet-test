@@ -62,6 +62,12 @@ class AdministratorsController < ApplicationController
 
   def opportunities
     @opportunities = Opportunity.all
+    @stats = {
+        students: User.all_by_role(User::ROLE_STUDENT).count,
+        people: User.all_by_role(User::ROLE_PERSON).count,
+        companies: User.all_by_role(User::ROLE_COMPANY).count,
+        active_offers: Opportunity.approved.count
+    }
   end
 
   def pending_opportunities

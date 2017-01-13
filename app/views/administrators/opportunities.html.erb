@@ -1,13 +1,45 @@
 <section class="studNet-wrapper">
   <div class="container">
 
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron text-center">
+          <h2>Estadísticas</h2>
+
+          <br/>
+
+          <div class="row">
+            <div class="col-md-3">
+              <p class="no-margin"><strong>Estudiantes</strong></p>
+              <p><%= @stats[:students] %></p>
+            </div>
+
+            <div class="col-md-3">
+              <p class="no-margin"><strong>Personas</strong></p>
+              <p><%= @stats[:people] %></p>
+            </div>
+
+            <div class="col-md-3">
+              <p class="no-margin"><strong>Compañias</strong></p>
+              <p><%= @stats[:companies] %></p>
+            </div>
+
+            <div class="col-md-3">
+              <p class="no-margin"><strong>Ofertas activas</strong></p>
+              <p><%= @stats[:active_offers] %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- List of all opportunities -->
     <div class="row">
       <div class="col-md-12">
 
-        <h1>
+        <h2>
           Lista de Ofertas
-        </h1>
+        </h2>
 
         <%= render 'administrators/opportunities_table' %>
 
