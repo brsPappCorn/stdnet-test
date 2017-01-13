@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     yield resource if block_given?
     if resource.persisted?
-      AdministratorMailer.new_user(resource).deliver_now
+      AdministratorMailer.new_user(resource).deliver_now if resource.role_id != User::ROLE_STUDENT
 
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
