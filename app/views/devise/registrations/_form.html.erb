@@ -108,19 +108,21 @@
     </div>
     <!-- ./Person Information -->
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-4 text-right">
-          <%= f.label :mobile_phone, 'Teléfono de contacto (opcional)' %>
-        </div>
-        <div class="col-md-8">
-          <%= f.text_field :mobile_phone, autocomplete: 'off', placeholder: 'Teléfono de contacto', class: 'form-control input-width' %>
-        </div>
-        <div class="field-info-icon">
-          <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="¡Ingresa tu teléfono de contacto para que un asesor se comunique contigo y resuelva tus dudas!"></span>
+    <% if params[:studnet].to_i != 2 %>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-4 text-right">
+            <%= f.label :mobile_phone, 'Teléfono de contacto (opcional)' %>
+          </div>
+          <div class="col-md-8">
+            <%= f.text_field :mobile_phone, autocomplete: 'off', placeholder: 'Teléfono de contacto', class: 'form-control input-width' %>
+          </div>
+          <div class="field-info-icon">
+            <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="¡Ingresa tu teléfono de contacto para que un asesor se comunique contigo y resuelva tus dudas!"></span>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="row">
       <div class="col-md-8 col-md-offset-4 text-center terms-conditions">
