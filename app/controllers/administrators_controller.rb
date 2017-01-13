@@ -1,7 +1,7 @@
 class AdministratorsController < ApplicationController
+  include AdministratorsHelper
+
   before_action :set_administrator, only: [:show, :edit, :update, :destroy]
-
-
 
   def index
     @administrators = Administrator.all
@@ -51,12 +51,23 @@ class AdministratorsController < ApplicationController
     end
   end
 
+  def download_excel
+    path = get_user_excel_path
+    send_file path
+  end
+
   #===================
   # Custom actions
   #===================
 
   def opportunities
     @opportunities = Opportunity.all
+    @stats = {
+        students: User.all_by_role(User::ROLE_STUDENT).count,
+        people: User.all_by_role(User::ROLE_PERSON).count,
+        companies: User.all_by_role(User::ROLE_COMPANY).count,
+        active_offers: Opportunity.approved.count
+    }
   end
 
   def pending_opportunities

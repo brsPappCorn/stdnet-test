@@ -108,6 +108,20 @@
     </div>
     <!-- ./Person Information -->
 
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <%= f.label :mobile_phone, 'Teléfono de contacto (opcional)' %>
+        </div>
+        <div class="col-md-8">
+          <%= f.text_field :mobile_phone, autocomplete: 'off', placeholder: 'Teléfono de contacto', class: 'form-control input-width' %>
+        </div>
+        <div class="field-info-icon">
+          <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="¡Ingresa tu teléfono de contacto para que un asesor se comunique contigo y resuelva tus dudas!"></span>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-8 col-md-offset-4 text-center terms-conditions">
         <p>
@@ -148,88 +162,90 @@
 
 <script type="text/javascript">
 
-  //=======================
-  // Display/Hide options
-  //=======================
+    //=======================
+    // Display/Hide options
+    //=======================
 
-  $(function() {
-    // Variables
-    var select_value = [];
+    $(function() {
+        // Variables
+        var select_value = [];
 
-    var current_params_role_id_val = <%= params[:studnet].to_i %>;
+        var current_params_role_id_val = <%= params[:studnet].to_i %>;
 
-    // Function to display company additional information
-    if ( current_params_role_id_val == 2 ) {
-      $('.devise-student-info').show();
-      $('.devise-company-info').hide();
-      $('.devise-person-info').hide();
-    } else if ( current_params_role_id_val == 3 ) {
-      $('.devise-student-info').hide();
-      $('.devise-company-info').show();
-      $('.devise-person-info').hide();
-    } else if ( current_params_role_id_val == 4 ) {
-      $('.devise-student-info').hide();
-      $('.devise-company-info').hide();
-      $('.devise-person-info').show();
-    }
-
-    function displayCompanyAdditionalInfo() {
-      $('#roleID').change(function(){
-        if ( $('#roleID').val() == 3 ) {
-          $('#deviseCompanySignUp').show();
-        } else {
-          $('#deviseCompanySignUp').hide();
+        // Function to display company additional information
+        if ( current_params_role_id_val == 2 ) {
+            $('.devise-student-info').show();
+            $('.devise-company-info').hide();
+            $('.devise-person-info').hide();
+        } else if ( current_params_role_id_val == 3 ) {
+            $('.devise-student-info').hide();
+            $('.devise-company-info').show();
+            $('.devise-person-info').hide();
+        } else if ( current_params_role_id_val == 4 ) {
+            $('.devise-student-info').hide();
+            $('.devise-company-info').hide();
+            $('.devise-person-info').show();
         }
 
-        // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
-        select_value =  $('#roleID').val();
-        roleID_value =  $('#user_role_id').attr('value', select_value);
+        function displayCompanyAdditionalInfo() {
+            $('#roleID').change(function(){
+                if ( $('#roleID').val() == 3 ) {
+                    $('#deviseCompanySignUp').show();
+                } else {
+                    $('#deviseCompanySignUp').hide();
+                }
 
-      });
+                // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
+                select_value =  $('#roleID').val();
+                roleID_value =  $('#user_role_id').attr('value', select_value);
 
-      $('#roleID').val();
-    }
+            });
 
-    // Function to display person additional information
-    if ( current_params_role_id_val == 4 ) {
-      $('#devisePersonSignUp').show();
-      $("#roleID option[value='4']").prop('selected', true);
-    } else {
-      $('#devisePersonSignUp').hide();
-    }
-
-
-    function displayPersonAdditionalInfo() {
-      $('#roleID').change(function(){
-        if ( $('#roleID').val() == 4 ) {
-          $('#devisePersonSignUp').show();
-        } else {
-          $('#devisePersonSignUp').hide();
+            $('#roleID').val();
         }
 
-        // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
-        select_value =  $('#roleID').val();
-        roleID_value =  $('#user_role_id').attr('value', select_value);
+        // Function to display person additional information
+        if ( current_params_role_id_val == 4 ) {
+            $('#devisePersonSignUp').show();
+            $("#roleID option[value='4']").prop('selected', true);
+        } else {
+            $('#devisePersonSignUp').hide();
+        }
 
-      });
 
-      $('#roleID').val();
+        function displayPersonAdditionalInfo() {
+            $('#roleID').change(function(){
+                if ( $('#roleID').val() == 4 ) {
+                    $('#devisePersonSignUp').show();
+                } else {
+                    $('#devisePersonSignUp').hide();
+                }
 
-    }
+                // This part of the function is used to pass the hidden value depending on the option selected in the roleID dropdown
+                select_value =  $('#roleID').val();
+                roleID_value =  $('#user_role_id').attr('value', select_value);
 
-    // Calling Functions
-    displayCompanyAdditionalInfo();
-    displayPersonAdditionalInfo();
+            });
 
-    // Student
-    $('#user_student_attributes_university_id').select2({
-      theme: "bootstrap"
+            $('#roleID').val();
+
+        }
+
+        // Calling Functions
+        displayCompanyAdditionalInfo();
+        displayPersonAdditionalInfo();
+
+        // Student
+        $('#user_student_attributes_university_id').select2({
+            theme: "bootstrap"
+        });
+        $('#user_student_attributes_major_id').select2({
+            theme: "bootstrap"
+        });
+        $('#roleID').select2({
+            theme: "bootstrap"
+        });
+
+        $('[data-toggle="tooltip"]').tooltip()
     });
-    $('#user_student_attributes_major_id').select2({
-      theme: "bootstrap"
-    });
-    $('#roleID').select2({
-      theme: "bootstrap"
-    });
-  });
 </script>

@@ -17,4 +17,6 @@ class Sector < ActiveRecord::Base
 
   accepts_nested_attributes_for :companies
 
+  alias_attribute :name, :sector_name
+
 end

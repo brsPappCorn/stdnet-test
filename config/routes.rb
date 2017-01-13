@@ -25,18 +25,19 @@ Rails.application.routes.draw do
     collection do
       get 'opportunities'
       get 'pending_opportunities'
+      post 'download_excel'
     end
   end
-  # TODO Remove new/create (views, actions, controllers)
-  resources :companies
-  resources :people
+
+  resources :companies, only: [:show, :index]
+  resources :people, only: [:show, :index]
   resources :students, only: [:show, :index] do
     member do
       post 'delete_second_major'
     end
   end
 
-  resources :users, except: [:new, :create] do
+  resources :users, except: [:new, :create, :show] do
     member do
       post 'build_learnt_language'
       post 'mark_as_selected'

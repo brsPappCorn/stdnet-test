@@ -17,4 +17,6 @@ class University < ActiveRecord::Base
 
   accepts_nested_attributes_for :students
 
+  alias_attribute :name, :university_name
+
 end

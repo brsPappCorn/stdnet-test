@@ -30,6 +30,24 @@ small, .small {
   font-size: 70%;
 }
 
+form {
+  .field-info-icon {
+    position: relative;
+    top: -25px;
+    right: -10px;
+    float: right;
+
+    .tooltip-inner {
+      max-width: 200px;
+      min-width: 150px;
+    }
+  }
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
 // General wrapper with basic CSS structure for the site
 .studNet-wrapper {
   margin: 0;

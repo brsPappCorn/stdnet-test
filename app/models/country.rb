@@ -19,4 +19,6 @@ class Country < ActiveRecord::Base
   accepts_nested_attributes_for :users
   accepts_nested_attributes_for :students
 
+  alias_attribute :name, :country_name
+
 end

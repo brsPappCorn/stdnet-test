@@ -13,26 +13,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    redirect_to root_path
-  end
-
   def edit
     redirect_to edit_user_path(current_user) if @user != current_user
-  end
-
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        flash[:success] = 'Tu perfil fue creado exitosamente.'
-        format.html { redirect_to @user }
-      else
-        flash[:error] = 'Tu perfil no pudo ser creado, por favor inténtalo nuevamente.'
-        format.html { render :new }
-      end
-    end
   end
 
   def update

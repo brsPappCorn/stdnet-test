@@ -15,4 +15,9 @@ class AdministratorMailer < ApplicationMailer
     @student = student
     mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Solicitud de información de estudiantes'
   end
+
+  def new_user(user)
+    @user = user
+    mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Nuevo usuario'
+  end
 end
