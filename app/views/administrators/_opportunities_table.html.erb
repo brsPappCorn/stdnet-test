@@ -4,6 +4,7 @@
     <th>
       Oferente
     </th>
+    <th>Correo oferente</th>
     <th>
       Nombre de la oferta
     </th>
@@ -33,6 +34,7 @@
               <%= opportunity.user.company.company_name  %>
           <% end %>
         </td>
+        <td><%= opportunity.user.email %></td>
         <td>
           <%= opportunity.opportunity_title %>
         </td>

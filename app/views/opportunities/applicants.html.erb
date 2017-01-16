@@ -30,6 +30,10 @@
             <th>
               Nombre(s)
             </th>
+            <% if administrator_signed_in? %>
+                <th>Correo electrónico</th>
+                <th>Teléfono</th>
+            <% end %>
             <th>
               Estudiante
             </th>
@@ -69,6 +73,10 @@
                 <td>
                   <%= applicant.first_name %>
                 </td>
+                <% if administrator_signed_in? %>
+                    <td><%= applicant.email %></td>
+                    <td><%= applicant.mobile_phone %></td>
+                <% end %>
                 <td>
                   <%= type_of_student_select_friendly(applicant) %>
                 </td>
@@ -119,6 +127,8 @@
                 <% end %>
 
                 <% if administrator_signed_in? %>
+                    <td><%= link_to 'Ver', student_path(applicant.student, opportunity: params[:id]), class: 'btn btn-studnet-details' %></td>
+
                     <% if applicant.application_for_opportunity(@opportunity.id).selected %>
                         <td>
                           <button type="button" class="btn btn-studnet-details" data-toggle="modal" data-target="#<%= "application-#{applicant.application_for_opportunity(@opportunity.id).id}" %>">Calificar</button>
