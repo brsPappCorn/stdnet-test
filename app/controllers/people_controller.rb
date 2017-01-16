@@ -10,7 +10,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    if user_signed_in? || administrator_signed_in?
+    if administrator_signed_in?  || (user_signed_in? && current_user == @person.user)
     else
       redirect_to root_path
     end

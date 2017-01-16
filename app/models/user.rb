@@ -205,7 +205,7 @@ class User < ActiveRecord::Base
   #---------------------
   private
   def basic_profile_incomplete?
-    basic_common_info = self.first_name.blank? || self.last_name.blank? || self.mobile_phone.blank? || self.city_id.nil? || self.country_id.nil?
+    basic_common_info = self.first_name.blank? || self.last_name.blank? || self.mobile_phone.blank? || self.country_id.nil? || (self.city_id.nil? && (!self.country_id.nil? && self.country.country_name.eql?('Colombia')))
 
     if self.role_id == User::ROLE_STUDENT
       basic_common_info = basic_common_info || self.document_number.blank? || self.date_of_birth.nil?

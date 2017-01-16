@@ -104,7 +104,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= "#{Time.now.year - applicant.date_of_birth.year} años" %>
+                  <%= "#{applicant.friendly_age} años" %>
                 </td>
                 <td>
                   <%= average_rating applicant %>

@@ -11,7 +11,7 @@ class StudentsController < ApplicationController
   end
 
   def show
-    if user_signed_in? || administrator_signed_in?
+    if administrator_signed_in? || (user_signed_in? && current_user == @student.user)
       if params[:opportunity]
         @application = Application.where(user_id: @student.user.id, opportunity_id: params[:opportunity]).first
       end
