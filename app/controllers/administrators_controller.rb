@@ -52,8 +52,16 @@ class AdministratorsController < ApplicationController
   end
 
   def download_excel
-    path = get_user_excel_path
-    send_file path
+    Thread.new do
+      puts '==> Generating Excel'
+      path = get_user_excel_path
+      puts '==> Sending email with Excel'
+      AdministratorMailer.users_excel(path).deliver_now
+      puts '==> Email sent'
+    end.run
+
+    flash[:success] = 'Pronto le estará llegando un correo con el Excel adjunto.'
+    redirect_to opportunities_administrators_path
   end
 
   #===================
@@ -75,13 +83,13 @@ class AdministratorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_administrator
-      @administrator = Administrator.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_administrator
+    @administrator = Administrator.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def administrator_params
-      params.require(:administrator).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def administrator_params
+    params.require(:administrator).permit(:name)
+  end
 end
