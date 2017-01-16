@@ -20,4 +20,9 @@ class AdministratorMailer < ApplicationMailer
     @user = user
     mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Nuevo usuario'
   end
+
+  def users_excel(file_path)
+    attachments[file_path.basename.to_s] = File.read(file_path)
+    mail to: ENV['ADMIN_NOTIFICATION_EMAIL'], subject: 'Excel con usuarios'
+  end
 end

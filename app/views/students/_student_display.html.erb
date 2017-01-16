@@ -14,11 +14,11 @@
             </span>
 
             <span>
-              <% if @student.user.role_id == User::ROLE_STUDENT %>
+              <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && (@application.nil? || (@application && !@application.selected)) %>
+                  <%= @student.user.first_name %>
+              <% else %>
                   <%= @student.user.first_name %>
                   <%= @student.user.last_name %>
-              <% elsif @student.user.role_id == User::ROLE_COMPANY || @student.user.role_id == User::ROLE_PERSON %>
-                  <%= @student.user.first_name %>
               <% end %>
             </span>
 
@@ -106,11 +106,11 @@
                           Nombre:
                         </td>
                         <td>
-                          <% if @student.user.role_id == User::ROLE_STUDENT %>
+                          <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && (@application.nil? || (@application && !@application.selected)) %>
+                              <%= @student.user.first_name %>
+                          <% else %>
                               <%= @student.user.first_name %>
                               <%= @student.user.last_name %>
-                          <% elsif @student.user.role_id == User::ROLE_COMPANY || @student.user.role_id == User::ROLE_PERSON %>
-                              <%= @student.user.first_name %>
                           <% end %>
                         </td>
                       </tr>
@@ -138,7 +138,7 @@
 
                   </div>
 
-                  <% if administrator_signed_in? || (user_signed_in? && current_user.role_id == User::ROLE_STUDENT) %>
+                  <% if administrator_signed_in? || (user_signed_in? && current_user.role_id == User::ROLE_STUDENT) || (user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) &&(@application && @application.selected)) %>
                       <div class="col-md-6">
 
                         <table class="table studNet-table">
@@ -832,7 +832,7 @@
 
           <!-- About this offer -->
           <% unless @application.nil? %>
-              <% if @application.applied_opportunity.user_id == current_user.id %>
+              <% if (user_signed_in? && @application.applied_opportunity.user_id == current_user.id) || administrator_signed_in? %>
                   <div id="pane6" class="tab-pane">
 
                     <div class="row">
