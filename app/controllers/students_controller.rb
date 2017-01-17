@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
     if administrator_signed_in? || user_signed_in?
       @application = Application.where(user_id: @student.user.id, opportunity_id: params[:opportunity]).first if params[:opportunity]
 
-      if (@application.nil? && user_signed_in? && current_user.role_id == User::ROLE_STUDENT && current_user != @student) ||
+      if (@application.nil? && user_signed_in? && current_user.role_id == User::ROLE_STUDENT && current_user != @student.user) ||
           (@application && user_signed_in? && (current_user.role_id == User::ROLE_PERSON || current_user.role_id == User::ROLE_COMPANY) && @application.applied_opportunity.user != current_user)
         redirect_to root_path
       end
