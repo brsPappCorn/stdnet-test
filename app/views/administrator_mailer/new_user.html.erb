@@ -5,5 +5,5 @@
 <ul>
   <li>Correo: <%= @user.email %></li>
   <li>Teléfono: <%= @user.mobile_phone.nil? ? 'N/D' : @user.mobile_phone %></li>
-  <li>Tipo de usurio: <%= @user.role_name %></li>
+  <li>Nombre de la empresa / ocupación: <%= @user.role_id == User::ROLE_COMPANY ? @user.company.company_name : @user.person.occupation %></li>
 </ul>
