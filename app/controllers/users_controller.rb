@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def build_learnt_language
+    @user.student.learnt_languages.create
   end
 
   def mark_as_selected

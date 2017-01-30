@@ -1,5 +1,6 @@
 var $container = $(".languages-container");
-$container.append("<%= j render(partial: 'users/student/empty_student_language') %>");
+$container.html();
+$container.html("<%= j render(partial: 'users/student/empty_student_language') %>");
 
 if ($container.find("> div").length >= 5) {
   $(".btn-add-other-language").hide('fast');
