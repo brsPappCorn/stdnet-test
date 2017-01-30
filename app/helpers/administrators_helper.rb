@@ -70,7 +70,7 @@ module AdministratorsHelper
 
   # Opportunities
   OPPORTUNITY_HEADER_ROWS = ['Email de tu cuenta:', 'Tipo de ususario:', 'Nombre de la empresa: / Nombre (completo) de la persona:', 'Tipo de oferta', 'Título de la oferta', 'Descripción de las actividades a realizar', 'Descripción de las habilidades y conocimientos requeridos', '¿Permitir aplicaciones de todas las carreras?', '¿De qué carreras buscas los estudiantes?', 'Pregunta al estudiante', 'Fecha de inicio del trabajo / proyecto', 'Fijar fechas', 'Duración del trabajo / proyecto', 'Duración del trabajo (en días, semanas o meses)', 'Tiempo requerido del estudiante', '¿Quieres poner un valor para el proyecto o escuchar ofertas de los estudiantes?', 'Salario / valor del proyecto', '¿Quieres recibir el portafolio de los estudiantes que apliquen a tu oferta? (Para ofertas de artes, diseño, arquitectura y afines)', '¿Cuántos estudiantes necesitas para esta oferta?', 'Número de aplicaciones', 'Correos de aplicantes', 'Estado de la oferta', 'Candidatos seleccionados']
-  OPPORTUNITY_ROWS = %w(email role_type company_person_name opportunity_type_description opportunity_title activity_description skills_description other_majors majors question_for_student date_ini duration_type_description opportunity_duration availability_description cost_or_offer_description opportunity_cost receive_portfolio number_of_students number_of_applicants	applicants_emails	approved selected_applicant_emails)
+  OPPORTUNITY_ROWS = %w(email role_type company_person_name opportunity_type_description opportunity_title activity_description skills_description other_majors majors question_for_student date_ini duration_type_description opportunity_duration availability_description cost_or_offer_description opportunity_cost receive_portfolio number_of_students number_of_applicants	applicants_emails	approved_state selected_applicant_emails)
 
   OPPORTUNITY_TO_MANY_RELATIONS = %w(majors)
 
@@ -83,17 +83,7 @@ module AdministratorsHelper
     row = []
     student = user.student
 
-    USER_ROWS.each do |attribute|
-      if attribute.eql? 'date_of_birth'
-        row << user.friendly_age
-      elsif attribute.eql?('country') || attribute.eql?('city')
-        row << user.send(attribute).name
-      elsif attribute.eql? 'referenced_by'
-        row << User::REFERENCES_USER[user[attribute].to_i]
-      else
-        row << user[attribute]
-      end
-    end
+    write_rows_for_user user, row
 
     STUDENT_ROWS.each do |attribute|
       if STUDENT_TO_SINGLE_RELATIONS.keys.include? attribute
@@ -133,9 +123,7 @@ module AdministratorsHelper
     row = []
     company = user.company
 
-    USER_ROWS.each do |attribute|
-      row << user[attribute]
-    end
+    write_rows_for_user user, row
 
     COMPANY_ROWS.each do |attribute|
       if COMPANY_TO_SINGLE_RELATIONS.keys.include? attribute
@@ -156,9 +144,7 @@ module AdministratorsHelper
     row = []
     person = user.person
 
-    USER_ROWS.each do |attribute|
-      row << user[attribute]
-    end
+    write_rows_for_user user, row
 
     PERSON_ROW.each do |attribute|
       row << person[attribute]
@@ -203,5 +189,23 @@ module AdministratorsHelper
     end
 
     sheet.add_row row
+  end
+
+  def write_rows_for_user(user, row)
+    USER_ROWS.each do |attribute|
+      if attribute.eql? 'date_of_birth'
+        row << user.friendly_age
+      elsif attribute.eql?('country') || attribute.eql?('city')
+        if user.send(attribute)
+          row << user.send(attribute).name
+        else
+          row << ''
+        end
+      elsif attribute.eql? 'referenced_by'
+        row << User::REFERENCES_USER[user[attribute].to_i]
+      else
+        row << user[attribute]
+      end
+    end
   end
 end
