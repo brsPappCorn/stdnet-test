@@ -111,6 +111,20 @@ class Student < ActiveRecord::Base
         includes(:user)
   end
 
+  def friendly_type_of_student
+    if self.type_of_student == Student::TYPE_OF_STUDENT_DAY
+      'Diurno'
+    elsif self.type_of_student == Student::TYPE_OF_STUDENT_NIGHT
+      'Nocturno'
+    elsif self.type_of_student == Student::TYPE_OF_STUDENT_VIRTUAL
+      'Virtual'
+    elsif self.type_of_student == Student::TYPE_OF_STUDENT_DIPLOMA_PENDING
+      'Esperando diploma'
+    elsif self.type_of_student == Student::TYPE_OF_STUDENT_GRADUATE
+      'Graduado'
+    end
+  end
+
   def definitive_major
     self.major.major_name.eql?('Otra') ? self.other_major : self.major.major_name
   end

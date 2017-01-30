@@ -49,18 +49,18 @@ module AdministratorsHelper
 
   private
   USER_HEADER_ROWS = ['Email de tu cuenta', 'Nombre(s)', 'Apellidos', 'Edad', 'País', 'Ciudad en la que vives', 'Otra', 'Teléfono celular', 'Documento de identidad', '¿Cómo te enteraste de studNet?', 'Código promocional (no obligatorio)']
-  USER_ROWS = %w(email first_name last_name date_of_birth country_name city_name other_city mobile_phone document_number referenced_by promo_id)
+  USER_ROWS = %w(email first_name last_name date_of_birth country city other_city mobile_phone document_number referenced_by promo_id)
 
   # Student
   STUDENT_HEADER_ROWS = ['Universidad', 'Carrera', 'Nivel', 'Universidad segunda carrera', 'Segunda carrera', 'Nivel segunda carrera', 'Otra universidad', 'Otra carrera', 'Otras carreras', 'Último semestre cursado', 'Calificación máxima en tu universidad', 'Promedio académico acumulado', 'Tipo de estudiante', '¿Has realizado algún intercambio académico?', 'Indica el país en el cual realizaste el intercambio', 'Indica el nombre de la universidad en la cual realizaste el intercambio', 'Indica el nombre del colegio del que te graduaste', '¿Tienes experiencia laboral?', 'Indica el nombre de la empresa en la que trabajaste', 'Indica el nombre de tu cargo en la empresa', 'Indica tus principales funciones y logros en el cargo', 'Indica el nombre de la empresa en la que trabajaste 2', 'Indica el nombre de tu cargo en la empresa 2', 'Indica tus principales funciones y logros en el cargo 2', 'Indica el nombre de la empresa en la que trabajaste 3', 'Indica el nombre de tu cargo en la empresa 3', 'Indica tus principales funciones y logros en el cargo 3', '¿Realizas o has realizado una actividad social / de voluntariado?', 'Indica el nombre de la organización donde realizaste esta actividad', 'Indica tus funciones en esta organización', 'Indica el nombre de la organización donde realizaste esta actividad 2', 'Indica tus funciones en esta organización 2', 'Indica el nombre de la organización donde realizaste esta actividad 3', 'Indica tus funciones en esta organización 3', 'Idiomas', 'Herramientas', '¿Qué otras herramientas sabes manejar / qué otras habilidades tienes?', '¿Sabes programar?', 'Por favor indica en qué lenguajes sabes programar', '¿Cuáles son tus principales fortalezas?', '¿En qué áreas te gustaría desarrollar tu carrera profesional?', 'Describe brevemente tus intereses, tus hobbies y demás información que describa quien eres']
-  STUDENT_ROWS = %w(university_name major_name level_name second_university_name second_major_name second_level_name other_university other_major other_majors last_semester gpa_max gpa type_of_student exchange_student exchange_country exchange_university highschool work_xp xp_company xp_position xp_achievements second_xp_company second_xp_position second_xp_achievements third_xp_company third_xp_position third_xp_achievements volunteer_xp volunteer_org volunteer_functions second_volunteer_org second_volunteer_functions third_volunteer_org3 third_volunteer_functions3 learnt_languages tools other_tools_skills programming_skills programing_languages strengths areas_to_develop hobbies)
+  STUDENT_ROWS = %w(university_name major_name level_name second_university_name second_major_name second_level_name other_university other_major other_majors last_semester gpa_max gpa type_of_student exchange_student exchange_country exchange_university highschool work_xp xp_company xp_position xp_achievements second_xp_company second_xp_position second_xp_achievements third_xp_company third_xp_position third_xp_achievements volunteer_xp volunteer_org volunteer_functions second_volunteer_org second_volunteer_functions third_volunteer_org third_volunteer_functions learnt_languages tools other_tools_skills programming_skills programing_languages strengths areas_to_develop hobbies)
 
   STUDENT_TO_SINGLE_RELATIONS = { 'university_name' => 'university', 'major_name' => 'major', 'level_name' => 'education_level', 'second_university_name' => 'second_university', 'second_major_name' => 'second_major', 'second_level_name' => 'second_education_level', 'exchange_country' => 'country' }
-  STUDENT_TO_MANY_RELATIONS = { 'other_majors' => 'majors',  'tools' => 'tools', 'learnt_languages' => 'languages' }
+  STUDENT_TO_MANY_RELATIONS = { 'other_majors' => 'majors',  'tools' => 'tools', 'learnt_languages' => 'learnt_languages' }
 
   # Company
   COMPANY_HEADER_ROWS = ['Nombre de la empresa', 'NIT', 'Breve descripción de tu empresa', 'Sector', 'Tamaño', 'Página web']
-  COMPANY_ROWS = %w(company_name	company_nit	company_description	company_size	company_website_url)
+  COMPANY_ROWS = %w(company_name company_nit company_description sector_name company_size company_website_url)
 
   COMPANY_TO_SINGLE_RELATIONS = { 'sector_name' => 'sector' }
 
@@ -84,7 +84,15 @@ module AdministratorsHelper
     student = user.student
 
     USER_ROWS.each do |attribute|
-      row << user[attribute]
+      if attribute.eql? 'date_of_birth'
+        row << user.friendly_age
+      elsif attribute.eql?('country') || attribute.eql?('city')
+        row << user.send(attribute).name
+      elsif attribute.eql? 'referenced_by'
+        row << User::REFERENCES_USER[user[attribute].to_i]
+      else
+        row << user[attribute]
+      end
     end
 
     STUDENT_ROWS.each do |attribute|
@@ -97,13 +105,24 @@ module AdministratorsHelper
       elsif STUDENT_TO_MANY_RELATIONS.keys.include? attribute
         temp_row = []
 
-        student.send(STUDENT_TO_MANY_RELATIONS[attribute]).each do |model|
-          temp_row << model.name
+        if attribute.eql? 'learnt_languages'
+          student.send(STUDENT_TO_MANY_RELATIONS[attribute]).each do |learnt_language|
+            temp_row << "#{learnt_language.language.name} (#{learnt_language.language_level})"
+          end
+        else
+          student.send(STUDENT_TO_MANY_RELATIONS[attribute]).each do |model|
+            temp_row << model.name
+          end
         end
+
 
         row << temp_row.join(',')
       else
-        row << student[attribute]
+        if attribute.eql? 'type_of_student'
+          row << student.friendly_type_of_student
+        else
+          row << student[attribute]
+        end
       end
     end
 
@@ -179,7 +198,7 @@ module AdministratorsHelper
 
         row << temp_row.join(',')
       else
-        row << opportunity[attribute]
+        row << opportunity.send(attribute)
       end
     end
 

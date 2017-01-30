@@ -17,4 +17,6 @@ class City < ActiveRecord::Base
 
   accepts_nested_attributes_for :users
 
+  alias_attribute :name, :city_name
+
 end
