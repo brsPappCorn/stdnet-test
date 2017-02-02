@@ -59,8 +59,8 @@ module AdministratorsHelper
   STUDENT_TO_MANY_RELATIONS = { 'other_majors' => 'majors',  'tools' => 'tools', 'learnt_languages' => 'learnt_languages' }
 
   # Company
-  COMPANY_HEADER_ROWS = ['Nombre de la empresa', 'NIT', 'Breve descripción de tu empresa', 'Sector', 'Tamaño', 'Página web']
-  COMPANY_ROWS = %w(company_name company_nit company_description sector_name company_size company_website_url)
+  COMPANY_HEADER_ROWS = ['Nombre de la empresa', 'NIT', 'Breve descripción de tu empresa', 'Sector', 'Tamaño', 'Página web', 'Cargo', 'Dirección']
+  COMPANY_ROWS = %w(company_name company_nit company_description sector_name company_size company_website_url position company_address)
 
   COMPANY_TO_SINGLE_RELATIONS = { 'sector_name' => 'sector' }
 
@@ -111,7 +111,7 @@ module AdministratorsHelper
         if attribute.eql? 'type_of_student'
           row << student.friendly_type_of_student
         else
-          row << student[attribute]
+          row << student[attribute].nil? ? '' : student[attribute]
         end
       end
     end
@@ -133,7 +133,7 @@ module AdministratorsHelper
           row << company.send(COMPANY_TO_SINGLE_RELATIONS[attribute]).name
         end
       else
-        row << company[attribute]
+        row << company[attribute].nil? ? '' : company[attribute]
       end
     end
 
@@ -147,7 +147,7 @@ module AdministratorsHelper
     write_rows_for_user user, row
 
     PERSON_ROW.each do |attribute|
-      row << person[attribute]
+      row << person[attribute].nil? ? '' : person[attribute]
     end
 
     sheet.add_row row
@@ -184,7 +184,7 @@ module AdministratorsHelper
 
         row << temp_row.join(',')
       else
-        row << opportunity.send(attribute)
+        row << opportunity.send(attribute).nil? ? '' : opportunity.send(attribute)
       end
     end
 
