@@ -77,7 +77,7 @@ class Opportunity < ActiveRecord::Base
     matching_opportunities = joins('INNER JOIN majors_opportunities ON majors_opportunities.opportunity_id = opportunities.id').
         where('(majors_opportunities.major_id IN (?) OR other_majors = ?) AND approved_state = ? AND closed = ?', major_ids, true, true, false)
 
-    for_all_opportunities = where(other_majors: true, closed: false)
+    for_all_opportunities = where(other_majors: true, approved_state: true, closed: false)
 
     matching_opportunities + for_all_opportunities
   end
