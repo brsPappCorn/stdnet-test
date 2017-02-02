@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117210013) do
+ActiveRecord::Schema.define(version: 20170202173034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,11 @@ ActiveRecord::Schema.define(version: 20161117210013) do
     t.boolean  "closed",                    default: false
   end
 
+  create_table "opportunities_users", id: false, force: :cascade do |t|
+    t.integer "opportunity_id", null: false
+    t.integer "user_id",        null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string   "occupation"
     t.datetime "created_at", null: false
@@ -227,7 +232,7 @@ ActiveRecord::Schema.define(version: 20161117210013) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.integer  "promo_id"
+    t.string   "promo_id"
     t.string   "referenced_by"
     t.string   "first_name"
     t.string   "last_name"

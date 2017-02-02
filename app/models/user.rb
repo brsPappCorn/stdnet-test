@@ -16,7 +16,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
-#  promo_id               :integer
+#  promo_id               :string
 #  referenced_by          :string
 #  first_name             :string
 #  last_name              :string
