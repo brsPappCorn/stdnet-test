@@ -70,7 +70,7 @@ module AdministratorsHelper
 
   # Opportunities
   OPPORTUNITY_HEADER_ROWS = ['Email de tu cuenta:', 'Tipo de ususario:', 'Nombre de la empresa: / Nombre (completo) de la persona:', 'Tipo de oferta', 'Título de la oferta', 'Descripción de las actividades a realizar', 'Descripción de las habilidades y conocimientos requeridos', '¿Permitir aplicaciones de todas las carreras?', '¿De qué carreras buscas los estudiantes?', 'Pregunta al estudiante', 'Fecha de inicio del trabajo / proyecto', 'Fijar fechas', 'Duración del trabajo / proyecto', 'Duración del trabajo (en días, semanas o meses)', 'Tiempo requerido del estudiante', '¿Quieres poner un valor para el proyecto o escuchar ofertas de los estudiantes?', 'Salario / valor del proyecto', '¿Quieres recibir el portafolio de los estudiantes que apliquen a tu oferta? (Para ofertas de artes, diseño, arquitectura y afines)', '¿Cuántos estudiantes necesitas para esta oferta?', 'Número de aplicaciones', 'Correos de aplicantes', 'Estado de la oferta', 'Candidatos seleccionados']
-  OPPORTUNITY_ROWS = %w(email role_type company_person_name opportunity_type_description opportunity_title activity_description skills_description other_majors majors question_for_student date_ini duration_type_description opportunity_duration availability_description cost_or_offer_description opportunity_cost receive_portfolio number_of_students number_of_applicants	applicants_emails	approved_state selected_applicant_emails)
+  OPPORTUNITY_ROWS = %w(email role_type company_person_name opportunity_type_description opportunity_title activity_description skills_description other_majors majors question_for_student date_ini_type_friendly date_ini duration_type_description opportunity_duration availability_description cost_or_offer_description opportunity_cost receive_portfolio number_of_students number_of_applicants	applicants_emails	approved_state selected_applicant_emails)
 
   OPPORTUNITY_TO_MANY_RELATIONS = %w(majors)
 
@@ -88,7 +88,7 @@ module AdministratorsHelper
     STUDENT_ROWS.each do |attribute|
       if STUDENT_TO_SINGLE_RELATIONS.keys.include? attribute
         if student.send(STUDENT_TO_SINGLE_RELATIONS[attribute]).nil?
-          row << ''
+          row << nil
         else
           row << student.send(STUDENT_TO_SINGLE_RELATIONS[attribute]).name
         end
@@ -105,13 +105,12 @@ module AdministratorsHelper
           end
         end
 
-
-        row << temp_row.join(',')
+        row << (temp_row.empty? ? nil : temp_row.join(','))
       else
         if attribute.eql? 'type_of_student'
           row << student.friendly_type_of_student
         else
-          row << student[attribute].nil? ? '' : student[attribute]
+          row << (student[attribute].to_s.blank? ? nil : student[attribute])
         end
       end
     end
@@ -128,12 +127,12 @@ module AdministratorsHelper
     COMPANY_ROWS.each do |attribute|
       if COMPANY_TO_SINGLE_RELATIONS.keys.include? attribute
         if company.send(COMPANY_TO_SINGLE_RELATIONS[attribute]).nil?
-          row << ''
+          row << nil
         else
           row << company.send(COMPANY_TO_SINGLE_RELATIONS[attribute]).name
         end
       else
-        row << company[attribute].nil? ? '' : company[attribute]
+        row << (company[attribute].to_s.blank? ? nil : company[attribute])
       end
     end
 
@@ -147,7 +146,7 @@ module AdministratorsHelper
     write_rows_for_user user, row
 
     PERSON_ROW.each do |attribute|
-      row << person[attribute].nil? ? '' : person[attribute]
+      row << (person[attribute].to_s.blank? ? nil : person[attribute])
     end
 
     sheet.add_row row
@@ -182,9 +181,9 @@ module AdministratorsHelper
           temp_row << model.name
         end
 
-        row << temp_row.join(',')
+        row << (temp_row.empty? ? nil : temp_row.join(','))
       else
-        row << opportunity.send(attribute).nil? ? '' : opportunity.send(attribute)
+        row << (opportunity.send(attribute).to_s.blank? ? nil : opportunity.send(attribute))
       end
     end
 
@@ -199,12 +198,12 @@ module AdministratorsHelper
         if user.send(attribute)
           row << user.send(attribute).name
         else
-          row << ''
+          row << nil
         end
       elsif attribute.eql? 'referenced_by'
         row << User::REFERENCES_USER[user[attribute].to_i]
       else
-        row << user[attribute]
+        row << (user[attribute].to_s.blank? ? nil : user[attribute])
       end
     end
   end

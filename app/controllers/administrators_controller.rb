@@ -52,16 +52,18 @@ class AdministratorsController < ApplicationController
   end
 
   def download_excel
-    Thread.new do
-      puts '==> Generating Excel'
+    if Rails.env.development?
       path = get_user_excel_path
-      puts '==> Sending email with Excel'
-      AdministratorMailer.users_excel(path).deliver_now
-      puts '==> Email sent'
-    end.run
+      send_file path
+    else
+      Thread.new do
+        path = get_user_excel_path
+        AdministratorMailer.users_excel(path).deliver_now
+      end.run
 
-    flash[:success] = 'Pronto le estará llegando un correo con el Excel adjunto.'
-    redirect_to opportunities_administrators_path
+      flash[:success] = 'Pronto le estará llegando un correo con el Excel adjunto.'
+      redirect_to opportunities_administrators_path
+    end
   end
 
   #===================
