@@ -148,4 +148,14 @@ class Opportunity < ActiveRecord::Base
     self.applications.where selected: true
   end
 
+  def date_ini_type_friendly
+    if self.date_ini_type == Opportunity::Opportunity::TYPE_UNDEFINED
+      'Indefinida'
+    elsif self.date_ini_type == Opportunity::Opportunity::TYPE_AS_SOON_AS_POSSIBLE
+      'Lo antes posible'
+    elsif self.date_ini_type == Opportunity::Opportunity::TYPE_SET_DATE_INI
+      'Fijar fecha'
+    end
+  end
+
 end
