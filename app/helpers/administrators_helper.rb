@@ -97,7 +97,9 @@ module AdministratorsHelper
 
         if attribute.eql? 'learnt_languages'
           student.send(STUDENT_TO_MANY_RELATIONS[attribute]).each do |learnt_language|
-            temp_row << "#{learnt_language.language.name} (#{learnt_language.language_level})"
+            if !learnt_language.language.nil? && !learnt_language.language_level.nil?
+              temp_row << "#{learnt_language.language.name} (#{learnt_language.language_level})"
+            end
           end
         else
           student.send(STUDENT_TO_MANY_RELATIONS[attribute]).each do |model|

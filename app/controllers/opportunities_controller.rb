@@ -110,7 +110,7 @@ class OpportunitiesController < ApplicationController
   end
 
   def apply
-    @application = @opportunity.applications.build user_id: current_user.id
+    @application = @opportunity.get_application_for_user current_user.id
     @application.assign_attributes application_params
 
     if @application.save
