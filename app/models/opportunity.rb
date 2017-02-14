@@ -158,4 +158,14 @@ class Opportunity < ActiveRecord::Base
     end
   end
 
+  def get_application_for_user(user_id)
+    applications_for_user = self.applications.where user_id: user_id
+
+    if applications_for_user.count > 0
+      applications_for_user.first
+    else
+      self.applications.build user_id: user_id
+    end
+  end
+
 end
