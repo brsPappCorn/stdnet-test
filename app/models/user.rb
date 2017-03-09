@@ -167,7 +167,7 @@ class User < ActiveRecord::Base
     now = Time.now.utc.to_date
 
     if self.date_of_birth
-      "#{now.year - self.date_of_birth.year - (self.date_of_birth.to_date.change(year: now.year) > now ? 1 : 0)} años"
+      "#{now.year - self.date_of_birth.year - (self.date_of_birth.month > now.month || (self.date_of_birth.month == now.month && self.date_of_birth.day > now.day) ? 1 : 0)} años"
     else
       'N/D'
     end
