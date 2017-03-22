@@ -114,12 +114,9 @@
 
 <script type="text/javascript">
 
-  //=======================
-  // Display/Hide options
-  //=======================
-
-  $(function() {
-
+    //=======================
+    // Display/Hide options
+    //=======================
     var select_value = [];
 
     // Variables
@@ -131,9 +128,9 @@
 
     // Function current_opportunity_type_val cost_or_offer Select
     if ( current_cost_or_offer_option_val == 0 ) {
-      $('#opportunityCost').show();
+        $('#opportunityCost').show();
     } else {
-      $('#opportunityCost').hide();
+        $('#opportunityCost').hide();
     }
 
     if (current_opportunity_type_val != 0) {
@@ -141,81 +138,81 @@
     }
 
     function displayOpportunityType() {
-      $('#opportunity_opportunity_type').change(function(){
-        if ( $('#opportunity_opportunity_type').val() == 0 ) {
-          $('#opportunityCost').show();
-          $('#opportunityCostorOfferSelect').show();
-        } else {
-          $('#opportunityCost').show();
-          $('#opportunityCostorOfferSelect').hide();
-        }
+        $('#opportunity_opportunity_type').change(function(){
+            if ( $('#opportunity_opportunity_type').val() == 0 ) {
+                $('#opportunityCost').show();
+                $('#opportunityCostorOfferSelect').show();
+            } else {
+                $('#opportunityCost').show();
+                $('#opportunityCostorOfferSelect').hide();
+            }
 
-      });
+        });
 
-      $('#opportunity_opportunity_type').val();
+        $('#opportunity_opportunity_type').val();
 
     }
 
     // Function for cost_or_offer Select
     if ( current_cost_or_offer_option_val == 0 ) {
-      $('#opportunityCost').show();
+        $('#opportunityCost').show();
     } else {
-      $('#opportunityCost').hide();
+        $('#opportunityCost').hide();
     }
 
     function displayOpportunityCost() {
-      $('#opportunity_cost_or_offer_option').change(function(){
-        if ( $('#opportunity_cost_or_offer_option').val() == 0 ) {
-          $('#opportunityCost').show();
-        } else {
-          $('#opportunityCost').hide();
-        }
+        $('#opportunity_cost_or_offer_option').change(function(){
+            if ( $('#opportunity_cost_or_offer_option').val() == 0 ) {
+                $('#opportunityCost').show();
+            } else {
+                $('#opportunityCost').hide();
+            }
 
-      });
+        });
 
-      $('#opportunity_cost_or_offer_option').val();
+        $('#opportunity_cost_or_offer_option').val();
 
     }
 
     // Function for date_ini_type Select
     if ( current_date_ini_type_val == 2 ) {
-      $('#dateIni').show();
+        $('#dateIni').show();
     } else {
-      $('#dateIni').hide();
+        $('#dateIni').hide();
     }
 
     function displaySetDateIni() {
-      $('#opportunity_date_ini_type').change(function(){
-        if ( $('#opportunity_date_ini_type').val() == 2 ) {
-          $('#dateIni').show();
-        } else {
-          $('#dateIni').hide();
-        }
+        $('#opportunity_date_ini_type').change(function(){
+            if ( $('#opportunity_date_ini_type').val() == 2 ) {
+                $('#dateIni').show();
+            } else {
+                $('#dateIni').hide();
+            }
 
-      });
+        });
 
-      $('#opportunity_date_ini_type').val();
+        $('#opportunity_date_ini_type').val();
 
     }
 
     // Function for date_ini_type Select
     if ( current_opportunity_duation_type_val == 1 ) {
-      $('#opportunityDurationType').show();
+        $('#opportunityDurationType').show();
     } else {
-      $('#opportunityDurationType').hide();
+        $('#opportunityDurationType').hide();
     }
 
     function displaySetOpportunityDuration() {
-      $('#opportunity_opportunity_duration_type').change(function(){
-        if ( $('#opportunity_opportunity_duration_type').val() == 1 ) {
-          $('#opportunityDurationType').show();
-        } else {
-          $('#opportunityDurationType').hide();
-        }
+        $('#opportunity_opportunity_duration_type').change(function(){
+            if ( $('#opportunity_opportunity_duration_type').val() == 1 ) {
+                $('#opportunityDurationType').show();
+            } else {
+                $('#opportunityDurationType').hide();
+            }
 
-      });
+        });
 
-      $('#opportunity_opportunity_duration_type').val();
+        $('#opportunity_opportunity_duration_type').val();
 
     }
 
@@ -223,14 +220,14 @@
     $('#opportunitySpecificMajor').show();
 
     function displaySpecificMajor() {
-      $("#opportunity_other_majors").on( 'change', function() {
-        if( $(this).is(':checked') ) {
-          $("#opportunitySpecificMajor").hide();
-        } else {
-          console.log('esta chequeado');
-          $("#opportunitySpecificMajor").show();
-        }
-      });
+        $("#opportunity_other_majors").on( 'change', function() {
+            if( $(this).is(':checked') ) {
+                $("#opportunitySpecificMajor").hide();
+            } else {
+                console.log('esta chequeado');
+                $("#opportunitySpecificMajor").show();
+            }
+        });
     }
 
 
@@ -248,10 +245,8 @@
 
     // Student
     $('select').select2({
-      theme: "bootstrap"
+        theme: "bootstrap"
     });
-
-  });
 
 
 </script>
