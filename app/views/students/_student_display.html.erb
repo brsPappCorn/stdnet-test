@@ -910,7 +910,7 @@
                     <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
                 <% elsif (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && params[:opportunity] %>
                     <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet-basic' %>
-                    <%= link_to 'Contactar', acquire_information_opportunity_path(params[:opportunity], applicant_id: @student.id), class: 'btn btn-primary btn-studnet-basic', method: :post %>
+                    <%= link_to 'Contactar', acquire_information_opportunity_path(params[:opportunity], applicant_id: @student.user.id), class: 'btn btn-primary btn-studnet-basic', method: :post %>
                 <% end %>
               </div>
             </div>

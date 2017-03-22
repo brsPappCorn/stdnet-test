@@ -91,7 +91,7 @@ class OpportunitiesController < ApplicationController
     @user_role = User.find_by_id(current_user.id)
 
     # Used for companies/people that create opportunities
-    @my_opportunities = Opportunity.where(user_id: [current_user.id], closed: false)
+    @my_opportunities = Opportunity.where(user_id: [current_user.id])
 
     # Used for students that applied to opportunities
     @student_opportunities = @user_role.applied_opportunities.where(closed: false)
