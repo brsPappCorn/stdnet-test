@@ -97,9 +97,6 @@
               <thead>
               <tr>
                 <th>
-                  Empresa oferente
-                </th>
-                <th>
                   Tipo de proyecto
                 </th>
                 <th>
@@ -124,13 +121,6 @@
               <tbody>
               <% @student_opportunities.each do |opportunity| %>
                   <tr>
-                    <td>
-                      <% if opportunity.user.company.nil? %>
-                          <%= "#{opportunity.user.first_name} #{opportunity.user.last_name}"  %>
-                      <% else %>
-                          <%= opportunity.user.company.company_name  %>
-                      <% end %>
-                    </td>
                     <td>
                       <%= opportunity_type_friendly(opportunity)  %>
                       opportunity.
