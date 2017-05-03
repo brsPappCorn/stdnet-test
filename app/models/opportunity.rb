@@ -79,7 +79,7 @@ class Opportunity < ActiveRecord::Base
 
     for_all_opportunities = where(other_majors: true, approved_state: true, closed: false)
 
-    matching_opportunities + for_all_opportunities
+    (matching_opportunities + for_all_opportunities).uniq
   end
 
   def self.approved
