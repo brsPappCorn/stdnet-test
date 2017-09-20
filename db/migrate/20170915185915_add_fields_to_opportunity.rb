@@ -9,6 +9,3 @@ class AddFieldsToOpportunity < ActiveRecord::Migration[5.1]
   end
 end
 
-["Auxilio de celular","bono de alimentación", "bono de dotación", "descuento en la empresa", "prima extralegal", "vacaciones extralegales"].each do |type|
-  Benefit.create(name: type)
-end
