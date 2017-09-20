@@ -120,7 +120,7 @@ module OpportunitiesHelper
         ['Contrato a Termino Fijo.', 1],
         ['Contrato a Termino Indefinido.', 2],
         ['Contrato de Obra o Labor.', 3],
-        ['Contrato de Aprendizaje.', 4]
+        ['Contrato de Aprendizaje.', 4],
         ['Contrato Civil por Prestación de Servicios', 5]
     ]
   end
