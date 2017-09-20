@@ -8,6 +8,7 @@
 
           <% if @opportunity.user.role_id == User::ROLE_COMPANY %>
               <%= f.select :opportunity_type, options_for_select(company_opportunity_select_type, @opportunity.opportunity_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+              
           <% elsif @opportunity.user.role_id == User::ROLE_PERSON %>
               <%= f.select :opportunity_type, options_for_select(person_opportunity_select_type, @opportunity.opportunity_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
           <% end %>
@@ -27,7 +28,49 @@
           <%= f.label :skills_description, 'Descripción de las habilidades y conocimientos requeridos' %><br>
           <%= f.text_area :skills_description, rows: 5, class: 'form-control input-width' %>
         </div>
+        <% if @opportunity.user.role_id == User::ROLE_COMPANY %>
+        <div class="form-group">
+          <%= f.label :contract_type, 'Tipo de contrato' %>
+          <%= f.select :contract_type, options_for_select(opportunity_contract_type_select, @opportunity.contract_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
 
+        <div class="form-group">
+          <%= f.label :compensatory_time_off, 'Días compensatorios' %>
+          <%= f.select :compensatory_time_off, options_for_select(opportunity_compensatory_time_off_select, @opportunity.compensatory_time_off), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Beneficios extralegales:" %><br />
+          <%= f.collection_check_boxes :benefit_ids, Benefit.all, :id, :name do |b| %>
+            <div class="collection-check-box">
+              <%= b.check_box %>
+              <%= b.label %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group" id="description">
+          <%= f.label :description, 'Descripción de la empresa' %><br>
+          <%= f.text_field :description, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group" id="schedule">
+          <%= f.label :schedule, 'Horario Laboral' %><br>
+          <%= f.text_field :schedule, class: 'form-control input-width' %>
+        </div>
+
+        <div class="form-group" id="salary">
+          <%= f.label :salary, 'Salary' %><br>
+          <%= f.text_field :salary, class: 'form-control input-width' %>
+        </div>
+
+         <div class="form-group">
+          <%= f.label :city_id, 'Ciudad' %><br />
+          <%= f.select :city_id, City.all.collect {|s| [s.name, s.id]}, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+
+          <%#= f.select :city, options_for_select(City.pluck(:name), @opportunity.city.city_name), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
+        </div>
+        <% end %>
         <div class="form-group">
           <h5>
             ¿Permitir aplicaciones de todas las carreras?

@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.1.1'
 
 # Core
 gem 'cancan'
-gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+gem 'carrierwave'
 gem 'devise'
 gem 'fog'
 gem 'pg'
@@ -13,10 +13,10 @@ gem 'file_validators'
 gem 'kaminari'
 
 # Assets
-gem 'bootstrap-sass', '~> 3.3.5'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'bootstrap-sass'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
@@ -33,10 +33,11 @@ gem 'axlsx'
 #gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'listen'
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'spring'
   gem 'better_errors'
   gem 'debase'

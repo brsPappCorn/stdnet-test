@@ -13,8 +13,10 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -27,6 +29,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
@@ -36,8 +39,9 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  # Use an evented file watcher to asynchronously detect changes in source code,
+  # routes, locales, etc. This feature depends on the listen gem.
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }

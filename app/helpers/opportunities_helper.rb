@@ -114,6 +114,26 @@ module OpportunitiesHelper
     ]
   end
 
+   # Helper method for building rails helper select from constants declared in the model
+  def opportunity_contract_type_select
+    [
+        ['Contrato a Termino Fijo.', 1],
+        ['Contrato a Termino Indefinido.', 2],
+        ['Contrato de Obra o Labor.', 3],
+        ['Contrato de Aprendizaje.', 4]
+        ['Contrato Civil por Prestación de Servicios', 5]
+    ]
+  end
+
+  def opportunity_compensatory_time_off_select
+     [
+        ['Fin de Semana', 1],
+        ['Sabados', 2],
+        ['Domingos', 3],
+        ['Un día entre semana', 4]
+    ]
+  end
+
   # Helper method to display friendly name instead of select value
   def opportunity_date_ini_type_friendly(opportunity)
     if opportunity.date_ini_type == 0

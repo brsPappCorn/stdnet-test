@@ -175,7 +175,7 @@ class OpportunitiesController < ApplicationController
     params.require(:opportunity).permit(:opportunity_type, :opportunity_title, :activity_description, :skills_description,
                                         :major_id, :other_majors, :question_for_student, :date_ini, :opportunity_duration,
                                         :availability, :cost_or_offer_option, :opportunity_cost, :receive_portfolio,
-                                        :number_of_students, :user_id, :student_availability, :date_ini_type, :opportunity_duration_type,
+                                        :number_of_students, :user_id, :student_availability, :date_ini_type, :opportunity_duration_type,:schedule,:contract_type,:description,:salary,:city_id,benefit_ids: [],
                                         major_ids: []
     )
   end

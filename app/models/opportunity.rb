@@ -23,6 +23,12 @@
 #  date_ini_type             :integer          default(0)
 #  opportunity_duration_type :integer          default(0)
 #  closed                    :boolean          default(FALSE)
+#  description               :string
+#  schedule                  :string
+#  contract_type             :integer
+#  city_id                   :integer
+#  salary                    :text
+#  compensatory_time_off     :integer
 #
 
 class Opportunity < ActiveRecord::Base
@@ -54,13 +60,20 @@ class Opportunity < ActiveRecord::Base
   # Associations
   #---------------------
   belongs_to :user
+  belongs_to :city
+  belongs_to :contract 
 
   has_many :students
   has_many :applications
   has_many :applied_users, through: :applications, class_name: 'User' # Students that applied to a company offer
   has_and_belongs_to_many :majors
 
+  has_and_belongs_to_many :benefits
+
+
   accepts_nested_attributes_for :majors
+  accepts_nested_attributes_for :benefits
+
 
   #---------------------
   # Validations
