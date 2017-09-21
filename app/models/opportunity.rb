@@ -29,6 +29,7 @@
 #  city_id                   :integer
 #  salary                    :text
 #  compensatory_time_off     :integer
+#  legal_benefits            :text
 #
 
 class Opportunity < ActiveRecord::Base
