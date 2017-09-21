@@ -28,7 +28,8 @@ gem 'annotate'
 gem 'roo', '~> 2.4.0'
 gem 'zip-zip'
 gem 'axlsx'
-
+gem 'public_activity'
+gem 'listen'
 # Others
 #gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

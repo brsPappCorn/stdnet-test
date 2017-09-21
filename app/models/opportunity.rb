@@ -82,6 +82,12 @@ class Opportunity < ActiveRecord::Base
   validates_presence_of :opportunity_type, :opportunity_title, :activity_description, :skills_description,
                         :availability, :number_of_students, :user_id, :date_ini_type, :opportunity_duration_type
 
+  include PublicActivity::Model
+  tracked
+
+
+
+
   #---------------------
   # Methods
   #---------------------

@@ -92,12 +92,12 @@ class Student < ActiveRecord::Base
   #---------------------
   # Uploaders
   #---------------------
-  mount_uploader :avatar, AvatarUploader
+  # mount_uploader :avatar, AvatarUploader
 
   #---------------------
   # Validations
   #---------------------
-  validates :avatar, file_size: { less_than: 500.kilobytes }
+  # validates :avatar, file_size: { less_than: 500.kilobytes }
   validates_presence_of :major, :university
 
   #---------------------

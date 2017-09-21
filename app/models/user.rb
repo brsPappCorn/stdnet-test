@@ -71,6 +71,9 @@ class User < ActiveRecord::Base
   REF_STUDENT_UNIVERSITY = 8
 
 
+include PublicActivity::Model
+  tracked
+
   #---------------------
   # Associations
   #---------------------

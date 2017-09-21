@@ -22,6 +22,11 @@
             <li class="navbar-links-normal-weight <%= is_active?(root_path) %>">
               <%= link_to 'home', root_path,class: '' %>
             </li>
+             <% if current_user.has_role?(User::ROLE_COMPANY)  %>
+                <li class="navbar-links-normal-weight <%= is_active?(notification_posts_path) %>">
+                  <%= link_to 'my notifications', notification_posts_path %>
+                </li>
+                <% end %>
         <% else %>
             <li class="<%= is_active?(root_path) %>">
               <%= link_to 'HOME', 'http://www.studnet.com.co', class: '' %>

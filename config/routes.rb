@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notification_posts
   # =========================
   # Root
   # =========================
