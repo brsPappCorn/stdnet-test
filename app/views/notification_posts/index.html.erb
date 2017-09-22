@@ -5,14 +5,14 @@
     <div class="row">
       <div class="col-md-12">
 
-        <h1>Lista de Notification</h1>
+        <h1>Lista de notificaciones</h1>
 
         <table class="table">
           <thead>
           <tr>
-             <th>Name</th>
-             <th>Body</th>
-             <th>User</th>
+             <th>Nombre</th>
+             <th>Cuerpo</th>
+             <th>Usuario</th>
              <th colspan="3"></th>
           </tr>
           </thead>
@@ -23,9 +23,9 @@
               <td><%= notification_post.name %></td>
               <td><%= notification_post.body %></td>
               <td><%= notification_post.user.first_name %></td>
-              <td><%= link_to 'Show', notification_post, class: 'btn btn-default btn-studnet-details' %></td>
-              <td><%= link_to 'Edit', edit_notification_post_path(notification_post), class: 'btn btn-default btn-studnet-details' %></td>
-              <td><%= link_to 'Destroy', notification_post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-studnet-details' %></td>
+              <td><%= link_to 'Espectáculo', notification_post, class: 'btn btn-default btn-studnet-details' %></td>
+              <td><%= link_to 'Editar', edit_notification_post_path(notification_post), class: 'btn btn-default btn-studnet-details' %></td>
+              <td><%= link_to 'Destruir', notification_post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-studnet-details' %></td>
             </tr>
           <% end %>
           </tbody>
@@ -35,6 +35,6 @@
 
       </div>
     </div>
-    <%= link_to 'New Notification Post', new_notification_post_path %>
+    <%= link_to 'Nuevo mensaje de notificación', new_notification_post_path %>
   </div>
 </section>

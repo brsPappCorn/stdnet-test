@@ -22,11 +22,7 @@
             <li class="navbar-links-normal-weight <%= is_active?(root_path) %>">
               <%= link_to 'home', root_path,class: '' %>
             </li>
-             <% if current_user.has_role?(User::ROLE_COMPANY)  %>
-                <li class="navbar-links-normal-weight">
-                  <%= link_to 'my notifications', notification_posts_path %>
-                </li>
-                <% end %>
+           
         <% else %>
               <li class="<%= is_active?(root_path) %>">
                 <%= link_to 'HOME', 'http://www.studnet.com.co', class: '' %>
@@ -138,6 +134,9 @@
                 </li>
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'personas', people_path  %>
+                </li>
+                <li class="navbar-links-normal-weight">
+                  <%= link_to 'Mis Notificaciones', notification_posts_path %>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li class="navbar-links-normal-weight">
