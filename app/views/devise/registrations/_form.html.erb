@@ -1,166 +1,176 @@
 <!-- Form -->
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => "form-horizontal",:id => "contact_form"}) do |f| %>
     <%= devise_error_messages! %>
 
+    <h2>
+
+    <% if params[:studnet].to_i == 2 %>
+         Registrarte como estudiante o egresado
+   
+  <% elsif params[:studnet].to_i == 3 %>
+
+         Registrarte como empresa / persona
+     
+  <% elsif params[:studnet].to_i == 4 %>
+    
+         Registrarte como empresa / persona
+   
+  <% end %>
+</h2>
     <% if current_page?(new_user_registration_path(studnet: 3)) || current_page?(new_user_registration_path(studnet: 4)) %>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-4 text-right">
-              <%= f.label :role_id, 'Selecciona el tipo de cuenta' %><br />
-            </div>
-            <div class="col-md-8">
-              <select id="roleID" name="user[role_id]" class="form-control input-width">
+      
+
+        <div class="form-group"> 
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span>
+              <select id="roleID" name="user[role_id]" class="form-control selectpicker">
                 <option value=3>
-                  Empresa
-                </option>
-                <option value=4>
-                  Persona
-                </option>
+                            Empresa
+                          </option>
+                          <option value=4>
+                            Persona
+                          </option>
               </select>
-            </div>
           </div>
         </div>
+  
     <% end %>
 
-    <!-- User Information -->
     <div class="form-group">
-      <div class="row">
-        <div class="col-md-4 text-right">
-          <%= f.label :email, 'Correo electrónico' %>
-        </div>
-        <div class="col-md-8">
-          <%= f.email_field :email, class: 'form-control input-width' %>
-        </div>
+      <div class="input-group">
+         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+         <%= f.email_field :email, class: 'form-control',placeholder: "correo electrónico" %>
       </div>
     </div>
 
     <div class="form-group">
-      <div class="row">
-        <div class="col-md-4 text-right">
-          <%= f.label :password, 'Contraseña' %>
-        </div>
-        <div class="col-md-8">
-          <%= f.password_field :password, autocomplete: 'off', placeholder: 'mínimo 6 caracteres', class: 'form-control input-width' %>
-        </div>
-      </div>
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <%= f.password_field :password, autocomplete: 'off', placeholder: 'Contraseña', class: 'form-control' %>
+     </div>
     </div>
+
+
     <!-- ./User Information -->
 
     <!-- Student Information -->
     <% if params[:studnet].to_i == 2 %>
-        <div class="form-group devise-student-info" id="deviseCompanySignUp">
-          <%= f.fields_for :student, resource.build_student do |s| %>
-              <div class="row margin-bottom-20">
-                <div class="col-md-4 text-right">
-                  <%= s.label :university_id, 'Universidad' %>
-                </div>
-                <div class="col-md-8">
-                  <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width devie-control-margin-bot' %>
-                </div>
-              </div>
+   <%= f.fields_for :student, resource.build_student do |s| %>  
+   <div id="deviseCompanySignUp">
+      <div class="form-group"> 
+       
+       
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+              <%= s.select :university_id, University.all.map { |u| [u.university_name, u.id] }, { prompt: 'Universidad' }, class: 'form-control selectpicker' %>
+         </div>
 
-              <div class="row">
-                <div class="col-md-4 text-right">
-                  <%= s.label :major_id, 'Carrera'  %>
-                </div>
-                <div class="col-md-8">
-                  <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
-                </div>
-              </div>
-          <% end %>
-        </div>
-    <% end %>
-    <!-- ./Student Information -->
-
-    <!-- Company Information -->
-    <% if params[:studnet].to_i == 3 %>
-    <% end %>
-
-    <div class="form-group devise-company-info" id="deviseCompanySignUp">
-      <%= f.fields_for :company, resource.build_company do |c| %>
-          <div class="row">
-            <div class="col-md-4 text-right">
-              <%= c.label :company_name, 'Nombre de la empresa'  %>
-            </div>
-            <div class="col-md-8">
-              <%= c.text_field :company_name, class: 'form-control input-width' %>
-            </div>
+      </div>
+        
+      <div class="form-group"> 
+        
+          
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+              <%= s.select :major_id, Major.all.map { |m| [m.major_name, m.id] }, { prompt: 'Carrera' }, class: 'form-control selectpicker' %>
           </div>
+
+      </div>
+      </div>   
+ <% end %>
+
+ <% end %>
+
+ <div class="form-group">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  <%= f.fields_for :company, resource.build_company do |c| %>
+          
+    <%= c.text_field :company_name, class: 'form-control',placeholder: "Nombre de la empresa" %>
+           
       <% end %>
-    </div>
+
+</div>
+</div>
+
+
     <!-- ./Company Information -->
 
     <!-- Person Information -->
     <% if params[:studnet].to_i == 4 %>
     <% end %>
 
-    <div class="form-group devise-person-info" id="devisePersonSignUp">
+    <div id="devisePersonSignUp">
       <%= f.fields_for :person, resource.build_person do |p| %>
-          <div class="row">
-            <div class="col-md-4 text-right">
-              <%= p.label :occupation, 'Ocupación'  %>
-            </div>
-            <div class="col-md-8">
-              <%= p.text_field :occupation, class: 'form-control input-width' %>
-            </div>
-          </div>
+       <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <%=  p.text_field :occupation, class: 'form-control',placeholder: "Ocupación" %>
+        </div>
+     </div>
       <% end %>
     </div>
     <!-- ./Person Information -->
 
     <% if params[:studnet].to_i != 2 %>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-4 text-right">
-            <%= f.label :mobile_phone, 'Teléfono de contacto (opcional)' %>
-          </div>
-          <div class="col-md-8">
-            <%= f.text_field :mobile_phone, autocomplete: 'off', placeholder: 'Teléfono de contacto', class: 'form-control input-width' %>
-          </div>
-          <div class="field-info-icon">
-            <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="¡Ingresa tu teléfono de contacto para que un asesor se comunique contigo y resuelva tus dudas!"></span>
-          </div>
-        </div>
+     <div class="form-group">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          <%=  f.text_field :mobile_phone, class: 'form-control',placeholder: "Teléfono de contacto" %>
       </div>
+     </div>
     <% end %>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-4 text-center terms-conditions">
-        <p>
-          Al registrarte confirmas que has leído y aceptas nuestros
-        </p>
-        <p>
-          <%= link_to 'Términos y Condiciones', 'http://www.studnet.com.co/terminos', target: '_blank' %>
-          y
-          <%= link_to 'Política de Privacidad', 'http://www.studnet.com.co/privacidad', target: '_blank' %>
-        </p>
-      </div>
+    
+    <div class="form-group">
+ 
+   
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+  <input name="contact_no" placeholder="Codigo (opcional)" class="form-control" type="text">
     </div>
+</div>
 
-    <div class="actions text-center">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-4">
-          <%= f.submit 'Registrarme', class: 'btn btn-primary btn-studnet-basic' %>
-        </div>
-      </div>
-    </div>
+<!-- Select Basic -->
 
-    <%= f.hidden_field(:role_id, value: params[:studnet].to_i) %>
+<!-- Success message -->
+
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-12 text-center">
+   <%= f.submit 'Registrarme', class: 'btn btnregister' %>
+  </div>
+</div>
+  <%= f.hidden_field(:role_id, value: params[:studnet].to_i) %>
 <% end %>
 
-<div class="text-right devise-shared-links">
-  <p>
-    ¿Ya estás registrado? Puedes ingresar
-    <% if current_page?(new_user_registration_path(studnet: 2)) %>
-        <%= link_to 'aquí', new_session_path(resource_name, studnet: 2) %><br />
-    <% elsif current_page?(new_user_registration_path(studnet: 3)) %>
-        <%= link_to 'aquí', new_session_path(resource_name, studnet: 3) %><br />
-    <% elsif current_page?(new_user_registration_path(studnet: 4)) %>
-        <%= link_to 'aquí', new_session_path(resource_name, studnet: 4) %><br />
-    <% end %>
+<div class="dottedborder"></div>
 
-  </p>
+
+  <div class="col-md-12 text-center">
+   <a href="#" class="btn-link fbbtn">Registrarme Con Facebook</a>
+ </div>
+
+<div class="col-md-12 text-center marbot15px">
+   Ya estas registrado?
+    <% if current_page?(new_user_registration_path(studnet: 2)) %>
+        <%= link_to 'aquí', new_session_path(resource_name, studnet: 2),class: "btn-link" %><br />
+    <% elsif current_page?(new_user_registration_path(studnet: 3)) %>
+        <%= link_to 'aquí', new_session_path(resource_name, studnet: 3),class: "btn-link" %><br />
+    <% elsif current_page?(new_user_registration_path(studnet: 4)) %>
+        <%= link_to 'aquí', new_session_path(resource_name, studnet: 4),class: "btn-link" %><br />
+    <% end %>
+  </div>
+<div class="col-md-12 text-center graytext font11px">
+Al registrarte confirmas que has leido y aceptas nuestros<br/>
+
+<%= link_to 'Términos y Condiciones', 'http://www.studnet.com.co/terminos', target: '_blank' %>
+ y <%= link_to 'Política de Privacidad', 'http://www.studnet.com.co/privacidad', target: '_blank' %>
 </div>
+
+
+ 
+<!-- /.container -->
 
 <script type="text/javascript">
 

@@ -38,6 +38,7 @@ gem 'listen'
 
 group :development, :test do
   gem 'byebug'
+  gem 'pry'
   gem 'web-console'
   gem 'spring'
   gem 'better_errors'
