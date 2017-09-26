@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
 
   def show
     if administrator_signed_in? || (user_signed_in? && current_user == @company.user)
+      @notifications = NotificationPost.all
     else
       redirect_to root_path
     end

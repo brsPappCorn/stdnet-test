@@ -15,7 +15,8 @@ class NotificationPostsController < ApplicationController
   # GET /notification_posts/new
   def new
     @notification_post = NotificationPost.new 
-     @notification_post.user_id = current_administrator.id
+     @notification_post.user_id = current_administrator.id if current_administrator
+     @notification_post.user_id = current_user.id if current_user
   end
 
   # GET /notification_posts/1/edit
