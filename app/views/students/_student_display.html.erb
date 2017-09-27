@@ -8,7 +8,7 @@
         <div class="col-md-12 text-center">
           <h2>
             <span class="student-avatar">
-              <% unless @student.user.student.avatar.file.nil? %>
+              <% unless @student.user.student.avatar.try(:file).nil? %>
                   <%= image_tag aws_url(@student.user.student.avatar), class: 'img-circle' %>
               <% end %>
             </span>
