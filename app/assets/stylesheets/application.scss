@@ -44,6 +44,14 @@ form {
   }
 }
 
+.main-part {
+  background: url('/assets/ogn39d0-compressor.jpg') no-repeat center center;
+  background-size:cover;
+  height: 100%;
+  background-attachment: fixed;
+}
+
+
 .no-margin {
   margin: 0 !important;
 }
@@ -60,6 +68,11 @@ form {
   h3 {
     margin-top: 0;
   }
+  
+  .container {
+    background: #fff;
+  }
+
 
   // Generic For
   .studNet-form {

@@ -62,7 +62,9 @@
   <%= render 'layouts/navbar' %>
 </header>
 
-<%= yield %>
+<div class="<%= 'main-part' if current_user %>">
+  <%= yield %>
+</div>
 
 <footer>
   <%= render 'layouts/footer' %>
