@@ -77,6 +77,13 @@
                 </li>
             <% end %>
 
+            <% if user_signed_in? && current_user.has_role?(User::ROLE_COMPANY)  %>
+                <li class="navbar-links-normal-weight">
+                  <%= link_to 'precios', company_pricing_path %>
+                </li>
+            <% end %>
+   
+
             <li class="dropdown navbar-links-normal-weight">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 perfil
@@ -117,16 +124,17 @@
 
            <% NotificationPost.all.each do |notification| %>
             <li> <p class="blue_txt"><%= notification.name  %></p> 
-                <p><%= notification.body %></p>5
+                <p><%= notification.body %></p>
             <p class="grey_txt_small"><%#= time_ago_in_words(Time.now.to_f - notification.created_at.to_f)   %></p>
             </li>
             <li class="divider"></li>
             
-          </ul>
+         
            <% end %>
-        </li>
+     
         <% end %>
-
+         </ul>
+   </li>
         <!-- ./Account Menu Dropdown. Depends on the type of user signed in. -->
 
 

@@ -5,6 +5,9 @@ class NotificationPostsController < ApplicationController
   # GET /notification_posts.json
   def index
     @notification_posts = NotificationPost.all.page params[:page]
+        @notification_post = NotificationPost.new 
+     @notification_post.user_id = current_administrator.id if current_administrator
+     @notification_post.user_id = current_user.id if current_user
   end
 
   # GET /notification_posts/1

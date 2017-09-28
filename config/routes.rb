@@ -65,6 +65,8 @@ Rails.application.routes.draw do
   # =========================
   # get '/about', to: 'static_pages#about'
   get '/admin_panel', to: 'administrators#index'
+  get '/company_pricing', to: 'static_pages#pricing'
+
 
 
   # ============
