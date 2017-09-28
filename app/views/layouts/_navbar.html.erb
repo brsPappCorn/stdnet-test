@@ -44,6 +44,23 @@
                 </ul>
               </li>
 
+               <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  INGRESO
+                  <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-fixed">
+                  <li>
+                    <%= link_to 'Estudiantes', new_user_registration_path(studnet: 2) %>
+                  </li>
+                  <li>
+                    <%= link_to 'Empresas / Personas', new_user_registration_path(studnet: 3) %>
+                  </li>
+                </ul>
+              </li>
+
+
             <!--
               <li class="<%= is_active?(new_user_session_path) %>">
                 <%= link_to 'INGRESAR', new_user_session_path,class: '' %>
@@ -75,9 +92,6 @@
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
                 </li>
-            <% end %>
-
-            <% if user_signed_in? && current_user.has_role?(User::ROLE_COMPANY)  %>
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'precios', company_pricing_path %>
                 </li>
