@@ -4,8 +4,8 @@
     <div class="row">
         <div class="">
             <h2 class="pull-left"> Lista de notificaciones </h2> 
-            <%#= link_to 'Nuevo mensaje de notificación', new_notification_post_path ,class: "pull-right site_btn",:"data-toggle" => "modal",:"data-target" => "#login-modal" %>
-            <%= link_to 'Nuevo mensaje de notificación', new_notification_post_path ,class: "pull-right site_btn" %>
+            <%= link_to 'Nuevo mensaje de notificación', new_notification_post_path ,class: "pull-right site_btn", remote: true %>
+            <%#= link_to 'Nuevo mensaje de notificación', new_notification_post_path ,class: "pull-right site_btn" %>
                 
              <div class="clearfix"> </div>   
             <div class="panel panel-primary">
@@ -24,7 +24,7 @@
                                  <%= link_to notification_post do  %>
                                     <span class="glyphicon glyphicon-menu-hamburger Try it"></span>
                                  <% end %>
-                                  <%= link_to edit_notification_post_path(notification_post) do %>
+                                  <%= link_to edit_notification_post_path(notification_post), remote: true do %>
                                    <span class="glyphicon glyphicon-pencil"></span>
                                   <% end %>
                                  <%= link_to notification_post, method: :delete, data: { confirm: 'Are you sure?' } do %>
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-
+<div class="new-modal"></div>
 
 <!-- <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog">

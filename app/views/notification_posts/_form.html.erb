@@ -2,15 +2,15 @@
     <%= render partial: 'shared/error_messages', locals: { object: @notification_post } %>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="form-group">
           <%= form.label :nombre %>
-           <%= form.text_field :name, id: :notification_post_name, class: 'form-control input-width' %>
+           <%= form.text_field :name, id: :notification_post_name, class: 'form-control' %>
         </div>
 
         <div class="form-group">
           <%= form.label :cuerpo %>
-          <%= form.text_area :body, id: :notification_post_body , class: 'form-control input-width' %>
+          <%= form.text_area :body, id: :notification_post_body , class: 'form-control' %>
         </div>
         </div>
 </div>
