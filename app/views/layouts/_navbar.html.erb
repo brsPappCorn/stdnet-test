@@ -20,7 +20,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? || administrator_signed_in? %>
             <li class="navbar-links-normal-weight <%= is_active?(root_path) %>">
-              <%= link_to 'home', root_path,class: '' %>
+              <%= link_to 'Home', root_path,class: '' %>
             </li>
            
         <% else %>
@@ -83,24 +83,29 @@
         <% if user_signed_in? %>
             <% if current_user.has_role? User::ROLE_STUDENT %>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'ver ofertas', opportunities_path %>
+                  <%= link_to 'Ver ofertas', opportunities_path %>
                 </li>
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
                 </li>
             <% elsif current_user.has_role?(User::ROLE_COMPANY) || current_user.has_role?(User::ROLE_PERSON) %>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
+                  <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
                 </li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'precios', company_pricing_path %>
+                  <%= link_to 'Precios', company_pricing_path %>
                 </li>
+            <% end %>
+            <% if current_user.has_role?(User::ROLE_COMPANY) %>
+              <!-- <li class="navbar-links-normal-weight">
+                <%= link_to 'payment', payment_page_path %>
+              </li> -->
             <% end %>
    
 
             <li class="dropdown navbar-links-normal-weight">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                perfil
+                Perfil
                 <span class="caret"></span>
               </a>
 

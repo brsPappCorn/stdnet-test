@@ -5,7 +5,7 @@ class NotificationPostsController < ApplicationController
   # GET /notification_posts.json
   def index
     @notification_posts = NotificationPost.all.page params[:page]
-        @notification_post = NotificationPost.new 
+    @notification_post = NotificationPost.new 
      @notification_post.user_id = current_administrator.id if current_administrator
      @notification_post.user_id = current_user.id if current_user
   end
@@ -33,7 +33,7 @@ class NotificationPostsController < ApplicationController
 
     respond_to do |format|
       if @notification_post.save
-        format.html { redirect_to @notification_post, notice: 'Notification post was successfully created.' }
+        format.html { redirect_to @notification_post, notice: 'Se ha publicado exitosamente tu notificación' }
         format.json { render :show, status: :created, location: @notification_post }
       else
         format.html { render :new }

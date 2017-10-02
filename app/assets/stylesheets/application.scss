@@ -339,7 +339,7 @@ header .navbar-custom .navbar-collapse .navbar-nav > li:hover, header .navbar-cu
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: $cp-dark-gray;
+  color: #1282b2;
   font-weight: bold;
 }
 
@@ -699,6 +699,10 @@ footer {
   z-index: 99999;
 }
 
+.notification-comapny-header{
+  margin-bottom: 0px !important;
+  background-color: #3B3B3C !important;
+}
 // ================
 // Import other stylesheets
 // ================
