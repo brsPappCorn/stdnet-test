@@ -16,6 +16,35 @@ class CompaniesController < ApplicationController
       redirect_to root_path
     end
   end
+  def payment_page
+    @user = current_user
+    @reference_code = rand(36**10).to_s(36)
+    @account_id = "512321"
+    @api_key = '4Vj8eK4rloUd272L48hsrarnUA'
+    @merchant_id = '508029'
+    @amount = "3"
+    @address = current_user.company.company_address rescue ""
+    @city = City.find(current_user.city) rescue "indore"
+    @country = Country.find(current_user.country) rescue "india"
+    @email = current_user.email
+    @tax = 0
+    @tax_return = 0
+    @product_description = "Test PAYU"
+    @currency = "USD"
+    signature = @api_key + "~" + @merchant_id + "~" + @reference_code + "~" + @amount + "~" + @currency
+    @signature = Digest::MD5.hexdigest(signature)
+  end
+
+  def payment_response_page
+    if params[:transactionState] == "4"
+      @transaction_state = "APPROVED"
+    else
+      @transaction_state = "FAILED"
+    end
+  end
+
+  def payment_confirmation_page
+  end
 
   private
   def set_company

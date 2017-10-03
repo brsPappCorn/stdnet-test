@@ -35,6 +35,7 @@ gem 'listen'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'listen'
+gem 'digest'
 
 group :development, :test do
   gem 'byebug'

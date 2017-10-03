@@ -1,0 +1,42 @@
+<section class="studNet-wrapper">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="amount-label"> MAKE TRANSACTION OF $<%=@amount%> </div>
+        <form method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/">
+          <input name="merchantId"      type="hidden"  value="<%= @merchant_id %>"   >
+          <input name="accountId"       type="hidden"  value="<%= @account_id %>" >
+          <input name="description"     type="hidden"  value="<%= @product_description %>"  >
+          <input name="referenceCode"   type="hidden"  value="<%= @reference_code %>" >
+          <input name="tax"             type="hidden"  value="<%= @tax %>"  >
+          <input name="taxReturnBase"   type="hidden"  value="<%= @tax_return %>" >
+          <input name="currency"        type="hidden"  value="<%= @currency %>" >
+          <input name="signature"       type="hidden"  value="<%= @signature %>"  id="digitalSignature">
+          <input name="test"            type="hidden"  value="1" >
+          <input name="buyerEmail"      type="hidden"  value="<%= @email %>" >
+          <input name="responseUrl"     type="hidden"  value="https://evening-reaches-65709.herokuapp.com/payment_response_page" >
+          <input name="amount"          type="hidden"  value="<%=@amount%>" >
+          <input class="submit-button" name="Submit" type="submit"  value="PAY" >
+        </form>
+        <form>
+      </div>
+    </div>
+  </div>
+</section>
+<style type="text/css">
+
+.amount-label{
+  padding-left: 479px;
+  padding-top: 200px;
+  padding-bottom: 30px;
+}
+
+.submit-button{
+  margin-bottom: 100px;
+  margin-left: 500px;
+  padding-right: 60px;
+  padding-left: 60px;
+}
+
+</style>

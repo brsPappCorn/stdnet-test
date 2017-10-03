@@ -85,6 +85,7 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    digest (0.0.1)
     erubi (1.6.1)
     eventmachine (1.2.5)
     excon (0.59.0)
@@ -411,6 +412,7 @@ DEPENDENCIES
   coffee-rails
   debase
   devise
+  digest
   file_validators
   fog
   jbuilder (~> 2.0)
@@ -434,4 +436,4 @@ DEPENDENCIES
   zip-zip
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
