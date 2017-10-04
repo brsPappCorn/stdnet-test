@@ -52,10 +52,10 @@
 
                 <ul class="dropdown-menu dropdown-menu-fixed">
                   <li>
-                    <%= link_to 'Estudiantes', new_user_registration_path(studnet: 2) %>
+                    <%= link_to 'Estudiantes', new_user_session_path(studnet: 3) %>
                   </li>
                   <li>
-                    <%= link_to 'Empresas / Personas', new_user_registration_path(studnet: 3) %>
+                    <%= link_to 'Empresas / Personas', new_user_session_path(studnet: 2) %>
                   </li>
                 </ul>
               </li>
@@ -96,11 +96,7 @@
                   <%= link_to 'Precios', company_pricing_path %>
                 </li>
             <% end %>
-            <% if current_user.has_role?(User::ROLE_COMPANY) %>
-              <!-- <li class="navbar-links-normal-weight">
-                <%= link_to 'payment', payment_page_path %>
-              </li> -->
-            <% end %>
+            
    
 
             <li class="dropdown navbar-links-normal-weight">

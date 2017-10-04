@@ -6,6 +6,7 @@
         <div class="status-label">
         	<% if @transaction_state == "APPROVED"%>
         		<h1 class=" status approved"> TRANSACTION APPROVED </h1>
+        		<h2>YOU HAVE <%=@credits%> Datos de Contacto</h2>
         	<% else %>
         		<h1 class=" status failed">TRANSACTION FAILED</h1>
         	<% end %>

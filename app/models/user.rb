@@ -30,6 +30,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  other_city             :string
+#  credits                :string           default("0")
 #
 # Indexes
 #
@@ -80,7 +81,7 @@ include PublicActivity::Model
   has_one :company, dependent: :destroy
   has_one :student, dependent: :destroy
   has_one :person, dependent: :destroy
-
+  has_many :transactions
   has_many :opportunities, dependent: :destroy # Company/People association for creation of an opportunity
   has_many :applications, dependent: :destroy
   has_many :applied_opportunities, through: :applications, class_name: 'Opportunity'
