@@ -83,14 +83,14 @@
         <% if user_signed_in? %>
             <% if current_user.has_role? User::ROLE_STUDENT %>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'Ver ofertas', opportunities_path %>
+                  <%= link_to 'Ver Ofertas', opportunities_path %>
                 </li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'mis ofertas', my_opportunities_opportunities_path %>
+                  <%= link_to 'Mis Ofertas', my_opportunities_opportunities_path %>
                 </li>
             <% elsif current_user.has_role?(User::ROLE_COMPANY) || current_user.has_role?(User::ROLE_PERSON) %>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'Mis ofertas', my_opportunities_opportunities_path %>
+                  <%= link_to 'Mis Ofertas', my_opportunities_opportunities_path %>
                 </li>
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'Precios', company_pricing_path %>
@@ -108,15 +108,15 @@
               <ul class="dropdown-menu dropdown-menu-fixed">
                 <% if user_signed_in? %>
                     <li class="navbar-links-normal-weight">
-                      <%= link_to 'ver perfil', role_show_route(current_user) %>
+                      <%= link_to 'Ver Perfil', role_show_route(current_user) %>
                     </li>
                     <li class="navbar-links-normal-weight">
-                      <%= link_to 'editar perfil', edit_user_path(current_user.id) %>
+                      <%= link_to 'Editar Perfil', edit_user_path(current_user.id) %>
                     </li>
                 <% elsif administrator_signed_in? %>
                     <!-- Actions for Admin -->
                     <li class="navbar-links-normal-weight">
-                      <%= link_to 'lista de usuarios', users_path  %>
+                      <%= link_to 'Lista De Usuarios', users_path  %>
                     </li>
                 <% end %>
                 <li role="separator" class="divider"></li>
@@ -159,32 +159,32 @@
 
             <li class="dropdown navbar-links-normal-weight">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                perfil
+                Perfil
                 <span class="caret"></span>
               </a>
 
               <ul class="dropdown-menu dropdown-menu-fixed">
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'ofertas', opportunities_administrators_path  %>
+                  <%= link_to 'Ofertas', opportunities_administrators_path  %>
                 </li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'usuarios', users_path  %>
+                  <%= link_to 'Usuarios', users_path  %>
                 </li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'estudiantes', students_path  %>
+                  <%= link_to 'Estudiantes', students_path  %>
                 </li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'empresas', companies_path  %>
+                  <%= link_to 'Empresas', companies_path  %>
                 </li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'personas', people_path  %>
+                  <%= link_to 'Personas', people_path  %>
                 </li>
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'Mis Notificaciones', notification_posts_path %>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'descargar excel', download_excel_administrators_path, method: :post %>
+                  <%= link_to 'Descargar Excel', download_excel_administrators_path, method: :post %>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li class="navbar-links-normal-weight">
