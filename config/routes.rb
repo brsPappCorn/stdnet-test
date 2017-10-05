@@ -65,9 +65,9 @@ Rails.application.routes.draw do
   # get '/about', to: 'static_pages#about'
   get '/admin_panel', to: 'administrators#index'
   get '/company_pricing', to: 'static_pages#pricing'
-  get "/payment_page", :to => "companies#payment_page", :as => "payment_page"
+  # get "/payment_page", :to => "companies#payment_page", :as => "payment_page"
   get "/payment_response_page", :to => "companies#payment_response_page", :as => "payment_response_page"
-  get "/payment_confirmation_page", :to => "companies#payment_confirmation_page", :as => "payment_confirmation_page"
+  post "/payment_confirmation_page", :to => "companies#payment_confirmation_page", :as => "payment_confirmation_page"
 
   # ============
   # Mailer

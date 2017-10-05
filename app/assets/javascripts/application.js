@@ -15,7 +15,7 @@
 // require turbolinks
 //= require bootstrap
 //= require_tree .
-
+//= require md5
 function elementVisible(selector, visible) {
     var $element = $(selector);
 

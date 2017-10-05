@@ -159,9 +159,9 @@ pensados segun tus necesidades</p>
 <tr>
 <td class="tabco1"></td>
 <td class="tabco2"></td>
-<td class="tabco3"><a href="<%=payment_page_path%>?plan=executive&amt=70000" class="btn-block pricebtn">Comprar</a></td>
-<td class="tabco4"><a href="<%=payment_page_path%>?plan=pro&amt=70000" class="btn-block pricebtn">Comprar</a></td>
-<td class="tabco5" style="border-bottom:0px;"><a href="<%=payment_page_path%>?plan=premium&amt=70000" class="btn-block pricebtn">Comprar</a></td>
+<td class="tabco3"><a href="#" plan="executive" class="btn-block pricebtn">Comprar</a></td>
+<td class="tabco4"><a href="#" plan="pro" class="btn-block pricebtn">Comprar</a></td>
+<td class="tabco5" style="border-bottom:0px;"><a href="#" plan="premium" class="btn-block pricebtn">Comprar</a></td>
 <td class="tabco6" class="text-center"><a href="#" class="btn-block pricebtncontact">Contactanos</a></td>
 </tr>
 
@@ -203,7 +203,31 @@ exacto de hojas de vida?</h1>
 	  <a href="#" class="btn-block pricebtncontact">Contactanos</a>
 </div>
 </div>
+<input id="apiKey"      type="hidden"  value="<%= @api_key %>"   >
+<input id="userCredits"      type="hidden"  value="<%= @user_credits %>"   >
+<form id="paymentForm" method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/">
+          <input id="merchantId" name="merchantId"      type="hidden"  value="<%= @merchant_id %>"   >
+          <input name="accountId"       type="hidden"  value="<%= @account_id %>" >
+          <input id="description" name="description"     type="hidden"  value=""  >
+          <input id="referenceCode" name="referenceCode"   type="hidden"  value="<%= @reference_code %>" >
+          <input name="tax"             type="hidden"  value="<%= @tax %>"  >
+          <input name="taxReturnBase"   type="hidden"  value="<%= @tax_return %>" >
+          <input id="currency" name="currency"        type="hidden"  value="<%= @currency %>" >
+          <input name="signature"       type="hidden"  value=""  id="digitalSignature">
+          <input name="test"            type="hidden"  value="1" >
+          <input name="buyerEmail"      type="hidden"  value="<%= @email %>" >
+          <input name="responseUrl"     type="hidden"  value="https://evening-reaches-65709.herokuapp.com/payment_response_page" >
+          <!-- <input name="responseUrl"     type="hidden"  value="https://ec72768c.ngrok.io/payment_response_page" > -->
+          <!-- <input name="responseUrl"     type="hidden"  value="http://localhost:3000/payment_response_page" > -->
+          <input name="confirmationUrl" type="hidden"  value="https://evening-reaches-65709.herokuapp.com/payment_confirmation_page" >
+          <!-- <input name="confirmationUrl" type="hidden"  value="https://ec72768c.ngrok.io/payment_confirmation_page" > -->
+          <!-- <input name="confirmationUrl" type="hidden"  value="http://localhost:3000/payment_confirmation_page" > -->
+          <input id="extra1" name="extra1" type="hidden"  value="" >
+          <input id="amount" name="amount"          type="hidden"  value="3" >
+          <!-- <input class="submit-button" name="Submit" type="submit"  value="PAY" > -->
+        </form>
 </div>
+
 
     <script>     $(function(){
     $(".dropdown").hover(            
@@ -217,7 +241,38 @@ exacto de hojas de vida?</h1>
                 $(this).toggleClass('open');
                 $('b', this).toggleClass("caret caret-up");                
             });
-    }); </script>
+    }); 
+    $(".pricebtn").on("click",function(e){
+      e.preventDefault();
+      if($("#userCredits").val() != "unlimited"){
+        var apiKey = $("#apiKey").val()
+        var merchantId = $("#merchantId").val()
+        var referenceCode = $("#referenceCode").val()
+        var currency = $("#currency").val()
+        var plan = this.getAttribute("plan")
+        if(plan == "executive"){
+          var amount = "70000"  
+          var description = "Executive Plan"
+        }
+        else if(plan == "pro"){
+          var amount = "70000"  
+          var description = "Pro Plan"
+        }
+        else if(plan == "premium"){
+          var amount = "70000"  
+          var description = "Premium Plan"
+        }
+        var amount = "3"  
+        var signature = apiKey + "~" + merchantId + "~" + referenceCode + "~" + amount + "~" + currency
+        $("#extra1").val(plan)
+        $("#description").val(description)
+        //$("#amount").val(amount)
+        $("#digitalSignature").val(md5(signature))
+        var form = document.getElementById("paymentForm");
+        form.submit()
+      }
+    })
+  </script>
 	<script>$('.btn-number').click(function(e){
     e.preventDefault();
     
@@ -289,6 +344,7 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
+
 	</script>
     
   </body>

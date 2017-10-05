@@ -80,11 +80,18 @@ class CompaniesController < ApplicationController
     elsif params[:extra1] == "premium"
       @credits = "unlimited"
     end
-    current_user.credits = @credits
+    if current_user.credits == "0" || @credits == "unlimited"
+      current_user.credits = @credits
+    else
+      credits = current_user.credits.to_i + @credits.to_i
+      current_user.credits = credits.to_s
+    end
     current_user.save!
+    @credits = current_user.credits
   end
 
   def payment_confirmation_page
+
   end
 
   private
