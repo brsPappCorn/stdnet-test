@@ -15,9 +15,10 @@
           <input name="signature"       type="hidden"  value="<%= @signature %>"  id="digitalSignature">
           <input name="test"            type="hidden"  value="1" >
           <input name="buyerEmail"      type="hidden"  value="<%= @email %>" >
-          <!-- <input name="responseUrl"     type="hidden"  value="https://evening-reaches-65709.herokuapp.com/payment_response_page" > -->
-          <input name="responseUrl"     type="hidden"  value="http://localhost:3000/payment_response_page" >
-          <input name="confirmationUrl" type="hidden"  value="http://localhost:3000/payment_confirmation_page" >
+          <input name="responseUrl"     type="hidden"  value="https://evening-reaches-65709.herokuapp.com/payment_response_page" >
+          <!-- <input name="responseUrl"     type="hidden"  value="http://localhost:3000/payment_response_page" > -->
+          <input name="confirmationUrl" type="hidden"  value="https://evening-reaches-65709.herokuapp.com/payment_confirmation_page" >
+          <!-- <input name="confirmationUrl" type="hidden"  value="http://localhost:3000/payment_confirmation_page" > -->
           <input name="extra1" type="hidden"  value="<%=@plan%>" >
           <input name="amount"          type="hidden"  value="<%=@amount%>" >
           <input class="submit-button" name="Submit" type="submit"  value="PAY" >
