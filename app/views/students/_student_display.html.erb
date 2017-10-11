@@ -9,9 +9,10 @@
           <div class="profileheader">
 <div class="col-sm-2">
   <span class="student-avatar">
-          <img src="/assets/user.png" class: 'img-circle'>
               <% unless @student.user.student.avatar.try(:file).nil? %>
                   <%= image_tag aws_url(@student.user.student.avatar), class: 'img-circle' %>
+              <% else %>
+                  <img src="/assets/user.png" class: 'img-circle'>
               <% end %>
             </span>
           </div>
