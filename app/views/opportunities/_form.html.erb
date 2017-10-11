@@ -28,7 +28,7 @@
           <%= f.label :skills_description, 'Descripción de las habilidades y conocimientos requeridos' %><br>
           <%= f.text_area :skills_description, rows: 5, class: 'form-control input-width' %>
         </div>
-        <% if @opportunity.user.role_id == User::ROLE_COMPANY %>
+        <% if @opportunity.user.role_id == User::ROLE_COMPANY ||  @opportunity.user.role_id == User::ROLE_PERSON  %>
         <div class="form-group">
           <%= f.label :contract_type, 'Tipo de contrato' %>
           <%= f.select :contract_type, options_for_select(opportunity_contract_type_select, @opportunity.contract_type), { prompt: 'Por favor selecciona una opción' }, class: 'form-control input-width' %>
