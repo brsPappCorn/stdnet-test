@@ -15,6 +15,7 @@ class StaticPagesController < ApplicationController
   def pricing
     # @plan = params[:plan]
     @user = current_user
+    @number_of_days_left = 30-(Time.now - current_user.transactions.order("created_at DESC").first.created_at.to_time).to_i/(24 * 60 * 60)
     @user_credits = @user.credits
     @reference_code = rand(36**10).to_s(36)
     @account_id = "512321"

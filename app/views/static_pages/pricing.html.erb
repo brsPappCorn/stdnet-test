@@ -5,7 +5,6 @@
 <span>planes y precious, aplican para todos los tipos de ofertas.</span>
 		</div>
 		
-
 </section>
 <div class="container-fluid imgbgbox">
  <div id="PricingTab">
@@ -204,6 +203,7 @@ exacto de hojas de vida?</h1>
 </div>
 </div>
 <input id="apiKey"      type="hidden"  value="<%= @api_key %>"   >
+<input id="numberOfDaysLeft"      type="hidden"  value="<%= @number_of_days_left %>"   >
 <input id="userCredits"      type="hidden"  value="<%= @user_credits %>"   >
 <form id="paymentForm" method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/">
           <input id="merchantId" name="merchantId"      type="hidden"  value="<%= @merchant_id %>"   >
@@ -244,7 +244,8 @@ exacto de hojas de vida?</h1>
     }); 
     $(".pricebtn").on("click",function(e){
       e.preventDefault();
-      if($("#userCredits").val() != "unlimited"){
+      
+      if(($("#userCredits").val() != "unlimited") || ($("#userCredits").val() == "unlimited" && parseInt($("#numberOfDaysLeft").val()) <= 0 )){
         var apiKey = $("#apiKey").val()
         var merchantId = $("#merchantId").val()
         var referenceCode = $("#referenceCode").val()
