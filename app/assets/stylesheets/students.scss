@@ -1,6 +1,11 @@
 //========================
 // EDIT
 //========================
+.profileheader{background: #ffffff; padding:30px 15px;overflow: hidden; -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-radius:5px 5px 0px 0px;}
+.profileheader h2{margin-bottom: 0px;text-align: left;}
+
 .student-edit-wrapper {
   margin-bottom: 100px;
   padding-left: 0;
@@ -59,13 +64,29 @@
 .student-tab-wrapper {
 
   .student-nav-tabs {
-    margin: 0 30px;
+    margin: 0px 0px 20px 0px;
   }
+.nav-tabs > li {
+  min-width: 23.32%;
+}
+ .nav-tabs > li:first-child {
+     -webkit-border-radius: 0px 0px 5px 0px;
+    -moz-border-radius: 0px 0px 5px 0px;
+    border-radius: 0px 0px 5px 0px;
+}
+.nav-tabs > li:last-child {
+     -webkit-border-radius: 0px 0px 5px 0px;
+    -moz-border-radius: 0px 0px 5px 0px;
+    border-radius: 0px 0px 5px 0px;
+}
+
 
   .nav-tabs > li > a {
-    background-color: $cp-medium-gray;
-    border: 3px solid $cp-blue;
-    border-bottom: 0;
+    background-color: #f5f5f5;
+    border-bottom: 3px solid #f5f5f5;
+    border-right: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-top: 0px solid transparent;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
@@ -73,12 +94,15 @@
     font-weight: bold;
     margin-right: 0;
     //min-height: 63px;
+    text-align: center;
   }
 
   .nav-tabs > li > a:hover, .nav-tabs > li > a:focus, .nav-tabs > li > a:active  {
-    background-color: white;
-    border: 3px solid $cp-blue;
-    border-bottom: 0;
+    background-color: #f5f5f5;
+    border-bottom: 3px solid #78b5e9;
+    border-right: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-top: 0px solid transparent;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
@@ -105,12 +129,14 @@
 
 
   .student-tab-content {
-    border: 3px solid $cp-blue;
+    background: #ffffff;
+    border: 0px solid $cp-blue;
     padding: 20px 30px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
     padding-top: 40px;
+    margin-bottom: 30px;
 
     h1 {
       color: $cp-blue;
@@ -158,7 +184,7 @@
     tr {
 
       td:nth-child(odd) {
-        font-weight: bold;
+     
       }
 
     }
@@ -215,9 +241,11 @@
   }
 
   .nav-tabs > .active > a, .nav-tabs.nav-justified > .active > a, .nav-tabs-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs-justified > .active > a:focus, .nav-tabs.nav-justified > .active > a:focus {
-    border: 3px solid #6AADE4;
-    border-bottom: 0;
-    background-color: white;
+    border-bottom: 3px solid #78b5e9;
+    border-right: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-top: 0px solid transparent;
+    background-color: #f5f5f5;
     color: $cp-dark-gray;
   }
 
@@ -228,7 +256,7 @@
 }
 
 .star-container {
-  display: inline-block;
+  display:block;
 }
 
 span.stars, span.stars span {

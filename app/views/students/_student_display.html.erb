@@ -6,28 +6,64 @@
       <!-- Student's Photo, Name and Rating -->
       <div class="row">
         <div class="col-md-12 text-center">
-          <h2>
-            <span class="student-avatar">
+          <div class="profileheader">
+<div class="col-sm-2">
+  <span class="student-avatar">
+          <img src="/assets/user.png" class: 'img-circle'>
               <% unless @student.user.student.avatar.try(:file).nil? %>
                   <%= image_tag aws_url(@student.user.student.avatar), class: 'img-circle' %>
               <% end %>
             </span>
-
-            <span>
-              <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && (@application.nil? || (@application && !@application.selected)) %>
+          </div>
+<div class="col-sm-6">
+  <span>
+              <h2>
+             <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && (@application.nil? || (@application && !@application.selected)) %>
                   <%= @student.user.first_name %>
               <% else %>
                   <%= @student.user.first_name %>
                   <%= @student.user.last_name %>
               <% end %>
-            </span>
-
-            <div class="star-container">
+            </span> </h2>
+            <div class="star-container text-left">
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
               <% if @student.user.average_rating > 0 %>
                   <span class="stars"><%= average_rating @student.user %></span>
               <% end %>
             </div>
-          </h2>
+</div>
+<div class="col-sm-4">
+  
+    <% if user_signed_in? %>
+            <!-- Student Actions -->
+            <div class="row">
+              <div class="col-md-12 text-center student-actions-wrapper">
+                <% if current_user.role_id == User::ROLE_STUDENT %>
+                    <%= link_to 'Editar perfil', edit_user_path(@student.user), class: 'pull-left btn btn-primary btn-studnet-basic' %>
+                    <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
+                <% elsif (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && params[:opportunity] %>
+                    <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet-basic' %>
+                    <%= link_to 'Contactar', acquire_information_opportunity_path(params[:opportunity], applicant_id: @student.user.id), class: 'btn btn-primary btn-studnet-basic pull-right', method: :post %>
+                <% end %>
+              </div>
+            </div>
+            <!-- ./Student Actions -->
+        <% end %>
+</div>
+
+             
+
+            
+
+            
+         
+
+          </div>
+        
         </div>
       </div>
       <!-- ./Student's Photo, Name and Rating -->
@@ -77,7 +113,7 @@
           <% end %>
         </ul>
 
-        <div class="tab-content student-tab-content">
+        <div class="tab-content student-tab-content clearfix">
 
           <!-- Personal & Education Info -->
           <div id="pane1" class="tab-pane active">
@@ -86,99 +122,73 @@
             <div class="row">
               <div class="col-md-12">
 
+               
+
                 <div class="row">
                   <div class="col-md-6">
-                    <h3>
+                     <h3>
                       Información personal
                     </h3>
-                  </div>
-                </div>
 
-
-                <div class="row">
-                  <div class="col-md-6">
 
                     <table class="table studNet-table">
                       <tbody>
 
                       <tr>
                         <td>
-                          Nombre:
-                        </td>
-                        <td>
-                          <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && (@application.nil? || (@application && !@application.selected)) %>
+                          <b>Nombre:</b> <% if user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && (@application.nil? || (@application && !@application.selected)) %>
                               <%= @student.user.first_name %>
                           <% else %>
                               <%= @student.user.first_name %>
                               <%= @student.user.last_name %>
                           <% end %>
                         </td>
+                       
                       </tr>
 
                       <tr>
                         <td>
-                          Edad:
-                        </td>
-                        <td>
-                          <%= @student.user.friendly_age %>
+                           <b>Edad:</b> <%= @student.user.friendly_age %>
                         </td>
                       </tr>
 
                       <tr>
+                       
                         <td>
-                          Ubicación:
-                        </td>
-                        <td>
-                          <%= @student.user.definitive_location %>
+                           <b>Ubicación:</b> <%= @student.user.definitive_location %>
                         </td>
                       </tr>
-
-                      <tbody>
-                    </table>
-
-                  </div>
-
-                  <% if administrator_signed_in? || (user_signed_in? && current_user.role_id == User::ROLE_STUDENT) || (user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) &&(@application && @application.selected)) %>
-                      <div class="col-md-6">
-
-                        <table class="table studNet-table">
-                          <tbody>
+<% if administrator_signed_in? || (user_signed_in? && current_user.role_id == User::ROLE_STUDENT) || (user_signed_in? && (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) &&(@application && @application.selected)) %>
+                     
+                    
 
                           <% if @student.user.role_id == User::ROLE_STUDENT %>
                               <tr>
-                                <td>Correo:</td>
-                                <td><%= @student.user.email %></td>
+                                <td><b>Correo:</b><%= @student.user.email %></td>
+                              
                               </tr>
 
                               <tr>
-                                <td>Celular:</td>
-                                <td><%= @student.user.mobile_phone %></td>
+                                <td><b>Celular:</b><%= @student.user.mobile_phone %></td>
+                              
                               </tr>
 
                               <tr>
-                                <td>Número de documento:</td>
-                                <td><%= @student.user.document_number %></td>
+                                <td><b>Número de documento:</b><%= @student.user.document_number %></td>
+                             
                               </tr>
                           <% end %>
 
-                          <tbody>
-                          </table>
+                        
 
-                      </div>
+                     
                   <% end %>
+                      <tbody>
+                    </table>
+  
+                  </div>
 
-                </div>
-              </div>
-              <!-- ./Personal Info Table -->
-            </div>
-            <!-- ./Personal Info -->
 
-            <!-- ./Education Info -->
-            <div class="row">
-              <div class="col-md-12">
-
-                <div class="row">
-                  <!-- Education Info Table -->
                   <div class="col-md-6">
 
                     <h3>
@@ -191,117 +201,110 @@
 
                       <tr>
                         <td>
-                          Carrera:
-                        </td>
-                        <td>
-                          <% unless @student.user.student.major_id.nil? %>
+                         <b> Carrera:</b> <% unless @student.user.student.major_id.nil? %>
                               <%= @student.user.student.definitive_major %>
                           <% end %>
                         </td>
+                     
                       </tr>
 
                       <tr>
                         <td>
-                          Universidad:
-                        </td>
-                        <td>
-                          <% unless @student.user.student.university_id.nil? %>
+                          <b>Universidad: </b><% unless @student.user.student.university_id.nil? %>
                               <%= @student.user.student.definitive_university %>
                           <% end %>
                         </td>
+                      
                       </tr>
 
                       <tr>
                         <td>
-                          Nivel:
-                        </td>
-                        <td>
-                          <% unless @student.user.student.ed_level_id.nil? %>
+                          <b>Nivel:</b><% unless @student.user.student.ed_level_id.nil? %>
                               <%= @student.user.student.education_level.level_name %>
                           <% end %>
                         </td>
+                       
                       </tr>
 
 
                       <% if @student.user.student.has_second_major? %>
-                          <tr></tr>
+                         
 
                           <tr>
                             <td>
-                              Segunda carrera:
-                            </td>
-                            <td>
-                              <% unless @student.user.student.second_major_id.nil? %>
+                              <b>Segunda carrera: </b> <% unless @student.user.student.second_major_id.nil? %>
                                   <%= @student.user.student.definitive_second_major %>
                               <% end %>
                             </td>
+                            
                           </tr>
 
                           <tr>
                             <td>
-                              Universidad:
-                            </td>
-                            <td>
-                              <% unless @student.user.student.second_university_id.nil? %>
+                              <b>Universidad:</b> <% unless @student.user.student.second_university_id.nil? %>
                                   <%= @student.user.student.definitive_second_university %>
                               <% end %>
                             </td>
+                           
                           </tr>
 
                           <tr>
                             <td>
-                              Nivel:
-                            </td>
-                            <td>
-                              <% unless @student.user.student.second_ed_level_id.nil? %>
+                              <b>Nivel:</b>  <% unless @student.user.student.second_ed_level_id.nil? %>
                                   <%= @student.user.student.second_education_level.level_name %>
                               <% end %>
                             </td>
+                          
                           </tr>
                       <% end %>
 
                       <tr>
                         <td>
-                          Último semestre cursado:
+                          <b>Último semestre cursado:</b><%= @student.user.student.last_semester %>
                         </td>
-                        <td>
-                          <%= @student.user.student.last_semester %>
-                        </td>
+                     
                       </tr>
 
                       <tr>
                         <td>
-                          Promedio académico:
-                        </td>
-                        <td>
-                          <% unless @student.user.student.gpa.blank?  %>
+                          <b>Promedio académico:</b>   <% unless @student.user.student.gpa.blank?  %>
                               <%= " #{@student.user.student.gpa} / #{@student.user.student.gpa_max}" %>
                           <% end %>
                         </td>
+                      
                       </tr>
 
                       <tr>
                         <td>
-                          Tipo de estudiante:
+                          <b>Tipo de estudiante:</b> <%= type_of_student_select_friendly(@student.user) %>
                         </td>
-                        <td>
-                          <%= type_of_student_select_friendly(@student.user) %>
-                        </td>
+                      
                       </tr>
 
                       <tr>
                         <td>
-                          Colegio:
+                          <b>Colegio:</b>  <%= @student.user.student.highschool %>
                         </td>
-                        <td>
-                          <%= @student.user.student.highschool %>
-                        </td>
+                       
                       </tr>
 
                       </tbody>
                     </table>
 
                   </div>
+                </div>
+              </div>
+              <!-- ./Personal Info Table -->
+            </div>
+            <!-- ./Personal Info -->
+
+            <!-- ./Education Info -->
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="row">
+                  <!-- Education Info Table -->
+                
                   <!-- ./Education Info Table -->
 
                   <!-- Other Major & Student Exchange Table -->
@@ -420,40 +423,37 @@
                 <!-- Work Experience outside studNet  -->
 
 
-                <div class="student-work-outside-studnet">
+                <div class="student-work-outside-studnet ">
                   <!-- Professional XP -->
-
+ <div class="col-md-6 student-xp-title student-xp-title-blank">
                   <% if @student.user.student.work_xp == 0 %>
-                      <div class="row">
-                        <div class="col-md-6 student-xp-title student-xp-title-blank">
-                          <h3>
-                            Experiencia profesional
-                          </h3>
-                        </div>
-                      </div>
-                  <% else %>
-                      <div class="row">
-                        <div class="col-md-6 student-xp-title">
-                          <h3>
-                            Experiencia profesional
-                          </h3>
-                        </div>
-                      </div>
 
-                      <div class="row">
-                        <div class="col-md-6 student-xp-title">
+                      
+                       
+                          <h3>
+                            Experiencia profesional
+                          </h3>
+                       
+                      
+                  <% else %>
+                     
+                    
+                           <h3>
+                            Experiencia profesional
+                          </h3>
+                      
+                      
+
+                     
                           <h4>
                             <%= @student.user.student.xp_position %>
                           </h4>
                           <h5>
                             <%= @student.user.student.xp_company %>
                           </h5>
-                        </div>
-                      </div>
 
 
-                      <div class="row">
-                        <div class="col-md-12">
+                          <div class="col-md-12">
                           <ul>
                             <li>
                               <p>
@@ -462,13 +462,13 @@
                             </li>
                           </ul>
                         </div>
-                      </div>
 
-                      <% if @student.user.student.has_second_work_xp? %>
+
+            <% if @student.user.student.has_second_work_xp? %>
                           <hr />
 
-                          <div class="row">
-                            <div class="col-md-6 student-xp-title">
+                          
+                            <div class="col-md-6 student-xp-title abx">
                               <h4>
                                 <%= @student.user.student.second_xp_position %>
                               </h4>
@@ -476,10 +476,10 @@
                                 <%= @student.user.student.second_xp_company %>
                               </h5>
                             </div>
-                          </div>
+                          
 
 
-                          <div class="row">
+                         
                             <div class="col-md-12">
                               <ul>
                                 <li>
@@ -489,13 +489,13 @@
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                          
                       <% end %>
 
                       <% if @student.user.student.has_third_work_xp? %>
                           <hr />
 
-                          <div class="row">
+                          
                             <div class="col-md-6 student-xp-title">
                               <h4>
                                 <%= @student.user.student.third_xp_position %>
@@ -504,9 +504,9 @@
                                 <%= @student.user.student.third_xp_company %>
                               </h5>
                             </div>
-                          </div>
+                          
 
-                          <div class="row">
+                       
                             <div class="col-md-12">
                               <ul>
                                 <li>
@@ -516,40 +516,48 @@
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                          
                       <% end %>
 
-                  <% end %>
+                  <% end %> 
                   <!-- Professional XP -->
 
+
+              </div>        
+
+
+                      
+
+                      
+
                   <!-- Other Activities XP -->
-
+  <div class="col-md-6 student-xp-title student-xp-title-blank">
                   <% if @student.user.student.volunteer_xp == 0 %>
-                      <div class="row">
-                        <div class="col-md-6 student-xp-title student-xp-title-blank">
+                      
+                      
                           <h3>
                             Actividades sociales y de voluntariado
                           </h3>
-                        </div>
-                      </div>
+                        
+                      
                   <% else %>
-                      <div class="row">
-                        <div class="col-md-6 student-xp-title">
+                      
+                       
                           <h3>
                             Actividades sociales y de voluntariado
                           </h3>
-                        </div>
-                      </div>
+                        
+                     
 
-                      <div class="row">
-                        <div class="col-md-6 student-xp-title">
+                     
+                       
                           <h5>
                             <%= @student.user.student.volunteer_org %>
                           </h5>
-                        </div>
-                      </div>
+                        
+                   
 
-                      <div class="row">
+                    
                         <div class="col-md-12">
                           <ul>
                             <li>
@@ -559,20 +567,19 @@
                             </li>
                           </ul>
                         </div>
-                      </div>
+                   
 
                       <% if @student.user.student.has_second_volunteer_xp? %>
                           <hr />
 
-                          <div class="row">
-                            <div class="col-md-6 student-xp-title">
+                         
+                            <div class="col-md-12 student-xp-title">
                               <h5>
                                 <%= @student.user.student.second_volunteer_org %>
                               </h5>
                             </div>
-                          </div>
-
-                          <div class="row">
+                     
+                         
                             <div class="col-md-12">
                               <ul>
                                 <li>
@@ -582,21 +589,21 @@
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                         
                       <% end %>
 
                       <% if @student.user.student.has_third_volunteer_xp? %>
                           <hr />
 
-                          <div class="row">
-                            <div class="col-md-6 student-xp-title">
+                        
+                            <div class="col-md-12 student-xp-title">
                               <h5>
                                 <%= @student.user.student.third_volunteer_org %>
                               </h5>
                             </div>
-                          </div>
+                       
 
-                          <div class="row">
+                         
                             <div class="col-md-12">
                               <ul>
                                 <li>
@@ -606,23 +613,24 @@
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                          
                       <% end %>
 
                   <% end %>
                 </div>
+                </div>
                 <!-- ./Work Experience outside studNet  -->
 
                 <!-- Work Experience inside studNet  -->
-                <div class="row">
+                
                   <div class="col-md-6 student-xp-title margin-bot-20">
                     <h3>
                       Proyectos desarrollados en studNet
                     </h3>
-                  </div>
-                </div>
+                  
+              
 
-                <div class="row">
+               
                   <div class="col-md-12">
                     <ul>
                       <% if @student.user.studnet_experience_projects.count > 0 %>
@@ -641,7 +649,7 @@
                     </ul>
                     <br>
                   </div>
-                </div>
+               </div>
                 <!-- ./Work Experience inside studNet  -->
 
               </div>
@@ -766,37 +774,37 @@
           <!-- Description -->
           <div id="pane4" class="tab-pane">
 
-            <div class="row">
+          <div class="row">
               <div class="col-md-12 student-skills">
 
-                <div class="row">
-                  <div class="col-md-6 student-xp-title">
+               
+                  <div class="student-xp-title">
                     <h3>
                       Principales fortalezas
                     </h3>
                   </div>
-                </div>
+               
 
-                <div class="row">
-                  <div class="col-md-12">
+               <div class="col-md-12">
+                 
                     <ul>
                       <li>
                         <%= @student.user.student.strengths %>
                       </li>
                     </ul>
-                  </div>
+                  
                 </div>
 
 
-                <div class="row">
-                  <div class="col-md-8 student-xp-title">
+               
+                  <div class="student-xp-title">
                     <h3>
                       Áreas en las que le gustaría desarrollar su carrera profesional
                     </h3>
                   </div>
-                </div>
+            
 
-                <div class="row">
+               
                   <div class="col-md-12">
                     <ul>
                       <li>
@@ -804,17 +812,17 @@
                       </li>
                     </ul>
                   </div>
-                </div>
+                
 
-                <div class="row">
-                  <div class="col-md-6 student-xp-title">
+               
+                  <div class="student-xp-title">
                     <h3>
                       Intereses, hobbies y otros
                     </h3>
                   </div>
-                </div>
+                
 
-                <div class="row">
+               
                   <div class="col-md-12">
                     <ul>
                       <li>
@@ -822,10 +830,10 @@
                       </li>
                     </ul>
                   </div>
-                </div>
+           
 
               </div>
-            </div>
+           
 
           </div>
           <!-- ./Description -->
@@ -901,21 +909,7 @@
         </div>
         <!-- /.tab-content -->
 
-        <% if user_signed_in? %>
-            <!-- Student Actions -->
-            <div class="row">
-              <div class="col-md-12 text-center student-actions-wrapper">
-                <% if current_user.role_id == User::ROLE_STUDENT %>
-                    <%= link_to 'Editar perfil', edit_user_path(@student.user), class: 'btn btn-primary btn-studnet-basic' %>
-                    <%= link_to 'Ver ofertas', opportunities_path, class: 'btn btn-primary btn-studnet-basic' %>
-                <% elsif (current_user.role_id == User::ROLE_COMPANY || current_user.role_id == User::ROLE_PERSON) && params[:opportunity] %>
-                    <%= link_to 'Ver más aplicaciones', applicants_opportunity_path(params[:opportunity]), class: 'btn btn-primary btn-studnet-basic' %>
-                    <%= link_to 'Contactar', acquire_information_opportunity_path(params[:opportunity], applicant_id: @student.user.id), class: 'btn btn-primary btn-studnet-basic', method: :post %>
-                <% end %>
-              </div>
-            </div>
-            <!-- ./Student Actions -->
-        <% end %>
+      
       </div>
       <!-- /.tabbable -->
 
