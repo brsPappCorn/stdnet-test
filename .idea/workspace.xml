@@ -1,108 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3a620d-f79f-4c21-b77e-cc21d439adcf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/administrators_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/administrators_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/students_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/students_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/users_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/administrators/opportunities.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators/opportunities.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companies/index.html.erb" afterPath="$PROJECT_DIR$/app/views/companies/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companies/show.html.erb" afterPath="$PROJECT_DIR$/app/views/companies/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/opportunities/index.html.erb" afterPath="$PROJECT_DIR$/app/views/opportunities/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/opportunities/my_opportunities.html.erb" afterPath="$PROJECT_DIR$/app/views/opportunities/my_opportunities.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/students/_student_display.html.erb" afterPath="$PROJECT_DIR$/app/views/students/_student_display.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/students/index.html.erb" afterPath="$PROJECT_DIR$/app/views/students/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/students/show.html.erb" afterPath="$PROJECT_DIR$/app/views/students/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/users/_student_form.html.erb" afterPath="$PROJECT_DIR$/app/views/users/_student_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/users/index.html.erb" afterPath="$PROJECT_DIR$/app/views/users/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/secrets.yml" afterPath="$PROJECT_DIR$/config/secrets.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922102622_create_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922102622_create_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922110605_create_users.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922110605_create_users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922110635_add_devise_to_users.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922110635_add_devise_to_users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922142657_add_referenced_by_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922142657_add_referenced_by_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922143612_remove_promo_id_from_student.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922143612_remove_promo_id_from_student.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922143640_add_promo_id_to_user.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922143640_add_promo_id_to_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922144058_remove_referenced_by_from_student.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922144058_remove_referenced_by_from_student.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922144150_add_referenced_by_to_user.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922144150_add_referenced_by_to_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922151300_create_companies.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922151300_create_companies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922152340_create_people.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922152340_create_people.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922154417_create_administrators.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922154417_create_administrators.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922221127_remove_ids_from_user.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922221127_remove_ids_from_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922221218_add_user_id_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922221218_add_user_id_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922221253_add_user_id_to_companies.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922221253_add_user_id_to_companies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160922221333_add_user_id_to_persons.rb" afterPath="$PROJECT_DIR$/db/migrate/20160922221333_add_user_id_to_persons.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160923015636_change_name_from_companies.rb" afterPath="$PROJECT_DIR$/db/migrate/20160923015636_change_name_from_companies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160923060533_remove_role_id_from_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160923060533_remove_role_id_from_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160923170033_create_universities.rb" afterPath="$PROJECT_DIR$/db/migrate/20160923170033_create_universities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160924185434_create_majors.rb" afterPath="$PROJECT_DIR$/db/migrate/20160924185434_create_majors.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160924190052_change_name_from_majors.rb" afterPath="$PROJECT_DIR$/db/migrate/20160924190052_change_name_from_majors.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160924195337_add_basic_info_to_users.rb" afterPath="$PROJECT_DIR$/db/migrate/20160924195337_add_basic_info_to_users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925022212_remove_identification_number_from_users.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925022212_remove_identification_number_from_users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925025532_create_cities.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925025532_create_cities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925025605_create_countries.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925025605_create_countries.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925100116_add_ed_info_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925100116_add_ed_info_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925212923_add_gpa_max_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925212923_add_gpa_max_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925221412_add_country_id_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925221412_add_country_id_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160925223714_remove_exchange_country_id_from_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160925223714_remove_exchange_country_id_from_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160926134741_add_work_experience_info_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160926134741_add_work_experience_info_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927091018_add_skills_info_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927091018_add_skills_info_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927092716_create_languages.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927092716_create_languages.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927093055_change_language_from_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927093055_change_language_from_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927100047_create_tools.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927100047_create_tools.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927100145_create_join_table_tool_student.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927100145_create_join_table_tool_student.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927102425_remove_tool_from_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927102425_remove_tool_from_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927120648_add_description_info_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927120648_add_description_info_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927135829_add_company_info_to_companies.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927135829_add_company_info_to_companies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927140316_add_company_info_extras_to_companies.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927140316_add_company_info_extras_to_companies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927141530_create_sectors.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927141530_create_sectors.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927142147_add_sector_id_to_companies.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927142147_add_sector_id_to_companies.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927180705_change_language_id_string_to_integer.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927180705_change_language_id_string_to_integer.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927214758_create_education_levels.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927214758_create_education_levels.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160927223312_create_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20160927223312_create_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160928002152_change_opportunity_type_string_to_integer.rb" afterPath="$PROJECT_DIR$/db/migrate/20160928002152_change_opportunity_type_string_to_integer.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160928032707_change_availability_string_to_integer.rb" afterPath="$PROJECT_DIR$/db/migrate/20160928032707_change_availability_string_to_integer.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160928032828_change_cost_offer_string_to_integer.rb" afterPath="$PROJECT_DIR$/db/migrate/20160928032828_change_cost_offer_string_to_integer.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160928034656_create_join_table_applicants.rb" afterPath="$PROJECT_DIR$/db/migrate/20160928034656_create_join_table_applicants.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161002170730_add_user_id_to_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20161002170730_add_user_id_to_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161003131525_add_student_availability_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20161003131525_add_student_availability_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161003160454_create_applications.rb" afterPath="$PROJECT_DIR$/db/migrate/20161003160454_create_applications.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161003171153_remove_student_availability_from_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20161003171153_remove_student_availability_from_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161005203540_add_devise_to_administrators.rb" afterPath="$PROJECT_DIR$/db/migrate/20161005203540_add_devise_to_administrators.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161005234909_add_approved_state_to_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20161005234909_add_approved_state_to_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161006143620_add_profession_to_people.rb" afterPath="$PROJECT_DIR$/db/migrate/20161006143620_add_profession_to_people.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161007102739_add_avatar_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20161007102739_add_avatar_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161007113334_add_portfolio_to_applications.rb" afterPath="$PROJECT_DIR$/db/migrate/20161007113334_add_portfolio_to_applications.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161012202718_change_students_booleans_to_integers.rb" afterPath="$PROJECT_DIR$/db/migrate/20161012202718_change_students_booleans_to_integers.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161012204524_change_students_remaining_booleans_to_integers.rb" afterPath="$PROJECT_DIR$/db/migrate/20161012204524_change_students_remaining_booleans_to_integers.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161013144615_add_date_ini_type_to_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20161013144615_add_date_ini_type_to_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161013170100_add_opportunity_duration_type_to_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20161013170100_add_opportunity_duration_type_to_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161014080442_change_opportunity_cost_integer_to_string.rb" afterPath="$PROJECT_DIR$/db/migrate/20161014080442_change_opportunity_cost_integer_to_string.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161018161518_add_user_confirmable.rb" afterPath="$PROJECT_DIR$/db/migrate/20161018161518_add_user_confirmable.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161024214009_create_student_major_join_table.rb" afterPath="$PROJECT_DIR$/db/migrate/20161024214009_create_student_major_join_table.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161025155720_create_opportunity_major_join_table.rb" afterPath="$PROJECT_DIR$/db/migrate/20161025155720_create_opportunity_major_join_table.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161025161501_remove_major_id_from_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20161025161501_remove_major_id_from_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161026233127_add_type_of_student_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20161026233127_add_type_of_student_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161103163716_add_other_city_to_user.rb" afterPath="$PROJECT_DIR$/db/migrate/20161103163716_add_other_city_to_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161103170232_add_other_major_university_to_user.rb" afterPath="$PROJECT_DIR$/db/migrate/20161103170232_add_other_major_university_to_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161103181026_add_other_tools_and_skills_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20161103181026_add_other_tools_and_skills_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161104214112_add_closed_column_to_opportunities.rb" afterPath="$PROJECT_DIR$/db/migrate/20161104214112_add_closed_column_to_opportunities.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161104215431_add_secondary_education_to_students.rb" afterPath="$PROJECT_DIR$/db/migrate/20161104215431_add_secondary_education_to_students.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161108170117_add_more_work_experience_student.rb" afterPath="$PROJECT_DIR$/db/migrate/20161108170117_add_more_work_experience_student.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161108181546_add_more_other_experience_to_student.rb" afterPath="$PROJECT_DIR$/db/migrate/20161108181546_add_more_other_experience_to_student.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161108182949_add_multiple_languages_to_student.rb" afterPath="$PROJECT_DIR$/db/migrate/20161108182949_add_multiple_languages_to_student.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161108212251_create_learnt_languages.rb" afterPath="$PROJECT_DIR$/db/migrate/20161108212251_create_learnt_languages.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161116223025_add_second_major_university.rb" afterPath="$PROJECT_DIR$/db/migrate/20161116223025_add_second_major_university.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20161117210013_add_selected_to_application.rb" afterPath="$PROJECT_DIR$/db/migrate/20161117210013_add_selected_to_application.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170202173034_change_promo_id_type.rb" afterPath="$PROJECT_DIR$/db/migrate/20170202173034_change_promo_id_type.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
-    </list>
+    <list default="true" id="be3a620d-f79f-4c21-b77e-cc21d439adcf" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/public/system/" />
@@ -171,6 +70,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Javier Jiménez" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -624,6 +528,9 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" />
+  <component name="StructureViewFactory">
+    <option name="AUTOSCROLL_MODE" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="be3a620d-f79f-4c21-b77e-cc21d439adcf" name="Default" comment="" />
@@ -635,25 +542,25 @@
       <workItem from="1508073566997" duration="2901000" />
       <workItem from="1508120518259" duration="1485000" />
       <workItem from="1508131560381" duration="1628000" />
-      <workItem from="1508159387783" duration="36774000" />
+      <workItem from="1508159387783" duration="38138000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49328000" />
+    <option name="totallyTimeSpent" value="50692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="59" y="-4" width="1307" height="772" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20856462" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20856462" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.50911975" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.5075337" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32886904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.4924663" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36309522" sideWeight="0.49088025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980174" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32589287" sideWeight="0.8659794" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32589287" sideWeight="0.8659794" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -696,6 +603,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="PopUps" />
+    <option name="LAST_COMMIT_MESSAGE" value="PopUps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
