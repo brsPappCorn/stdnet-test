@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3a620d-f79f-4c21-b77e-cc21d439adcf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="be3a620d-f79f-4c21-b77e-cc21d439adcf" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/public/system/" />
@@ -157,8 +155,8 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="417" />
-    <option name="y" value="48" />
+    <option name="x" value="491" />
+    <option name="y" value="24" />
     <option name="width" value="1307" />
     <option name="height" value="744" />
   </component>
@@ -614,15 +612,15 @@
       <workItem from="1508131560381" duration="1628000" />
       <workItem from="1508159387783" duration="38138000" />
       <workItem from="1508214923071" duration="1334000" />
-      <workItem from="1508248947478" duration="654000" />
+      <workItem from="1508248947478" duration="770000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52680000" />
+    <option name="totallyTimeSpent" value="52796000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="417" y="48" width="1307" height="744" extended-state="0" />
+    <frame x="491" y="24" width="1307" height="744" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21490881" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
