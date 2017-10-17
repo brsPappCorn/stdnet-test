@@ -1,4 +1,4 @@
-class AddSkillsInfoToStudents < ActiveRecord::Migration
+class AddSkillsInfoToStudents < ActiveRecord::Migration[5.1]
   def change
     add_column :students, :language, :string
     add_column :students, :language_level, :string

@@ -1,4 +1,4 @@
-class AddEdInfoToStudents < ActiveRecord::Migration
+class AddEdInfoToStudents < ActiveRecord::Migration[5.1]
   def change
     add_column :students, :ed_level_id, :integer
     add_column :students, :last_semester, :string

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy, :build_learnt_language, :mark_as_selected, :rate_opportunity]
-
   def index
     if administrator_signed_in?
       if params[:email]
@@ -20,7 +19,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        flash[:success] = 'Tu perfil se ha actualizado exitosamente.'
+        session[:student] = true
+        session[:company] = true
         format.html { redirect_to root_path }
       else
         flash[:error] = 'Tu perfil no pudo ser actualizado, por favor inténtalo nuevamente.'

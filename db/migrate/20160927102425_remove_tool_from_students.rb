@@ -1,4 +1,4 @@
-class RemoveToolFromStudents < ActiveRecord::Migration
+class RemoveToolFromStudents < ActiveRecord::Migration[5.1]
   def change
     remove_column :students, :tools, :string
   end

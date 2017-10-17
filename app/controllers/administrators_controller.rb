@@ -22,6 +22,7 @@ class AdministratorsController < ApplicationController
 
     respond_to do |format|
       if @administrator.save
+
         flash[:success] = 'El administrador fue creado exitosamente.'
         format.html { redirect_to @administrator }
       else
@@ -60,8 +61,7 @@ class AdministratorsController < ApplicationController
         path = get_user_excel_path
         AdministratorMailer.users_excel(path).deliver_now
       end.run
-
-      flash[:success] = 'Pronto le estará llegando un correo con el Excel adjunto.'
+      session[:excel] = true
       redirect_to opportunities_administrators_path
     end
   end

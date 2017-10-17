@@ -14,6 +14,7 @@ gem 'kaminari'
 
 # Assets
 gem 'bootstrap-sass'
+gem "twitter-bootstrap-rails"
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'

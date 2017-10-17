@@ -1,4 +1,4 @@
-class AddUserIdToOpportunities < ActiveRecord::Migration
+class AddUserIdToOpportunities < ActiveRecord::Migration[5.1]
   def change
     add_column :opportunities, :user_id, :integer
   end

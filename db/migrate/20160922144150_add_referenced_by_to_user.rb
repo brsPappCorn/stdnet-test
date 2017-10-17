@@ -1,4 +1,4 @@
-class AddReferencedByToUser < ActiveRecord::Migration
+class AddReferencedByToUser < ActiveRecord::Migration[5.1]
   def change
     add_column :users, :referenced_by, :string
   end

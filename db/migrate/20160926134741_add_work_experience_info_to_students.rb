@@ -1,4 +1,4 @@
-class AddWorkExperienceInfoToStudents < ActiveRecord::Migration
+class AddWorkExperienceInfoToStudents < ActiveRecord::Migration[5.1]
   def change
     add_column :students, :work_xp, :boolean
     add_column :students, :xp_company, :string

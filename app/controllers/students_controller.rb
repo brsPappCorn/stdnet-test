@@ -3,13 +3,13 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :delete_second_major, :destroy]
 
   def index
+
     if administrator_signed_in?
       @students = Student.all.page params[:page]
     else
       redirect_to root_path
     end
   end
-
   def show
     if administrator_signed_in? || user_signed_in?
       @application = Application.where(user_id: @student.user.id, opportunity_id: params[:opportunity]).first if params[:opportunity]
@@ -35,11 +35,10 @@ class StudentsController < ApplicationController
       redirect_to root_path
     end
   end
-
   def delete_second_major
     if user_signed_in?
       if @student.delete_second_major
-        flash[:success] = 'Has eliminado la información de "Otra carrera"'
+        session[:delete_second] = true
         redirect_to @student
       else
         flash[:error] = 'Ocurrió un error, por favor inténtelo de nuevo.'

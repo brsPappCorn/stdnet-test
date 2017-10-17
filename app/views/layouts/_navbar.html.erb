@@ -90,7 +90,7 @@
                 </li>
             <% elsif current_user.has_role?(User::ROLE_COMPANY) || current_user.has_role?(User::ROLE_PERSON) %>
                 <li class="navbar-links-normal-weight">
-                  <%= link_to 'Mis Ofertas', my_opportunities_opportunities_path %>
+                  <%= link_to 'Mis Ofertas', my_opportunities_opportunities_path %><%session[:myOp]=true %>
                 </li>
                 <li class="navbar-links-normal-weight">
                   <%= link_to 'Precios', company_pricing_path %>

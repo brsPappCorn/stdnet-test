@@ -1,3 +1,105 @@
+<script>
+    $(window).on('load',function(){
+        $('#admin').modal('show');
+    });
+</script>
+<% if session[:showAdmin]==true %>
+    <div data-target="#admin">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="admin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " id="exampleModalLongTitle">Información</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Aquí encontrarás la información correspondiente a la empresa
+          </div>
+          <div class="modal-footer">
+            <button id="closePopup" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<%end %>
+<script>
+    $( "#closePopup" ).click(function()
+    {   '<%= session["showAdmin"]=false %>';
+    });
+</script>
+
+
+
+<script>
+    $(window).on('load',function(){
+        $('#info').modal('show');
+    });
+</script>
+<% if session[:company_role] == true %>
+    <div data-target="#info">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " id="exampleModalLongTitle">Información</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Por favor completa la información de tu perfil para crear y publicar ofertas.
+          </div>
+          <div class="modal-footer">
+            <button id="closePop" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<%end %>
+<script>
+    $( "#closePop").click(function()
+    {   '<%= session["info"]=false %>';
+    });
+</script>
+<script>
+    $(window).on('load',function(){
+        $('#editCompany').modal('show');
+    });
+</script>
+<% if session[:company] == true %>
+    <div data-target="#editCompany">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="editCompany" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " id="exampleModalLongTitle">Actualización</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Has actualizado tus datos.
+          </div>
+          <div class="modal-footer">
+            <button id="closePop" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<%end %>
+<script>
+    $( "#closePop").click(function()
+    {   '<%= session["company"]=false %>';
+    });
+</script>
 <section class="devise-wrapper">
   <div class="companies-signup-header margin-bot-40">
     
@@ -180,3 +282,4 @@
 
   </div>
 </section>
+

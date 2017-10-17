@@ -23,7 +23,7 @@
                 </td>
                 <td><%= company.company_name %></td>
 
-                <td><%= link_to 'Show', company, class: 'btn btn-default btn-studnet-details' %></td>
+                <td><%= link_to 'Show', company, class: 'btn btn-default btn-studnet-details' %><% session[:showAdmin]= true %></td>
               </tr>
           <% end %>
           </tbody>

@@ -112,7 +112,8 @@
                   <h4>
                     Otra carrera (opcional)
                     <% if @user.student.has_second_major? %>
-                        <span><small><%= link_to '(Eliminar carrera)', delete_second_major_student_path(@user.student), class: 'text-danger', method: :post %></small></span>
+                        <span><small><%= link_to '(Eliminar carrera)', delete_second_major_student_path(@user.student), class: 'text-danger', method: :post %>
+                          </small></span>
                     <% end %>
                   </h4><br/>
 
@@ -517,6 +518,7 @@
       <!-- ./Other -->
 
       <div class="actions actions-margin-top text-right">
+
         <%= f.submit 'Guardar', class: 'btn btn-primary btn-studnet-basic' %>
       </div>
     </div>

@@ -1,3 +1,139 @@
+<script>
+    $(window).on('load',function(){
+        $('#admin').modal('show');
+    });
+</script>
+<% if session[:show]==true %>
+    <div data-target="#admin">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="admin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " id="exampleModalLongTitle">Información</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Aquí encontrarás la información correspondiente a el estudiante
+          </div>
+          <div class="modal-footer">
+            <button id="closePopup" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<%end %>
+<script>
+    $( "#closePopup" ).click(function()
+    {   '<%= session["showAdmin"]=false %>';
+    });
+</script>
+
+
+<script>
+    $(window).on('load',function(){
+        $('#role').modal('show');
+    });
+</script>
+<% if session[:student_role]==true %>
+    <div data-target="#role">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="role" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " id="exampleModalLongTitle">Información</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           Recuerda completar tu información para poder ver ofertas.
+          </div>
+          <div class="modal-footer">
+            <button id="closePopup" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<%end %>
+<script>
+    $( "#closePopup" ).click(function()
+    {   '<%= session["student_role"]=false %>';
+    });
+</script>
+
+<script>
+    $(window).on('load',function(){
+        $('#editPerfil').modal('show');
+    });
+</script>
+<% if session[:student]==true %>
+<div data-target="#editPerfil">
+</div>
+<!-- Modal -->
+<div class="modal fade" id="editPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="exampleModalLongTitle">Has editado tu perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Actualizaste tu perfil.
+      </div>
+      <div class="modal-footer">
+        <button id="closePopup" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%end %>
+<script>
+    $( "#closePopup" ).click(function()
+    {   '<%= session["student"]=false %>';
+    });
+</script>
+
+<script>
+    $(window).on('load',function(){
+        $('#delete_second_major').modal('show');
+    });
+</script>
+<% if session[:delete_second]==true %>
+    <div data-target="#delete_second_major">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="delete_second_major" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " id="exampleModalLongTitle">Has eliminado tu otra carrera</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Recuerda que debes completar tu perfil para poder aplicar a las ofertas.
+          </div>
+          <div class="modal-footer">
+            <button id="closePopup" type="button" class="pull-right btn btn-primary btn-studnet-basic"  data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<%end %>
+<script>
+    $( "#closePopup" ).click(function()
+    {   '<%= session["delete_second"]=false %>';
+    });
+</script>
 <section class="devise-wrapper">
   <div class="students-show-view-header">
     <div class="container">
@@ -11,11 +147,8 @@
     </div>
   </div>
 </section>
-
 <section class="profile-wrapper">
   <div class="container">
-
-    <%= render 'students/student_display' %>
-
+        <%= render 'students/student_display' %>
   </div>
 </section>

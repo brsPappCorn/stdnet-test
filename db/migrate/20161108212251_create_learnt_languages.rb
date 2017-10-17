@@ -1,4 +1,4 @@
-class CreateLearntLanguages < ActiveRecord::Migration
+class CreateLearntLanguages < ActiveRecord::Migration[5.1]
   def change
     create_table :learnt_languages do |t|
       t.integer :language_id
