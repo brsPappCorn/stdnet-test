@@ -1,4 +1,4 @@
-class PeopleController < ApplicationController
+ class PeopleController < ApplicationController
   before_action :set_person, only: :show
 
   def index

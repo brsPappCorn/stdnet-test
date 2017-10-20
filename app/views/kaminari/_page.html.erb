@@ -1,4 +1,4 @@
-<% if page.current? %>
+ <% if page.current? %>
   <li class='active'>
     <%= content_tag :a, page, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
   </li>

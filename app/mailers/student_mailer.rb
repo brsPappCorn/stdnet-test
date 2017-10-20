@@ -1,4 +1,4 @@
-class StudentMailer < ApplicationMailer
+ class StudentMailer < ApplicationMailer
   helper OpportunitiesHelper
 
   def notify_new_offer(opportunity, student)

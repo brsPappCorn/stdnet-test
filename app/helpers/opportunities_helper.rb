@@ -1,4 +1,4 @@
-module OpportunitiesHelper
+ module OpportunitiesHelper
 
   def opportunity_majors_by_comma
     if @opportunity.other_majors

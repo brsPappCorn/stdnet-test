@@ -1,2 +1,2 @@
-module NotificationPostsHelper
+ module NotificationPostsHelper
 end

@@ -1,4 +1,4 @@
-module StudentsHelper
+ module StudentsHelper
 
   # Helper method for building rails helper select from constants declared in the model
   def student_yes_no_select_type

@@ -1,4 +1,4 @@
-class StaticPagesController < ApplicationController
+ class StaticPagesController < ApplicationController
   include UsersHelper
 
   def index

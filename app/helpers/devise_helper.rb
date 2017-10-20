@@ -1,4 +1,4 @@
-module DeviseHelper
+ module DeviseHelper
   # ====
   # Override methods
   # ====

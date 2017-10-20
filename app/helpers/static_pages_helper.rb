@@ -1,4 +1,4 @@
-module StaticPagesHelper
+ module StaticPagesHelper
   def alert_class(flash_key)
     case flash_key
       when 'notice'

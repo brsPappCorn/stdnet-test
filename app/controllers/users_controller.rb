@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy, :build_learnt_language, :mark_as_selected, :rate_opportunity]
   def index
     if administrator_signed_in?

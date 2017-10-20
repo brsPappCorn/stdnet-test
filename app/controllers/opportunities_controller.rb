@@ -1,4 +1,4 @@
-class OpportunitiesController < ApplicationController
+ class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy, :apply, :application_form, :applicants,
                                          :approve, :close, :acquire_information]
 

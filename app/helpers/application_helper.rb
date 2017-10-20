@@ -1,4 +1,4 @@
-module ApplicationHelper
+ module ApplicationHelper
 
   # Sets active class in navbar links
   def is_active?(link_path)

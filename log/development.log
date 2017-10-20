@@ -5699,3 +5699,21 @@ Completed 200 OK in 69ms (Views: 56.9ms | ActiveRecord: 5.2ms)
 
 Started GET "/assets/user.png" for 127.0.0.1 at 2017-10-15 00:16:31 -0500
 Started GET "/assets/ogn39d0-compressor.jpg" for 127.0.0.1 at 2017-10-15 00:16:31 -0500
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7053808260453188115);[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7053808260453188115)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Passing string to :if and :unless conditional options is deprecated and will be removed in Rails 5.2 without replacement. (called from <class:Application> at /home/javierjimenez/Imágenes/stdnet-test/app/models/application.rb:36)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7053808260453188115);[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7053808260453188115)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Passing string to :if and :unless conditional options is deprecated and will be removed in Rails 5.2 without replacement. (called from <class:Application> at /home/javierjimenez/Imágenes/stdnet-test/app/models/application.rb:36)

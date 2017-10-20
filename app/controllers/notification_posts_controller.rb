@@ -1,4 +1,4 @@
-class NotificationPostsController < ApplicationController
+ class NotificationPostsController < ApplicationController
   before_action :set_notification_post, only: [:show, :edit, :update, :destroy]
 
   # GET /notification_posts
